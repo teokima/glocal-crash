@@ -190,11 +190,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 #nego[hidden]{display:none}#nego .nf{font-size:40px}#nego b{display:block;font-size:17px;margin:4px 0}#nego p{font-size:13.5px;line-height:1.6;color:#e5e1d8;margin:6px 0}
 #nego .offer{font-size:13px;color:#ffe08a;font-weight:700;margin:8px 0 12px}#nego .row{display:flex;gap:8px}#nego .row button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);font-weight:700}
 #nego .row button.main{background:linear-gradient(90deg,#4a9bff,#7fd0ff);color:#081a2c;border:0}
-#claims{position:fixed;right:16px;bottom:140px;z-index:8;display:flex;flex-direction:column;gap:8px;width:280px}
+#claims{position:fixed;left:0;right:0;margin:0 auto;top:52px;z-index:11;display:flex;flex-direction:column;gap:8px;width:min(380px,calc(100% - 24px))}
+.claim .crow{display:flex;gap:6px}.claim .crow button{flex:1}
+#claimChip{position:fixed;right:112px;top:60px;z-index:9;padding:7px 12px;border-radius:999px;border:0;background:linear-gradient(90deg,#7a52c8,#b06bff);color:#fff;font-weight:800;font-size:12.5px;box-shadow:0 0 14px rgba(176,107,255,.6)}#claimChip[hidden]{display:none}
+.clrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(255,200,61,.1);border:1px solid rgba(255,200,61,.4);margin-bottom:6px}.clrow small{color:#ffd27a}.clrow button{padding:6px 10px;border-radius:8px;border:0;background:linear-gradient(90deg,#7a52c8,#b06bff);color:#fff;font-weight:800}
 .claim{padding:10px 12px;display:flex;flex-direction:column;gap:6px;border-color:rgba(255,200,80,.7)}
 .claim b{font-size:14px;color:#ffc83d}.claim span{font-size:12px;color:#ddd8cf;line-height:1.4}
 .claim button{padding:8px;border-radius:8px;border:0;background:linear-gradient(90deg,#7a52c8,#b06bff);color:#fff;font-weight:700}.claim button.x{background:transparent;border:1px solid var(--line);color:var(--dim);padding:4px}
-@media (max-width:640px){#claims{right:10px;width:calc(100% - 20px);bottom:200px}}
+@media (max-width:640px){#claims{top:120px}#claimChip{top:auto;bottom:240px;right:10px}}
 #who{display:flex;gap:8px;margin:12px 0 4px}#who input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
 #who input:focus,.rkedit input:focus{outline:2px solid var(--hot)}
 .rkme{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px}.rkme span{font-weight:700}
@@ -225,8 +228,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 #caps div.out{opacity:0}@keyframes capIn{from{transform:translateY(6px);opacity:0}}
 .mixh{font-size:12px;color:var(--dim);margin:2px 0 -2px}
 .sndhelp{font-size:12.5px;color:#ddd8cf;margin:4px 0}.sndhelp summary{cursor:pointer;color:#ffd27a;font-weight:700}.sndhelp ul{margin:6px 0 0;padding-left:16px;line-height:1.7}.sndhelp b{color:#fff}
-#claims{bottom:330px!important}
-@media (max-width:640px){#situ{bottom:176px;right:10px;width:min(260px,calc(100% - 20px));padding:6px 8px}#situ .sh small{display:none}.si span{font-size:10.5px}#claims{bottom:330px!important}}
+
+@media (max-width:640px){#situ{bottom:176px;right:10px;width:min(260px,calc(100% - 20px));padding:6px 8px}#situ .sh small{display:none}.si span{font-size:10.5px}}
 #seasonRow button{font-size:12px;padding:6px 2px}
 .acctlink{display:flex;flex-direction:column;align-items:center;width:100%;margin:2px 0 8px;padding:8px;border-radius:10px;border:1px dashed rgba(255,210,122,.6);background:rgba(255,200,61,.08);color:#ffd27a;font-weight:800}.acctlink small{font-weight:500;color:var(--dim);font-size:11.5px}
 #acctmenu input{width:100%;box-sizing:border-box;margin:4px 0;padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
@@ -499,6 +502,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="rkMine"></div><div id="rkList"></div><div id="rkNote"></div>
 </div>
 <div id="namedbar" hidden></div>
+<button id="claimChip" hidden></button>
 <div id="ktobar" class="card" hidden><b>👑 김태오</b><span>최강 네임드</span><div class="bb"><i id="ktofill"></i></div><em id="ktohp">300 / 300</em></div>
 <div id="bossbar" class="card" hidden><b>총장</b><span>권위</span><div class="bb"><i id="bossfill"></i></div><em id="bosshp">100 / 100</em></div>
 <div id="gacha" class="card panel wide" hidden>
@@ -4106,7 +4110,10 @@ function renderRoster(box) {
   const items = [['👑', '점령 건물', owned.size + '채'], ['🏢', '세운 건물', myBuilds.size + '채'], ['🎓', '내 학생', mine + '명'], ['🚜', '내 용역팀', myTeams + '팀'], ...Object.entries(units).map(([id, n]) => [gdef(id).icon, gdef(id).name, n + '개'])];
   for (const [ic, k, v] of items) { const d = document.createElement('div'); d.innerHTML = `<span>${ic}</span><small></small><b></b>`; d.children[1].textContent = k; d.children[2].textContent = v; sum.appendChild(d); }
   box.appendChild(sum);
-  if (!owned.size && !myBuilds.size) { const e = document.createElement('p'); e.className = 'none'; e.textContent = '아직 내 건물이 없어요 · 위 [내 건물 세우기]로 직접 짓거나, 캠퍼스 건물을 90% 넘게 부수고 [점령하기]를 누르세요. 건물마다 무엇을 만들지 여기서 골라요.'; box.appendChild(e); return; }
+  const cl = claimable();
+  if (cl.length) { const hd = document.createElement('div'); hd.className = 'st-sub'; hd.textContent = '👑 지금 점령할 수 있는 건물 (70% 넘게 부서짐)'; box.appendChild(hd);
+    for (const b of cl) { const r = document.createElement('div'); r.className = 'clrow'; r.innerHTML = '<b></b><small></small><button>점령 · 50만</button>'; r.children[0].textContent = b.name; r.children[1].textContent = Math.round(b.ratio() * 100) + '% 부서짐'; r.children[2].onclick = () => { if (claimBuilding(b)) renderInv(); }; box.appendChild(r); } }
+  if (!owned.size && !myBuilds.size) { const e = document.createElement('p'); e.className = 'none'; e.textContent = '아직 내 건물이 없어요 · 위 [내 건물 세우기]로 직접 짓거나, 캠퍼스 건물을 70% 넘게 부수면 [점령하기]가 떠요. 건물마다 무엇을 만들지 여기서 골라요.'; box.appendChild(e); return; }
   for (const b of [...owned, ...myBuilds]) {
     const row = document.createElement('div'); row.className = 'prodrow';
     const P = PROD[b.prod || 'income'], left = Math.max(0, Math.ceil(prodEvery(b) - (b.prodT || 0)));
@@ -5013,16 +5020,25 @@ function spawnCleaners(n) {
    ===================================================================== */
 const owned = new Set();
 const MINE = { wall: 0x5b3fa8, roof: 0xffc83d, incomeT: 20, crewT: 60 };
+const CLAIM_AT = 0.7;                 // 70% 넘게 부서지면 점령 가능
+const claimable = () => CAMPUS_BUILDINGS.filter(b => b.name && !owned.has(b) && b.ratio() >= CLAIM_AT);
 function offerClaim(b) {
-  if (owned.has(b) || b.claimShown) return; b.claimShown = true;
-  const d = document.createElement('div'); d.className = 'claim card';
-  d.innerHTML = `<b>👑 ${b.name} 붕괴!</b><span>점령하면 내 건물이 되어 장학금 수입과 내 학생·내 용역팀이 생겨요</span><button>점령하기 · 장학금 50만</button><button class="x">닫기</button>`;
-  d.querySelector('button').onclick = () => { if (claimBuilding(b)) d.remove(); };
-  d.querySelector('.x').onclick = () => d.remove();
-  $('claims').appendChild(d); setTimeout(() => d.remove(), 30000);
+  if (owned.has(b) || b.claimCard || clock < (b.claimSnooze || 0)) return;
+  const d = document.createElement('div'); d.className = 'claim card'; b.claimCard = d;
+  d.innerHTML = `<b>👑 ${b.name} 붕괴! 점령할 수 있어요</b><span>점령하면 내 건물이 되어 장학금 수입·내 학생·내 용역팀이 생기고, 무엇을 만들지 고를 수 있어요</span><div class="crow"><button>점령하기 · 장학금 50만</button><button class="x">나중에</button></div>`;
+  d.querySelector('button').onclick = () => { if (claimBuilding(b)) { d.remove(); b.claimCard = null; } };
+  d.querySelector('.x').onclick = () => { d.remove(); b.claimCard = null; b.claimSnooze = clock + 60; };
+  $('claims').appendChild(d); while ($('claims').children.length > 2) { const o = $('claims').firstChild; o.remove(); for (const x of CAMPUS_BUILDINGS) if (x.claimCard === o) x.claimCard = null; }
+  situLog('👑', `${b.name} 점령 가능`, '위 가운데 카드나 [뽑기·보관함 → 내 세력]에서 점령하세요', 'gold');
+}
+function refreshClaims() {
+  // 다시 복구돼서 기준 아래로 내려가면 카드 치움
+  for (const b of CAMPUS_BUILDINGS) if (b.claimCard && (owned.has(b) || b.ratio() < CLAIM_AT - 0.05)) { b.claimCard.remove(); b.claimCard = null; }
+  const n = claimable().length, chip = $('claimChip'); chip.hidden = !n; chip.textContent = `👑 점령 가능 ${n}`;
 }
 function claimBuilding(b) {
   if (!spend(500000, `${b.name} 점령`)) return false;
+  if (b.claimCard) { b.claimCard.remove(); b.claimCard = null; }
   owned.add(b); mEvent('claims'); b.prod = 'income'; b.prodT = 0;
   b.blocks.forEach((k, i) => { if (!k.c0) k.c0 = k.c.clone(); if (k.t !== 'g') { k.c.set(k.t === 'r' || k.t === 'h' ? MINE.roof : MINE.wall).offsetHSL(0, 0, rand(-0.03, 0.03)); b.setBlockColor(i, k.c); } });
   b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; });
@@ -5041,13 +5057,14 @@ function claimBuilding(b) {
 function updateOwned(dt) {
   // 붕괴한 캠퍼스 건물 → 점령 제안
   if ((MINE.chkT = (MINE.chkT || 0) - dt) <= 0) { MINE.chkT = 1; } else if (!owned.size) return;
-  if (MINE.chkT === 1) for (const b of CAMPUS_BUILDINGS) if (b.name && b.ratio() >= 0.9) offerClaim(b);
+  if (MINE.chkT === 1) { for (const b of claimable()) offerClaim(b); refreshClaims(); }
   if (!owned.size) return;
   for (const b of owned) { if (!b.prod) b.prod = 'income'; b.prodT = (b.prodT || 0) + dt; if (b.prodT >= prodEvery(b)) { b.prodT = 0; runProd(b); } }   // 건물마다 고른 것을 생산
   if (!$('gacha').hidden && invTab === 'roster' && frameNo % 30 === 0) renderInv();
 }
 function clearOwned() {
-  for (const b of owned) { b.blocks.forEach((k, i) => { if (k.c0) { k.c.copy(k.c0); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; }); if (b.flag) scene.remove(b.flag); if (b.lblDiv) { b.def.labelText = b.labelText0 || null; b.labelDirty = true; } b.claimShown = false; b.lvl = 1; b.armor = 0; }
+  for (const b of owned) { b.blocks.forEach((k, i) => { if (k.c0) { k.c.copy(k.c0); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; }); if (b.flag) scene.remove(b.flag); if (b.lblDiv) { b.def.labelText = b.labelText0 || null; b.labelDirty = true; } b.claimCard = null; b.claimSnooze = 0; b.lvl = 1; b.armor = 0; }
+  $('claims').textContent = ''; for (const x of CAMPUS_BUILDINGS) { x.claimCard = null; x.claimSnooze = 0; }
   owned.clear(); for (const a of agents) if (a.kind === 'mine') a.fadeOut = true;
 }
 
@@ -6003,7 +6020,7 @@ function upgradeBuilding(b) {
 function loseBuilding(b, why) {
   if (b.built) { myBuilds.delete(b); scene.remove(b.label); for (const [ch, i] of b.cells) if (ch.blocks[i].alive) ch.kill(i, null); }
   else {
-    owned.delete(b); b.armor = 0; b.lvl = 1; b.claimShown = false;
+    owned.delete(b); b.armor = 0; b.lvl = 1; b.claimCard = null; b.claimSnooze = clock + 30;
     b.blocks.forEach((k, i) => { if (k.c0) { k.c.copy(k.c0); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; });
     if (b.flag) { scene.remove(b.flag); b.flag = null; } if (b.lblDiv) { b.def.labelText = b.labelText0 || null; b.labelDirty = true; }
   }
@@ -6334,6 +6351,7 @@ addEventListener('blur', () => audioAway(true)); addEventListener('focus', () =>
 document.addEventListener('freeze', () => audioAway(true));
 addEventListener('visibilitychange', () => audioAway(document.hidden));
 addEventListener('beforeunload', () => { try { speechSynthesis.cancel(); } catch {} if (AU.master) AU.master.gain.value = 0; });
+$('claimChip').onclick = () => { invTab = 'roster'; if ($('gacha').hidden) pop('gacha'); renderInv(); };
 $('gTabs').querySelectorAll('[data-it]').forEach(b => b.onclick = () => { invTab = b.dataset.it; renderInv(); });
 $('pull1').onclick = () => pull(1); $('pull10').onclick = () => pull(10);
 renderInv(); applyUpgrades();
