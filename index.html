@@ -169,7 +169,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .attr2{font-size:10.5px;color:var(--dim);line-height:1.5;padding:4px 2px}
 @media (max-width:640px){
   .mob-only{display:flex!important}.attr2.mob-only{display:block!important}
-  #toggles>.tg[data-t=names],#toggles>.tg[data-t=sound],#toggles>.tg[data-t=night],#toggles>.tg[data-t=stage]{display:none}
+  #toggles>.tg[data-t=rank]{display:none}
   #attr{display:none}
   #scorecard{padding:7px 10px;max-width:46vw}
   #scorecard .ttl{font-size:12px;white-space:nowrap}#scorecard .ttl small{display:none}
@@ -221,6 +221,38 @@ button{font:inherit;color:inherit;cursor:pointer}
 .sndhelp{font-size:12.5px;color:#ddd8cf;margin:4px 0}.sndhelp summary{cursor:pointer;color:#ffd27a;font-weight:700}.sndhelp ul{margin:6px 0 0;padding-left:16px;line-height:1.7}.sndhelp b{color:#fff}
 #claims{bottom:200px!important}
 @media (max-width:640px){#caps{bottom:176px;right:10px}}
+#seasonRow button{font-size:12px;padding:6px 2px}
+.acctlink{display:flex;flex-direction:column;align-items:center;width:100%;margin:2px 0 8px;padding:8px;border-radius:10px;border:1px dashed rgba(255,210,122,.6);background:rgba(255,200,61,.08);color:#ffd27a;font-weight:800}.acctlink small{font-weight:500;color:var(--dim);font-size:11.5px}
+#acctmenu input{width:100%;box-sizing:border-box;margin:4px 0;padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
+#acctmenu .acrow{display:flex;gap:6px}#acctmenu .acrow input{min-width:0}
+#acctmenu .row button.main{background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;border:0}
+.acnote{font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0}.acnote b{color:#ffd27a}
+#acMsg{font-size:12.5px;min-height:18px;color:#bfe6ff;margin:4px 0}#acMsg.bad{color:#ff8a7a}
+.acwho{display:flex;justify-content:space-between;align-items:center;gap:8px}.acwho button{padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel2)}
+#acSync{color:var(--dim);font-size:11.5px}
+#acStats{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:10px}#acStats div{display:flex;justify-content:space-between;gap:6px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.04);font-size:12.5px}#acStats span{color:var(--dim)}#acStats b{font-variant-numeric:tabular-nums}
+#acForms[hidden],#acIn[hidden],#acOffline[hidden]{display:none}
+.tg.ic{padding:7px 10px}.tg.ic .dot{display:none}.tg.ic:not(.on){opacity:.55}
+#evcards>.evcard:nth-child(n+5){display:none}
+#gInv.inv-equip,#gInv.inv-roster{display:block}
+.hqbtn{display:flex;flex-direction:column;align-items:center;width:100%;margin-bottom:10px;padding:10px;border-radius:12px;border:0;background:linear-gradient(90deg,#7a52c8,#b06bff);color:#fff;font-weight:800;font-size:14px}.hqbtn small{font-weight:500;font-size:11.5px;opacity:.9}
+#buildbar .hqs{background:rgba(176,107,255,.25);border-color:#b06bff}
+.lbl.mineb{background:rgba(91,63,168,.9)!important;border-color:#ffc83d!important}
+#gTabs{display:flex;gap:6px;margin:10px 0 8px}#gTabs button{flex:1;padding:8px 4px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:700;font-size:12.5px}#gTabs button.on{background:rgba(255,178,63,.18);border-color:var(--hot);color:#ffd27a}
+.slot .sbtn button.use{background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;border:0}
+.eqslots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.eqslot{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px;border-radius:12px;border:2px dashed var(--line);min-height:120px;justify-content:center;text-align:center}
+.eqslot[class*=r-]{border-style:solid}.eqslot small{color:var(--dim);font-size:11px}.eqslot .gi{font-size:30px}.eqslot span{font-size:11.5px;color:#ddd8cf}
+.eqslot button{margin-top:4px;padding:5px 14px;border-radius:8px;border:1px solid var(--line);background:var(--panel2)}
+.eqbag{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}
+.roster-sum{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:6px;margin-bottom:10px}
+.roster-sum div{display:flex;flex-direction:column;align-items:center;padding:8px 4px;border-radius:10px;background:rgba(255,255,255,.05)}.roster-sum span{font-size:20px}.roster-sum small{font-size:11px;color:var(--dim)}.roster-sum b{font-size:14px}
+.prodrow{padding:10px;border-radius:12px;background:rgba(123,82,200,.12);border:1px solid rgba(176,107,255,.35);margin-bottom:8px}
+.prodrow .ph2{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}.prodrow .ph2 small{color:#ffd27a;font-size:12px}
+.popts{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.popts button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:18px}
+.popts button span{font-size:10px;line-height:1.2}.popts button.on{background:rgba(176,107,255,.3);border-color:#b06bff}
+.pdesc{display:block;margin-top:6px;color:var(--dim);font-size:11.5px}
+@media (max-width:640px){#zoom{width:132px}.popts button span{font-size:9px}}
 #setnote{font-size:11.5px;color:var(--dim);line-height:1.5}
 #fps{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;top:8px;z-index:6;padding:4px 10px;font-size:12px;font-variant-numeric:tabular-nums}
 #fps[hidden]{display:none}
@@ -232,9 +264,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 #buildbar .swatches{display:flex;gap:5px}
 #buildbar .sw{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,.25)}
 #buildbar .sw.on{border-color:#fff;box-shadow:0 0 0 2px var(--hot2)}
-#zoom{display:flex;flex-direction:column;border-radius:12px;overflow:hidden}
-#zoom button{width:44px;height:38px;border:0;background:transparent;font-size:22px;font-weight:700}
-#zoom button+button{border-top:1px solid var(--line)}
+#zoom{display:flex;flex-direction:column;gap:4px;border-radius:12px;padding:6px;width:150px;box-sizing:border-box}
+#zoom .vh{font-size:11px;color:var(--dim);font-weight:700;padding-left:2px}
+#zoom .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+#zoom button{border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:8px;font-weight:700;touch-action:none;user-select:none;-webkit-user-select:none}
+#zoom .vgrid button{height:34px;font-size:17px}
+#zoom .vrow{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}#zoom .vrow button{font-size:10.5px;padding:5px 0;white-space:nowrap}
+#zoom .vdrag{font-size:11.5px;padding:6px 0}#zoom .vdrag.on{background:rgba(255,178,63,.2);border-color:var(--hot);color:#ffd27a}
 #zoom button:hover{background:var(--panel2)}
 .lbl em{display:none;font-style:normal;font-weight:400;color:#cde6ff;margin-left:6px}
 .lbl.near em{display:inline}
@@ -329,15 +365,12 @@ button{font:inherit;color:inherit;cursor:pointer}
     <div id="combo"></div>
   </div>
   <div id="toggles">
-    <button class="tg on" data-t="names"><span class="dot"></span>이름</button>
-    <button class="tg on" data-t="sound"><span class="dot"></span>소리</button>
-    <button class="tg" data-t="night"><span class="dot"></span>밤</button>
-    <button class="tg" data-t="stage"><span class="dot"></span>공연장</button>
-    <button class="tg hot" data-t="gacha"><span class="dot"></span>뽑기</button>
-    <button class="tg hot" data-t="events"><span class="dot"></span>이벤트</button>
-    <button class="tg" data-t="status"><span class="dot"></span>현황</button>
-    <button class="tg hot" data-t="rank"><span class="dot"></span>랭킹</button>
-    <button class="tg" data-t="more" id="moreBtn"><span class="dot"></span>더보기 ▾</button>
+    <button class="tg on ic" data-t="sound" title="소리 (M)"><span class="dot"></span>🔊</button>
+    <button class="tg hot" data-t="gacha">🎁 뽑기·보관함</button>
+    <button class="tg hot" data-t="events">⚡ 이벤트</button>
+    <button class="tg" data-t="rank">🏆 랭킹</button>
+    <button class="tg" data-t="acct" id="acctBtn">👤 로그인</button>
+    <button class="tg" data-t="more" id="moreBtn">☰ 더보기</button>
     <div id="more" class="card" hidden>
       <button class="tg hot" data-t="multi"><span class="dot"></span>같이 하기</button>
       <button class="tg" data-t="card"><span class="dot"></span>결과 카드</button>
@@ -346,10 +379,10 @@ button{font:inherit;color:inherit;cursor:pointer}
       <button class="tg" data-t="home"><span class="dot"></span>처음 시점</button>
       <button class="tg" data-t="tutorial"><span class="dot"></span>안내 다시 보기</button>
       <button class="tg" data-t="settings"><span class="dot"></span>설정</button>
-      <button class="tg on mob-only" data-t="names"><span class="dot"></span>이름표</button>
-      <button class="tg on mob-only" data-t="sound"><span class="dot"></span>소리</button>
-      <button class="tg mob-only" data-t="night"><span class="dot"></span>밤</button>
-      <button class="tg mob-only" data-t="stage"><span class="dot"></span>공연장</button>
+      <button class="tg" data-t="status"><span class="dot"></span>캠퍼스 현황</button>
+      <button class="tg on" data-t="names"><span class="dot"></span>이름표 (L)</button>
+      <button class="tg" data-t="night"><span class="dot"></span>밤 (N)</button>
+      <button class="tg" data-t="stage"><span class="dot"></span>노천극장 공연</button>
       <div class="mob-only attr2">만든이 컴퓨터공학과 김태오<br>건물·도로 © OpenStreetMap 기여자<br>고도 AWS Terrain Tiles · 층수 일부 추정</div>
     </div>
   </div>
@@ -358,7 +391,15 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="live" class="card" title="누르면 노천극장으로 이동"><span class="led"></span><span id="livetxt">노천극장 · 공연 중</span></div>
   <div id="compass" class="card" title="누르면 북쪽이 위로"><svg viewBox="0 0 30 30"><g id="needle"><path d="M15 3 L19.5 15 L10.5 15 Z" fill="#ff5a36"/><path d="M15 27 L19.5 15 L10.5 15 Z" fill="#d8d4ca"/><text x="15" y="12.2" text-anchor="middle" font-size="6.5" font-weight="900" fill="#fff" font-family="sans-serif">N</text></g></svg></div>
   <div id="missions" class="card"><div class="mh" id="mhead"><b>미션 <span id="mfold">▾</span></b><small id="mdone">완료 0</small></div><div id="mlist"></div></div>
-  <div id="zoom" class="card"><button id="zin" title="확대">+</button><button id="zout" title="축소">−</button><button id="zclose" title="화면 가운데를 아주 가까이">◎</button></div>
+  <div id="zoom" class="card">
+    <div class="vh">시점</div>
+    <div class="vgrid">
+      <button id="vRotL" title="왼쪽으로 돌기 (Q)">⟲</button><button id="vUp" title="위에서 보기 쪽으로 (R)">▲</button><button id="vRotR" title="오른쪽으로 돌기 (E)">⟳</button>
+      <button id="zin" title="확대">＋</button><button id="vDown" title="낮게 눕혀 보기 (F)">▼</button><button id="zout" title="축소">－</button>
+    </div>
+    <div class="vrow"><button id="zclose" title="화면 가운데를 아주 가까이">◎ 가까이</button><button id="vEye" title="사람 눈높이로">👁 눈높이</button><button id="vTop" title="바로 위에서">⬒ 위에서</button></div>
+    <button id="vDrag" class="vdrag" title="한 손가락·왼쪽 끌기를 회전으로 바꿈">✋ 끌기: 이동</button>
+  </div>
 </div>
 <div id="toast" class="card"></div>
 <div id="nego" class="card" hidden><div class="nf" id="negoFace">🏛️</div><b id="negoWho"></b><p id="negoText"></p><div class="offer" id="negoOffer"></div><div class="row"><button id="negoYes" class="main">수락</button><button id="negoNo">거절</button></div></div>
@@ -411,6 +452,8 @@ button{font:inherit;color:inherit;cursor:pointer}
     <li><b>앵앵</b> 사이렌: 막는 세력 출동 · <b>구호</b> 시위대</li></ul></details>
   <label class="rng">지진 세기 <output id="o_quake">×1.0</output><input type="range" id="s_quake" min="0.5" max="2.5" step="0.1" value="1"></label>
   <div class="row"><button data-q="high">화질 높음</button><button data-q="mid">보통</button><button data-q="low">낮음</button></div>
+  <div class="mixh">계절 (바꾸면 캠퍼스를 다시 불러와요)</div>
+  <div class="row season" id="seasonRow"><button data-season="auto">자동</button><button data-season="spring">🌸 봄</button><button data-season="summer">🌿 여름</button><button data-season="autumn">🍁 가을</button><button data-season="winter">❄️ 겨울</button></div>
   <label><input type="checkbox" id="s_town" checked> 캠퍼스 밖 원룸촌 보이기</label>
   <label><input type="checkbox" id="s_vibe" checked> 휴대폰 진동</label>
   <label><input type="checkbox" id="s_fps"> 화면에 FPS 표시 (속도 재기)</label>
@@ -418,6 +461,20 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="setnote">느리면 화질을 낮추고 원룸촌을 끄세요. 설정은 이 브라우저에 저장돼요.</div>
 </div>
 <div id="fps" class="card" hidden></div>
+<div id="acctmenu" class="card panel" hidden>
+  <div class="ph"><b>내 계정 · 누적 기록</b><button data-close="acctmenu">✕</button></div>
+  <p id="acOffline" class="acnote">지금은 <b>이 기기에 자동 저장</b>돼요. 창을 닫아도 장학금·기록이 그대로 남아요. 회원가입(다른 기기에서도 이어 하기)은 서버가 연결되면 열려요.</p>
+  <div id="acForms">
+    <input id="acId" maxlength="16" placeholder="아이디 (영어 소문자·숫자 4~16자)" autocomplete="username" autocapitalize="off">
+    <input id="acPw" type="password" maxlength="64" placeholder="비밀번호 (6자 이상)" autocomplete="current-password">
+    <div class="acrow"><input id="acNick" maxlength="12" placeholder="닉네임 (가입할 때)"><input id="acDept" maxlength="16" list="deptList" placeholder="학과 (가입할 때)"></div>
+    <div class="row"><button id="acLogin" class="main">로그인</button><button id="acSignup">회원가입</button></div>
+    <div id="acMsg"></div>
+    <p class="acnote">비밀번호는 게임에 저장하지 않아요. 아이디·닉네임·학과·기록만 서버에 남아요.</p>
+  </div>
+  <div id="acIn" hidden><div class="acwho"><b id="acWho"></b><button id="acOut">로그아웃</button></div><small id="acSync">서버와 연결됨</small></div>
+  <div id="acStats"></div>
+</div>
 <div id="rankmenu" class="card panel" hidden>
   <div class="ph"><b>랭킹</b><button data-close="rankmenu">✕</button></div>
   <div class="rkme"><span id="meName">닉네임 없음</span><button id="meEdit">바꾸기</button></div>
@@ -429,12 +486,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div id="ktobar" class="card" hidden><b>👑 김태오</b><span>최강 네임드</span><div class="bb"><i id="ktofill"></i></div><em id="ktohp">300 / 300</em></div>
 <div id="bossbar" class="card" hidden><b>총장</b><span>권위</span><div class="bb"><i id="bossfill"></i></div><em id="bosshp">100 / 100</em></div>
 <div id="gacha" class="card panel wide" hidden>
-  <div class="ph"><b>유닛 뽑기</b><button data-close="gacha">✕</button></div>
+  <div class="ph"><b>뽑기 · 보관함</b><button data-close="gacha">✕</button></div>
   <div class="rates"><span class="r-common">일반 60%</span><span class="r-rare">희귀 28%</span><span class="r-epic">에픽 10%</span><span class="r-legend">전설 2%</span></div>
   <div class="row"><button id="pull1" class="main">1회 · 장학금 30만</button><button id="pull10" class="main">10회 · 270만<small>에픽 이상 1개 확정</small></button></div>
   <div class="row" id="gTix"></div>
   <div id="gResult"></div>
-  <div class="st-sub">내 보관함 · 소환 유닛은 도구판 [소환](- 키)으로 불러요</div>
+  <div class="tabs" id="gTabs"><button data-it="items" class="on">🎒 아이템</button><button data-it="equip">🛡️ 장비</button><button data-it="roster">👑 내 세력</button></div>
   <div id="gInv"></div>
   <div class="st-sub" id="gPity"></div>
 </div>
@@ -471,7 +528,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 </div>
 
 <div id="bottom">
-  <div id="buildbar" class="card" hidden><div class="shapes"><button data-shape="block" class="on">1칸</button><button data-shape="wall">벽</button><button data-shape="house">작은 집</button><button data-shape="tower">탑</button></div><div class="swatches" id="swatches"></div></div>
+  <div id="buildbar" class="card" hidden><div class="shapes"><button data-shape="block" class="on">1칸</button><button data-shape="wall">벽</button><button data-shape="house">작은 집</button><button data-shape="tower">탑</button><button data-shape="hq" class="hqs">🏢 내 건물 300만~</button></div><div class="swatches" id="swatches"></div></div>
   <div id="summonbar" class="card" hidden></div>
   <div id="tools" class="card"></div>
   <div id="acts">
@@ -503,6 +560,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <li><b>N / L / M</b><span>밤 · 이름표 · 소리 켜고 끄기</span></li>
     </ul>
     <div id="who"><input id="nick" maxlength="12" placeholder="닉네임 (랭킹에 표시)" autocomplete="off"><input id="dept" maxlength="16" list="deptList" placeholder="학과" autocomplete="off"></div>
+    <button id="acctOpen" class="acctlink">👤 로그인 · 회원가입 <small>기록을 계정에 계속 쌓기</small></button>
     <datalist id="deptList"><option value="컴퓨터공학과"><option value="소프트웨어학과"><option value="전기전자공학부"><option value="기계자동차공학과"><option value="바이오메디컬공학과"><option value="식품영양학과"><option value="간호학과"><option value="의학과"><option value="경영학과"><option value="경찰학과"><option value="소방방재융합학과"><option value="유아교육과"><option value="사회복지학과"><option value="산업디자인학과"><option value="실내디자인학과"><option value="패션디자인학과"><option value="미디어학부"><option value="문헌정보학과"><option value="영어문화학과"><option value="교직원"><option value="졸업생"><option value="충주 시민"></datalist>
     <button id="start" disabled>불러오는 중…</button>
     <div class="credit">만든이 <b>컴퓨터공학과 김태오</b> · <a href="#" id="donateBtn">후원하기</a> · <a id="themeLink" href="christmas.html">크리스마스 버전 🎄</a></div>
@@ -528,6 +586,24 @@ if (!C) { document.getElementById('start').textContent = '캠퍼스 데이터(ca
    0. 공통 상수·도우미
    ===================================================================== */
 const XMAS = (window.GAME_THEME === 'xmas');   // christmas.html 에서 켜짐
+// 계절 (봄·여름·가을·겨울). 땅·나무·지붕·하늘 색과 날리는 것(꽃잎·낙엽·눈)이 바뀜. 바꾸면 다시 불러옴
+const SEASONS = { spring: '봄', summer: '여름', autumn: '가을', winter: '겨울' };
+const SEASON = (() => {
+  if (XMAS) return 'winter';
+  const q = new URLSearchParams(location.search).get('season'); if (SEASONS[q]) return q;
+  let s = 'auto'; try { s = JSON.parse(localStorage.getItem('glocalcrash.season')) || 'auto'; } catch {}
+  if (SEASONS[s]) return s;
+  const m = new Date().getMonth() + 1; return m >= 3 && m <= 5 ? 'spring' : m <= 8 && m >= 6 ? 'summer' : m >= 9 && m <= 11 ? 'autumn' : 'winter';
+})();
+const WINTER = SEASON === 'winter';
+// 초록 계열 색만 계절에 맞게 바꿈 (도로·주차장 등은 그대로)
+function seasonTint(hex) {
+  const c = new THREE.Color(hex); if (!(c.g > c.r && c.g > c.b)) return hex;
+  if (SEASON === 'spring') return c.lerp(new THREE.Color(0xb3d98a), 0.32).getHex();
+  if (SEASON === 'summer') return c.lerp(new THREE.Color(0x4a9a32), 0.3).getHex();
+  if (SEASON === 'autumn') return c.lerp(new THREE.Color(0xb39a4e), 0.5).getHex();
+  return hex;
+}
 const B = 2;              // 블록 한 칸 = 2 m
 const GRAV = 26;          // 중력 (실제보다 약간 세게 → 손맛)
 const WORLD = 850;        // 세계 반경 (m)
@@ -579,9 +655,9 @@ document.body.appendChild(labelRenderer.domElement);
 const scene = new THREE.Scene();
 // 장면에서 뺄 때 그 안의 이름표(CSS2D)도 같이 지움 (안 지우면 화면에 남음)
 { const rm = scene.remove.bind(scene); scene.remove = (...objs) => { for (const o of objs) if (o) o.traverse(c => { if (c.isCSS2DObject && c.element.parentNode) c.element.remove(); }); return rm(...objs); }; }
-const DAY = { bg: XMAS ? 0xd3dde8 : 0xbcd6ea };
+const DAY = { bg: WINTER ? 0xd3dde8 : SEASON === 'autumn' ? 0xc9d6e0 : 0xbcd6ea };
 scene.background = new THREE.Color(DAY.bg);
-scene.fog = new THREE.Fog(XMAS ? 0xdfe6ee : 0xcfe3f2, 700, 2600);
+scene.fog = new THREE.Fog(WINTER ? 0xdfe6ee : SEASON === 'autumn' ? 0xdcdcd2 : SEASON === 'summer' ? 0xc6def2 : 0xcfe3f2, 700, 2600);
 
 const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.3, 5000);
 const HOME_CAM = { pos: V3(-90, 420, 520), tgt: V3(-40, 0, 20) };
@@ -590,7 +666,7 @@ camera.position.copy(HOME_CAM.pos);
 const controls = new MapControls(camera, renderer.domElement);
 controls.target.copy(HOME_CAM.tgt);
 controls.enableDamping = true; controls.dampingFactor = 0.12;
-controls.maxPolarAngle = Math.PI * 0.49; controls.minDistance = 3; controls.maxDistance = 1400;
+controls.maxPolarAngle = Math.PI * 0.497; controls.minPolarAngle = 0.001;   // 거의 땅 높이 ~ 바로 위까지 controls.minDistance = 3; controls.maxDistance = 1400;
 controls.zoomSpeed = 1.1;
 controls.update();
 
@@ -616,7 +692,7 @@ scene.add(flash);
 /* =====================================================================
    2. 땅·구역·도로 (OpenStreetMap)
    ===================================================================== */
-const snowy = (hex, k = 0.72) => XMAS ? new THREE.Color(hex).lerp(new THREE.Color(0xf4f7fa), k).getHex() : hex;   // 크리스마스: 눈 덮인 색
+const snowy = (hex, k = 0.72) => WINTER ? new THREE.Color(hex).lerp(new THREE.Color(0xf4f7fa), k).getHex() : seasonTint(hex);   // 크리스마스: 눈 덮인 색
 
 // 2-0. 땅 높이 (AWS Terrain Tiles · SRTM 30 m → 10 m 격자). 캠퍼스 가운데 해발을 0으로 둔 상대 높이
 const TER = C.terrain;
@@ -667,14 +743,15 @@ const AREAS = {};
 for (const a of C.areas) (AREAS[a.k] = AREAS[a.k] || []).push(a);
 for (const [k, list] of Object.entries(AREAS).sort((a, b) => (AREA_STYLE[a[0]] || [0, 3])[1] - (AREA_STYLE[b[0]] || [0, 3])[1])) {
   let [color] = AREA_STYLE[k] || [0x999999, 3];
-  if (XMAS) color = k === 'water' ? 0xcfe6f2 : k === 'parking' || k === 'track' ? snowy(color, 0.25) : k === 'wood' ? snowy(color, 0.45) : snowy(color, 0.75);
+  if (!WINTER) color = seasonTint(color);
+  if (WINTER) color = k === 'water' ? 0xcfe6f2 : k === 'parking' || k === 'track' ? snowy(color, 0.25) : k === 'wood' ? snowy(color, 0.45) : snowy(color, 0.75);
   for (const a of list) fillPoly(a.p, color);
   if (k === 'pitch') for (const a of list) { pg.lineWidth = 0.3 * PX; pg.strokeStyle = 'rgba(255,255,255,.75)'; pg.setLineDash([]); pg.beginPath(); a.p.forEach((q, i) => { const [x, y] = P(q); i ? pg.lineTo(x, y) : pg.moveTo(x, y); }); pg.closePath(); pg.stroke(); }
   if (['water', 'pitch', 'track', 'parking', 'greenhouse'].includes(k)) list.forEach(a => markPoly(a.p));
 }
 const ROAD_W = { secondary: 7.5, secondary_link: 5, tertiary: 9, tertiary_link: 5.5, residential: 6, unclassified: 6, living_street: 5, service: 4.5, pedestrian: 4, footway: 2.2, cycleway: 2.2, path: 1.6, steps: 2.4, track: 3, bridleway: 2 };
 const roadCls = t => /secondary|tertiary|residential|unclassified/.test(t) ? 'main' : /living|service/.test(t) ? 'minor' : t === 'track' ? 'dirt' : 'walk';
-const ROAD_COL = { walk: XMAS ? 0xe6e4df : 0xd3ccbc, dirt: 0xa68d66, minor: 0x5b5e64, main: 0x3e4147 };
+const ROAD_COL = { walk: WINTER ? 0xe6e4df : 0xd3ccbc, dirt: 0xa68d66, minor: 0x5b5e64, main: 0x3e4147 };
 for (const cls of ['dirt', 'walk', 'minor', 'main']) for (const r of C.roads) if (roadCls(r.t) === cls) {
   const w = ROAD_W[r.t] || 2; strokeLine(r.p, w, ROAD_COL[cls]);
   markLine(r.p, Math.ceil(w / 2) + (cls === 'walk' ? 0 : 1));
@@ -711,7 +788,7 @@ const floorAt = (x, z) => terrainAt(x, z) + rubbleAt(x, z);
    2-5. 하늘 · 구름 · 해 · 저수지 물 · 새 떼 (생동감)
    ===================================================================== */
 const SKY = {
-  day: { top: XMAS ? 0x9fb3c8 : 0x4f8fd6, hor: XMAS ? 0xdfe6ee : 0xcfe3f2 },
+  day: { top: WINTER ? 0x9fb3c8 : SEASON === 'summer' ? 0x3a82da : SEASON === 'spring' ? 0x62a0e0 : 0x5a8fc8, hor: WINTER ? 0xdfe6ee : SEASON === 'autumn' ? 0xe6dfcf : SEASON === 'spring' ? 0xe2e8f0 : 0xcfe3f2 },
   night: { top: 0x050914, hor: 0x16223a },
 };
 const skyMat = new THREE.ShaderMaterial({
@@ -731,7 +808,7 @@ const clouds3 = [];
   const geos = [];
   for (let k = 0; k < 7; k++) { const g = new THREE.IcosahedronGeometry(rand(18, 30), 1); g.scale(1, 0.45, 1); g.translate(rand(-35, 35), rand(-4, 6), rand(-18, 18)); geos.push(g); }
   const cg = mergeGeometries(geos);
-  const cmat = new THREE.MeshLambertMaterial({ color: XMAS ? 0xe8edf2 : 0xffffff, transparent: true, opacity: 0.92, flatShading: true });
+  const cmat = new THREE.MeshLambertMaterial({ color: WINTER ? 0xe8edf2 : 0xffffff, transparent: true, opacity: 0.92, flatShading: true });
   const N = SMALL ? 14 : 30, cl = new THREE.InstancedMesh(cg, cmat, N);
   for (let k = 0; k < N; k++) { const c = { p: V3(rand(-1400, 1400), rand(320, 420), rand(-1400, 1400)), s: rand(0.7, 1.6), r: rand(0, 6.28) }; clouds3.push(c); }
   cl.frustumCulled = false; scene.add(cl); clouds3.mesh = cl;
@@ -745,7 +822,7 @@ function updateSky(dt) {
 // 저수지·연못: 지형 위에 물 판을 얹고 살짝 반짝이게
 const waterMeshes = [];
 {
-  const wmat = new THREE.MeshStandardMaterial({ color: XMAS ? 0xcfe6f2 : 0x3d7fb3, roughness: XMAS ? 0.5 : 0.08, metalness: XMAS ? 0 : 0.35, transparent: true, opacity: XMAS ? 0.95 : 0.88 });
+  const wmat = new THREE.MeshStandardMaterial({ color: WINTER ? 0xcfe6f2 : 0x3d7fb3, roughness: WINTER ? 0.5 : 0.08, metalness: WINTER ? 0 : 0.35, transparent: true, opacity: XMAS ? 0.95 : 0.88 });
   for (const a of (AREAS.water || [])) {
     let lo = 1e9; for (const [x, z] of a.p) lo = Math.min(lo, terrainAt(x, z));
     const shape = new THREE.Shape(a.p.map(([x, z]) => new THREE.Vector2(x, -z)));
@@ -809,7 +886,7 @@ const PAL = {
   theater: { s: 0xc3beb3, S: 0xaca699, p: 0x7b5a3c, k: 0x27282c, m: 0x7d848c, R: 0xe9edf2 },
   xtree:   { G: 0x1f6b3a, g2: 0x2c8a4b, o1: 0xd62828, o2: 0xf2c230, o3: 0x2a6fd6, S: 0xffe066, b: 0x6b4a32, w: 0xf4f7fa },
 };
-if (XMAS) for (const k of Object.keys(PAL)) if (PAL[k].r) PAL[k].r = 0xf2f6fa;   // 지붕에 눈
+if (WINTER) for (const k of Object.keys(PAL)) if (PAL[k].r) PAL[k].r = 0xf2f6fa;   // 지붕에 눈
 
 const buildings = [];
 var theater = { building: null, screenBroken: false };
@@ -1452,12 +1529,22 @@ function treeOK(x, z) {
   if (inPoly(x, z, TH.poly)) return false;
   return true;
 }
+// 계절별 나무 색: 봄 벚꽃·연두 · 여름 짙은 초록 · 가을 단풍(빨강·주황·노랑) · 겨울 눈 덮임
+function treeColor() {
+  const C3 = new THREE.Color();
+  if (XMAS) return C3.setHSL(rand(0.36, 0.42), rand(0.35, 0.5), rand(0.2, 0.28)).lerp(new THREE.Color(0xffffff), rand(0.1, 0.3));
+  if (SEASON === 'winter') return Math.random() < 0.3 ? C3.setHSL(rand(0.36, 0.42), 0.35, 0.22).lerp(new THREE.Color(0xffffff), 0.35) : C3.setHSL(0.08, 0.12, rand(0.55, 0.7)).lerp(new THREE.Color(0xf4f7fa), rand(0.45, 0.7));
+  if (SEASON === 'spring') return Math.random() < 0.38 ? C3.setHSL(0.93 + rand(-0.03, 0.02), rand(0.6, 0.8), rand(0.8, 0.88)) : C3.setHSL(rand(0.22, 0.28), rand(0.45, 0.6), rand(0.42, 0.55));
+  if (SEASON === 'summer') return C3.setHSL(rand(0.28, 0.35), rand(0.5, 0.7), rand(0.2, 0.32));
+  if (SEASON === 'autumn') { const r = Math.random(); return r < 0.3 ? C3.setHSL(rand(0.0, 0.03), rand(0.65, 0.8), rand(0.38, 0.48)) : r < 0.62 ? C3.setHSL(rand(0.06, 0.09), rand(0.75, 0.9), rand(0.45, 0.55)) : r < 0.88 ? C3.setHSL(rand(0.12, 0.15), rand(0.75, 0.9), rand(0.5, 0.6)) : C3.setHSL(rand(0.24, 0.3), 0.4, 0.32); }
+  return C3.setHSL(rand(0.24, 0.33), rand(0.35, 0.55), rand(0.26, 0.4));
+}
 function plantIn(poly, n) {
   const b = bbox(poly);
   for (let k = 0, got = 0; k < n * 4 && got < n && trees.length < TREE_MAX; k++) {
     const x = rand(b.minx, b.maxx), z = rand(b.minz, b.maxz);
     if (!inPoly(x, z, poly) || !treeOK(x, z)) continue;
-    const c = XMAS ? new THREE.Color().setHSL(rand(0.36, 0.42), rand(0.35, 0.5), rand(0.2, 0.28)).lerp(new THREE.Color(0xffffff), rand(0.1, 0.3)) : new THREE.Color().setHSL(rand(0.24, 0.33), rand(0.35, 0.55), rand(0.26, 0.4));
+    const c = treeColor();
     trees.push({ p: V3(x, 0, z), s: rand(0.8, 1.35), tilt: 0, target: 0, axis: V3(1, 0, 0), c }); got++;
   }
 }
@@ -1879,7 +1966,6 @@ class Vehicle {
     }
     this.speed += clamp(target - this.speed, -16 * dt, 4.5 * dt);
     this.wait = this.speed < 0.4 && blocked ? this.wait + dt : 0;
-    if (this.wait > 3 && Math.random() < dt * 0.4 && camera.position.distanceTo(pos) < 160) SFX.honk(pos);
     this.s += this.speed * dt;
     while (this.s >= this.e.len) {
       const carry = this.s - this.e.len, n = this.next || this.pickNext();
@@ -1980,6 +2066,7 @@ const combo = { n: 0, t: -9 };
 const actions = []; let actSeq = 0;
 function beginAction(kind) { const a = { id: ++actSeq, kind, blocks: [], debris: [], trees: [], craters: [], vehicles: [], score: 0 }; actions.push(a); if (actions.length > 40) actions.shift(); updateUI(); return a; }
 function addScore(pts, act) {
+  if (state.night && equipped('goggles') && pts > 0) pts = Math.round(pts * 1.2);
   if (clock - combo.t < 1.6) combo.n = Math.min(combo.n + 1, 30); else combo.n = 1;
   combo.t = clock; if (combo.n > (sem.maxCombo || 0)) sem.maxCombo = combo.n;
   const v = Math.round(pts * (1 + (combo.n - 1) * 0.08));
@@ -2079,7 +2166,7 @@ function resetAll() {
   for (const pr of projectiles) scene.remove(pr.mesh); projectiles.length = 0;
   theater.screenBroken = false; concert.state = 'play'; quake.active = false;
   endAllEvents(); repairScore = 0; clearBuilt();
-  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); clearKto(); clearSchemes(); fixFountain(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
+  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
   dmgLog.length = 0; EVS.facCool = clock + 20; DEF.lvl = 0;
   for (const d of [...boss.domes]) d.retreat(false); if (boss.active) { scene.remove(boss.fig.g); scene.remove(boss.podium); boss.active = false; $('bossbar').hidden = true; } boss.defeated = false;
   for (const j of defJets) scene.remove(j.g); defJets.length = 0;
@@ -2135,7 +2222,7 @@ function explode(p, R, power, act) {
   for (const t of teams) if (t.kind !== 'facility') for (const a of t.crew) if (a.pos.distanceTo(p) < R * 2 + 3) a.down = 2;
   scarePeople(p, R * 4 + 25); protestPanic(p, R * 3 + 15);
   if (boss.active && p.distanceTo(boss.pos) < 45) bossDamage(R * 0.5, '근처 폭발');
-  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R);
+  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R);
   if (NET.on && !NET.remote) sendNet({ t: 'fx', k: 'boom', p: [p.x, p.y, p.z], R });
   R *= SET.power; power *= Math.sqrt(SET.power);
   act.R = R;
@@ -2178,7 +2265,7 @@ function usePipe(hit) {
   const act = beginAction('pipe');
   if (clock - pipeLast < 0.7) pipeCombo = Math.min(pipeCombo + 1, 8); else pipeCombo = 0;
   pipeLast = clock;
-  const R = (1.7 + pipeCombo * 0.14) * SET.power * (hasItem('goldpipe') ? 1.4 : 1);
+  const R = (1.7 + pipeCombo * 0.14) * SET.power * (equipped('goldpipe') ? 1.4 : 1);
   after(0.11, () => {
     const veh = hit.vehicle;
     SFX.clang(P); fxSparks(P, 18, 10, n); shake(0.25 + pipeCombo * 0.03, P);
@@ -2275,7 +2362,7 @@ function useCannon(hit) {
   cannon.recoil = 1;
   const act = beginAction('cannon');
   const m = XMAS ? makeGift(1.4) : new THREE.Mesh(ballGeo, ballMat); m.position.copy(muzzle); m.castShadow = true; scene.add(m);
-  projectiles.push({ kind: 'ball', mesh: m, v: v0, act, R: 5 * (hasItem('bigcannon') ? 1.3 : 1), power: 17, t: 0 });
+  projectiles.push({ kind: 'ball', mesh: m, v: v0, act, R: 5 * (equipped('bigcannon') ? 1.3 : 1), power: 17, t: 0 });
   fxSmoke(muzzle, 2.2, 14, 0.75); fxFire(muzzle, 1.4, 14); SFX.cannon(muzzle); shake(0.3, muzzle);
 }
 // 4. 폭탄
@@ -2425,7 +2512,7 @@ for (const m of [wLegs, wLegR, wArmL, wArmR, wBody, wHead, wHat, wHair, wLong, w
 // 사람 분류
 const ROLES = {
   male: ['남학생', '#4a90e2'], female: ['여학생', '#e86a9a'], prof: ['교수', '#d4a72c'], council: ['학생회', '#ff9a1a'], staff: ['교직원', '#5fbf8a'],
-  facility: ['시설팀', '#ff7a1a'], army: ['군인', '#6b7f3a'], cjman: ['충주맨', '#2f9e5b'], cleaner: ['환경미화원', '#ff8c1a'], mine: ['내 학생', '#b06bff'], airforce: ['공군 장병', '#4a6fa5'], contractor: ['철거 용역', '#888'], kid: ['어린이', '#ffd23a'], player: ['농구 선수', '#d9443a'],
+  facility: ['시설팀', '#ff7a1a'], army: ['군인', '#6b7f3a'], cjman: ['충주맨', '#2f9e5b'], cleaner: ['환경미화원', '#ff8c1a'], mine: ['내 학생', '#b06bff'], riot: ['질서유지대', '#2b3a55'], airforce: ['공군 장병', '#4a6fa5'], contractor: ['철거 용역', '#888'], kid: ['어린이', '#ffd23a'], player: ['농구 선수', '#d9443a'],
 };
 const HAIR = [0x1d1a17, 0x2a211a, 0x3a2a1e, 0x1d1a17, 0x5a3a22, 0x6b4a2b, 0x8a5a32, 0x1d1a17, 0x2a211a];
 const HAIR_DYED = [0xc9a25a, 0x9aa0aa, 0xb85a7a, 0x7a3a2a, 0xd8c8a0, 0x4a5a8a];
@@ -2476,7 +2563,7 @@ function addAgent(o) {
 function removeAgent(a) { const i = agents.indexOf(a); if (i >= 0) { agents.splice(i, 1); agentsDirty = true; } if (a.signMesh) scene.remove(a.signMesh); a.dead = true; }
 function stepTo(a, x, z, speed, dt) { const dx = x - a.pos.x, dz = z - a.pos.z, d = Math.hypot(dx, dz); if (d < 0.3) return true; const st = Math.min(d, speed * dt); a.pos.x += dx / d * st; a.pos.z += dz / d * st; a.yawT = Math.atan2(dx, dz); a.moving = true; return false; }
 function fleeFrom(a, p, speed = 6, t = 3) { const dx = a.pos.x - p.x, dz = a.pos.z - p.z, L = Math.hypot(dx, dz) || 1, ang = Math.atan2(dz / L, dx / L) + rand(-.6, .6); a.fvx = Math.cos(ang) * speed; a.fvz = Math.sin(ang) * speed; a.ft = t; }
-const PANIC_KINDS = new Set(['ped', 'student', 'teacher', 'player', 'kid', 'fest', 'cleaner', 'mine', 'cjman']);
+const PANIC_KINDS = new Set(['ped', 'student', 'teacher', 'player', 'kid', 'fest', 'cleaner', 'mine', 'cjman', 'cafe']);
 function scarePeople(p, R) { for (const a of agents) if (PANIC_KINDS.has(a.kind) && a.ft <= 0 && Math.hypot(a.pos.x - p.x, a.pos.z - p.z) < R) fleeFrom(a, p, rand(5, 7), rand(2.5, 4.5)); }
 const _mt = new THREE.Matrix4(), _mr = new THREE.Matrix4(), _ml = new THREE.Matrix4(), _mx = new THREE.Matrix4();
 function limb(mesh, i, x, y, ang) { _ml.makeTranslation(x, y, 0); _mx.makeRotationX(ang); _ml.multiply(_mx); _mx.multiplyMatrices(_m, _ml); mesh.setMatrixAt(i, _mx); }
@@ -3209,18 +3296,20 @@ function santaRun() {
 }
 // ── 크리스마스 눈 ──
 let snow = null;
-if (XMAS) {
-  const N = SMALL ? 2500 : 6000, pos = new Float32Array(N * 3);
+const FALL = WINTER ? { n: 6000, col: 0xffffff, size: 0.45, v: 2.2, sway: 0.6 } : SEASON === 'spring' ? { n: 1800, col: 0xffc6da, size: 0.38, v: 0.9, sway: 1.6 } : SEASON === 'autumn' ? { n: 1400, col: 0xd9822b, size: 0.55, v: 1.3, sway: 1.9 } : null;
+if (FALL) {
+  const N = Math.round(FALL.n * (SMALL ? 0.42 : 1)), pos = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) { pos[i * 3] = rand(-160, 160); pos[i * 3 + 1] = rand(0, 120); pos[i * 3 + 2] = rand(-160, 160); }
   const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  snow = new THREE.Points(g, new THREE.PointsMaterial({ color: 0xffffff, size: 0.45, transparent: true, opacity: 0.9, depthWrite: false }));
+  snow = new THREE.Points(g, new THREE.PointsMaterial({ color: FALL.col, size: FALL.size, transparent: true, opacity: 0.9, depthWrite: false }));
+  if (SEASON === 'autumn') { const cs = new Float32Array(N * 3), cc = new THREE.Color(); for (let i = 0; i < N; i++) { cc.setHSL(pick([0.01, 0.06, 0.08, 0.13]), 0.8, 0.5); cs.set([cc.r, cc.g, cc.b], i * 3); } g.setAttribute('color', new THREE.BufferAttribute(cs, 3)); snow.material.vertexColors = true; snow.material.color.set(0xffffff); }
   snow.frustumCulled = false; scene.add(snow);
 }
 function updateSnow(dt) {
   if (!snow) return;
   const a = snow.geometry.attributes.position.array, cx = controls.target.x, cz = controls.target.z;
   for (let i = 0; i < a.length; i += 3) {
-    a[i + 1] -= dt * (2.2 + (i % 7) * 0.25); a[i] += Math.sin(clock + i) * dt * 0.6;
+    a[i + 1] -= dt * (FALL.v + (i % 7) * 0.25 * FALL.v / 2.2); a[i] += Math.sin(clock * (FALL.sway > 1 ? 1.7 : 1) + i) * dt * FALL.sway; a[i + 2] += Math.cos(clock * 1.3 + i * 0.7) * dt * (FALL.sway - 0.6) * 0.5;
     if (a[i + 1] < controls.target.y - 25) { a[i + 1] = controls.target.y + 100; a[i] = cx + rand(-160, 160); a[i + 2] = cz + rand(-160, 160); }
   }
   snow.geometry.attributes.position.needsUpdate = true;
@@ -3646,6 +3735,7 @@ function shapeCells(shape) {
   return out;
 }
 function useBuild(hit) {
+  if (buildOpt.shape === 'hq') { if (buildHQ(hit)) { buildOpt.shape = 'block'; $('buildbar').querySelectorAll('[data-shape]').forEach(x => x.classList.toggle('on', x.dataset.shape === 'block')); } return; }
   const p = hit.point.clone().addScaledVector(hit.normal, 0.9);
   if (hit.ground) p.y = terrainAt(p.x, p.z) + 0.5;
   if (hit.vehicle) { toast('차 위에는 지을 수 없어요'); return; }
@@ -3777,13 +3867,15 @@ setInterval(renderStatus, 1000);
 const RARITY = { common: ['일반', '#9aa1a8', 60], rare: ['희귀', '#4a9bff', 28], epic: ['에픽', '#b06bff', 10], legend: ['전설', '#ffb23f', 2] };
 const GACHA = [
   { id: 'bulldozer', r: 'common', name: '불도저', type: 'unit', desc: '건물 1층을 밀고 들어가요', icon: '🚜' },
-  { id: 'coin', r: 'common', name: '장학금 봉투', type: 'bonus', desc: '장학금 ₩300,000 바로 지급', icon: '💰' },
+  { id: 'coin', r: 'common', name: '장학금 봉투', type: 'bonus', desc: '보관함에서 [사용]하면 장학금 ₩300,000', icon: '💰' },
+  { id: 'goggles', r: 'common', name: '야간 투시경', type: 'equip', desc: '착용하면 밤에 얻는 점수 ×1.2', icon: '🥽' },
   { id: 'crewticket', r: 'common', name: '용역 무료 호출권', type: 'ticket', desc: '용역 호출 1회 무료', icon: '🎫' },
   { id: 'drones', r: 'rare', name: '드론 편대', type: 'unit', desc: '드론 6대가 날아가 자폭', icon: '🛸' },
   { id: 'crane', r: 'rare', name: '철구 크레인', type: 'unit', desc: '쇠공을 휘둘러 25초 동안 철거', icon: '🏗️' },
   { id: 'cluster', r: 'rare', name: '집속탄', type: 'weapon', uses: 2, desc: '작은 폭탄 8발이 넓게 떨어짐 (2회)', icon: '🎇' },
-  { id: 'goldpipe', r: 'rare', name: '황금 쇠파이프', type: 'equip', desc: '갖고 있으면 쇠파이프 범위 ×1.4', icon: '🥇' },
-  { id: 'bigcannon', r: 'rare', name: '대구경 포신', type: 'equip', desc: '갖고 있으면 대포 폭발 ×1.3', icon: '💥' },
+  { id: 'goldpipe', r: 'rare', name: '황금 쇠파이프', type: 'equip', desc: '착용하면 쇠파이프 범위 ×1.4', icon: '🥇' },
+  { id: 'bigcannon', r: 'rare', name: '대구경 포신', type: 'equip', desc: '착용하면 대포·전차 폭발 ×1.3', icon: '💥' },
+  { id: 'megaphone', r: 'rare', name: '확성기', type: 'equip', desc: '착용하면 네임드 가두기 성공 확률 +10%p', icon: '📢' },
   { id: 'tank', r: 'epic', name: '전차', type: 'unit', desc: '30초 동안 포탑을 돌려 포격', icon: '🪖' },
   { id: 'missile', r: 'epic', name: '미사일 차량', type: 'unit', desc: '미사일 6발 일제 발사', icon: '🚀' },
   { id: 'heli', r: 'epic', name: '공격 헬기', type: 'unit', desc: '22초 동안 떠서 로켓 연사 (격추될 수 있음)', icon: '🚁' },
@@ -3812,7 +3904,6 @@ function rollOne(minRank) {
   return pick(GACHA.filter(g => g.r === rar));
 }
 function grant(g) {
-  if (g.type === 'bonus') { wallet.won += 300000; uiDirty = true; return; }
   if (inv.slots.length >= SLOT_MAX) { const v = Math.round(VALUE[g.r] * 0.6); wallet.won += v; uiDirty = true; toast(`보관함이 가득 차서 ${g.name}을(를) 장학금 ${won(v)}으로 바꿨어요`); return; }
   inv.slots.push({ id: g.id, uses: g.uses || 1 });
 }
@@ -3845,31 +3936,170 @@ function pullTicket(kind) {
 }
 let summonPick = 0;
 const USABLE = t => t === 'unit' || t === 'weapon';
+// ── 보관함 3탭: 아이템 10칸 · 장비 2칸 · 내 세력(보유 유닛·인력·건물 생산) ──
+const EQUIP_MAX = 2;
+if (!Array.isArray(inv.equip)) inv.equip = [null, null];
+const equipped = id => inv.equip.includes(id);
+let invTab = 'items';
+function useBonus(i) {
+  const s = inv.slots[i]; if (!s) return; inv.slots.splice(i, 1); wallet.won += 300000; uiDirty = true; saveInv(); renderInv();
+  toast('장학금 봉투를 열었어요 · +₩300,000'); SFX.ding(); popText(controls.target.clone().setY(controls.target.y + 6), '+₩300,000');
+}
+function equipItem(i) {
+  const s = inv.slots[i]; if (!s) return; const g = gdef(s.id);
+  if (equipped(s.id)) { toast(`${g.name}은(는) 이미 착용 중이에요`); return; }
+  const k = inv.equip.indexOf(null); if (k < 0) { toast('장비칸 2칸이 가득 찼어요 · [장비] 탭에서 먼저 해제하세요'); invTab = 'equip'; renderInv(); return; }
+  inv.equip[k] = s.id; inv.slots.splice(i, 1); saveInv(); applyUpgrades(); renderInv(); toast(`${g.icon} ${g.name} 착용`); SFX.shield();
+}
+function unequip(k) {
+  const id = inv.equip[k]; if (!id) return;
+  if (inv.slots.length >= SLOT_MAX) { toast('아이템 칸이 가득 차서 해제할 수 없어요 · 먼저 하나를 쓰거나 버리세요'); return; }
+  inv.equip[k] = null; inv.slots.push({ id, uses: 1 }); saveInv(); applyUpgrades(); renderInv(); toast(`${gdef(id).name} 해제 · 아이템 칸으로 옮겼어요`);
+}
+const EQUIP_FX = { goldpipe: '쇠파이프 범위 ×1.4', bigcannon: '대포·전차 폭발 ×1.3', goggles: '밤에 얻는 점수 ×1.2', megaphone: '네임드 가두기 성공 확률 +10%p' };
+function slotCard(s, i) {
+  const g = gdef(s.id), d = document.createElement('div'); d.className = 'slot r-' + g.r;
+  const sub = g.type === 'equip' ? `장비 · ${EQUIP_FX[g.id] || ''}` : g.type === 'ticket' ? '용역 호출 때 자동 사용' : g.type === 'weapon' ? `무기 · ${s.uses}회 남음` : g.type === 'bonus' ? '눌러서 바로 장학금' : '소환 유닛';
+  d.innerHTML = `<div class="gi">${g.icon}</div><b>${g.name}</b><small>${sub}</small>`;
+  const row = document.createElement('div'); row.className = 'sbtn';
+  const btn = (t, fn, cls) => { const b = document.createElement('button'); b.textContent = t; if (cls) b.className = cls; b.onclick = fn; row.appendChild(b); };
+  if (USABLE(g.type)) btn('쓰기', () => { summonPick = i; selectWeapon('summon'); pop('gacha'); toast(`${g.name} 준비 · 목표를 누르세요`); });
+  if (g.type === 'bonus') btn('사용', () => useBonus(i), 'use');
+  if (g.type === 'equip') btn('착용', () => equipItem(i), 'use');
+  btn('버리기', () => discard(i), 'del');
+  d.appendChild(row); return d;
+}
 function renderInv() {
   const tx = []; if (inv.freePulls > 0) tx.push(['free', `무료 뽑기 ×${inv.freePulls}`]); if (inv.epicTix > 0) tx.push(['epic', `에픽 확정권 ×${inv.epicTix}`]); if (inv.legendTix > 0) tx.push(['legend', `전설 확정권 ×${inv.legendTix}`]);
   $('gTix').innerHTML = ''; tx.forEach(([k, t]) => { const b = document.createElement('button'); b.className = 'main'; b.textContent = t; b.onclick = () => pullTicket(k); $('gTix').appendChild(b); });
-  // 보관함 10칸
-  const box = $('gInv'); box.innerHTML = '';
-  for (let i = 0; i < SLOT_MAX; i++) {
-    const s = inv.slots[i], d = document.createElement('div');
-    if (!s) { d.className = 'slot empty'; d.textContent = i + 1; box.appendChild(d); continue; }
-    const g = gdef(s.id); d.className = 'slot r-' + g.r;
-    d.innerHTML = `<div class="gi">${g.icon}</div><b>${g.name}</b><small>${g.type === 'equip' ? '장비 · 갖고만 있어도 효과' : g.type === 'ticket' ? '용역 호출 때 자동 사용' : g.type === 'weapon' ? `무기 · ${s.uses}회 남음` : '소환 유닛'}</small>`;
-    const row = document.createElement('div'); row.className = 'sbtn';
-    if (USABLE(g.type)) { const u = document.createElement('button'); u.textContent = '쓰기'; u.onclick = () => { summonPick = i; selectWeapon('summon'); pop('gacha'); toast(`${g.name} 준비 · 목표를 누르세요`); }; row.appendChild(u); }
-    const x = document.createElement('button'); x.textContent = '버리기'; x.className = 'del'; x.onclick = () => discard(i); row.appendChild(x);
-    d.appendChild(row); box.appendChild(d);
-  }
-  $('gPity').textContent = `보관함 ${inv.slots.length}/${SLOT_MAX} · ${inv.pulls}번 뽑음 · 에픽 이상까지 최대 ${50 - inv.pity}번 · 가득 차면 새로 뽑은 건 장학금으로 바뀌어요`;
-  // 소환 막대 (쓸 수 있는 칸만)
+  $('gTabs').querySelectorAll('[data-it]').forEach(b => { b.classList.toggle('on', b.dataset.it === invTab); });
+  $('gTabs').querySelector('[data-it=items]').textContent = `🎒 아이템 ${inv.slots.length}/${SLOT_MAX}`;
+  $('gTabs').querySelector('[data-it=equip]').textContent = `🛡️ 장비 ${inv.equip.filter(Boolean).length}/${EQUIP_MAX}`;
+  $('gTabs').querySelector('[data-it=roster]').textContent = `👑 내 세력 ${owned.size + myBuilds.size}`;
+  const box = $('gInv'); box.innerHTML = ''; box.className = 'inv-' + invTab;
+  if (invTab === 'items') {
+    for (let i = 0; i < SLOT_MAX; i++) { const s = inv.slots[i]; if (!s) { const d = document.createElement('div'); d.className = 'slot empty'; d.textContent = i + 1; box.appendChild(d); } else box.appendChild(slotCard(s, i)); }
+  } else if (invTab === 'equip') {
+    const eq = document.createElement('div'); eq.className = 'eqslots';
+    for (let k = 0; k < EQUIP_MAX; k++) {
+      const id = inv.equip[k], d = document.createElement('div'); d.className = 'eqslot' + (id ? ' r-' + gdef(id).r : '');
+      if (id) { const g = gdef(id); d.innerHTML = `<small>장비칸 ${k + 1}</small><div class="gi">${g.icon}</div><b>${g.name}</b><span>${EQUIP_FX[id] || ''}</span>`; const b = document.createElement('button'); b.textContent = '해제'; b.onclick = () => unequip(k); d.appendChild(b); }
+      else d.innerHTML = `<small>장비칸 ${k + 1}</small><div class="gi">＋</div><span>비어 있음</span>`;
+      eq.appendChild(d);
+    }
+    box.appendChild(eq);
+    const h = document.createElement('div'); h.className = 'st-sub'; h.textContent = '착용할 수 있는 장비 (아이템 칸에 있는 것)'; box.appendChild(h);
+    const list = document.createElement('div'); list.className = 'eqbag';
+    inv.slots.forEach((s, i) => { if (gdef(s.id).type === 'equip') list.appendChild(slotCard(s, i)); });
+    if (!list.children.length) list.innerHTML = '<span class="none">장비가 없어요 · 뽑기에서 황금 쇠파이프·대구경 포신·야간 투시경·확성기가 나와요</span>';
+    box.appendChild(list);
+  } else renderRoster(box);
+  $('gPity').textContent = `${inv.pulls}번 뽑음 · 에픽 이상까지 최대 ${50 - inv.pity}번 · 아이템 칸이 가득 차면 새로 뽑은 건 장학금으로 바뀌어요`;
   const bar = $('summonbar'); bar.innerHTML = '';
   const usable = inv.slots.map((s, i) => [s, i]).filter(([s]) => USABLE(gdef(s.id).type));
-  if (!usable.length) bar.innerHTML = '<span class="none">쓸 유닛·무기가 없어요 · [뽑기]에서 뽑아 보세요</span>';
+  if (!usable.length) bar.innerHTML = '<span class="none">쓸 유닛·무기가 없어요 · [뽑기·보관함]에서 뽑아 보세요</span>';
   if (usable.length && !usable.some(([, i]) => i === summonPick)) summonPick = usable[0][1];
   usable.forEach(([s, i]) => { const g = gdef(s.id), b = document.createElement('button'); b.className = 'r-' + g.r + (summonPick === i ? ' on' : ''); b.innerHTML = `${g.icon} ${g.name}${g.type === 'weapon' ? ` <em>${s.uses}회</em>` : ''}`; b.onclick = () => { summonPick = i; renderInv(); }; bar.appendChild(b); });
 }
+// ── 내 세력: 점령한 건물마다 무엇을 만들지 고름 ──
+const PROD = {
+  income: { icon: '💰', name: '장학금 수입', every: 20, desc: '20초마다 ₩60,000' },
+  students: { icon: '🎓', name: '내 학생 양성', every: 25, desc: '25초마다 내 학생 2명 (건물당 최대 12명)' },
+  crew: { icon: '🚜', name: '철거 용역 사무소', every: 60, desc: '60초마다 내 용역팀이 가까운 건물 철거 (동시에 2팀까지)' },
+  drones: { icon: '🛸', name: '드론 공장', every: 90, desc: '90초마다 드론 편대 1개를 보관함에' },
+  tanks: { icon: '🪖', name: '전차 공장', every: 180, desc: '3분마다 전차 1대를 보관함에' },
+};
+function mineThink(a, dt) { if (a.wait > 0) { a.wait -= dt; return; } if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = a.homeC.clone().add(V3(rand(-18, 18), 0, rand(-18, 18))); a.wait = rand(1, 4); } }
+function spawnMine(b, n) {
+  const have = agents.filter(a => a.kind === 'mine' && a.home === b).length;
+  for (let k = 0; k < Math.min(n, 12 - have); k++) { const c = bbCenter(b), p = freeSpots(c.clone().add(V3(rand(-15, 15), 0, rand(-15, 15))), 1, 0)[0] || c; const a = addAgent({ pos: p, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: mineThink }); if (a) { a.home = b; a.homeC = c; } }
+}
+function sendMyCrew(b) {
+  if (teams.filter(t => t.mine).length >= 2) return false;
+  const fc = bbCenter(b), tgt = CAMPUS_BUILDINGS.filter(x => x.name && !owned.has(x) && x.alive > 50).sort((p, q) => bbCenter(p).distanceTo(fc) - bbCenter(q).distanceTo(fc))[0];
+  if (!tgt) return false;
+  const c = nearestAliveBlock(tgt, fc, 1e9) || bbCenter(tgt), t = new Team('contractor', tgt, c); t.id = ++teamSeq; t.mine = true;
+  banner('내 용역팀 출동', `${b.name} 용역 사무소에서 ${tgt.name} 철거하러 갑니다`, 'gold'); return true;
+}
+function produceUnit(b, id) {
+  const g = gdef(id);
+  if (inv.slots.length >= SLOT_MAX) { const v = Math.round(VALUE[g.r] * 0.6); wallet.won += v; uiDirty = true; toast(`${b.name}에서 ${g.name}을(를) 만들었지만 칸이 가득 차서 장학금 ${won(v)}으로 바꿨어요`); return; }
+  inv.slots.push({ id, uses: g.uses || 1 }); saveInv(); renderInv(); toast(`${b.name} ${PROD[b.prod].name}에서 ${g.icon} ${g.name} 생산 · 보관함에 넣었어요`); SFX.ding();
+}
+function runProd(b) {
+  const P = b.prod;
+  if (P === 'income') { wallet.won += 60000; uiDirty = true; popText(bbCenter(b).setY(b.base + b.H * B + 4), '+₩60,000'); }
+  else if (P === 'students') spawnMine(b, 2);
+  else if (P === 'crew') { if (!sendMyCrew(b)) b.prodT = PROD.crew.every - 10; }
+  else if (P === 'drones') produceUnit(b, 'drones');
+  else if (P === 'tanks') produceUnit(b, 'tank');
+}
+function setProd(b, p) { b.prod = p; b.prodT = 0; toast(`${b.name} → ${PROD[p].icon} ${PROD[p].name}`); renderInv(); }
+// ── 내 건물 세우기: 비싼 값으로 내 세력 건물을 직접 지음 → 점령 건물처럼 생산 ──
+const myBuilds = new Set();
+const hqCost = () => 3000000 * (1 + 0.5 * myBuilds.size);           // 300만 → 450만 → 600만 …
+function buildHQ(hit) {
+  const p = hit.point.clone(); p.y = terrainAt(p.x, p.z);
+  const W = 8, D = 7, H = 8;                                          // 16 × 14 m · 4층
+  const ax = Math.floor(p.x / B) - (W >> 1), az = Math.floor(p.z / B) - (D >> 1);
+  for (let x = 0; x < W; x++) for (let z = 0; z < D; z++) { const wx = (ax + x + 0.5) * B, wz = (az + z + 0.5) * B, ty = terrainAt(wx, wz); if (hasBlock(wx, ty + 1, wz) || hasBlock(wx, ty + 5, wz) || Math.abs(ty - p.y) > 2.5) { toast('여기는 건물이 있거나 너무 비탈져서 지을 수 없어요 · 평평한 빈 땅을 눌러 주세요'); return false; } }
+  const cost = hqCost(); if (!spend(cost, '내 건물 세우기')) return false;
+  const cells = []; NET.remote = true;
+  for (let iy = 0; iy <= H; iy++) for (let x = 0; x < W; x++) for (let z = 0; z < D; z++) {
+    const edge = x === 0 || z === 0 || x === W - 1 || z === D - 1; if (!edge && iy < H && iy % 2) continue;    // 벽 + 층 바닥 + 지붕
+    const gx = ax + x, gz = az + z, cx = Math.floor(gx / CH), cz = Math.floor(gz / CH), ch = getChunk(cx, cz); if (!ch) continue;
+    const by = Math.floor((p.y - ch.base) / B) + iy; if (by < 0 || by >= CH_H) continue;
+    const i = ch.grid[ch.gi(gx - cx * CH, by, gz - cz * CH)]; if (i < 0 || ch.blocks[i].alive) continue;
+    const glass = edge && iy < H && iy % 2 === 1 && (x + z) % 2 === 1, col = iy === H ? MINE.roof : glass ? 0xb9d4f0 : MINE.wall;
+    const blk = ch.blocks[i]; blk.c.set(col).offsetHSL(0, 0, rand(-0.03, 0.03)); ch.setBlockColor(i, blk.c); ch.mesh.instanceColor.needsUpdate = true; ch.revive(i); cells.push([ch, i]);
+  }
+  NET.remote = false;
+  const n = myBuilds.size + 1, name = `${profile.nick || '내'} 세력 ${n}호관`;
+  const x0 = ax * B, z0 = az * B;
+  const hq = { name, built: true, bb: [x0, x0 + W * B, z0, z0 + D * B], base: p.y, H, cells, prod: 'income', prodT: 0 };
+  const div = document.createElement('div'); div.className = 'lbl big mineb'; div.textContent = `👑 ${name}`;
+  const lbl = new CSS2DObject(div); lbl.position.set(x0 + W, p.y + H * B + 4, z0 + D); scene.add(lbl); hq.label = lbl;
+  myBuilds.add(hq); mEvent('hq');
+  for (let j = 0; j < 60; j++) fire.spawn(x0 + rand(0, W * B), p.y + rand(0, H * B), z0 + rand(0, D * B), 0, rand(1, 4), 0, 1, 1, 0.5, 0.8, 0.6, 1, 1, 0, 1);
+  spawnMine(hq, 4);
+  banner('내 건물 완공!', `${name} · ${won(cost)} · [뽑기·보관함 → 👑 내 세력]에서 무엇을 만들지 고르세요`, 'gold'); SFX.bell(); shake(0.3, p);
+  if (!$('gacha').hidden) renderInv();
+  return true;
+}
+function updateMyBuilds(dt) {
+  for (const hq of [...myBuilds]) {
+    hq.prodT += dt; if (hq.prodT >= PROD[hq.prod].every) { hq.prodT = 0; runProd(hq); }
+    if ((hq.chk = (hq.chk || 0) - dt) <= 0) {
+      hq.chk = 1.5; const alive = hq.cells.filter(([ch, i]) => ch.blocks[i].alive).length;
+      if (alive < hq.cells.length * 0.4) { myBuilds.delete(hq); scene.remove(hq.label); for (const a of agents) if (a.home === hq) a.fadeOut = true; banner('내 건물이 무너졌어요', `${hq.name}을(를) 잃었어요`, 'red'); }
+    }
+  }
+}
+function clearMyBuilds() { for (const hq of myBuilds) scene.remove(hq.label); myBuilds.clear(); }
+
+function renderRoster(box) {
+  const units = {}; for (const s of inv.slots) { const g = gdef(s.id); if (USABLE(g.type)) units[g.id] = (units[g.id] || 0) + 1; }
+  const mine = agents.filter(a => a.kind === 'mine').length, myTeams = teams.filter(t => t.mine).length;
+  const bb = document.createElement('button'); bb.className = 'hqbtn'; bb.innerHTML = `🏗️ 내 건물 세우기 <small>${won(hqCost())} · 빈 땅을 눌러 16×14 m 4층 건물을 지어요</small>`; bb.onclick = () => { buildOpt.shape = 'hq'; selectWeapon('build'); $('buildbar').querySelectorAll('[data-shape]').forEach(x => x.classList.toggle('on', x.dataset.shape === 'hq')); pop('gacha'); toast(`내 건물 세우기 · 평평한 빈 땅을 누르세요 (${won(hqCost())})`); }; box.appendChild(bb);
+  const sum = document.createElement('div'); sum.className = 'roster-sum';
+  const items = [['👑', '점령 건물', owned.size + '채'], ['🏢', '세운 건물', myBuilds.size + '채'], ['🎓', '내 학생', mine + '명'], ['🚜', '내 용역팀', myTeams + '팀'], ...Object.entries(units).map(([id, n]) => [gdef(id).icon, gdef(id).name, n + '개'])];
+  for (const [ic, k, v] of items) { const d = document.createElement('div'); d.innerHTML = `<span>${ic}</span><small></small><b></b>`; d.children[1].textContent = k; d.children[2].textContent = v; sum.appendChild(d); }
+  box.appendChild(sum);
+  if (!owned.size && !myBuilds.size) { const e = document.createElement('p'); e.className = 'none'; e.textContent = '아직 내 건물이 없어요 · 위 [내 건물 세우기]로 직접 짓거나, 캠퍼스 건물을 90% 넘게 부수고 [점령하기]를 누르세요. 건물마다 무엇을 만들지 여기서 골라요.'; box.appendChild(e); return; }
+  for (const b of [...owned, ...myBuilds]) {
+    const row = document.createElement('div'); row.className = 'prodrow';
+    const P = PROD[b.prod || 'income'], left = Math.max(0, Math.ceil(P.every - (b.prodT || 0)));
+    const head = document.createElement('div'); head.className = 'ph2'; head.innerHTML = '<b></b><small></small>'; head.children[0].textContent = `👑 ${b.name}`; head.children[1].textContent = `${P.icon} ${P.name} · 다음까지 ${left}초`; row.appendChild(head);
+    const opts = document.createElement('div'); opts.className = 'popts';
+    for (const [k, o] of Object.entries(PROD)) { const bt = document.createElement('button'); bt.className = (b.prod || 'income') === k ? 'on' : ''; bt.innerHTML = `${o.icon}<span>${o.name}</span>`; bt.title = o.desc; bt.onclick = () => setProd(b, k); opts.appendChild(bt); }
+    row.appendChild(opts);
+    const ds = document.createElement('small'); ds.className = 'pdesc'; ds.textContent = P.desc; row.appendChild(ds);
+    box.appendChild(row);
+  }
+}
+
 function applyUpgrades() {
-  if (pipe.m) pipe.m.material = hasItem('goldpipe') ? new THREE.MeshStandardMaterial({ color: 0xffc83d, metalness: 1, roughness: 0.25, emissive: 0x3a2800 }) : (pipe.m.userData.mat0 || (pipe.m.userData.mat0 = pipe.m.material));
+  if (pipe.m) pipe.m.material = equipped('goldpipe') ? new THREE.MeshStandardMaterial({ color: 0xffc83d, metalness: 1, roughness: 0.25, emissive: 0x3a2800 }) : (pipe.m.userData.mat0 || (pipe.m.userData.mat0 = pipe.m.material));
 }
 
 // ── 유닛 공통 ──
@@ -3954,7 +4184,7 @@ function updateUnits(dt) {
           const muzzle = V3(4.6, 2.3, 0).applyAxisAngle(UP, m.rotation.y + tur.rotation.y).add(u.pos);
           const T = clamp(muzzle.distanceTo(aim) / 70, 0.25, 0.9), v0 = V3().subVectors(aim, muzzle).divideScalar(T); v0.y += 0.5 * GRAV * T;
           const ball = new THREE.Mesh(ballGeo, ballMat); ball.scale.setScalar(0.6); ball.position.copy(muzzle); scene.add(ball);
-          projectiles.push({ kind: 'ball', mesh: ball, v: v0, act: u.act, R: 5.5 * (hasItem('bigcannon') ? 1.2 : 1), power: 16, t: 0 });
+          projectiles.push({ kind: 'ball', mesh: ball, v: v0, act: u.act, R: 5.5 * (equipped('bigcannon') ? 1.3 : 1), power: 16, t: 0 });
           fxFire(muzzle, 1.6, 16); fxSmoke(muzzle, 2, 10, 0.7); SFX.cannon(muzzle); m.userData.barrel.position.x = 2.6;
         }
         m.userData.barrel.position.x += (3.4 - m.userData.barrel.position.x) * Math.min(1, dt * 6);
@@ -4393,7 +4623,7 @@ function updateDefense(dt) {
    12-17. 미션 (3개씩 걸리고, 깨면 보상 · 새 미션)
    ===================================================================== */
 const MS = { c: {}, active: [], done: store.get('missionsDone', 0) };
-const mEvent = (k, n = 1) => { MS.c[k] = (MS.c[k] || 0) + n; };
+const mEvent = (k, n = 1) => { MS.c[k] = (MS.c[k] || 0) + n; if (k === 'bossDown' || k === 'ktoDown' || k === 'claims') career[k] = (career[k] || 0) + n; };
 const MISSIONS = [
   { id: 'cars10', t: '차 10대 뒤집기', goal: 10, val: () => stats.cars, reward: { won: 400000 } },
   { id: 'combo20', t: '콤보 20 달성', goal: 20, abs: true, val: () => sem.maxCombo || 0, reward: { pull: 1 } },
@@ -4747,7 +4977,7 @@ function offerClaim(b) {
 }
 function claimBuilding(b) {
   if (!spend(500000, `${b.name} 점령`)) return false;
-  owned.add(b); mEvent('claims');
+  owned.add(b); mEvent('claims'); b.prod = 'income'; b.prodT = 0;
   b.blocks.forEach((k, i) => { if (!k.c0) k.c0 = k.c.clone(); if (k.t !== 'g') { k.c.set(k.t === 'r' || k.t === 'h' ? MINE.roof : MINE.wall).offsetHSL(0, 0, rand(-0.03, 0.03)); b.setBlockColor(i, k.c); } });
   b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; });
   NET.remote = true; for (let i = 0; i < b.total; i++) b.revive(i); NET.remote = false;
@@ -4759,7 +4989,7 @@ function claimBuilding(b) {
   flag.add(pole, cloth); flag.position.copy(c); scene.add(flag); b.flag = flag;
   if (b.lblDiv) { b.def.labelText = `👑 ${b.name} · 내 건물`; b.labelDirty = true; }
   for (let k = 0; k < 8; k++) { const p = bbCenter(b).add(V3(rand(-20, 20), 0, rand(-20, 20))); const s = freeSpots(p, 1, 0)[0] || p; addAgent({ pos: s, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { const c2 = bbCenter(b); a.goal = (freeSpots(c2.add(V3(rand(-25, 25), 0, rand(-25, 25))), 1, 0)[0]) || c2; } } }); }
-  banner('점령 성공!', `${b.name}이(가) 내 건물이 됐어요 · 20초마다 장학금 수입, 내 용역팀이 다음 건물을 철거하러 갑니다`, 'gold'); SFX.bell(); whiteFlash();
+  banner('점령 성공!', `${b.name}이(가) 내 건물이 됐어요 · [뽑기·보관함 → 👑 내 세력]에서 이 건물이 무엇을 만들지 고르세요 (수입·학생·용역·드론·전차)`, 'gold'); SFX.bell(); whiteFlash();
   return true;
 }
 function updateOwned(dt) {
@@ -4767,14 +4997,8 @@ function updateOwned(dt) {
   if ((MINE.chkT = (MINE.chkT || 0) - dt) <= 0) { MINE.chkT = 1; } else if (!owned.size) return;
   if (MINE.chkT === 1) for (const b of CAMPUS_BUILDINGS) if (b.name && b.ratio() >= 0.9) offerClaim(b);
   if (!owned.size) return;
-  if ((MINE.incomeT -= dt) <= 0) { MINE.incomeT = 20; const v = 40000 * owned.size; wallet.won += v; uiDirty = true; popText(controls.target.clone().setY(controls.target.y + 8), `내 건물 수입 +${won(v)}`); }
-  if ((MINE.crewT -= dt) <= 0) {
-    MINE.crewT = 60;
-    if (!EVS.auto || teams.some(t => t.kind === 'contractor' && t.mine)) return;
-    const from = [...owned][0], fc = bbCenter(from);
-    const tgt = CAMPUS_BUILDINGS.filter(b => b.name && !owned.has(b) && b.alive > 50).sort((p, q) => bbCenter(p).distanceTo(fc) - bbCenter(q).distanceTo(fc))[0];
-    if (tgt) { const c = nearestAliveBlock(tgt, fc, 1e9) || bbCenter(tgt); const t = new Team('contractor', tgt, c); t.id = ++teamSeq; t.mine = true; banner('내 용역팀 출동', `내 건물 ${from.name}에서 ${tgt.name} 철거하러 갑니다`, 'gold'); }
-  }
+  for (const b of owned) { if (!b.prod) b.prod = 'income'; b.prodT = (b.prodT || 0) + dt; if (b.prodT >= PROD[b.prod].every) { b.prodT = 0; runProd(b); } }   // 건물마다 고른 것을 생산
+  if (!$('gacha').hidden && invTab === 'roster' && frameNo % 30 === 0) renderInv();
 }
 function clearOwned() {
   for (const b of owned) { b.blocks.forEach((k, i) => { if (k.c0) { k.c.copy(k.c0); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; }); if (b.flag) scene.remove(b.flag); if (b.lblDiv) { b.def.labelText = null; b.labelDirty = true; } b.claimShown = false; }
@@ -4806,7 +5030,7 @@ async function sendOnline() {
   const C = window.GLOCAL_RANK; RK.lastNet = clock; RK.sentScore = score;
   try {
     await fetch(`${C.url}/rest/v1/glocal_rank`, { method: 'POST', headers: { apikey: C.key, Authorization: 'Bearer ' + C.key, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: JSON.stringify({ sid: RK.sid, nick: profile.nick, dept: profile.dept || '학과 미입력', score, pct: +campusPct.toFixed(1), theme: XMAS ? 'xmas' : 'base' }) });
+      body: JSON.stringify({ sid: ACC.user ? ACC.user.id : RK.sid, nick: profile.nick, dept: profile.dept || '학과 미입력', score: ACC.user ? Math.max(score, career.best) : score, pct: +campusPct.toFixed(1), theme: XMAS ? 'xmas' : 'base' }) });
   } catch { /* 온라인 실패는 조용히 (이 기기 기록은 남음) */ }
 }
 async function loadOnline() {
@@ -5173,6 +5397,7 @@ function trapChance(target) {
   if (target === 'kto') return 0.12;
   return Math.max(0.12, 0.7 - 0.13 * g);
 }
+{ const f0 = trapChance; trapChance = t => Math.min(0.95, f0(t) + (equipped('megaphone') ? 0.1 : 0)); }
 function trapTargetPos(target) { return target === 'boss' ? boss.fig.g.position : target === 'kto' ? kto.fig.g.position : scheme.pos; }
 function tryTrap(target) {
   const nameOf = { scheme: scheme.kind && SCHEMES[scheme.kind].who, boss: '총장', kto: '김태오' }[target];
@@ -5389,6 +5614,268 @@ function updateAmbience(dt) {
   if (concert.state === 'play' && camera.position.distanceTo(STAGE) < 300) caption('music', '🎵 노천극장 공연 음악');
 }
 
+// 카페 레스티오 (중원도서관 1층) · 바깥 테라스
+const restio = (() => {
+  const lib = byName('중원도서관'); if (!lib) return null;
+  const c = bbCenter(lib), nd = G.nodes[nearestNode(c.x, c.z)]; if (!nd) return null;
+  // 1층 블록 중: 길에 가깝고, 분수대와는 10 m 넘게 떨어진 바깥 블록
+  let bi = -1, bd = 1e9; const cc = V3();
+  lib.blocks.forEach((k, i) => {
+    if (k.y !== 0) return; lib.center(i, cc);
+    const fd = fountain ? Math.hypot(cc.x - fountain.p.x, cc.z - fountain.p.z) : 99; if (fd < 12) return;
+    const dx = nd[0] - cc.x, dz = nd[1] - cc.z, L = Math.hypot(dx, dz) || 1;
+    if (hasBlock(cc.x + dx / L * B, lib.base + 1, cc.z + dz / L * B)) return;          // 바깥 면만
+    const d = Math.hypot(cc.x - nd[0], cc.z - nd[1]) + fd * 0.05; if (d < bd) { bd = d; bi = i; }
+  });
+  if (bi < 0) return null;
+  lib.center(bi, cc); const dx = nd[0] - cc.x, dz = nd[1] - cc.z, L = Math.hypot(dx, dz) || 1, ux = dx / L, uz = dz / L, ang = Math.atan2(ux, uz);
+  const g = new THREE.Group();
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 64; const x = cv.getContext('2d');
+  x.fillStyle = '#3b2a20'; x.fillRect(0, 0, 256, 64); x.strokeStyle = '#e9d8b8'; x.lineWidth = 3; x.strokeRect(5, 5, 246, 54);
+  x.fillStyle = '#f4e6c8'; x.font = 'italic 700 30px Georgia,"Noto Serif KR",serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('레스티오', 98, 33);
+  x.font = '700 15px "Noto Sans KR",sans-serif'; x.fillStyle = '#c9a76a'; x.fillText('CAFE', 205, 34);
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace;
+  const brown = new THREE.MeshStandardMaterial({ color: 0x3b2a20, roughness: .7 });
+  const sign = new THREE.Mesh(new THREE.BoxGeometry(4.6, 1.15, 0.2), [brown, brown, brown, brown, new THREE.MeshStandardMaterial({ map: tex, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.25 }), brown]); sign.position.y = 3.3;
+  const glass = new THREE.Mesh(new THREE.BoxGeometry(5.4, 2.6, 0.12), new THREE.MeshStandardMaterial({ color: 0xd8b88a, emissive: 0x6a4a20, emissiveIntensity: 0.55, transparent: true, opacity: 0.6, roughness: .05, metalness: .2 })); glass.position.y = 1.3;
+  const awn = new THREE.Mesh(new THREE.BoxGeometry(6, 0.12, 1.6), new THREE.MeshStandardMaterial({ color: 0x2f4a3a })); awn.position.set(0, 2.8, 0.75); awn.rotation.x = 0.12;
+  g.add(sign, glass, awn);
+  // 테라스: 파라솔 테이블 3개 + 의자
+  const wood = new THREE.MeshStandardMaterial({ color: 0x8a6a48, roughness: .8 }), cream = new THREE.MeshStandardMaterial({ color: 0xf2e6cf, roughness: .8 });
+  for (let k = -1; k <= 1; k++) {
+    const t = new THREE.Group(); t.position.set(k * 2.4, 0, 3.4);
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.06, 14), wood); top.position.y = 0.75;
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.75, 6), wood); leg.position.y = 0.37;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 2.3, 6), wood); pole.position.y = 1.15;
+    const um = new THREE.Mesh(new THREE.ConeGeometry(1.25, 0.5, 8), k ? cream : new THREE.MeshStandardMaterial({ color: 0x2f4a3a })); um.position.y = 2.35;
+    const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 0.12, 8), new THREE.MeshStandardMaterial({ color: 0xffffff })); cup.position.set(0.15, 0.84, 0);
+    t.add(top, leg, pole, um, cup);
+    for (const s of [-1, 1]) { const ch = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.45, 0.42), wood); ch.position.set(s * 0.8, 0.22, 0); t.add(ch); }
+    g.add(t);
+  }
+  g.position.set(cc.x + ux * (B / 2 + 0.2), lib.base, cc.z + uz * (B / 2 + 0.2)); g.rotation.y = ang;
+  g.traverse(o => { if (o.isMesh) o.castShadow = true; }); scene.add(g);
+  const div = document.createElement('div'); div.className = 'lbl'; div.textContent = '카페 레스티오 · 중원도서관 1층'; const lb = new CSS2DObject(div); lb.position.set(0, 4.5, 0); g.add(lb);
+  // 테라스 손님 4명 (앉아서 이야기)
+  const guests = [];
+  for (let k = 0; k < 4; k++) {
+    const lx = (k % 3 - 1) * 2.4 + (k < 2 ? -0.8 : 0.8), lz = 3.4, wx = g.position.x + lx * Math.cos(ang) + lz * Math.sin(ang), wz = g.position.z - lx * Math.sin(ang) + lz * Math.cos(ang);
+    const a = addAgent({ pos: V3(wx, 0, wz), kind: 'cafe', role: k % 2 ? 'female' : 'male', think: (a, dt) => { a.yawT = Math.atan2(g.position.x + Math.sin(ang) * 3.4 - a.pos.x, g.position.z + Math.cos(ang) * 3.4 - a.pos.z) + Math.PI / 2 * (k % 2 ? 1 : -1); a.bob = Math.sin(clock * 2 + k) > 0.6 ? 0.04 : 0; } });
+    if (a) { a.phone = k === 3; guests.push(a); }
+  }
+  return { g, probe: cc.clone(), on: true, guests };
+})();
+function updateCafe() {
+  if (!restio || frameNo % 30 !== 7) return;
+  const alive = hasBlock(restio.probe.x, restio.probe.y, restio.probe.z);
+  if (alive !== restio.on) { restio.on = alive; restio.g.visible = alive; if (!alive) { popText(restio.probe.clone().setY(restio.probe.y + 3), '레스티오 휴업…'); for (const a of restio.guests) if (!a.dead) { fleeFrom(a, restio.probe, 6, 3); } } }
+}
+// 여름 매미 소리 (낮)
+function cicada() {
+  if (!SFX.ok()) return; const t = AU.ctx.currentTime;
+  for (let k = 0; k < 6; k++) { const s = t + k * 0.32, o = osc('sawtooth', rand(4200, 4800), s, 0.26), am = osc('square', 85, s, 0.26), ag = gain(); ag.gain.value = 0.5; const g = gain(); env(g, s, 0.04, 0.012, 0.2); am.connect(ag).connect(g.gain); o.connect(filt('bandpass', 4500, 3)).connect(g).connect(AU.amb); }
+  caption('cicada', '🦗 매미 소리 (여름)');
+}
+
+/* =====================================================================
+   12-29. 계정 · 누적 기록 (커리어)
+   - 커리어: 장학금 · 최고 점수 · 누적 점수 · 부순 블록 · 뒤집은 차 · 판 수 · 플레이 시간 · 김태오/총장 격파 · 점령 수
+   - 로그인 안 해도 이 브라우저에 자동 저장 (창을 닫아도 그대로)
+   - 회원가입/로그인(아이디 + 비밀번호): rank-config.js 의 Supabase 로 계정을 만들고 커리어를 서버에 저장 → 다른 기기에서도 이어서
+     · 비밀번호는 Supabase 인증 서버만 다룸 (게임 코드·이 브라우저에 저장하지 않음). 이 브라우저에는 로그인 토큰만 남음
+     · 아이디는 내부적으로 '아이디@players.glocalcrash.app' 형식 이메일로 바꿔 씀 (실제 메일 안 보냄)
+   ===================================================================== */
+const CAREER0 = { won: 500000, best: 0, total: 0, blocks: 0, cars: 0, plays: 0, playSec: 0, bossDown: 0, ktoDown: 0, claims: 0, since: Date.now() };
+const career = Object.assign({}, CAREER0, store.get('career', {}));
+const ACC = { user: null, token: null, refresh: null, lastSync: 0, lastLocal: 0, lastScore: 0, lastBlocks: 0, lastCars: 0, busy: false };
+const ID_RE = /^[a-z0-9_]{4,16}$/;
+const idMail = id => `${id}@players.glocalcrash.app`;
+// 시작할 때 장학금은 저장된 값으로 (입학 장학금 50만은 처음 한 번만)
+wallet.won = career.won; best = Math.max(best, career.best);
+career.plays++;
+function trackCareer(dt) {
+  career.playSec += dt;
+  if (score > ACC.lastScore) career.total += score - ACC.lastScore; ACC.lastScore = score;
+  if (stats.blocks > ACC.lastBlocks) career.blocks += stats.blocks - ACC.lastBlocks; ACC.lastBlocks = stats.blocks;
+  if (stats.cars > ACC.lastCars) career.cars += stats.cars - ACC.lastCars; ACC.lastCars = stats.cars;
+  career.won = wallet.won; career.best = Math.max(career.best, score, best);
+  if ((ACC.lastLocal += dt) > 5) { ACC.lastLocal = 0; store.set('career', career); }
+  if (ACC.user && clock - ACC.lastSync > 30) pushCareer();
+}
+function saveCareer(net) { career.won = wallet.won; store.set('career', career); if (net && ACC.user) pushCareer(true); }
+const rk = () => window.GLOCAL_RANK;
+async function authCall(path, body) {
+  const C = rk(); const r = await fetch(`${C.url}/auth/v1/${path}`, { method: 'POST', headers: { apikey: C.key, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.msg || j.error_description || j.message || ('오류 ' + r.status)); return j;
+}
+function setSession(j) {
+  ACC.token = j.access_token; ACC.refresh = j.refresh_token; ACC.exp = Date.now() + (j.expires_in || 3600) * 1000 - 60000;
+  ACC.user = { id: j.user.id, login: (j.user.email || '').split('@')[0] };
+  store.set('session', { refresh: ACC.refresh, login: ACC.user.login });
+}
+async function ensureToken() { if (ACC.token && Date.now() < ACC.exp) return true; if (!ACC.refresh) return false; try { setSession(await authCall('token?grant_type=refresh_token', { refresh_token: ACC.refresh })); return true; } catch { logout(true); return false; } }
+async function dbCall(method, query, body, extra = {}) {
+  if (!(await ensureToken())) throw new Error('로그인이 끊겼어요');
+  const C = rk(); const r = await fetch(`${C.url}/rest/v1/glocal_players${query}`, { method, keepalive: !!extra.keepalive, headers: { apikey: C.key, Authorization: 'Bearer ' + ACC.token, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=representation' }, body: body ? JSON.stringify(body) : undefined });
+  if (!r.ok) throw new Error('저장 서버 오류 ' + r.status); return r.status === 204 ? null : r.json().catch(() => null);
+}
+async function pushCareer(keepalive) {
+  if (!ACC.user || ACC.busy) return; ACC.lastSync = clock; ACC.busy = true;
+  try { await dbCall('POST', '', { user_id: ACC.user.id, login: ACC.user.login, nick: profile.nick, dept: profile.dept, best: career.best, total: Math.round(career.total), data: career }, { keepalive }); $('acSync').textContent = '서버에 저장됨 · ' + new Date().toLocaleTimeString().slice(0, -3); }
+  catch (e) { $('acSync').textContent = '저장 실패 · ' + e.message; }
+  ACC.busy = false;
+}
+async function pullCareer() {
+  const rows = await dbCall('GET', `?user_id=eq.${ACC.user.id}&select=nick,dept,data`);
+  const row = rows && rows[0];
+  if (row && row.data) {
+    // 서버 기록과 이 기기 기록 중 더 많이 쌓인 쪽을 씀
+    const d = row.data;
+    if ((d.total || 0) >= career.total) { Object.assign(career, d); wallet.won = career.won; best = Math.max(best, career.best); }
+    if (row.nick) setProfile(row.nick, row.dept || '');
+    uiDirty = true;
+  }
+  await pushCareer();
+}
+async function signup(id, pw, nick, dept) {
+  if (!ID_RE.test(id)) throw new Error('아이디는 영어 소문자·숫자·_ 4~16자');
+  if (pw.length < 6) throw new Error('비밀번호는 6자 이상');
+  if (!cleanText(nick, 12)) throw new Error('닉네임을 넣어 주세요');
+  const j = await authCall('signup', { email: idMail(id), password: pw, data: { nick: cleanText(nick, 12), dept: cleanText(dept, 16) } });
+  if (!j.access_token) throw new Error('가입은 됐지만 바로 로그인되지 않았어요 (관리자: 이메일 확인 끄기 필요)');
+  setSession(j); setProfile(nick, dept); await pullCareer();
+}
+async function login(id, pw) {
+  if (!ID_RE.test(id)) throw new Error('아이디를 확인해 주세요');
+  setSession(await authCall('token?grant_type=password', { email: idMail(id), password: pw })); await pullCareer();
+}
+function logout(silent) {
+  if (ACC.user) saveCareer(true);
+  ACC.user = ACC.token = ACC.refresh = null; store.set('session', null); renderAcct();
+  if (!silent) toast('로그아웃했어요 · 기록은 서버와 이 기기에 남아 있어요');
+}
+function fmtTime(s) { const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? `${h}시간 ${m}분` : `${m}분`; }
+function renderAcct() {
+  const on = !!(rk() && rk().url && rk().key);
+  $('acOffline').hidden = on; $('acForms').hidden = !on || !!ACC.user; $('acIn').hidden = !ACC.user;
+  $('acctBtn').textContent = ACC.user ? `👤 ${profile.nick || ACC.user.login}` : '👤 로그인';
+  if (ACC.user) $('acWho').textContent = `${profile.nick || ACC.user.login} (${ACC.user.login})${profile.dept ? ' · ' + profile.dept : ''}`;
+  const rows = [['장학금', won(wallet.won)], ['최고 점수', career.best.toLocaleString()], ['누적 점수', Math.round(career.total).toLocaleString()], ['부순 블록', career.blocks.toLocaleString()], ['뒤집은 차', career.cars.toLocaleString() + '대'], ['접속', career.plays + '번'], ['플레이 시간', fmtTime(career.playSec)], ['총장 사퇴', career.bossDown + '번'], ['김태오 격파', career.ktoDown + '번'], ['점령한 건물', career.claims + '채']];
+  const box = $('acStats'); box.textContent = '';
+  for (const [k, v] of rows) { const d = document.createElement('div'); const a = document.createElement('span'); a.textContent = k; const b = document.createElement('b'); b.textContent = v; d.append(a, b); box.appendChild(d); }
+}
+function acctMsg(t, bad) { const m = $('acMsg'); m.textContent = t; m.classList.toggle('bad', !!bad); }
+async function acctDo(kind) {
+  const id = $('acId').value.trim().toLowerCase(), pw = $('acPw').value;
+  acctMsg(kind === 'up' ? '가입하는 중…' : '로그인 중…');
+  try {
+    if (kind === 'up') await signup(id, pw, $('acNick').value || profile.nick, $('acDept').value || profile.dept); else await login(id, pw);
+    $('acPw').value = ''; acctMsg(''); renderAcct(); toast(kind === 'up' ? `가입 완료! ${profile.nick}님 기록이 계속 쌓여요` : `${profile.nick || id}님 다시 오셨네요 · 기록을 불러왔어요`); SFX.ding();
+  } catch (e) { acctMsg(/Invalid login/.test(e.message) ? '아이디 또는 비밀번호가 맞지 않아요' : /already registered|already exists/.test(e.message) ? '이미 있는 아이디예요' : e.message, true); }
+}
+// 저장된 로그인 이어 가기
+(async () => { const s = store.get('session', null); if (s && s.refresh && rk() && rk().url) { ACC.refresh = s.refresh; if (await ensureToken()) { try { await pullCareer(); } catch {} } renderAcct(); } })();
+
+/* =====================================================================
+   12-30. 세력 다툼
+   (1) 시위 진압: 시위가 행진·집회·폭동이면 '교내 질서유지대'(방패 12명)가 목표 건물 앞을 막아섬
+       → 대치(힘겨루기 막대): 시위대 수 vs 질서유지대 수 × 1.6. 질서유지대가 이기면 해산, 시위대가 이기면 밀어내고 폭동
+       → 내가 질서유지대 근처를 폭발시키면 쓰러져 시위대가 유리해짐
+   (2) 철거 용역 vs 시설팀: 두 팀이 70 m 안에서 일하면 가운데로 몰려가 몸싸움 (힘겨루기 ±8점)
+       → 용역이 이기면 시설팀 철수 + 장학금 30만, 시설팀이 이기면 용역 철수. 내가 근처를 공격하면 용역 쪽 +1(지원)
+   사람을 해치는 연출은 없음: 밀치기·넘어짐(잠깐 쓰러졌다 일어남)만
+   ===================================================================== */
+const riotLine = { active: false, crew: [], meter: 0, t: 0, front: null, until: 0, cool: 0 };
+function startRiotLine() {
+  if (riotLine.active || !protest.active || clock < riotLine.cool) return;
+  const tg = protest.target, tc = bbCenter(tg), pc = protestCenter();
+  const dir = V3(pc.x - tc.x, 0, pc.z - tc.z); const L = dir.length() || 1; dir.divideScalar(L);
+  const front = tc.clone().addScaledVector(dir, Math.min(L * 0.55, Math.hypot(tg.bb[1] - tg.bb[0], tg.bb[3] - tg.bb[2]) / 2 + 8)); front.y = 0;
+  const side = V3(-dir.z, 0, dir.x);
+  Object.assign(riotLine, { active: true, crew: [], meter: 0, t: 0, front, dir, until: clock + 75 });
+  for (let k = 0; k < 12; k++) {
+    const post = front.clone().addScaledVector(side, (k - 5.5) * 1.3).addScaledVector(dir, k % 2 ? 0.6 : 0);
+    const from = tc.clone().addScaledVector(side, rand(-6, 6));
+    const a = addAgent({ pos: from, kind: 'guard', role: 'riot', shirt: 0x2b3a55, pants: 0x1f2633, hat: 0x1f2633, shield: true, speed: 3.2, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.yawT = Math.atan2(riotLine.dir.x, riotLine.dir.z); if (riotLine.clash) a.bob = Math.abs(Math.sin(clock * 5 + a.pos.x)) * 0.12; } } });
+    if (a) { a.goal = post; riotLine.crew.push(a); }
+  }
+  banner('질서유지대 출동', `${tg.name || '건물'} 앞을 방패로 막아섭니다 · 시위대와 대치`, 'blue'); SFX.siren(front);
+}
+function updateRiotLine(dt) {
+  if (!riotLine.active) { if (protest.active && (protest.state === 'rally' || protest.state === 'riot') && clock > riotLine.cool) startRiotLine(); return; }
+  const R = riotLine; R.t += dt; R.crew = R.crew.filter(a => !a.dead);
+  const up = R.crew.filter(a => a.down <= 0 && a.ft <= 0);
+  if (!protest.active || protest.state === 'disperse') { endRiotLine(protest.active ? 'win' : 'end'); return; }
+  const pc = protestCenter();
+  // 질서유지대가 시위대 바로 앞(4 m)까지 다가가 줄을 섬
+  if ((R.reT = (R.reT || 0) - dt) <= 0) { R.reT = 2; const tc = bbCenter(protest.target), dv = V3(pc.x - tc.x, 0, pc.z - tc.z); const L = dv.length() || 1; dv.divideScalar(L); R.dir = dv; R.front = V3(pc.x, 0, pc.z).addScaledVector(dv, -Math.min(6, L * 0.5)); const sd = V3(-dv.z, 0, dv.x); R.crew.forEach((a, k) => { if (a.down <= 0) a.goal = R.front.clone().addScaledVector(sd, (k - 5.5) * 1.3).addScaledVector(dv, k % 2 ? -0.6 : 0); }); }
+  const mc = up.reduce((s, a) => s.add(a.pos), V3()).divideScalar(Math.max(1, up.length)), d = Math.hypot(pc.x - mc.x, pc.z - mc.z);
+  R.clash = up.length > 0 && d < 15;
+  if (R.clash) {
+    const P = protest.list.length, G2 = up.length * 5;
+    R.meter += (G2 - P) / Math.max(1, G2 + P) * dt * 0.15;      // + 질서유지대 우세, − 시위대 우세
+    if (Math.random() < dt * 1.5 && up.length && protest.list.length) {    // 밀치기
+      const loserGuard = Math.random() < P / (P + G2 + 0.01);
+      const a = loserGuard ? pick(up) : pick(protest.list); a.down = 1.6; popText(a.pos.clone().setY(a.y + 2.4), loserGuard ? '밀림!' : '저지!'); SFX.hit(a.pos, 0.5);
+    }
+    card('riotline', '시위대 vs 질서유지대', `대치 중 · 질서유지대 ${up.length}명 · 시위대 ${protest.list.length}명 · 질서유지대 근처를 흔들면 시위대 유리`, clamp(0.5 + R.meter, 0, 1), R.meter > 0 ? 'blue' : 'red');
+    if (R.meter > 0.5) { protestToDisperse(false); endRiotLine('win'); return; }
+    if (R.meter < -0.5 || !up.length) { endRiotLine('lose'); return; }
+  }
+  if (clock > R.until) endRiotLine('end');
+}
+function endRiotLine(res) {
+  const R = riotLine; if (!R.active) return; R.active = false; R.cool = clock + 40; uncard('riotline');
+  for (const a of R.crew) if (!a.dead) a.fadeOut = true; R.crew = [];
+  if (res === 'win') banner('질서유지대 승리', '시위대가 해산했어요', 'blue');
+  else if (res === 'lose') { banner('시위대가 밀어냈다!', '질서유지대가 물러나고 시위가 폭동으로 번집니다', 'red'); if (protest.active && protest.state !== 'riot') protestToRiot(true); mEvent('lineBroken'); }
+}
+function riotLineBoom(p, R0) {
+  if (!riotLine.active) return;
+  for (const a of riotLine.crew) if (a.pos.distanceTo(p) < R0 * 2 + 5) { a.down = 3; riotLine.meter -= 0.04; }
+}
+// ── 철거 용역 vs 시설팀 ──
+const clashes = [];       // { con, fac, mid, score, t, card }
+function updateClashes(dt) {
+  if (frameNo % 20 === 0) {
+    const cons = teams.filter(t => t.kind === 'contractor' && (t.state === 'hold' || t.state === 'park') && t.crew.length);
+    const facs = teams.filter(t => t.kind === 'facility' && (t.state === 'hold' || t.state === 'deploy') && t.crew.length);
+    for (const c of cons) for (const f of facs) {
+      if (clashes.some(x => x.con === c || x.fac === f)) continue;
+      if (c.zone.distanceTo(f.zone) > 70) continue;
+      const mid = c.zone.clone().lerp(f.zone, 0.5); mid.y = 0;
+      const sp = freeSpots(mid, 1, 0)[0]; if (sp) mid.copy(sp).setY(0);
+      const X = { con: c, fac: f, mid, score: 0, t: 0, id: 'clash' + teamSeq + '_' + clashes.length };
+      for (const a of [...c.crew.slice(0, 5), ...f.crew.slice(0, 5)]) { a.goal = mid.clone().add(V3(rand(-3, 3), 0, rand(-3, 3))); a.clash = X; }
+      clashes.push(X);
+      banner('세력 다툼!', `${c.mine ? '내 ' : ''}철거 용역 vs 시설팀 · 가운데에서 몸싸움 · 근처를 공격하면 용역 지원`, 'red'); SFX.siren(mid);
+    }
+  }
+  for (const X of [...clashes]) {
+    X.t += dt;
+    const A = X.con.crew.filter(a => a.clash === X && !a.dead), F = X.fac.crew.filter(a => a.clash === X && !a.dead);
+    const near = a => a.pos.distanceTo(X.mid) < 8;
+    const Au = A.filter(a => a.down <= 0 && near(a)), Fu = F.filter(a => a.down <= 0 && near(a));
+    for (const a of [...A, ...F]) if (near(a) && a.down <= 0) { const o = (a.role === 'facility' ? Au : Fu)[0]; if (o) a.yawT = Math.atan2(o.pos.x - a.pos.x, o.pos.z - a.pos.z); a.swing = Math.max(0, Math.sin(clock * 9 + a.pos.x)) * 1.3; }
+    if (Au.length && Fu.length && Math.random() < dt * 1.8) {
+      const pCon = (Au.length * (X.con.mine ? 1.25 : 1.1)) / (Au.length * 1.1 + Fu.length * 1.15);
+      const conWins = Math.random() < pCon, loser = conWins ? pick(Fu) : pick(Au);
+      loser.down = 1.8; X.score += conWins ? 1 : -1; popText(loser.pos.clone().setY(loser.y + 2.4), conWins ? '용역 +1' : '시설팀 +1'); SFX.hit(loser.pos, 0.6);
+    }
+    card(X.id, '세력 다툼 · 철거 용역 vs 시설팀', `용역 ${A.length}명 vs 시설팀 ${F.length}명 · 먼저 8점`, clamp(0.5 + X.score / 16, 0, 1), X.score >= 0 ? 'gold' : 'blue');
+    const over = X.score >= 8 || X.score <= -8 || X.t > 40 || !A.length || !F.length || X.con.state === 'retreat' || X.fac.state === 'retreat' || X.con.state === 'leave' || X.fac.state === 'leave';
+    if (over) {
+      clashes.splice(clashes.indexOf(X), 1); uncard(X.id);
+      for (const a of [...A, ...F]) { a.clash = null; a.goal = a.post; }
+      if (X.score >= 8 || (!F.length && A.length)) { banner('철거 용역 승리!', '시설팀이 방패를 내리고 철수합니다 · 장학금 ₩300,000', 'gold'); wallet.won += 300000; uiDirty = true; if (X.fac.state !== 'retreat') X.fac.retreat(true); mEvent('clashWin'); }
+      else if (X.score <= -8 || (!A.length && F.length)) { banner('시설팀이 막아냈다', '철거 용역이 물러납니다', 'blue'); if (X.con.state !== 'retreat') X.con.retreat(false); }
+      else banner('세력 다툼 무승부', '양쪽이 제자리로 돌아갑니다', '');
+    }
+  }
+}
+function clashBoom(p, R0) { for (const X of clashes) if (p.distanceTo(V3(X.mid.x, p.y, X.mid.z)) < 25 + R0) { X.score += 1; popText(X.mid.clone().setY(terrainAt(X.mid.x, X.mid.z) + 4), '지원 공격! 용역 +1'); } }
+function clearClashes() { for (const X of clashes) uncard(X.id); clashes.length = 0; if (riotLine.active) endRiotLine('end'); riotLine.cool = 0; }
+
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
@@ -5532,9 +6019,9 @@ function setNight(on) {
   state.night = on;
   const bg = on ? 0x0b1222 : DAY.bg;
   const S = on ? SKY.night : SKY.day; skyMat.uniforms.top.value.set(S.top); skyMat.uniforms.hor.value.set(S.hor); skyMat.uniforms.sunAmt.value = on ? 0.15 : 1; skyMat.uniforms.sunCol.value.set(on ? 0xbfd0ff : 0xfff2d0);
-  scene.fog.color.set(S.hor); clouds3.mesh.material.color.set(on ? 0x2a3348 : (XMAS ? 0xe8edf2 : 0xffffff)); if (bloom) bloom.strength = on ? 0.55 : 0.22;
+  scene.fog.color.set(S.hor); clouds3.mesh.material.color.set(on ? 0x2a3348 : (WINTER ? 0xe8edf2 : 0xffffff)); if (bloom) bloom.strength = on ? 0.55 : 0.22;
   hemi.intensity = on ? 0.22 : 1.0; hemi.color.set(on ? 0x5a6a9a : 0xd6e9ff);
-  sun.intensity = on ? 0.35 : 2.4; sun.color.set(on ? 0x8fa6ff : 0xfff0d8);
+  sun.intensity = on ? 0.35 : SEASON === 'summer' ? 2.75 : WINTER ? 2.1 : 2.4; sun.color.set(on ? 0x8fa6ff : 0xfff0d8);
   lampMat.emissiveIntensity = on ? 2.2 : 0;
   renderer.toneMappingExposure = on ? 1.25 : 1.0;
   if (on) { for (const a of agents) if (a.kind === 'cleaner') a.fadeOut = true; } else if (!agents.some(a => a.kind === 'cleaner')) spawnCleaners(5);
@@ -5551,7 +6038,7 @@ function flyTo(pos, tgt) { fly = { p0: camera.position.clone(), t0: controls.tar
 document.querySelectorAll('#toggles .tg').forEach(b => b.addEventListener('click', () => {
   const t = b.dataset.t; audioInit();
   if (t === 'names') { state.names = !state.names; document.querySelectorAll('[data-t=names]').forEach(x => x.classList.toggle('on', state.names)); document.body.classList.toggle('hide-labels', !state.names); }
-  if (t === 'sound') { AU.on = !AU.on; document.querySelectorAll('[data-t=sound]').forEach(x => x.classList.toggle('on', AU.on)); if (AU.master) AU.master.gain.value = AU.on ? 0.85 : 0; if (!AU.on && 'speechSynthesis' in window) speechSynthesis.cancel(); }
+  if (t === 'sound') { AU.on = !AU.on; document.querySelectorAll('[data-t=sound]').forEach(x => x.classList.toggle('on', AU.on)); document.querySelectorAll('.tg.ic[data-t=sound]').forEach(x => x.lastChild.textContent = AU.on ? '🔊' : '🔇'); if (AU.master) AU.master.gain.value = AU.on ? 0.85 : 0; if (!AU.on && 'speechSynthesis' in window) speechSynthesis.cancel(); }
   if (t === 'night') setNight(!state.night);
   if (t === 'top') flyTo(V3(controls.target.x, 520, controls.target.z + 1), controls.target.clone());
   if (t === 'stage') flyTo(STAGE_VIEW.pos.clone(), STAGE_VIEW.tgt.clone());
@@ -5566,6 +6053,7 @@ document.querySelectorAll('#toggles .tg').forEach(b => b.addEventListener('click
   if (t === 'settings') pop('setmenu');
   if (t === 'status') { pop('statmenu'); renderStatus(); }
   if (t === 'gacha') { pop('gacha'); renderInv(); }
+  if (t === 'acct') { pop('acctmenu'); renderAcct(); }
   if (t === 'rank') { pop('rankmenu'); RK.online = null; renderRank(); if (ONLINE()) loadOnline(); }
 }));
 $('live').addEventListener('click', () => flyTo(STAGE_VIEW.pos.clone(), STAGE_VIEW.tgt.clone()));
@@ -5592,6 +6080,10 @@ for (const k of ['power', 'quake']) {
   inp.oninput = () => { SET[k] = +inp.value; out.textContent = '×' + SET[k].toFixed(1); saveSet(); };
 }
 $('setmenu').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { applyQuality(b.dataset.q); saveSet(); });
+{ let cur = 'auto'; try { cur = JSON.parse(localStorage.getItem('glocalcrash.season')) || 'auto'; } catch {}
+  $('seasonRow').querySelectorAll('[data-season]').forEach(b => { b.classList.toggle('on', b.dataset.season === cur); b.title = b.dataset.season === 'auto' ? '실제 달에 맞춤 (지금: ' + SEASONS[SEASON] + ')' : '';
+    b.onclick = () => { if (b.dataset.season === cur) return; store.set('season', b.dataset.season); if (typeof saveCareer === 'function') saveCareer(true); toast('계절을 바꾸는 중…'); setTimeout(() => { const u = new URL(location.href); u.searchParams.delete('season'); location.href = u.toString(); }, 300); }; });
+  if (XMAS) $('seasonRow').hidden = true; }
 $('s_town').checked = SET.town; $('s_town').onchange = e => { applyTown(e.target.checked); saveSet(); };
 for (const k of ['v_music', 'v_sfx', 'v_amb', 'v_voice']) { const inp = $('s_' + k), out = $('o_' + k); inp.value = SET[k]; out.textContent = Math.round(SET[k] * 100) + '%'; inp.oninput = () => { SET[k] = +inp.value; out.textContent = Math.round(SET[k] * 100) + '%'; applyMix(); saveSet(); }; }
 $('s_caps').checked = SET.caps; $('s_caps').onchange = e => { SET.caps = e.target.checked; saveSet(); };
@@ -5609,20 +6101,50 @@ BUILD_COLORS.forEach(([c, name], k) => {
 // 확대·축소 단추
 function zoomBy(k) { const tg = controls.target, off = camera.position.clone().sub(tg); const d = clamp(off.length() * k, controls.minDistance, controls.maxDistance); flyTo(tg.clone().add(off.setLength(d)), tg.clone()); }
 $('zin').onclick = () => zoomBy(0.55); $('zout').onclick = () => zoomBy(1.8);
+// 시점 돌리기·기울이기 (누르고 있으면 계속)
+const _sph = new THREE.Spherical();
+function camOrbit(dAz, dPol) {
+  const off = camera.position.clone().sub(controls.target); _sph.setFromVector3(off);
+  _sph.theta += dAz; _sph.phi = clamp(_sph.phi + dPol, controls.minPolarAngle + 0.02, controls.maxPolarAngle - 0.003);
+  off.setFromSpherical(_sph); camera.position.copy(controls.target).add(off); fly = null; controls.update();
+}
+function holdBtn(id, fn) {
+  const b = $(id); let t = null; const stop = () => { clearInterval(t); t = null; };
+  b.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); fn(); stop(); t = setInterval(fn, 30); });
+  for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) b.addEventListener(ev, stop);
+}
+holdBtn('vRotL', () => camOrbit(0.045, 0)); holdBtn('vRotR', () => camOrbit(-0.045, 0));
+holdBtn('vUp', () => camOrbit(0, -0.03)); holdBtn('vDown', () => camOrbit(0, 0.03));
+$('vEye').onclick = () => { const tg = controls.target.clone(), off = camera.position.clone().sub(tg).setY(0); if (off.lengthSq() < 1) off.set(0, 0, 1); off.setLength(22); const p = tg.clone().add(off); p.y = Math.max(tg.y + 1.7, terrainAt(p.x, p.z) + 1.7); flyTo(p, tg.clone().setY(tg.y + 1.6)); toast('사람 눈높이 · ⟲ ⟳로 둘러보세요'); };
+$('vTop').onclick = () => flyTo(V3(controls.target.x, controls.target.y + 320, controls.target.z + 1), controls.target.clone());
+function applyDrag() {
+  const rot = !!SET.dragRotate;
+  controls.mouseButtons.LEFT = rot ? THREE.MOUSE.ROTATE : THREE.MOUSE.PAN; controls.mouseButtons.RIGHT = rot ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
+  controls.touches.ONE = rot ? THREE.TOUCH.ROTATE : THREE.TOUCH.PAN; controls.touches.TWO = rot ? THREE.TOUCH.DOLLY_PAN : THREE.TOUCH.DOLLY_ROTATE;
+  $('vDrag').textContent = rot ? '🔄 끌기: 회전' : '✋ 끌기: 이동'; $('vDrag').classList.toggle('on', rot);
+}
+$('vDrag').onclick = () => { SET.dragRotate = !SET.dragRotate; applyDrag(); saveSet(); toast(SET.dragRotate ? '끌면 시점이 돌아가요 (이동은 오른쪽 끌기·두 손가락)' : '끌면 지도가 움직여요 (회전은 오른쪽 끌기·두 손가락)'); };
+applyDrag();
 $('zclose').onclick = () => { const h = pickAt(innerWidth / 2, innerHeight / 2); const tg = h ? h.point.clone() : controls.target.clone(); const off = camera.position.clone().sub(controls.target).setLength(9); off.y = Math.max(off.y, 3.5); flyTo(tg.clone().add(off), tg); toast('가까이 보기 · 유리창 너머로 수업 중인 학생들이 보여요'); };
 // 이벤트 메뉴
-const pop = id => { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
+const pop = id => { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
 $('evmenu').querySelectorAll('button[data-ev]').forEach(b => b.onclick = () => { triggerEvent(b.dataset.ev); $('evmenu').hidden = true; });
 $('statmenu').querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { $('statmenu').querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b)); $('stPeople').hidden = b.dataset.tab !== 'people'; $('stBld').hidden = b.dataset.tab !== 'bld'; });
 spawnCleaners(SMALL ? 3 : 5);
 // 닉네임 · 학과
 $('nick').value = profile.nick; $('dept').value = profile.dept; setProfile(profile.nick, profile.dept);
 $('start').addEventListener('click', () => { setProfile($('nick').value, $('dept').value); if (profile.nick) toast(`${profile.nick}님, 기록은 [랭킹]에 남아요`); });
+$('acctOpen').onclick = e => { e.preventDefault(); setProfile($('nick').value, $('dept').value); startGame(); pop('acctmenu'); renderAcct(); };
+$('acLogin').onclick = () => acctDo('in'); $('acSignup').onclick = () => acctDo('up'); $('acOut').onclick = () => logout();
+$('acPw').addEventListener('keydown', e => { if (e.key === 'Enter') acctDo('in'); });
+renderAcct();
 $('meEdit').onclick = () => { $('rkEdit').hidden = !$('rkEdit').hidden; $('nick2').value = profile.nick; $('dept2').value = profile.dept; };
 $('meSave').onclick = () => { setProfile($('nick2').value, $('dept2').value); $('rkEdit').hidden = true; renderRank(); };
 $('rankmenu').querySelectorAll('[data-rk]').forEach(b => b.onclick = () => { RK.tab = b.dataset.rk; renderRank(); });
 $('rankmenu').querySelectorAll('[data-sc]').forEach(b => b.onclick = () => { RK.scope = b.dataset.sc; if (RK.scope === 'online' && ONLINE() && RK.online === null) loadOnline(); renderRank(); });
-addEventListener('pagehide', () => recordScore(true));
+addEventListener('pagehide', () => { recordScore(true); saveCareer(true); });
+addEventListener('visibilitychange', () => { if (document.hidden) saveCareer(true); });
+$('gTabs').querySelectorAll('[data-it]').forEach(b => b.onclick = () => { invTab = b.dataset.it; renderInv(); });
 $('pull1').onclick = () => pull(1); $('pull10').onclick = () => pull(10);
 renderInv(); applyUpgrades();
 $('evauto').onchange = e => { EVS.auto = e.target.checked; toast(EVS.auto ? '이벤트가 자동으로 일어나요' : '자동 이벤트를 껐어요'); };
@@ -5656,6 +6178,7 @@ window.addEventListener('keydown', e => {
   const n = parseInt(e.key, 10); if (n >= 1 && n <= 9) selectWeapon(WEAPONS[n - 1].id); if (e.key === '0') selectWeapon('build'); if (e.key === '-') selectWeapon('summon'); if (e.key === '=') selectWeapon('fighter');
   const k = e.key.toLowerCase();
   if (k === 'n') setNight(!state.night);
+  if (k === 'q') camOrbit(0.12, 0); if (k === 'e') camOrbit(-0.12, 0); if (k === 'r') camOrbit(0, -0.08); if (k === 'f') camOrbit(0, 0.08);
   if (k === 'l') document.querySelector('[data-t="names"]').click();
   if (k === 'm') document.querySelector('[data-t="sound"]').click();
 });
@@ -5705,7 +6228,7 @@ const LABEL_FAR = SMALL ? 260 : 420;
 const needle = $('needle');
 function loop(now) {
   requestAnimationFrame(loop);
-  const dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt;
+  const tnow = performance.now(), dt = Math.min(0.05, Math.max(0, (tnow - last) / 1000)); last = tnow; clock += dt;   // 시각이 뒤로 가도 시간이 거꾸로 흐르지 않게
   for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) { const t = timers.splice(i, 1)[0]; t.fn(); }
   if (fly) {
     fly.t = Math.min(1, fly.t + dt / 1.1); const e = 1 - Math.pow(1 - fly.t, 3);
@@ -5719,8 +6242,9 @@ function loop(now) {
   updateProjectiles(dt); updateQuake(dt); updatePipe(dt); updateTracers(dt); updateRings(dt); updateRockets(dt); updateTrees(dt);
   updateConcert(dt, beat);
   updateEvents(dt); updateAgents(dt); updateNet(dt); updatePeopleTags(dt); updateUnits(dt); updateSky(dt); updateBirds(dt); updateDefense(dt); updateTutorial(dt);
-  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop(); updateAmbience(dt);
-  if (AU.ctx && Math.random() < dt * (state.night ? 0.9 : 0.35) && camera.position.y < 200) state.night ? SFX.cricket() : SFX.chirp();
+  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop(); updateAmbience(dt); updateCafe(); trackCareer(dt); updateMyBuilds(dt); updateRiotLine(dt); updateClashes(dt);
+  if (SEASON === 'summer' && !state.night && Math.random() < dt * 0.06 && camera.position.y < 220) cicada();
+  if (AU.ctx && Math.random() < dt * (state.night ? 0.45 : 0.12) && camera.position.y < 200) state.night ? SFX.cricket() : SFX.chirp();
   frameNo++;
   if (Math.floor(clock * 30) % 2 === 0) drawScreen(beat);
   fire.update(dt); smoke.update(dt);
@@ -5762,7 +6286,7 @@ window.__game = { THREE, scene, camera, controls, buildings, vehicles, movers, c
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
