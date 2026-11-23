@@ -17,6 +17,10 @@
 - 크리스마스 버전: `christmas.html`
 - 온라인 랭킹(선택): `rank-config.js`에 Supabase 주소·공개 키 (개발명세서 70절)
 
+## 바로 하기 (공개 주소)
+- 기본: https://teokima.github.io/glocal-crash/
+- 크리스마스: https://teokima.github.io/glocal-crash/christmas.html
+
 ## 실행
 - `index.html`(기본) 또는 `christmas.html`(크리스마스)을 브라우저로 열기. 같은 폴더에 `campus-data.js` 필요
 - 또는 이 폴더에서 `python -m http.server` 후 `http://localhost:8000`
@@ -24,6 +28,7 @@
 ## 다시 만들기
 - 지도 데이터: `node tools/build-campus.mjs` (원본 `data/*.osm`)
 - 크리스마스 판: `index.html`을 고친 뒤 `node tools/build-xmas.mjs`
+- 공개 배포: `node tools/deploy.mjs "바뀐 내용"` → `../glocal-crash-site`에 복사·커밋 → 그 폴더에서 `git push` (GitHub Pages가 1분쯤 뒤 반영)
 
 ## 문서
 [개발계획서](docs/개발계획서.md) · [개발명세서](docs/개발명세서.md) · [기능설명서](docs/기능설명서.md)
