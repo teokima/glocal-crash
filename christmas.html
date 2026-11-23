@@ -259,6 +259,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .helpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;max-height:64vh;overflow:auto}.helpgrid section{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04)}.helpgrid h4{margin:0 0 6px;font-size:13.5px;color:#ffd27a}.helpgrid ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.65}.helpgrid b{color:#fff}
 .named.crate{background:rgba(120,80,10,.9);border-color:#ffd27a}
 @media (max-width:640px){#warbox{width:150px;padding:6px}#warbox .wh small{display:none}#warbox button{font-size:10.5px;padding:5px 1px}}
+.achgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}.ach{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.04);opacity:.55}.ach.on{opacity:1;background:rgba(255,200,61,.14);border:1px solid rgba(255,200,61,.45)}.ach b{display:block;font-size:12px}.ach small{font-size:10.5px;color:var(--dim)}
+.named.hero{background:linear-gradient(90deg,#3a2670,#7a52c8);border-color:#ffc83d;box-shadow:0 0 18px rgba(176,107,255,.8)}
 #gTabs{display:flex;gap:6px;margin:10px 0 8px}#gTabs button{flex:1;padding:8px 4px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:700;font-size:12.5px}#gTabs button.on{background:rgba(255,178,63,.18);border-color:var(--hot);color:#ffd27a}
 .slot .sbtn button.use{background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;border:0}
 .eqslots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -525,7 +527,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   </div>
 </div>
 <div id="acctmenu" class="card panel" hidden>
-  <div class="ph"><b>내 계정 · 누적 기록</b><button data-close="acctmenu">✕</button></div>
+  <div class="ph"><b>내 계정 · 누적 기록 · 🏅 업적</b><button data-close="acctmenu">✕</button></div>
   <p id="acOffline" class="acnote">지금은 <b>이 기기에 자동 저장</b>돼요. 창을 닫아도 장학금·기록이 그대로 남아요. 회원가입(다른 기기에서도 이어 하기)은 서버가 연결되면 열려요.</p>
   <div id="acForms">
     <input id="acId" maxlength="16" placeholder="아이디 (영어 소문자·숫자 4~16자)" autocomplete="username" autocapitalize="off">
@@ -537,6 +539,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   </div>
   <div id="acIn" hidden><div class="acwho"><b id="acWho"></b><button id="acOut">로그아웃</button></div><small id="acSync">서버와 연결됨</small></div>
   <div id="acStats"></div>
+  <div id="acAch"></div>
 </div>
 <div id="rankmenu" class="card panel" hidden>
   <div class="ph"><b>랭킹</b><button data-close="rankmenu">✕</button></div>
@@ -2050,6 +2053,7 @@ class Vehicle {
     this.g.rotation.set(0, this.yaw, pitch);
   }
   hit(impulse, act, dmg = 99) {
+    if (this.type === 'moto') chickenHeist(this);
     if (this.state !== 'drive') { this.vel.add(impulse.clone().multiplyScalar(0.5)); this.settled = false; return; }
     this.hp -= dmg;
     if (this.hp > 0) { fxSparks(this.g.position.clone().setY(1.5), 6, 8); return; }
@@ -5920,6 +5924,7 @@ function renderAcct() {
   $('acctBtn').textContent = ACC.user ? `👤 ${profile.nick || ACC.user.login}` : '👤 로그인';
   if (ACC.user) $('acWho').textContent = `${profile.nick || ACC.user.login} (${ACC.user.login})${profile.dept ? ' · ' + profile.dept : ''}`;
   const rows = [['장학금', won(wallet.won)], ['최고 점수', career.best.toLocaleString()], ['누적 점수', Math.round(career.total).toLocaleString()], ['부순 블록', career.blocks.toLocaleString()], ['뒤집은 차', career.cars.toLocaleString() + '대'], ['접속', career.plays + '번'], ['플레이 시간', fmtTime(career.playSec)], ['총장 사퇴', career.bossDown + '번'], ['김태오 격파', career.ktoDown + '번'], ['점령한 건물', career.claims + '채']];
+  { const ab = $('acAch'); ab.textContent = ''; renderAch(ab); }
   const box = $('acStats'); box.textContent = '';
   for (const [k, v] of rows) { const d = document.createElement('div'); const a = document.createElement('span'); a.textContent = k; const b = document.createElement('b'); b.textContent = v; d.append(a, b); box.appendChild(d); }
 }
@@ -6110,7 +6115,7 @@ function updateRetake(dt) {
   }
   card('retake', `탈환 작전 · ${b.name}`, `막는 세력 ${retake.crew.length}명 · 내 학생 ${def}명이 막는 중 · 근처를 공격하면 쫓아내요`, retake.prog, 'red');
   if (retake.prog >= 1) { endRetake(); loseBuilding(b, '탈환 작전에 빼앗겼어요 · 다시 부수고 점령할 수 있어요'); }
-  else if (retake.crew.length < 3 || !all.includes(b)) { if (all.includes(b)) { banner('탈환 저지!', `${b.name}을(를) 지켜냈어요 · 장학금 ₩400,000`, 'gold'); wallet.won += 400000; uiDirty = true; } endRetake(); }
+  else if (retake.crew.length < 3 || !all.includes(b)) { if (all.includes(b)) { career.repel = (career.repel || 0) + 1; banner('탈환 저지!', `${b.name}을(를) 지켜냈어요 · 장학금 ₩400,000`, 'gold'); wallet.won += 400000; uiDirty = true; } endRetake(); }
 }
 function endRetake() { uncard('retake'); for (const a of retake.crew) if (!a.dead) a.fadeOut = true; retake.crew = []; retake.b = null; }
 function retakeBoom(p, R0) { if (!retake.b) return; for (const a of retake.crew) if (a.pos.distanceTo(p) < R0 * 2 + 6) { fleeFrom(a, p, 7, 2.5); a.afterFlee = x => { x.fadeOut = true; }; popText(a.pos.clone().setY(a.y + 2.5), '탈환대 이탈!'); } }
@@ -6133,7 +6138,7 @@ function updateCede(dt) { if (!(owned.size + myBuilds.size) || retake.b || inTru
    - 명령: 🎯 목표 지정 총공격 · 🛡️ 기지 방어 · 📣 총돌격(장학금) · ✋ 자동 출동 켜기/끄기
    - 이벤트: 🎁 보급 상자 · ✨ 황금 건물(점수 ×3) · 🌧️ 소나기
    ===================================================================== */
-const WAR = { on: true, order: null, orderUntil: 0, defendUntil: 0, orderMode: false, act: null, actT: 0, broke: 0, raidCap: 36, gold: null, crates: [], rain: null };
+const WAR = { on: true, order: null, orderUntil: 0, defendUntil: 0, orderMode: false, act: null, actT: 0, broke: 0, raidCap: SMALL ? 18 : 30, gold: null, crates: [], rain: null };
 const myBases = () => [...owned, ...myBuilds];
 function warAct() { if (!WAR.act || clock - WAR.actT > 15) { WAR.act = { id: 0, kind: 'raid', blocks: [], debris: [], trees: [], craters: [], vehicles: [], score: 0 }; WAR.actT = clock; } return WAR.act; }
 const raiders = () => agents.filter(a => a.raider && !a.dead && !a.fadeOut);
@@ -6156,7 +6161,7 @@ function raiderThink(a, dt) {
   if (d > 2.4) { stepTo(a, a.spot.x, a.spot.z, a.speed, dt); return; }
   a.yawT = Math.atan2(a.spot.x - a.pos.x, a.spot.z - a.pos.z); a.swing = Math.max(0, Math.sin(clock * 8 + a.pos.x)) * 1.5;
   if ((a.hitT = (a.hitT || 0) - dt) <= 0) {
-    a.hitT = rand(0.9, 1.4); const p = a.spot.clone(), act = warAct();
+    a.hitT = rand(0.9, 1.4) * (heroNear(a) ? 0.62 : 1); const p = a.spot.clone(), act = warAct();
     const n = damageSphere(p, 1.5, 6, act); if (n) { afterDamage(n, p, act); WAR.broke += n; if (Math.random() < 0.3) SFX.hit(p, 0.5); }
     a.spot = null;
   }
@@ -6181,7 +6186,7 @@ function updateWar(dt) {
   if (WAR.order && WAR.order.ratio() >= CLAIM_AT) { banner('총공격 성공!', `${WAR.order.name}이(가) 무너졌어요 · 점령할 수 있어요`, 'gold'); offerClaim(WAR.order); WAR.order = null; uncard('order'); }
   // 내 세력 판
   if (frameNo % 20 === 0) { renderWarBox(); checkDomination(); }
-  updateCrates(dt); updateGold(dt); updateRain(dt);
+  updateCrates(dt); updateGold(dt); updateRain(dt); updateHero(dt); updateCounter(dt);
 }
 // ── 명령 ──
 function orderAttack() { if (!raiders().length && !myBases().length) { toast('아직 내 세력이 없어요 · 건물을 점령하거나 직접 세우세요'); return; } WAR.orderMode = true; toast('🎯 총공격할 캠퍼스 건물을 누르세요'); }
@@ -6252,7 +6257,7 @@ function openCrate(c) {
   else if (r < 0.7) { inv.freePulls = (inv.freePulls || 0) + 2; saveInv(); renderInv(); banner('🎁 보급 상자', '무료 뽑기 2회!', 'gold'); }
   else if (r < 0.9) { const g = rollOne('rare'); grant(g); saveInv(); renderInv(); banner('🎁 보급 상자', `${g.icon} ${g.name} (보관함에 넣었어요)`, 'gold'); }
   else { const bases = myBases(); if (bases.length) { let n = 0; for (const b of bases) n += spawnRaiders(b, 5); banner('🎁 보급 상자', `지원군! 돌격대 ${n}명 출동`, 'gold'); } else { inv.epicTix = (inv.epicTix || 0) + 1; saveInv(); renderInv(); banner('🎁 보급 상자', '에픽 확정권!', 'gold'); } }
-  SFX.bell(); mEvent('crates');
+  SFX.bell(); mEvent('crates'); career.crates = (career.crates || 0) + 1;
 }
 function crateAtScreen(x, y) {
   for (const c of WAR.crates) { const s = c.g.position.clone().setY(c.g.position.y + 1).project(camera); const sx = (s.x + 1) / 2 * innerWidth, sy = (1 - s.y) / 2 * innerHeight; if (s.z < 1 && Math.hypot(sx - x, sy - y) < 46) return c; }
@@ -6293,7 +6298,89 @@ function updateRain(dt) {
   if (fire && fire.mat && Math.random() < dt) fire.update(dt * 0.5);       // 비: 불꽃이 빨리 사그라듦
   if (clock > R0.until) { scene.remove(R0.pts); scene.fog.color.copy(R0.fog); scene.fog.near = 700; sun.intensity /= 0.6; for (const p of agents) if (p.kind === 'ped') p.speed = Math.min(p.speed, 1.8); WAR.rain = null; situLog('☀️', '날이 갰어요', '', 'blue'); }
 }
-function clearWar() { WAR.domDone = new Set(); if (WAR.rain) WAR.rain.until = 0; for (const c of WAR.crates) scene.remove(c.g); WAR.crates.length = 0; endGold(); WAR.order = null; uncard('order'); WAR.orderMode = false; for (const b of CAMPUS_BUILDINGS) b.raidT = 8; }
+function clearWar() { if (hero.f) { scene.remove(hero.f.g); hero.f = null; } WAR.counter25 = false; WAR.counterT = 240; WAR.counterUntil = 0; uncard('counter'); WAR.domDone = new Set(); if (WAR.rain) WAR.rain.until = 0; for (const c of WAR.crates) scene.remove(c.g); WAR.crates.length = 0; endGold(); WAR.order = null; uncard('order'); WAR.orderMode = false; for (const b of CAMPUS_BUILDINGS) b.raidT = 8; }
+
+/* =====================================================================
+   12-33. 재미 더하기 (12.1판): 내 세력 대장 · 총반격 · 업적 · 치킨 가로채기
+   ===================================================================== */
+// ── ⭐ 내 세력 대장: 첫 기지가 생기면 등장. 총공격 목표로 앞장서고, 15 m 안 돌격대는 1.6배 빨리 부숨, 탈환대를 날려 보냄 ──
+const hero = { f: null, goal: null, smashT: 0 };
+function heroNear(a) { return hero.f && a.pos.distanceTo(hero.f.g.position) < 15; }
+function updateHero(dt) {
+  const bases = myBases();
+  if (!hero.f) { if (!bases.length) return; const c = bbCenter(bases[0]), nd = G.nodes[nearestNode(c.x, c.z)], p = nd ? V3(nd[0], 0, nd[1]) : c; p.y = terrainAt(p.x, p.z);
+    hero.f = makeNamed(`⭐ ${profile.nick || '나'}`, '내 세력 대장', 0x3a2670, 0xffc83d, 1.9); hero.f.g.position.copy(p); scene.add(hero.f.g); hero.f.tag.classList.add('hero');
+    banner('⭐ 내 세력 대장 등장', `${profile.nick || '나'} 대장이 돌격대를 이끕니다 · 근처 돌격대는 1.6배 빨리 부숴요`, 'gold'); return; }
+  if (!bases.length) { scene.remove(hero.f.g); hero.f = null; return; }
+  const g = hero.f.g;
+  // 목표: 방어 중이면 탈환대, 총공격 중이면 그 건물, 아니면 돌격대가 많은 곳
+  let to = null;
+  if (retake.b && (clock < WAR.defendUntil || retake.crew.length)) { const e = retake.crew.find(x => !x.dead); if (e) to = e.pos; }
+  if (!to && WAR.order && clock < WAR.orderUntil) to = bbCenter(WAR.order);
+  if (!to) { const r = raiders().find(a => a.target); if (r) to = r.pos; }
+  if (!to) to = bbCenter(bases[0]);
+  const dx = to.x - g.position.x, dz = to.z - g.position.z, d = Math.hypot(dx, dz);
+  if (d > 4) { const s = Math.min(d - 3, 3.2 * dt); g.position.x += dx / d * s; g.position.z += dz / d * s; g.rotation.y = Math.atan2(dx, dz); hero.f.armL.rotation.x = Math.sin(clock * 7) * 0.6; hero.f.armR.rotation.x = -Math.sin(clock * 7) * 0.6; }
+  else { hero.f.armR.rotation.x = -2.6 + Math.sin(clock * 6) * 0.4; }
+  g.position.y = terrainAt(g.position.x, g.position.z);
+  if ((hero.smashT -= dt) <= 0 && retake.b) { hero.smashT = 2; for (const e of retake.crew) if (!e.dead && e.pos.distanceTo(g.position) < 7) { fleeFrom(e, g.position, 9, 2); e.hits = (e.hits || 0) + 1; if (e.hits >= 3) e.fadeOut = true; popText(e.pos.clone().setY(e.y + 2.5), '대장의 일격!'); } }
+}
+// ── 교직원 연합 총반격: 지배율 25%를 넘으면 한 번, 그 뒤 4분마다 기지 3개 이상이면 ──
+function startCounter() {
+  const bases = myBases(); if (!bases.length) return;
+  banner('🚨 교직원 연합 총반격!', '군·시설팀·탈환대·총장이 한꺼번에 몰려옵니다 · [🛡️ 방어]와 [📣 총돌격]으로 버티세요', 'red'); SFX.siren(controls.target);
+  dispatchTeam('army', false); dispatchTeam('facility', false); dispatchTeam('staff', false);
+  retake.cool = 0; startRetake([...bases].sort((a, b) => (b.lvl || 1) - (a.lvl || 1))[0]);
+  if (!boss.active && !boss.defeated) spawnBoss();
+  WAR.counterUntil = clock + 90; mEvent('counter');
+}
+function updateCounter(dt) {
+  const named = CAMPUS_BUILDINGS.filter(b => b.name).length, dom = owned.size / Math.max(1, named);
+  if (!WAR.counter25 && dom >= 0.25) { WAR.counter25 = true; after(20, startCounter); situLog('⚠️', '총반격 예고', '지배율 25%를 넘어서 20초 뒤 교직원 연합이 총반격해요', 'red'); }
+  if (myBases().length >= 3) { WAR.counterT = (WAR.counterT ?? 240) - dt; if (WAR.counterT <= 0) { WAR.counterT = 240; startCounter(); } }
+  if (WAR.counterUntil && clock < WAR.counterUntil) card('counter', '🚨 총반격 중', `${Math.ceil(WAR.counterUntil - clock)}초 버티면 장학금 ₩2,000,000`, (WAR.counterUntil - clock) / 90, 'red');
+  else if (WAR.counterUntil) { WAR.counterUntil = 0; uncard('counter'); if (myBases().length) { wallet.won += 2000000; uiDirty = true; banner('총반격을 버텼다!', '장학금 ₩2,000,000', 'gold'); career.repel = (career.repel || 0) + 1; } }
+}
+// ── 🏅 업적 (이 기기·계정에 영구 저장) ──
+const ACH = [
+  ['claim1', '첫 점령', '캠퍼스 건물을 처음으로 점령', () => career.claims >= 1, 500000],
+  ['hq1', '내 땅에 내 건물', '내 건물을 직접 세움', () => myBuilds.size >= 1, 500000],
+  ['dom25', '캠퍼스 반란', '지배율 25%', () => WAR.domDone && WAR.domDone.has(25), 2000000],
+  ['dom50', '캠퍼스 정복자', '지배율 50%', () => WAR.domDone && WAR.domDone.has(50), 5000000],
+  ['boss', '총장 사퇴', '총장 보스를 쓰러뜨림', () => career.bossDown >= 1, 1000000],
+  ['kto', '만든이를 넘어서', '최강 네임드 김태오를 쓰러뜨림', () => career.ktoDown >= 1, 5000000],
+  ['blocks10k', '철거 장인', '누적 블록 1만 개', () => career.blocks >= 10000, 1000000],
+  ['blocks100k', '철거 전설', '누적 블록 10만 개', () => career.blocks >= 100000, 5000000],
+  ['crates5', '보급 수집가', '보급 상자 5개 열기', () => (career.crates || 0) >= 5, 800000],
+  ['repel3', '철벽 수비', '탈환대·총반격을 3번 막아냄', () => (career.repel || 0) >= 3, 1000000],
+  ['trap', '감금의 달인', '네임드 가두기 성공', () => (MS.c.traps || 0) >= 1, 500000],
+  ['fest', '축제 파괴자', '축제를 중단시킴', () => (MS.c.festBroken || 0) >= 1, 300000],
+  ['combo30', '콤보 마스터', '콤보 30 달성', () => combo.n >= 30, 500000],
+  ['rich', '장학금 부자', '장학금 1억 모으기', () => wallet.won >= 100000000, 0],
+  ['seasons', '사계절 캠퍼스', '봄·여름·가을·겨울 모두 플레이', () => (career.seasons || []).length >= 4, 2000000],
+];
+career.ach = career.ach || []; career.seasons = career.seasons || []; if (!career.seasons.includes(SEASON)) career.seasons.push(SEASON);
+function checkAch() {
+  for (const [id, name, desc, ok, pay] of ACH) {
+    if (career.ach.includes(id)) continue; let done = false; try { done = ok(); } catch {} if (!done) continue;
+    career.ach.push(id); if (pay) { wallet.won += pay; uiDirty = true; }
+    banner(`🏅 업적: ${name}`, desc + (pay ? ` · 장학금 ${won(pay)}` : ''), 'gold'); SFX.bell(); saveCareer();
+  }
+}
+setInterval(() => { try { checkAch(); } catch {} }, 2000);
+function renderAch(box) {
+  const h = document.createElement('div'); h.className = 'st-sub'; h.textContent = `🏅 업적 ${career.ach.length} / ${ACH.length}`; box.appendChild(h);
+  const g = document.createElement('div'); g.className = 'achgrid';
+  for (const [id, name, desc, , pay] of ACH) { const d = document.createElement('div'); const on = career.ach.includes(id); d.className = 'ach' + (on ? ' on' : ''); d.innerHTML = '<b></b><small></small>'; d.children[0].textContent = (on ? '🏅 ' : '🔒 ') + name; d.children[1].textContent = desc + (pay ? ` · ${won(pay)}` : ''); g.appendChild(d); }
+  box.appendChild(g);
+}
+// ── 🍗 배달 오토바이를 맞히면 치킨 가로채기 ──
+function chickenHeist(v) {
+  if (v.type !== 'moto' || v.heisted) return; v.heisted = true;
+  const p = v.g.position.clone(), menu = pick(['🍗 후라이드', '🍗 양념치킨', '🍕 피자', '🍜 짜장면', '🍔 햄버거', '🍰 케이크']), val = pick([50000, 80000, 120000]);
+  wallet.won += val; uiDirty = true; popText(p.setY(p.y + 3), `${menu} 가로채기 +${won(val)}`); mEvent('heist');
+  if (Math.random() < 0.15) situLog('🛵', '배달 가로채기', `${menu} · 배달 기사님 죄송합니다…`, 'gold');
+}
 
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
@@ -6739,7 +6826,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
