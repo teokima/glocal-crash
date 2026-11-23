@@ -253,6 +253,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 .named{padding:5px 12px!important;box-shadow:0 0 16px rgba(120,170,255,.55);transform:scale(1.15)}.named b{font-size:14.5px!important}.named small{font-size:11.5px!important}
 .pact{display:flex;gap:6px;margin-top:8px}.pact button{flex:1;padding:7px 4px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:12px;font-weight:700}.pact button.up{background:linear-gradient(90deg,#c99a2e,#ffd27a);color:#1a1208;border:0}.pact button:disabled{opacity:.5}
 @media (max-width:640px){#namedbar{top:84px;bottom:auto;left:auto;right:10px;margin:0;max-width:62vw;justify-content:flex-end}#namedbar button{font-size:11px;padding:4px 8px}#evcards{top:120px!important}}
+#warbox{padding:8px;width:220px;box-sizing:border-box}#warbox[hidden]{display:none}#warbox .wh{display:flex;flex-direction:column;margin-bottom:6px}#warbox .wh b{font-size:13px;color:#d6b8ff}#warbox .wh small{font-size:11px;color:var(--dim);line-height:1.4}
+#warbox .wdom{height:6px;border-radius:4px;background:rgba(255,255,255,.1);margin:4px 0 2px;overflow:hidden}#warbox .wdom i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7a52c8,#ffc83d)}
+#warbox .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}#warbox button{padding:7px 2px;border-radius:8px;border:1px solid rgba(176,107,255,.5);background:rgba(123,82,200,.18);font-weight:800;font-size:11.5px}#warbox button:hover{background:rgba(123,82,200,.35)}#warbox button.hot{background:#c0392b;border-color:#ff8a7a;animation:namedPulse 1s infinite}
+.helpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;max-height:64vh;overflow:auto}.helpgrid section{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04)}.helpgrid h4{margin:0 0 6px;font-size:13.5px;color:#ffd27a}.helpgrid ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.65}.helpgrid b{color:#fff}
+.named.crate{background:rgba(120,80,10,.9);border-color:#ffd27a}
+@media (max-width:640px){#warbox{width:150px;padding:6px}#warbox .wh small{display:none}#warbox button{font-size:10.5px;padding:5px 1px}}
 #gTabs{display:flex;gap:6px;margin:10px 0 8px}#gTabs button{flex:1;padding:8px 4px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:700;font-size:12.5px}#gTabs button.on{background:rgba(255,178,63,.18);border-color:var(--hot);color:#ffd27a}
 .slot .sbtn button.use{background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;border:0}
 .eqslots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -395,6 +401,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <button class="tg" data-t="shot"><span class="dot"></span>사진</button>
       <button class="tg" data-t="top"><span class="dot"></span>위에서 보기</button>
       <button class="tg" data-t="home"><span class="dot"></span>처음 시점</button>
+      <button class="tg hot" data-t="help"><span class="dot"></span>📖 조작·명령 모음 (H)</button>
       <button class="tg" data-t="tutorial"><span class="dot"></span>안내 다시 보기</button>
       <button class="tg" data-t="settings"><span class="dot"></span>설정</button>
       <button class="tg" data-t="status"><span class="dot"></span>캠퍼스 현황</button>
@@ -409,6 +416,8 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="live" class="card" title="누르면 노천극장으로 이동"><span class="led"></span><span id="livetxt">노천극장 · 공연 중</span></div>
   <div id="compass" class="card" title="누르면 북쪽이 위로"><svg viewBox="0 0 30 30"><g id="needle"><path d="M15 3 L19.5 15 L10.5 15 Z" fill="#ff5a36"/><path d="M15 27 L19.5 15 L10.5 15 Z" fill="#d8d4ca"/><text x="15" y="12.2" text-anchor="middle" font-size="6.5" font-weight="900" fill="#fff" font-family="sans-serif">N</text></g></svg></div>
   <div id="missions" class="card"><div class="mh" id="mhead"><b>미션 <span id="mfold">▾</span></b><small id="mdone">완료 0</small></div><div id="mlist"></div></div>
+  <div id="warbox" class="card" hidden><div class="wh"><b>⚔️ 내 세력</b><small id="wbStat"></small><div class="wdom"><i id="wbDom"></i></div><small id="wbDomT"></small></div>
+    <div class="wgrid"><button id="wbAtk">🎯 총공격</button><button id="wbDef">🛡️ 방어</button><button id="wbRush">📣 총돌격</button><button id="wbAuto">✋ 자동 출동 끄기</button></div></div>
   <button id="vToggle" class="card">🎥 시점</button>
   <div id="zoom" class="card">
     <div class="vh">시점</div>
@@ -442,6 +451,10 @@ button{font:inherit;color:inherit;cursor:pointer}
   <button data-ev="sports">체육대회<small>육상 트랙 계주 · 응원전</small></button>
   <button data-ev="exam">시험 기간<small>2분 동안 장학금 2배</small></button>
   <button data-ev="mayor">충주시장 방문<small>협상 제안 · 수락하면 장학금과 휴전</small></button>
+  <button data-ev="crate">🎁 보급 상자<small>낙하산 상자 · 누르거나 근처를 터뜨리면 보상</small></button>
+  <button data-ev="gold">✨ 황금 건물<small>60초 동안 그 건물을 부수면 점수 ×3</small></button>
+  <button data-ev="rain">🌧️ 소나기<small>60초 · 하늘이 어두워지고 사람들이 뛰어다녀요</small></button>
+  <button data-ev="retake">⚔️ 탈환대 습격<small>적이 내 기지를 빼앗으러 옴 (내 기지가 있을 때)</small></button>
   <button data-ev="scheme">네임드 기획<small>총장·교무처장·총학생회장이 사람을 모아 기획 · 가둬서 막기</small></button>
   <button data-ev="donate_new">기부 신축<small>동문 기부로 새 건물이 지어져요 (부술 거리 추가)</small></button>
   <button data-ev="remodel">리모델링<small>기부로 건물 1채를 고치고 내진 보강 · 체력 약 2배</small></button>
@@ -480,6 +493,37 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="setnote">느리면 화질을 낮추고 원룸촌을 끄세요. 설정은 이 브라우저에 저장돼요.</div>
 </div>
 <div id="fps" class="card" hidden></div>
+<div id="helpmenu" class="card panel wide" hidden>
+  <div class="ph"><b>📖 조작 · 명령 모음</b><button data-close="helpmenu">✕</button></div>
+  <div class="helpgrid">
+    <section><h4>🖱️ 기본 조작</h4><ul>
+      <li><b>누르기</b> 고른 무기로 공격 (총은 누르고 있으면 연사)</li><li><b>끌기</b> 지도 이동 · <b>오른쪽 끌기</b> 회전 · <b>휠</b> 확대</li>
+      <li><b>휴대폰</b> 한 손가락 이동, 두 손가락 회전·확대</li><li><b>✋/🔄 끌기 바꾸기</b> 시점 판에서 끌기를 회전으로</li></ul></section>
+    <section><h4>⌨️ 단축키</h4><ul>
+      <li><b>1~9</b> 쇠파이프·총·대포·폭탄·운석·핵폭탄·지진·용역·복구 · <b>0</b> 짓기 · <b>-</b> 소환 · <b>=</b> 전투기</li>
+      <li><b>Q / E</b> 시점 돌기 · <b>R / F</b> 기울이기</li><li><b>Ctrl+Z</b> 되돌리기 · <b>N</b> 밤 · <b>L</b> 이름표 · <b>M</b> 소리 · <b>H</b> 이 창</li></ul></section>
+    <section><h4>⚔️ 내 세력 명령 (왼쪽 '내 세력' 판)</h4><ul>
+      <li><b>🎯 총공격</b> 누른 뒤 남의 건물을 찍으면 돌격대 전원이 60초 동안 그 건물만 부숨</li>
+      <li><b>🛡️ 방어</b> 탈환대가 오면 돌격대가 기지로 돌아가 막음</li>
+      <li><b>📣 총돌격</b> 장학금을 내고 모든 기지에서 돌격대 6명씩 즉시 출동</li>
+      <li><b>✋ 자동 출동</b> 기지마다 35초(업그레이드하면 더 빨리)마다 돌격대 3명이 나가 가까운 건물을 부숨 · 끄고 켤 수 있음</li></ul></section>
+    <section><h4>👑 내 세력 만들기</h4><ul>
+      <li><b>점령</b> 캠퍼스 건물을 70% 넘게 부수면 위 가운데 카드 · 오른쪽 위 [👑 점령 가능]</li>
+      <li><b>내 건물 세우기</b> 보관함 → 내 세력 → 🏗️ (300만부터)</li>
+      <li><b>생산 고르기 · ⬆️ 업그레이드 · 🤝 반환 협상</b> 보관함 → 내 세력 탭</li>
+      <li><b>탈환대</b> 적이 내 기지를 부수며 빼앗으러 옴 → 근처를 공격하거나 🛡️ 방어</li></ul></section>
+    <section><h4>🎁 뽑기 · 보관함</h4><ul>
+      <li><b>🎒 아이템 10칸</b> 유닛·무기 [쓰기] · 장학금 봉투 [사용] · [버리기]</li><li><b>🛡️ 장비 2칸</b> [착용]/[해제]한 것만 효과</li>
+      <li><b>소환</b> 도구판 [소환](-) 고르고 목표를 누름</li></ul></section>
+    <section><h4>⚡ 이벤트 (이벤트 메뉴 · 자동)</h4><ul>
+      <li>시설팀·공군·시위·종강·전투기·군·교직원·총장·축제 4종·시험 기간·시장·충주맨·네임드 기획·기부·리모델링·김태오</li>
+      <li><b>🎁 보급 상자</b> 누르거나 근처를 터뜨리면 보상 · <b>✨ 황금 건물</b> 점수 ×3 · <b>🌧️ 소나기</b></li>
+      <li><b>🔒 가두기</b> 네임드가 기획 중일 때 왼쪽 아래 단추 (확률)</li></ul></section>
+    <section><h4>🔊 화면에서 알 수 있는 것</h4><ul>
+      <li><b>상황판</b> 오른쪽 아래 · 무슨 소리·알림이 왜 났는지</li><li><b>📍 네임드</b> 위 가운데 · 누르면 그 인물로 이동</li>
+      <li><b>오른쪽 카드</b> 지금 진행 중인 일 · <b>왼쪽 미션</b> 깨면 보상</li></ul></section>
+  </div>
+</div>
 <div id="acctmenu" class="card panel" hidden>
   <div class="ph"><b>내 계정 · 누적 기록</b><button data-close="acctmenu">✕</button></div>
   <p id="acOffline" class="acnote">지금은 <b>이 기기에 자동 저장</b>돼요. 창을 닫아도 장학금·기록이 그대로 남아요. 회원가입(다른 기기에서도 이어 하기)은 서버가 연결되면 열려요.</p>
@@ -2100,6 +2144,7 @@ function addScore(pts, act) {
 function breakBlock(bd, i, act, vel, nfrag) {
   const blk = bd.blocks[i]; const c = bd.center(i, V3());
   if (!bd.kill(i, act)) return false;
+  if (WAR.gold && bd === WAR.gold.b) addScore(30, act);        // 황금 건물 ×3
   if (nfrag <= 1) spawnDebris(c, vel, B * 0.96, blk.c, act, 1.6, bd.quat);
   else for (let k = 0; k < nfrag; k++) spawnDebris(_p.set(c.x + rand(-.5, .5), c.y + rand(-.5, .5), c.z + rand(-.5, .5)), _v2.copy(vel).add(randUnit(_b).multiplyScalar(2.5)), rand(0.7, 1.15), blk.c, act, 4);
   return true;
@@ -2188,7 +2233,7 @@ function resetAll() {
   for (const pr of projectiles) scene.remove(pr.mesh); projectiles.length = 0;
   theater.screenBroken = false; concert.state = 'play'; quake.active = false;
   endAllEvents(); repairScore = 0; clearBuilt();
-  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
+  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
   dmgLog.length = 0; EVS.facCool = clock + 20; DEF.lvl = 0;
   for (const d of [...boss.domes]) d.retreat(false); if (boss.active) { scene.remove(boss.fig.g); scene.remove(boss.podium); boss.active = false; $('bossbar').hidden = true; } boss.defeated = false;
   for (const j of defJets) scene.remove(j.g); defJets.length = 0;
@@ -2244,7 +2289,7 @@ function explode(p, R, power, act) {
   for (const t of teams) if (t.kind !== 'facility') for (const a of t.crew) if (a.pos.distanceTo(p) < R * 2 + 3) a.down = 2;
   scarePeople(p, R * 4 + 25); protestPanic(p, R * 3 + 15);
   if (boss.active && p.distanceTo(boss.pos) < 45) bossDamage(R * 0.5, '근처 폭발');
-  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R);
+  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R); crateBoom(p, R);
   if (NET.on && !NET.remote) sendNet({ t: 'fx', k: 'boom', p: [p.x, p.y, p.z], R });
   R *= SET.power; power *= Math.sqrt(SET.power);
   act.R = R;
@@ -2932,6 +2977,10 @@ function triggerEvent(name) {
   else if (name === 'mayor') { mayor.cool = 0; mayorVisit(); }
   else if (name === 'cjman') chungjuman();
   else if (name === 'donate_new') donateBuilding();
+  else if (name === 'crate') dropCrate();
+  else if (name === 'gold') startGold();
+  else if (name === 'rain') startRain();
+  else if (name === 'retake') { if (myBases().length) { retake.cool = 0; startRetake(); } else toast('내 기지가 없어요 · 먼저 점령하거나 세우세요'); }
   else if (name === 'scheme') { scheme.cool = 0; startScheme(); }
   else if (name === 'remodel') remodelBuilding();
   else if (name === 'kto') { kto.defeated = false; spawnKto(); }
@@ -3597,7 +3646,7 @@ function updateEvents(dt) {
       if (clock > EVS.next && !protest.active && !jong.active) {
         EVS.next = clock + rand(80, 140);
         const r = Math.random(); let e;
-        if (campusPct > 4 && r < 0.2) e = 'jong'; else if (r < 0.38) e = 'protest'; else if (r < 0.62) e = pick(['mosirae', 'moram', 'cherry', 'sports']); else if (r < 0.7) e = 'exam'; else if (r < 0.71) e = 'cjman'; else if (r < 0.74) e = 'scheme'; else if (r < 0.78) e = campusPct > 3 ? pick(['donate_new', 'remodel']) : 'cjman'; else if (campusPct > 2 && r < 0.88) e = 'airforce'; else e = XMAS ? 'santa' : 'jets';
+        if (campusPct > 4 && r < 0.2) e = 'jong'; else if (r < 0.38) e = 'protest'; else if (r < 0.62) e = pick(['mosirae', 'moram', 'cherry', 'sports']); else if (r < 0.7) e = 'exam'; else if (r < 0.66) e = 'cjman'; else if (r < 0.7) e = 'scheme'; else if (r < 0.74) e = pick(['crate', 'crate', 'gold', 'rain']); else if (r < 0.78) e = campusPct > 3 ? pick(['donate_new', 'remodel']) : 'cjman'; else if (campusPct > 2 && r < 0.88) e = 'airforce'; else e = XMAS ? 'santa' : 'jets';
         triggerEvent(e);
       }
     }
@@ -4037,7 +4086,7 @@ const PROD = {
 };
 function mineThink(a, dt) { if (a.wait > 0) { a.wait -= dt; return; } if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = a.homeC.clone().add(V3(rand(-18, 18), 0, rand(-18, 18))); a.wait = rand(1, 4); } }
 function spawnMine(b, n) {
-  const have = agents.filter(a => a.kind === 'mine' && a.home === b).length;
+  const have = agents.filter(a => a.kind === 'mine' && a.home === b).length; if (agents.filter(a => a.kind === 'mine' && !a.raider).length >= 40) return;
   for (let k = 0; k < Math.min(n, 12 + 6 * (lvlOf(b) - 1) - have); k++) { const c = bbCenter(b), p = freeSpots(c.clone().add(V3(rand(-15, 15), 0, rand(-15, 15))), 1, 0)[0] || c; const a = addAgent({ pos: p, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: mineThink }); if (a) { a.home = b; a.homeC = c; } }
 }
 function sendMyCrew(b) {
@@ -5051,7 +5100,8 @@ function claimBuilding(b) {
   const cloth = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.5), new THREE.MeshStandardMaterial({ map: tx, side: THREE.DoubleSide })); cloth.position.set(2, 8.6, 0);
   flag.add(pole, cloth); flag.position.copy(c); scene.add(flag); b.flag = flag;
   if (b.lblDiv) { b.def.labelText = `👑 ${b.name} · 내 건물`; b.labelDirty = true; }
-  for (let k = 0; k < 8; k++) { const p = bbCenter(b).add(V3(rand(-20, 20), 0, rand(-20, 20))); const s = freeSpots(p, 1, 0)[0] || p; addAgent({ pos: s, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { const c2 = bbCenter(b); a.goal = (freeSpots(c2.add(V3(rand(-25, 25), 0, rand(-25, 25))), 1, 0)[0]) || c2; } } }); }
+  const mineN = agents.filter(a => a.kind === 'mine' && !a.raider).length;   // 내 학생은 모두 합쳐 40명까지
+  for (let k = 0; k < Math.min(8, 40 - mineN); k++) { const p = bbCenter(b).add(V3(rand(-20, 20), 0, rand(-20, 20))); const s = freeSpots(p, 1, 0)[0] || p; addAgent({ pos: s, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { const c2 = bbCenter(b); a.goal = (freeSpots(c2.add(V3(rand(-25, 25), 0, rand(-25, 25))), 1, 0)[0]) || c2; } } }); }
   banner('점령 성공!', `${b.name}이(가) 내 건물이 됐어요 · [뽑기·보관함 → 👑 내 세력]에서 이 건물이 무엇을 만들지 고르세요 (수입·학생·용역·드론·전차)`, 'gold'); SFX.bell(); whiteFlash();
   return true;
 }
@@ -6036,16 +6086,28 @@ function startRetake(b) {
   const c = bbCenter(b), nd = G.nodes[nearestNode(c.x, c.z)], from = nd ? V3(nd[0], 0, nd[1]) : c;
   Object.assign(retake, { b, crew: [], prog: 0 });
   for (let k = 0; k < 10; k++) { const a = addAgent({ pos: from.clone().add(V3(rand(-6, 6), 0, rand(-6, 6))), kind: 'guard', role: k % 2 ? 'army' : 'facility', shirt: k % 2 ? 0x5d6b47 : 0xff7a1a, pants: 0x2b3040, hat: k % 2 ? 0x3a4a2a : 0xffd23a, shield: k % 3 === 0, speed: 2.6, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = c.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); a.swing = 0.8; } } }); if (a) retake.crew.push(a); }
-  banner('탈환 작전!', `막는 세력이 ${b.name}을(를) 되찾으러 옵니다 · 근처를 공격해 쫓아내세요`, 'red'); SFX.siren(c);
+  banner('⚔️ 탈환 작전!', `교직원 연합 탈환대가 ${b.name}을(를) 부수며 빼앗으러 옵니다 · 근처를 공격하거나 [🛡️ 방어] 명령`, 'red'); SFX.siren(c);
+  regNamed('⚔️ 탈환대', () => { const L = retake.crew.filter(a => !a.dead); return L.length ? L[0].pos.clone().setY(L[0].y) : c; }, () => !!retake.b);
 }
 function updateRetake(dt) {
   const all = [...owned, ...myBuilds];
-  if (!retake.b) { if (all.length && (retake.cool -= dt) <= 0) { retake.cool = rand(110, 170); if (DEF.lvl >= 1 || all.length >= 2) startRetake(); } return; }
+  if (!retake.b) { if (all.length && (retake.cool -= dt) <= 0) { retake.cool = rand(75, 120); startRetake(); } return; }
   const b = retake.b, c = bbCenter(b);
   retake.crew = retake.crew.filter(a => !a.dead && !a.fadeOut);
   const here = retake.crew.filter(a => a.down <= 0 && Math.hypot(a.pos.x - c.x, a.pos.z - c.z) < 30).length;
   const def = agents.filter(a => a.kind === 'mine' && Math.hypot(a.pos.x - c.x, a.pos.z - c.z) < 35).length;
   retake.prog += Math.max(0, here * 0.006 - def * 0.004) * dt / lvlOf(b);
+  if ((retake.hitT = (retake.hitT || 0) - dt) <= 0) {
+    retake.hitT = 1.2; const act = warAct();
+    for (const e of retake.crew.filter(a => a.down <= 0 && Math.hypot(a.pos.x - c.x, a.pos.z - c.z) < 30).slice(0, 3)) {
+      let p = null; if (b.built) { const al = b.cells.filter(([ch, i]) => ch.blocks[i].alive); if (al.length) { const [ch, i] = pick(al); p = ch.center(i, V3()); } } else p = nearestAliveBlock(b, e.pos);
+      if (p) { e.swing = 1.4; damageSphere(p, 1.2, 5, act); }
+    }
+    // 몸싸움: 탈환대 ↔ 내 돌격대·학생
+    const mine = agents.filter(m => m.kind === 'mine' && m.down <= 0 && !m.fadeOut);
+    for (const e of retake.crew) { if (e.down > 0 || e.fadeOut) continue; const m = mine.find(m => m.pos.distanceTo(e.pos) < 6); if (!m) continue;
+      const myWin = Math.random() < 0.5 + 0.08 * (lvlOf(b) - 1), l = myWin ? e : m; l.down = 2; l.hits = (l.hits || 0) + 1; popText(l.pos.clone().setY(l.y + 2.4), myWin ? '탈환대 밀림!' : '돌격대 밀림!'); SFX.hit(l.pos, 0.4); if (l.hits >= 3) { l.fadeOut = true; if (myWin) situLog('⚔️', '탈환대원 퇴각', `${b.name} 앞 몸싸움에서 이김`, 'gold'); } }
+  }
   card('retake', `탈환 작전 · ${b.name}`, `막는 세력 ${retake.crew.length}명 · 내 학생 ${def}명이 막는 중 · 근처를 공격하면 쫓아내요`, retake.prog, 'red');
   if (retake.prog >= 1) { endRetake(); loseBuilding(b, '탈환 작전에 빼앗겼어요 · 다시 부수고 점령할 수 있어요'); }
   else if (retake.crew.length < 3 || !all.includes(b)) { if (all.includes(b)) { banner('탈환 저지!', `${b.name}을(를) 지켜냈어요 · 장학금 ₩400,000`, 'gold'); wallet.won += 400000; uiDirty = true; } endRetake(); }
@@ -6063,6 +6125,175 @@ function offerCede(b, who) {
     decline: () => { banner('반환 거절', `${who}: "그렇다면 힘으로 되찾겠소" · 탈환 작전 시작`, 'red'); retake.cool = 0; startRetake(b); } });
 }
 function updateCede(dt) { if (!(owned.size + myBuilds.size) || retake.b || inTruce()) return; if ((cede.cool -= dt) <= 0) { cede.cool = rand(220, 320); offerCede(); } }
+
+/* =====================================================================
+   12-32. 세력 전쟁 (12판)
+   - 내 기지(점령·세운 건물)마다 '돌격대'가 주기적으로 나와 가까운 남의 건물을 직접 부숨 (점수·장학금은 내 것)
+   - 적 '탈환대'는 내 기지를 부수며 빼앗으려 하고, 근처의 내 돌격대와 몸싸움
+   - 명령: 🎯 목표 지정 총공격 · 🛡️ 기지 방어 · 📣 총돌격(장학금) · ✋ 자동 출동 켜기/끄기
+   - 이벤트: 🎁 보급 상자 · ✨ 황금 건물(점수 ×3) · 🌧️ 소나기
+   ===================================================================== */
+const WAR = { on: true, order: null, orderUntil: 0, defendUntil: 0, orderMode: false, act: null, actT: 0, broke: 0, raidCap: 36, gold: null, crates: [], rain: null };
+const myBases = () => [...owned, ...myBuilds];
+function warAct() { if (!WAR.act || clock - WAR.actT > 15) { WAR.act = { id: 0, kind: 'raid', blocks: [], debris: [], trees: [], craters: [], vehicles: [], score: 0 }; WAR.actT = clock; } return WAR.act; }
+const raiders = () => agents.filter(a => a.raider && !a.dead && !a.fadeOut);
+function raidTarget(a) {
+  if (WAR.order && clock < WAR.orderUntil && !owned.has(WAR.order) && WAR.order.ratio() < 0.97) return WAR.order;
+  const hc = a.homeC || a.pos;
+  let best = null, bd = 260;
+  for (const b of CAMPUS_BUILDINGS) { if (!b.name || owned.has(b) || b.ratio() > 0.9) continue; const c = bbCenter(b), d = Math.hypot(c.x - hc.x, c.z - hc.z); if (d < bd) { bd = d; best = b; } }
+  return best;
+}
+function raiderThink(a, dt) {
+  if (a.down > 0) return;
+  // 방어 명령: 가장 가까운 탈환대에게
+  if (retake.b && (clock < WAR.defendUntil || a.home === retake.b)) { const e = retake.crew.find(x => !x.dead); if (e) { if (a.pos.distanceTo(e.pos) > 2) stepTo(a, e.pos.x, e.pos.z, a.speed * 1.2, dt); else a.swing = Math.max(0, Math.sin(clock * 9 + a.pos.x)) * 1.4; return; } }
+  if (!a.target || owned.has(a.target) || a.target.ratio() > 0.95 || (WAR.order && clock < WAR.orderUntil && a.target !== WAR.order)) { a.target = raidTarget(a); a.spot = null; }
+  const tgt = a.target;
+  if (!tgt) { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) a.goal = (a.homeC || a.pos).clone().add(V3(rand(-15, 15), 0, rand(-15, 15))); return; }
+  if (!a.spot || clock > a.spotT) { a.spot = nearestAliveBlock(tgt, a.pos); a.spotT = clock + 8; if (!a.spot) { a.target = null; return; } }
+  const d = Math.hypot(a.spot.x - a.pos.x, a.spot.z - a.pos.z);
+  if (d > 2.4) { stepTo(a, a.spot.x, a.spot.z, a.speed, dt); return; }
+  a.yawT = Math.atan2(a.spot.x - a.pos.x, a.spot.z - a.pos.z); a.swing = Math.max(0, Math.sin(clock * 8 + a.pos.x)) * 1.5;
+  if ((a.hitT = (a.hitT || 0) - dt) <= 0) {
+    a.hitT = rand(0.9, 1.4); const p = a.spot.clone(), act = warAct();
+    const n = damageSphere(p, 1.5, 6, act); if (n) { afterDamage(n, p, act); WAR.broke += n; if (Math.random() < 0.3) SFX.hit(p, 0.5); }
+    a.spot = null;
+  }
+}
+function spawnRaiders(b, n, why) {
+  const have = raiders().length; n = Math.min(n, WAR.raidCap - have); if (n <= 0) return 0;
+  const c = bbCenter(b);
+  for (let k = 0; k < n; k++) {
+    const p = freeSpots(c.clone().add(V3(rand(-10, 10), 0, rand(-10, 10))), 1, 0)[0] || c;
+    const a = addAgent({ pos: p, kind: 'mine', role: 'mine', shirt: 0x7a52c8, pants: 0x2b2040, hat: 0xffc83d, tool: true, speed: rand(2.2, 2.8), think: raiderThink });
+    if (a) { a.raider = true; a.home = b; a.homeC = c; }
+  }
+  if (why) situLog('⚔️', `${b.name}에서 돌격대 ${n}명 출동`, why, 'gold');
+  return n;
+}
+function updateWar(dt) {
+  const bases = myBases();
+  // 자동 출동: 기지마다 (35초 ÷ 단계 속도)마다 3명
+  if (WAR.on) for (const b of bases) { if (b.raidOff) continue; b.raidT = (b.raidT ?? 8) - dt * (1 + 0.4 * ((b.lvl || 1) - 1)); if (b.raidT <= 0) { b.raidT = 35; spawnRaiders(b, 3, '가까운 남의 건물을 부수러 갑니다 · 부순 만큼 내 점수'); } }
+  if (WAR.order && clock > WAR.orderUntil) { WAR.order = null; uncard('order'); }
+  if (WAR.order) card('order', `🎯 총공격 · ${WAR.order.name}`, `돌격대 ${raiders().length}명 · ${Math.round(WAR.order.ratio() * 100)}% 부서짐 · ${Math.ceil(WAR.orderUntil - clock)}초`, WAR.order.ratio(), 'gold');
+  if (WAR.order && WAR.order.ratio() >= CLAIM_AT) { banner('총공격 성공!', `${WAR.order.name}이(가) 무너졌어요 · 점령할 수 있어요`, 'gold'); offerClaim(WAR.order); WAR.order = null; uncard('order'); }
+  // 내 세력 판
+  if (frameNo % 20 === 0) { renderWarBox(); checkDomination(); }
+  updateCrates(dt); updateGold(dt); updateRain(dt);
+}
+// ── 명령 ──
+function orderAttack() { if (!raiders().length && !myBases().length) { toast('아직 내 세력이 없어요 · 건물을 점령하거나 직접 세우세요'); return; } WAR.orderMode = true; toast('🎯 총공격할 캠퍼스 건물을 누르세요'); }
+function applyOrder(hit) {
+  WAR.orderMode = false;
+  const b = hit && hit.building; if (!b || !b.campus || !b.name || owned.has(b)) { toast('남의 캠퍼스 건물을 눌러 주세요'); return; }
+  WAR.order = b; WAR.orderUntil = clock + 60;
+  for (const a of raiders()) { a.target = b; a.spot = null; }
+  for (const t of teams) if (t.mine && t.state === 'hold' && t.bd !== b) t.retreat(false);
+  banner('🎯 총공격 명령!', `내 돌격대 전원이 ${b.name}(으)로 갑니다 · 60초`, 'gold'); SFX.bell();
+}
+function orderDefend() { if (!retake.b) { toast('지금 공격받는 내 기지가 없어요'); return; } WAR.defendUntil = clock + 30; banner('🛡️ 방어 명령', `돌격대가 ${retake.b.name}을(를) 지키러 돌아갑니다`, 'blue'); }
+function orderRush() {
+  const bases = myBases(); if (!bases.length) { toast('내 기지가 없어요'); return; }
+  const cost = 500000 + bases.length * 200000; if (!spend(cost, '총돌격')) return;
+  let n = 0; for (const b of bases) n += spawnRaiders(b, 6);
+  banner('📣 총돌격!', `모든 기지에서 돌격대 ${n}명이 한꺼번에 출동 · ${won(cost)}`, 'gold'); SFX.cheer(bbCenter(bases[0]));
+}
+// 캠퍼스 지배율 단계 보상 (이 판에서 한 번씩)
+const DOM_STEPS = [[10, '🔥 세력 확장', 1000000], [25, '⚔️ 캠퍼스 반란 성공', 3000000], [50, '👑 캠퍼스 정복!', 10000000]];
+function checkDomination() {
+  const named = CAMPUS_BUILDINGS.filter(b => b.name).length, dom = owned.size / Math.max(1, named) * 100;
+  for (const [pct, title, pay] of DOM_STEPS) if (dom >= pct && !(WAR.domDone || (WAR.domDone = new Set())).has(pct)) {
+    WAR.domDone.add(pct); wallet.won += pay; uiDirty = true; addScore(pct * 200);
+    banner(title, `캠퍼스 지배율 ${Math.round(dom)}% · 장학금 ${won(pay)}`, 'gold'); SFX.cheer(controls.target); whiteFlash(); mEvent('dom' + pct);
+    if (pct === 50) for (let k = 0; k < 16; k++) after(k * 0.2, () => launchFirework(controls.target.clone().add(V3(rand(-40, 40), 0, rand(-40, 40))), true));
+  }
+}
+function renderWarBox() {
+  const box = $('warbox'), bases = myBases(); box.hidden = !bases.length && !raiders().length;
+  if (box.hidden) return;
+  if (!WAR.folded && innerHeight < 940) { WAR.folded = true; $('missions').classList.add('fold'); }   // 왼쪽 판이 넘치지 않게 미션은 접음
+  const named = CAMPUS_BUILDINGS.filter(b => b.name).length, dom = Math.round(owned.size / Math.max(1, named) * 100);
+  $('wbDom').style.width = Math.min(100, dom * 2) + '%'; $('wbDomT').textContent = `캠퍼스 지배율 ${dom}% · 목표 25% 반란 · 50% 정복`;
+  $('wbStat').textContent = `기지 ${bases.length} · 돌격대 ${raiders().length}명 · 내 용역 ${teams.filter(t => t.mine).length}팀${retake.b ? ' · ⚠️ ' + retake.b.name + ' 공격받는 중' : ''}`;
+  $('wbAuto').textContent = WAR.on ? '✋ 자동 출동 끄기' : '▶ 자동 출동 켜기';
+  $('wbRush').textContent = `📣 총돌격 ${won(500000 + bases.length * 200000)}`;
+  $('wbDef').classList.toggle('hot', !!retake.b);
+}
+// ── 🎁 보급 상자: 하늘에서 낙하산으로 떨어짐. 누르거나 근처를 폭발시키면 열림 ──
+const crateGeo = new THREE.BoxGeometry(1.6, 1.6, 1.6), crateMat = new THREE.MeshStandardMaterial({ color: 0xc8902a, roughness: .6, emissive: 0x3a2600 });
+function dropCrate(p) {
+  p = p || controls.target.clone().add(V3(rand(-60, 60), 0, rand(-60, 60)));
+  const ground = surfaceBelow(p.x, terrainAt(p.x, p.z) + 200, p.z);
+  const g = new THREE.Group(), box = new THREE.Mesh(crateGeo, crateMat);
+  const chute = new THREE.Mesh(new THREE.SphereGeometry(2.6, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: pick([0xd62828, 0x2a6fd6, 0xf2c230]), side: THREE.DoubleSide })); chute.position.y = 5;
+  const beam = new THREE.Mesh(beaconGeo, new THREE.MeshBasicMaterial({ color: 0xffe28a, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false })); beam.scale.set(4, 60, 4); beam.visible = false;
+  g.add(box, chute, beam); g.position.set(p.x, ground + 110, p.z); scene.add(g);
+  const div = document.createElement('div'); div.className = 'named crate'; div.innerHTML = '<b>🎁 보급 상자</b><small>누르거나 근처를 터뜨리면 열려요</small>';
+  const lb = new CSS2DObject(div); lb.position.y = 3; g.add(lb);
+  WAR.crates.push({ g, chute, beam, ground, until: clock + 60, landed: false });
+  regNamed('보급 상자', () => g.position, () => !!g.parent);
+  banner('🎁 보급 상자 투하!', '하늘에서 상자가 떨어져요 · 누르거나 근처를 폭발시키면 보상', 'gold'); SFX.jet(g.position);
+}
+function updateCrates(dt) {
+  for (const c of [...WAR.crates]) {
+    const g = c.g;
+    if (!c.landed) { g.position.y -= dt * 9; g.rotation.y += dt * 0.6; if (g.position.y <= c.ground + 0.8) { g.position.y = c.ground + 0.8; c.landed = true; c.chute.visible = false; c.beam.visible = true; } }
+    else c.beam.material.opacity = 0.25 + Math.sin(clock * 4) * 0.12;
+    if (clock > c.until) { scene.remove(g); WAR.crates.splice(WAR.crates.indexOf(c), 1); }
+  }
+}
+function openCrate(c) {
+  if (!WAR.crates.includes(c)) return; WAR.crates.splice(WAR.crates.indexOf(c), 1);
+  const p = c.g.position.clone(); scene.remove(c.g); fxSparks(p.clone().setY(p.y + 1), 50, 14); whiteFlash();
+  const r = Math.random();
+  if (r < 0.45) { const v = pick([500000, 800000, 1200000, 2000000]); wallet.won += v; uiDirty = true; banner('🎁 보급 상자', `장학금 ${won(v)}!`, 'gold'); }
+  else if (r < 0.7) { inv.freePulls = (inv.freePulls || 0) + 2; saveInv(); renderInv(); banner('🎁 보급 상자', '무료 뽑기 2회!', 'gold'); }
+  else if (r < 0.9) { const g = rollOne('rare'); grant(g); saveInv(); renderInv(); banner('🎁 보급 상자', `${g.icon} ${g.name} (보관함에 넣었어요)`, 'gold'); }
+  else { const bases = myBases(); if (bases.length) { let n = 0; for (const b of bases) n += spawnRaiders(b, 5); banner('🎁 보급 상자', `지원군! 돌격대 ${n}명 출동`, 'gold'); } else { inv.epicTix = (inv.epicTix || 0) + 1; saveInv(); renderInv(); banner('🎁 보급 상자', '에픽 확정권!', 'gold'); } }
+  SFX.bell(); mEvent('crates');
+}
+function crateAtScreen(x, y) {
+  for (const c of WAR.crates) { const s = c.g.position.clone().setY(c.g.position.y + 1).project(camera); const sx = (s.x + 1) / 2 * innerWidth, sy = (1 - s.y) / 2 * innerHeight; if (s.z < 1 && Math.hypot(sx - x, sy - y) < 46) return c; }
+  return null;
+}
+function crateBoom(p, R0) { for (const c of [...WAR.crates]) if (c.landed && c.g.position.distanceTo(p) < R0 + 8) openCrate(c); }
+// ── ✨ 황금 건물: 60초 동안 이 건물 블록은 점수 ×3 ──
+function startGold(b) {
+  if (WAR.gold) return; b = b || pick(CAMPUS_BUILDINGS.filter(x => x.name && !owned.has(x) && x.ratio() < 0.5)); if (!b) return;
+  b.blocks.forEach((k, i) => { if (k.t !== 'g') { k.cg = k.c.clone(); k.c.lerp(_col.set(0xffd24a), 0.55); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; });
+  WAR.gold = { b, until: clock + 60 };
+  regNamed(`✨ 황금 ${b.name}`, () => bbCenter(b).setY(b.base + b.H * B), () => WAR.gold && WAR.gold.b === b);
+  banner('✨ 황금 건물!', `${b.name}이(가) 60초 동안 황금으로 · 부수면 점수 ×3`, 'gold'); SFX.bell();
+}
+function updateGold() {
+  const G2 = WAR.gold; if (!G2) return;
+  card('gold', `✨ 황금 건물 · ${G2.b.name}`, `부수면 점수 ×3 · ${Math.ceil(G2.until - clock)}초`, (G2.until - clock) / 60, 'gold');
+  if (clock > G2.until || G2.b.ratio() > 0.9) endGold();
+}
+function endGold() { const G2 = WAR.gold; if (!G2) return; const b = G2.b; b.blocks.forEach((k, i) => { if (k.cg) { k.c.copy(k.cg); k.cg = null; b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; }); WAR.gold = null; uncard('gold'); }
+// ── 🌧️ 소나기 (겨울엔 눈보라): 60초 · 불꽃이 금방 꺼지고 하늘이 어두워짐 ──
+function startRain() {
+  if (WAR.rain) return;
+  const N = SMALL ? 1500 : 4000, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { pos[i * 3] = rand(-120, 120); pos[i * 3 + 1] = rand(0, 90); pos[i * 3 + 2] = rand(-120, 120); }
+  const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const pts = new THREE.Points(g, new THREE.PointsMaterial({ color: WINTER ? 0xffffff : 0x9fc4e8, size: WINTER ? 0.22 : 0.1, transparent: true, opacity: 0.55, depthWrite: false })); pts.frustumCulled = false; scene.add(pts);
+  WAR.rain = { pts, until: clock + 60, fog: scene.fog.color.clone() };
+  scene.fog.color.lerp(new THREE.Color(0x6d7884), 0.6); scene.fog.near = 300; sun.intensity *= 0.6;
+  banner(WINTER ? '❄️ 눈보라' : '🌧️ 소나기', '60초 동안 · 불이 금방 꺼지고 거리의 사람들이 뛰어다녀요', 'blue');
+  for (const a of agents) if (a.kind === 'ped' && Math.random() < 0.6) a.speed *= 1.6;
+}
+function updateRain(dt) {
+  const R0 = WAR.rain; if (!R0) return;
+  const a = R0.pts.geometry.attributes.position.array, cx = controls.target.x, cz = controls.target.z, cy = controls.target.y;
+  for (let i = 0; i < a.length; i += 3) { a[i + 1] -= dt * (WINTER ? 8 : 38); if (a[i + 1] < cy - 20) { a[i + 1] = cy + 90; a[i] = cx + rand(-120, 120); a[i + 2] = cz + rand(-120, 120); } }
+  R0.pts.geometry.attributes.position.needsUpdate = true;
+  if (fire && fire.mat && Math.random() < dt) fire.update(dt * 0.5);       // 비: 불꽃이 빨리 사그라듦
+  if (clock > R0.until) { scene.remove(R0.pts); scene.fog.color.copy(R0.fog); scene.fog.near = 700; sun.intensity /= 0.6; for (const p of agents) if (p.kind === 'ped') p.speed = Math.min(p.speed, 1.8); WAR.rain = null; situLog('☀️', '날이 갰어요', '', 'blue'); }
+}
+function clearWar() { WAR.domDone = new Set(); if (WAR.rain) WAR.rain.until = 0; for (const c of WAR.crates) scene.remove(c.g); WAR.crates.length = 0; endGold(); WAR.order = null; uncard('order'); WAR.orderMode = false; for (const b of CAMPUS_BUILDINGS) b.raidT = 8; }
 
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
@@ -6133,6 +6364,8 @@ window.addEventListener('pointerup', e => {
 });
 window.addEventListener('pointercancel', e => { activePointers.delete(e.pointerId); press = null; stopAuto(); });
 function attack(x, y) {
+  if (WAR.orderMode) { applyOrder(pickAt(x, y)); return; }
+  { const cr = crateAtScreen(x, y); if (cr && cr.landed) { openCrate(cr); return; } }
   if (inTruce() && weapon !== 'fix' && weapon !== 'build') { toast(`휴전 중이에요 · ${Math.ceil(truce.until - clock)}초 남음 (복구·짓기는 돼요)`); return; }
   if (NET.on && NET.role === 'build' && weapon !== 'fix' && weapon !== 'build') { toast('복구 역할은 [복구]·[짓기]만 쓸 수 있어요'); return; }
   if (NET.on && NET.role === 'destroy' && NET.mode === 'versus' && (weapon === 'fix' || weapon === 'build')) { toast('부수기 역할은 복구·짓기를 못 해요'); return; }
@@ -6243,6 +6476,7 @@ document.querySelectorAll('#toggles .tg').forEach(b => b.addEventListener('click
   if (t === 'status') { pop('statmenu'); renderStatus(); }
   if (t === 'gacha') { pop('gacha'); renderInv(); }
   if (t === 'acct') { pop('acctmenu'); renderAcct(); }
+  if (t === 'help') pop('helpmenu');
   if (t === 'rank') { pop('rankmenu'); RK.online = null; renderRank(); if (ONLINE()) loadOnline(); }
 }));
 $('live').addEventListener('click', () => flyTo(STAGE_VIEW.pos.clone(), STAGE_VIEW.tgt.clone()));
@@ -6309,6 +6543,7 @@ function holdBtn(id, fn) {
 holdBtn('vRotL', () => camOrbit(0.045, 0)); holdBtn('vRotR', () => camOrbit(-0.045, 0));
 holdBtn('vUp', () => camOrbit(0, -0.03)); holdBtn('vDown', () => camOrbit(0, 0.03));
 $('vEye').onclick = () => { const tg = controls.target.clone(), off = camera.position.clone().sub(tg).setY(0); if (off.lengthSq() < 1) off.set(0, 0, 1); off.setLength(22); const p = tg.clone().add(off); p.y = Math.max(tg.y + 1.7, terrainAt(p.x, p.z) + 1.7); flyTo(p, tg.clone().setY(tg.y + 1.6)); toast('사람 눈높이 · ⟲ ⟳로 둘러보세요'); };
+$('wbAtk').onclick = orderAttack; $('wbDef').onclick = orderDefend; $('wbRush').onclick = orderRush; $('wbAuto').onclick = () => { WAR.on = !WAR.on; toast(WAR.on ? '자동 출동을 켰어요' : '자동 출동을 껐어요 · 명령으로만 움직여요'); renderWarBox(); };
 $('vToggle').onclick = () => { $('zoom').classList.toggle('open'); $('vToggle').textContent = $('zoom').classList.contains('open') ? '🎥 시점 닫기' : '🎥 시점'; };
 $('vTop').onclick = () => flyTo(V3(controls.target.x, controls.target.y + 320, controls.target.z + 1), controls.target.clone());
 function applyDrag() {
@@ -6321,7 +6556,7 @@ $('vDrag').onclick = () => { SET.dragRotate = !SET.dragRotate; applyDrag(); save
 applyDrag();
 $('zclose').onclick = () => { const h = pickAt(innerWidth / 2, innerHeight / 2); const tg = h ? h.point.clone() : controls.target.clone(); const off = camera.position.clone().sub(controls.target).setLength(9); off.y = Math.max(off.y, 3.5); flyTo(tg.clone().add(off), tg); toast('가까이 보기 · 유리창 너머로 수업 중인 학생들이 보여요'); };
 // 이벤트 메뉴
-const pop = id => { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
+const pop = id => { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu', 'helpmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
 $('evmenu').querySelectorAll('button[data-ev]').forEach(b => b.onclick = () => { triggerEvent(b.dataset.ev); $('evmenu').hidden = true; });
 $('statmenu').querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { $('statmenu').querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b)); $('stPeople').hidden = b.dataset.tab !== 'people'; $('stBld').hidden = b.dataset.tab !== 'bld'; });
 spawnCleaners(SMALL ? 3 : 5);
@@ -6387,6 +6622,7 @@ window.addEventListener('keydown', e => {
   const n = parseInt(e.key, 10); if (n >= 1 && n <= 9) selectWeapon(WEAPONS[n - 1].id); if (e.key === '0') selectWeapon('build'); if (e.key === '-') selectWeapon('summon'); if (e.key === '=') selectWeapon('fighter');
   const k = e.key.toLowerCase();
   if (k === 'n') setNight(!state.night);
+  if (k === 'h') pop('helpmenu');
   if (k === 'q') camOrbit(0.12, 0); if (k === 'e') camOrbit(-0.12, 0); if (k === 'r') camOrbit(0, -0.08); if (k === 'f') camOrbit(0, 0.08);
   if (k === 'l') document.querySelector('[data-t="names"]').click();
   if (k === 'm') document.querySelector('[data-t="sound"]').click();
@@ -6451,7 +6687,7 @@ function loop(now) {
   updateProjectiles(dt); updateQuake(dt); updatePipe(dt); updateTracers(dt); updateRings(dt); updateRockets(dt); updateTrees(dt);
   updateConcert(dt, beat);
   updateEvents(dt); updateAgents(dt); updateNet(dt); updatePeopleTags(dt); updateUnits(dt); updateSky(dt); updateBirds(dt); updateDefense(dt); updateTutorial(dt);
-  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop(); updateAmbience(dt); updateCafe(); trackCareer(dt); updateMyBuilds(dt); updateRetake(dt); updateCede(dt); updateRiotLine(dt); updateClashes(dt);
+  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop(); updateAmbience(dt); updateCafe(); trackCareer(dt); updateMyBuilds(dt); updateRetake(dt); updateCede(dt); updateWar(dt); updateRiotLine(dt); updateClashes(dt);
   if (SEASON === 'summer' && !state.night && Math.random() < dt * 0.06 && camera.position.y < 220) cicada();
   if (AU.ctx && Math.random() < dt * (state.night ? 0.45 : 0.12) && camera.position.y < 200) state.night ? SFX.cricket() : SFX.chirp();
   frameNo++;
@@ -6503,7 +6739,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
