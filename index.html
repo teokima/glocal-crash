@@ -214,10 +214,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 #trapbox button small{font-weight:600;font-size:11px;color:#ffd6d6}#trapbox button:hover{filter:brightness(1.15)}
 .named.trap{background:rgba(80,60,120,.92);border-color:#c9a8ff}
 @media (max-width:640px){#trapbox{left:10px;bottom:190px}}
-#situ{position:fixed;right:16px;bottom:118px;z-index:7;width:300px;padding:8px 10px;max-height:44vh;overflow:hidden;display:flex;flex-direction:column;gap:5px}
+#situ{position:fixed;right:16px;bottom:160px;z-index:7;width:300px;padding:8px 10px;max-height:38vh;overflow:hidden;display:flex;flex-direction:column;gap:5px}
 #situ[hidden]{display:none}#situ .sh{display:flex;align-items:baseline;gap:6px;cursor:pointer}#situ .sh b{font-size:13px}#situ .sh small{color:var(--dim);font-size:11px;flex:1}#situ.fold #situList{display:none}#situ.fold #situFold{transform:rotate(-90deg)}
 #situList{display:flex;flex-direction:column;gap:4px;overflow:hidden}
-.si{display:grid;grid-template-columns:1fr auto;column-gap:6px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.05);border-left:3px solid #8a8f99;animation:capIn .25s ease-out}
+.si{display:grid;grid-template-columns:1fr auto;column-gap:6px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.05);border-left:3px solid #8a8f99;}
 .si b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.si em{font-style:normal;font-size:10.5px;color:var(--dim);grid-row:1;grid-column:2}.si span{grid-column:1/3;font-size:11.5px;color:#cfcac0;line-height:1.35}
 .si.gold{border-left-color:#ffc83d}.si.red{border-left-color:#ff5a4a}.si.blue{border-left-color:#4a9bff}.si.snd{border-left-color:#7fd0ff}.si.none{color:var(--dim);font-size:11.5px;border-left-color:transparent}
 #caps{display:none;position:fixed;right:16px;bottom:118px;z-index:7;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
@@ -249,7 +249,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes namedPulse{50%{box-shadow:0 0 20px rgba(255,200,60,.7)}}
 .named{padding:5px 12px!important;box-shadow:0 0 16px rgba(120,170,255,.55);transform:scale(1.15)}.named b{font-size:14.5px!important}.named small{font-size:11.5px!important}
 .pact{display:flex;gap:6px;margin-top:8px}.pact button{flex:1;padding:7px 4px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:12px;font-weight:700}.pact button.up{background:linear-gradient(90deg,#c99a2e,#ffd27a);color:#1a1208;border:0}.pact button:disabled{opacity:.5}
-@media (max-width:640px){#namedbar{top:auto;bottom:250px;max-width:calc(100% - 20px)}}
+@media (max-width:640px){#namedbar{top:84px;bottom:auto;left:auto;right:10px;margin:0;max-width:62vw;justify-content:flex-end}#namedbar button{font-size:11px;padding:4px 8px}#evcards{top:120px!important}}
 #gTabs{display:flex;gap:6px;margin:10px 0 8px}#gTabs button{flex:1;padding:8px 4px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:700;font-size:12.5px}#gTabs button.on{background:rgba(255,178,63,.18);border-color:var(--hot);color:#ffd27a}
 .slot .sbtn button.use{background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;border:0}
 .eqslots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -276,6 +276,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 #buildbar .swatches{display:flex;gap:5px}
 #buildbar .sw{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,.25)}
 #buildbar .sw.on{border-color:#fff;box-shadow:0 0 0 2px var(--hot2)}
+#vToggle{display:none;padding:8px 12px;border-radius:12px;font-weight:800;font-size:13px}
+@media (max-width:640px){#vToggle{display:block}#zoom{display:none!important}#zoom.open{display:flex!important}#situ{left:10px!important;right:10px!important;width:auto!important;bottom:150px!important;max-height:84px}#situ .si span{display:none}#tip{bottom:240px}}
 #zoom{display:flex;flex-direction:column;gap:4px;border-radius:12px;padding:6px;width:150px;box-sizing:border-box}
 #zoom .vh{font-size:11px;color:var(--dim);font-weight:700;padding-left:2px}
 #zoom .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
@@ -337,7 +339,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 #rpOk{width:100%;padding:11px;border:0;border-radius:10px;background:linear-gradient(90deg,var(--hot),var(--hot2));color:#1a0d07;font-family:'Black Han Sans',sans-serif;font-size:17px}
 @media (max-width:640px){
   #evcards,.panel{top:auto;bottom:150px;right:10px;width:calc(100% - 20px)}
-  #evcards{bottom:160px}
+  #evcards{bottom:auto;top:150px;width:min(62vw,250px)}#evcards>.evcard:nth-child(n+3){display:none}#evcards .evcard span{font-size:10.5px}
   #banner b{font-size:30px}
   #stagepct{display:none}
 }
@@ -403,6 +405,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="live" class="card" title="누르면 노천극장으로 이동"><span class="led"></span><span id="livetxt">노천극장 · 공연 중</span></div>
   <div id="compass" class="card" title="누르면 북쪽이 위로"><svg viewBox="0 0 30 30"><g id="needle"><path d="M15 3 L19.5 15 L10.5 15 Z" fill="#ff5a36"/><path d="M15 27 L19.5 15 L10.5 15 Z" fill="#d8d4ca"/><text x="15" y="12.2" text-anchor="middle" font-size="6.5" font-weight="900" fill="#fff" font-family="sans-serif">N</text></g></svg></div>
   <div id="missions" class="card"><div class="mh" id="mhead"><b>미션 <span id="mfold">▾</span></b><small id="mdone">완료 0</small></div><div id="mlist"></div></div>
+  <button id="vToggle" class="card">🎥 시점</button>
   <div id="zoom" class="card">
     <div class="vh">시점</div>
     <div class="vgrid">
@@ -1494,7 +1497,7 @@ const SFX = {
   clang(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = vol(p);
     for (const f of [523, 1347, 2219, 3170]) { const o = osc('sine', f * rand(.97, 1.03), t, 0.9), g = gain(); env(g, t, 0.001, 0.11 * v, rand(0.4, 0.8)); o.connect(g).connect(AU.sfx); }
     this.hit(p, 0.8); },
-  shot(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = Math.max(0.5, vol(p));
+  shot(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = p ? vol(p) * 0.8 : 0.6;
     const n = nsrc(t, 0.12), g = gain(); env(g, t, 0.001, 0.55 * v, 0.09); n.connect(filt('bandpass', 1500, 0.6)).connect(g).connect(AU.sfx);
     const o = osc('square', 140, t, 0.06), g2 = gain(); env(g2, t, 0.001, 0.25 * v, 0.05); o.connect(filt('lowpass', 600)).connect(g2).connect(AU.sfx); },
   cannon(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = vol(p);
@@ -1510,9 +1513,9 @@ const SFX = {
   scream(p) { if (!this.ok()) return; const t = AU.ctx.currentTime;
     for (let i = 0; i < 3; i++) { const n = nsrc(t + i * 0.08, 1.2), f = filt('bandpass', rand(1500, 2600), 3), g = gain(); env(g, t + i * 0.08, 0.06, 0.18 * vol(p), 1.0); n.connect(f).connect(g).connect(AU.sfx); } },
   cheer(p) { if (!this.ok()) return; const t = AU.ctx.currentTime; const n = nsrc(t, 2.6), g = gain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.3 * vol(p), t + 0.6); g.gain.exponentialRampToValueAtTime(0.0001, t + 2.5); n.connect(filt('bandpass', 1100, 0.7)).connect(g).connect(AU.sfx); },
-  siren(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = Math.max(0.25, vol(p)) * 0.09; const o = AU.ctx.createOscillator(); o.type = 'square';
-    for (let k = 0; k < 8; k++) o.frequency.setValueAtTime(k % 2 ? 960 : 720, t + k * 0.36); o.start(t); o.stop(t + 2.95);
-    const g = gain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.05); g.gain.setValueAtTime(v, t + 2.6); g.gain.exponentialRampToValueAtTime(0.0001, t + 2.9); o.connect(filt('lowpass', 2200)).connect(g).connect(AU.sfx); },
+  siren(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = vol(p) * 0.05; const o = AU.ctx.createOscillator(); o.type = 'sine';
+    for (let k = 0; k < 4; k++) o.frequency.setValueAtTime(k % 2 ? 880 : 660, t + k * 0.32); o.start(t); o.stop(t + 1.35);
+    const g = gain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.06); g.gain.setValueAtTime(v, t + 1.1); g.gain.exponentialRampToValueAtTime(0.0001, t + 1.3); o.connect(filt('lowpass', 1800)).connect(g).connect(AU.sfx); },
   chant(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = vol(p) * 0.5;
     for (const [d, f] of [[0, 260], [0.34, 220]]) { const n = nsrc(t + d, 0.3), g = gain(); env(g, t + d, 0.02, 0.35 * v, 0.24); n.connect(filt('bandpass', 750, 1.4)).connect(g).connect(AU.sfx);
       const o = osc('sawtooth', f, t + d, 0.28), g2 = gain(); env(g2, t + d, 0.02, 0.08 * v, 0.24); o.connect(filt('lowpass', 900)).connect(g2).connect(AU.sfx); } },
@@ -5614,14 +5617,14 @@ function updateShop() {
 // 소리마다 [이름, 왜 나는지]
 const CAP = {
   boom: ['💥 쾅 (폭발)', '폭탄·대포·운석·유닛 공격이 터짐'], hit: ['🔨 퍽 (타격)', '쇠파이프·포클레인이 건물을 침'], clang: ['🔩 깡 (쇠 소리)', '쇠파이프가 단단한 곳에 맞음'],
-  shot: ['🔫 탕 (총소리)', '총·대공포 발사'], cannon: ['💣 펑 (대포 발사)', '대포·전차가 포탄을 쏨'], whoosh: ['🌠 휘익', '무언가 날아가는 중 (운석·미사일)'],
+  shot: ['🔫 탕 (총소리)', '군 방어부대 대공포가 내 포탄·드론·헬기를 쏘거나 전투기 기총 사격 · 내가 총을 쓸 때'], cannon: ['💣 펑 (대포 발사)', '대포·전차가 포탄을 쏨'], whoosh: ['🌠 휘익', '무언가 날아가는 중 (운석·미사일)'],
   beep: ['⏱️ 삐삐삐', '붙여 둔 폭탄 타이머 · 빨라지면 곧 터짐'], rumble: ['🌋 우르르', '건물이 무너지거나 지진'], scream: ['😱 비명', '근처 사람들이 놀라 대피'],
-  cheer: ['🙌 와아 (환호)', '축제·공연 관객·응원단'], siren: ['🚨 앵앵 (사이렌)', '막는 세력(시설팀·군·질서유지대) 출동'], chant: ['📢 구호', '학생 시위대가 외침'],
+  cheer: ['🙌 와아 (환호)', '축제·공연 관객·응원단'], siren: ['🚨 삐뽀 (출동 사이렌)', '시설팀·군·질서유지대·탈환대가 출동 · 캠퍼스가 부서지거나 자동 이벤트가 생기면 저절로 와요'], chant: ['📢 구호', '학생 시위대가 외침'],
   bell: ['🔔 뾰로롱', '새 이벤트·알림 (아래 상황판 참고)'], shield: ['🛡️ 쨍', '방패·방어막이 공격을 막음'], ding: ['✨ 띵', '아이템 획득·미션·짓기 완료'],
   jet: ['✈️ 제트기', '전투기·공습·방공기가 지나감'], chirp: ['🐦 짹짹', '낮 새소리'], cricket: ['🦗 찌르르', '밤 풀벌레'],
 };
 // 같은 소리가 너무 자주 겹치지 않게 (초)
-const SFX_GAP = { boom: 0.07, rumble: 0.45, siren: 2.5, bell: 0.9, cheer: 1.8, jet: 1.5, scream: 1.2, shield: 0.25, chant: 1.5, hit: 0.05, clang: 0.08, whoosh: 0.2, ding: 0.12 };
+const SFX_GAP = { boom: 0.07, rumble: 0.45, siren: 8, shot: 0.12, bell: 0.9, cheer: 1.8, jet: 1.5, scream: 1.2, shield: 0.25, chant: 1.5, hit: 0.05, clang: 0.08, whoosh: 0.2, ding: 0.12 };
 const sfxLast = {};
 const capT = {};
 function nearPlace(p) {
@@ -5638,7 +5641,7 @@ function situLog(icon, title, why, tone, key) {
 }
 function situRender() {
   const S = situLog.st, box = $('situList'); if (!S || !box) return;
-  const now = performance.now(), show = S.list.slice(0, SMALL ? 3 : 6);
+  const now = performance.now(), show = S.list.slice(0, SMALL ? 2 : 6);
   box.textContent = ''; $('situ').classList.toggle('fold', S.fold);
   for (const e of show) {
     const d = document.createElement('div'); d.className = 'si ' + (e.tone || '');
@@ -5658,8 +5661,10 @@ function caption(k, txt, why, p) {
 }
 for (const k of Object.keys(CAP)) { const f = SFX[k]; if (typeof f === 'function') SFX[k] = function (...a) {
   if (!this.ok()) return; const now = performance.now() / 1000;
+  const p = a[0], far = p && p.isVector3 && camera.position.distanceTo(p) > 260;
+  if (far) { caption(k, null, CAP[k][1] + ' · 멀어서 소리는 안 냈어요', p); return; }
   if (SFX_GAP[k] && now - (sfxLast[k] || 0) < SFX_GAP[k]) return; sfxLast[k] = now;
-  caption(k, null, null, a[0]); return f.apply(this, a);
+  caption(k, null, null, p); return f.apply(this, a);
 }; }
 setInterval(situRender, 2000);
 function applyMix() {
@@ -6286,6 +6291,7 @@ function holdBtn(id, fn) {
 holdBtn('vRotL', () => camOrbit(0.045, 0)); holdBtn('vRotR', () => camOrbit(-0.045, 0));
 holdBtn('vUp', () => camOrbit(0, -0.03)); holdBtn('vDown', () => camOrbit(0, 0.03));
 $('vEye').onclick = () => { const tg = controls.target.clone(), off = camera.position.clone().sub(tg).setY(0); if (off.lengthSq() < 1) off.set(0, 0, 1); off.setLength(22); const p = tg.clone().add(off); p.y = Math.max(tg.y + 1.7, terrainAt(p.x, p.z) + 1.7); flyTo(p, tg.clone().setY(tg.y + 1.6)); toast('사람 눈높이 · ⟲ ⟳로 둘러보세요'); };
+$('vToggle').onclick = () => { $('zoom').classList.toggle('open'); $('vToggle').textContent = $('zoom').classList.contains('open') ? '🎥 시점 닫기' : '🎥 시점'; };
 $('vTop').onclick = () => flyTo(V3(controls.target.x, controls.target.y + 320, controls.target.z + 1), controls.target.clone());
 function applyDrag() {
   const rot = !!SET.dragRotate;
@@ -6434,6 +6440,13 @@ function loop(now) {
   fire.update(dt); smoke.update(dt);
   for (const b of buildings) b.flush();
   // 이름표는 0.25초마다 (매 프레임 글자를 바꾸면 렉)
+  // 멀리서는 교실 안 의자·책상·소품(삼각형 약 39만 개)을 그리지 않음 · 원룸촌은 화질에 따라 먼 곳 숨김
+  if (frameNo % 15 === 3) {
+    const camD = camera.position.distanceTo(controls.target), inside = camD < 150;
+    for (const m of [seatRestI, seatTorsoI, deskI, propI, seatLongI]) if (m.visible !== inside) m.visible = inside;
+    const far = SET.quality === 'high' ? 1e9 : SET.quality === 'mid' ? 700 : 450, tx = controls.target.x, tz = controls.target.z;
+    for (const b of buildings) if (!b.campus && !b.userChunk) { const v = SET.town && Math.hypot((b.bb[0] + b.bb[1]) / 2 - tx, (b.bb[2] + b.bb[3]) / 2 - tz) < far; if (b.meshes[0] && b.meshes[0].visible !== v) b.meshes.forEach(m => m.visible = v); }
+  }
   if (frameNo % 15 === 0) for (const b of buildings) if (b.lblDiv) {
     if (b.labelDirty) { b.labelDirty = false; b.updateLabel(); }
     const dist = Math.hypot(camera.position.x - (b.bb[0] + b.bb[1]) / 2, camera.position.z - (b.bb[2] + b.bb[3]) / 2), near = dist < 190;
