@@ -214,6 +214,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 #trapbox button small{font-weight:600;font-size:11px;color:#ffd6d6}#trapbox button:hover{filter:brightness(1.15)}
 .named.trap{background:rgba(80,60,120,.92);border-color:#c9a8ff}
 @media (max-width:640px){#trapbox{left:10px;bottom:190px}}
+#caps{position:fixed;right:16px;bottom:118px;z-index:7;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none}
+#caps div{padding:4px 10px;border-radius:8px;background:rgba(10,12,18,.78);border:1px solid rgba(255,255,255,.14);font-size:12px;color:#e8e4dc;transition:opacity .5s;animation:capIn .25s ease-out}
+#caps div.out{opacity:0}@keyframes capIn{from{transform:translateY(6px);opacity:0}}
+.mixh{font-size:12px;color:var(--dim);margin:2px 0 -2px}
+.sndhelp{font-size:12.5px;color:#ddd8cf;margin:4px 0}.sndhelp summary{cursor:pointer;color:#ffd27a;font-weight:700}.sndhelp ul{margin:6px 0 0;padding-left:16px;line-height:1.7}.sndhelp b{color:#fff}
+#claims{bottom:200px!important}
+@media (max-width:640px){#caps{bottom:176px;right:10px}}
 #setnote{font-size:11.5px;color:var(--dim);line-height:1.5}
 #fps{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;top:8px;z-index:6;padding:4px 10px;font-size:12px;font-variant-numeric:tabular-nums}
 #fps[hidden]{display:none}
@@ -358,6 +365,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div id="nego" class="card" hidden><div class="nf" id="negoFace">🏛️</div><b id="negoWho"></b><p id="negoText"></p><div class="offer" id="negoOffer"></div><div class="row"><button id="negoYes" class="main">수락</button><button id="negoNo">거절</button></div></div>
 <div id="claims"></div>
 <div id="trapbox" hidden></div>
+<div id="caps"></div>
 <div id="tip" class="card" hidden><span class="n" id="tipN">1</span><p id="tipT"></p><button id="tipSkip">건너뛰기</button></div>
 <div id="banner"><b></b><span></span></div>
 <div id="evcards"></div>
@@ -391,6 +399,17 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div id="setmenu" class="card panel" hidden>
   <div class="ph"><b>설정</b><button data-close="setmenu">✕</button></div>
   <label class="rng">무기 세기 <output id="o_power">×1.0</output><input type="range" id="s_power" min="0.5" max="2" step="0.1" value="1"></label>
+  <div class="mixh">소리 크기</div>
+  <label class="rng">공연 음악 <output id="o_v_music">100%</output><input type="range" id="s_v_music" min="0" max="1.5" step="0.05" value="1"></label>
+  <label class="rng">효과음 <output id="o_v_sfx">100%</output><input type="range" id="s_v_sfx" min="0" max="1.5" step="0.05" value="1"></label>
+  <label class="rng">주변 소리 <output id="o_v_amb">100%</output><input type="range" id="s_v_amb" min="0" max="1.5" step="0.05" value="1"></label>
+  <label class="rng">학생 목소리 <output id="o_v_voice">100%</output><input type="range" id="s_v_voice" min="0" max="1" step="0.05" value="1"></label>
+  <label><input type="checkbox" id="s_caps"> 소리 자막 (어떤 소리인지 오른쪽 아래에 표시)</label>
+  <details class="sndhelp"><summary>무슨 소리예요?</summary><ul>
+    <li><b>쿵쿵 박자</b> 노천극장 공연 음악 (가까울수록 크게)</li><li><b>쾅</b> 폭발 · <b>우르르</b> 건물 무너짐·지진</li>
+    <li><b>삐삐삐 빨라짐</b> 폭탄 타이머 (곧 터짐)</li><li><b>짹짹</b> 낮 새소리 · <b>찌르르</b> 밤 풀벌레</li>
+    <li><b>웅얼웅얼</b> 사람 많은 곳의 대화 · <b>윙~</b> 환경미화원 송풍기</li><li><b>뾰로롱</b> 이벤트·알림 · <b>띵</b> 획득·미션 완료</li>
+    <li><b>앵앵</b> 사이렌: 막는 세력 출동 · <b>구호</b> 시위대</li></ul></details>
   <label class="rng">지진 세기 <output id="o_quake">×1.0</output><input type="range" id="s_quake" min="0.5" max="2.5" step="0.1" value="1"></label>
   <div class="row"><button data-q="high">화질 높음</button><button data-q="mid">보통</button><button data-q="low">낮음</button></div>
   <label><input type="checkbox" id="s_town" checked> 캠퍼스 밖 원룸촌 보이기</label>
@@ -1333,13 +1352,14 @@ function audioInit() {
   const ctx = AU.ctx = new AC();
   const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 6; comp.connect(ctx.destination);
   AU.master = ctx.createGain(); AU.master.gain.value = AU.on ? 0.85 : 0; AU.master.connect(comp);
-  AU.music = ctx.createGain(); AU.music.gain.value = 0; AU.music.connect(AU.master);
+  AU.musicMix = ctx.createGain(); AU.musicMix.connect(AU.master); AU.amb = ctx.createGain(); AU.amb.connect(AU.master);
+  AU.music = ctx.createGain(); AU.music.gain.value = 0; AU.music.connect(AU.musicMix);
   AU.sfx = ctx.createGain(); AU.sfx.gain.value = 0.9; AU.sfx.connect(AU.master);
   const len = ctx.sampleRate * 4, buf = ctx.createBuffer(1, len, ctx.sampleRate), dd = buf.getChannelData(0);
   for (let i = 0; i < len; i++) dd[i] = Math.random() * 2 - 1;
   AU.noise = buf;
   AU.t0 = ctx.currentTime + 0.1; AU.next = AU.t0; AU.step = 0;
-  setInterval(scheduleMusic, 25);
+  setInterval(scheduleMusic, 25); applyMix();
 }
 function env(g, t, a, peak, dec) { g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + dec); }
 function nsrc(t, dur) { const s = AU.ctx.createBufferSource(); s.buffer = AU.noise; s.start(t, Math.random() * 0.5, dur + 0.05); return s; }
@@ -1415,8 +1435,8 @@ const SFX = {
     g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.5, t + d * 0.5); g.gain.exponentialRampToValueAtTime(0.0001, t + d); n.connect(f).connect(g).connect(AU.sfx); },
   // 배경: 낮엔 새소리, 밤엔 풀벌레
   chirp() { if (!this.ok()) return; const t = AU.ctx.currentTime, base = rand(2600, 4200), n = 2 + (Math.random() * 3 | 0);
-    for (let k = 0; k < n; k++) { const s = t + k * rand(0.09, 0.15), o = osc('sine', base, s, 0.12), g = gain(); o.frequency.exponentialRampToValueAtTime(base * rand(1.2, 1.5), s + 0.07); env(g, s, 0.005, 0.025, 0.08); o.connect(g).connect(AU.sfx); } },
-  cricket() { if (!this.ok()) return; const t = AU.ctx.currentTime; for (let k = 0; k < 3; k++) { const s = t + k * 0.06, o = osc('sine', 4800, s, 0.04), g = gain(); env(g, s, 0.002, 0.018, 0.03); o.connect(g).connect(AU.sfx); } },
+    for (let k = 0; k < n; k++) { const s = t + k * rand(0.09, 0.15), o = osc('sine', base, s, 0.12), g = gain(); o.frequency.exponentialRampToValueAtTime(base * rand(1.2, 1.5), s + 0.07); env(g, s, 0.012, 0.014, 0.09); const vb = osc('sine', rand(28, 40), s, 0.12), vg = gain(); vg.gain.value = base * 0.04; vb.connect(vg).connect(o.frequency); o.connect(filt('lowpass', 5200)).connect(g).connect(AU.amb); } },
+  cricket() { if (!this.ok()) return; const t = AU.ctx.currentTime; for (let k = 0; k < 3; k++) { const s = t + k * 0.06, o = osc('sine', 4800, s, 0.04), g = gain(); env(g, s, 0.002, 0.014, 0.03); o.connect(g).connect(AU.amb); } },
   honk(p) { if (!this.ok()) return; const t = AU.ctx.currentTime, v = vol(p) * 0.6; for (const f of [392, 494]) { const o = osc('square', f, t, 0.35), g = gain(); env(g, t, 0.01, 0.07 * v, 0.3); o.connect(filt('lowpass', 1800)).connect(g).connect(AU.sfx); } },
 };
 
@@ -1612,7 +1632,7 @@ function updateConcert(dt, beat) {
     else { concert.state = 'play'; for (const p of crowd) if (p.st !== 'watch') p.st = 'return'; SFX.cheer(STAGE); toast('공연 재개! 관객이 돌아옵니다'); }
   }
   const playing = concert.state === 'play', night = state.night;
-  if (AU.ctx) { const d = camera.position.distanceTo(STAGE); AU.music.gain.setTargetAtTime(playing ? clamp(1.1 - (d - 50) / 420, 0.05, 1) * 0.55 : 0, AU.ctx.currentTime, 0.3); }
+  if (AU.ctx) { const d = camera.position.distanceTo(STAGE); AU.music.gain.setTargetAtTime(playing ? clamp(1 - (d - 40) / 300, 0, 1) * 0.55 : 0, AU.ctx.currentTime, 0.3); }
   beams.forEach((m, i) => {
     m.rotation.x = -0.6 + Math.sin(beat * Math.PI / 4 + i) * 0.18;
     m.rotation.z = Math.sin(beat * Math.PI / 8 + i * 1.3) * 0.45;
@@ -1675,15 +1695,18 @@ function updateConcert(dt, beat) {
 }
 const hsl = h => { _col.setHSL(h, 0.9, 0.6); return [_col.r, _col.g, _col.b]; };
 const rockets = [];
-function launchFirework(p) { rockets.push({ p, v: V3(rand(-2, 2), rand(32, 40), rand(-2, 2)), t: 0, h: Math.random() }); }
+function launchFirework(p, big) { rockets.push({ p, v: V3(rand(-2, 2), big ? rand(42, 52) : rand(32, 40), rand(-2, 2)), t: 0, h: Math.random(), big }); }
+const fwFlashGeo = new THREE.SphereGeometry(1, 12, 8);
 function updateRockets(dt) {
   for (let i = rockets.length - 1; i >= 0; i--) {
     const r = rockets[i]; r.t += dt; r.v.y -= 14 * dt; r.p.addScaledVector(r.v, dt);
     fire.spawn(r.p.x, r.p.y, r.p.z, 0, -2, 0, 0.4, 0.6, 0.1, 1, 0.8, 0.5, 0.8, 0, 1);
     if (r.v.y < 4) {
       const [cr, cg, cb] = hsl(r.h);
-      for (let k = 0; k < 110; k++) { randUnit(_a); const sp = rand(14, 20); fire.spawn(r.p.x, r.p.y, r.p.z, _a.x * sp, _a.y * sp, _a.z * sp, rand(1.2, 1.9), 1.1, 0.3, cr, cg, cb, 1, -5, 1.3); }
-      SFX.boom(r.p, 0.35); rockets.splice(i, 1);
+      const N = r.big ? 170 : 110, S = r.big ? 2.6 : 1.1;
+      for (let k = 0; k < N; k++) { randUnit(_a); const sp = r.big ? rand(20, 28) : rand(14, 20); fire.spawn(r.p.x, r.p.y, r.p.z, _a.x * sp, _a.y * sp, _a.z * sp, rand(1.4, 2.2), S, 0.4, cr, cg, cb, 1, -5, 1.3); }
+      if (r.big) { const fl = new THREE.Mesh(fwFlashGeo, new THREE.MeshBasicMaterial({ color: new THREE.Color(cr, cg, cb), transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false })); fl.position.copy(r.p); scene.add(fl); let k = 0; const step = () => { k += 0.06; fl.scale.setScalar(4 + k * 26); fl.material.opacity = 0.8 * (1 - k); if (k < 1) requestAnimationFrame(step); else scene.remove(fl); }; step(); }
+      capT.boom = performance.now(); caption('fw', '🎆 불꽃놀이'); SFX.boom(r.p, 0.35); rockets.splice(i, 1);
     }
   }
 }
@@ -4500,8 +4523,8 @@ function cjmanBoom(p, R) {
    12-19. 모여서 하는 이벤트 — 모시래 축제 · 모람제 · 벚꽃축제 · 체육대회 · 시험 기간
    ===================================================================== */
 const FESTS = {
-  mosirae: { name: '모시래 축제', desc: '기숙사생 먹거리 장터와 버스킹', bld: '모시래학사(남학생동)', booths: 8, people: 55, mode: 'mingle' },
-  moram: { name: '모람제', desc: '캠퍼스 대동제 · 주점 거리와 불꽃놀이', bld: '학생회관', booths: 10, people: 65, mode: 'mingle', fireworks: true },
+  mosirae: { name: '모시래 축제', desc: '기숙사생 먹거리 장터와 버스킹', bld: '모시래학사(남학생동)', booths: 14, people: 60, mode: 'mingle' },
+  moram: { name: '모람제', desc: '상허광장 대동제 · 학과 주점 거리 · 무대 공연', at: 'plaza', booths: 34, people: 80, mode: 'mingle', fireworks: true },
   cherry: { name: '벚꽃축제', desc: '캠퍼스 벚꽃이 활짝 · 산책하며 사진 찍는 학생들', people: 50, mode: 'stroll', cherry: true },
   sports: { name: '체육대회', desc: '육상 트랙에서 학과 대항 계주와 응원전', people: 60, mode: 'race' },
 };
@@ -4520,14 +4543,125 @@ function trackInfo() {
   let a = 0, b = 0; for (const [x, z] of tr.p) { const lx = (x - c[0]) * Math.cos(ang) + (z - c[1]) * Math.sin(ang), lz = -(x - c[0]) * Math.sin(ang) + (z - c[1]) * Math.cos(ang); a = Math.max(a, Math.abs(lx)); b = Math.max(b, Math.abs(lz)); }
   return { c: V3(c[0], 0, c[1]), ang, a: a - 5, b: b - 5 };
 }
+// ── 축제 2판: 상허광장 · 길가에 부스 거리 + 폐막식 불꽃놀이 ──
+// 상허광장 테두리 (OpenStreetMap way 1164699090 '상허 광장'을 게임 좌표로 바꾼 값)
+const PLAZA_POLY = [[-150, -37], [-114, -12], [-99, -2], [-71, 18], [-118, 88], [-140, 72], [-157, 60], [-198, 31], [-178, 3], [-150, -37]];
+const PLAZA_C = V3(-134, 0, 26);
+const BOOTH_NAMES = ['컴공과 주점', '경영학과 닭꼬치', '디자인과 굿즈', '간호학과 타코야끼', '총학 무료 음료', '동아리 떡볶이', '사회복지 와플', '경찰학과 소떡소떡', '밴드부 굿즈', '사진동아리 포토존', '기계과 핫도그', '미디어학부 굿즈', '식품영양 수제청', '충주 사과즙', '게임동아리 체험', '의학과 건강 체크', '영어문화 칵테일(무알콜)', '유아교육 풍선아트'];
+const signTex = {};
+function boothSign(text) {
+  if (signTex[text]) return signTex[text];
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 64; const x = cv.getContext('2d');
+  x.fillStyle = '#fffaf0'; x.fillRect(0, 0, 256, 64); x.fillStyle = '#c0392b'; x.fillRect(0, 54, 256, 10);
+  x.fillStyle = '#1a1a1a'; x.font = `800 ${text.length > 9 ? 24 : 30}px "Noto Sans KR",sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(text, 128, 29);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return signTex[text] = t;
+}
+const BOOTH_COLS = [0xd62828, 0x2a6fd6, 0xf2c230, 0x3aa56b, 0x8a52c8, 0xf08a24];
+const boothGeo = { canopy: new THREE.BoxGeometry(3.2, 0.12, 2.6), roof: new THREE.ConeGeometry(2.25, 0.9, 4), table: new THREE.BoxGeometry(2.8, 0.9, 1.0), cloth: new THREE.BoxGeometry(2.84, 0.5, 1.04), pole: new THREE.CylinderGeometry(0.05, 0.05, 2.6, 5), sign: new THREE.BoxGeometry(2.6, 0.62, 0.06), good: new THREE.BoxGeometry(0.32, 0.26, 0.32) };
+const bWhiteMat = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: .8 }), bPoleMat = new THREE.MeshStandardMaterial({ color: 0xcfd2d6, metalness: .5, roughness: .4 });
+function makeBooth2(p, ang, k) {
+  const g = new THREE.Group(), col = BOOTH_COLS[k % BOOTH_COLS.length], cm = M_(col);
+  const canopy = new THREE.Mesh(boothGeo.canopy, bWhiteMat); canopy.position.y = 2.6;
+  const roof = new THREE.Mesh(boothGeo.roof, cm); roof.position.y = 3.1; roof.rotation.y = Math.PI / 4; roof.scale.set(1, 1, 0.82);
+  const table = new THREE.Mesh(boothGeo.table, M_(0xb58b5c)); table.position.set(0, 0.45, 0.6);
+  const cloth = new THREE.Mesh(boothGeo.cloth, cm); cloth.position.set(0, 0.65, 0.6);
+  const sign = new THREE.Mesh(boothGeo.sign, [bWhiteMat, bWhiteMat, bWhiteMat, bWhiteMat, new THREE.MeshStandardMaterial({ map: boothSign(BOOTH_NAMES[k % BOOTH_NAMES.length]), roughness: .7 }), bWhiteMat]); sign.position.set(0, 2.25, 1.32);
+  g.add(canopy, roof, table, cloth, sign);
+  for (const [x, z] of [[-1.5, -1.2], [1.5, -1.2], [-1.5, 1.2], [1.5, 1.2]]) { const pole = new THREE.Mesh(boothGeo.pole, bPoleMat); pole.position.set(x, 1.3, z); g.add(pole); }
+  for (let j = 0; j < 3; j++) { const gd = new THREE.Mesh(boothGeo.good, M_(pick([0xffd27a, 0xff8a65, 0x8fd14f, 0x6fb7d8, 0xf08aa8]))); gd.position.set(-0.8 + j * 0.8, 1.04, 0.6); g.add(gd); }
+  // 부스 안 상인
+  g.position.copy(p); g.rotation.y = ang; g.traverse(o => { if (o.isMesh) o.castShadow = true; }); scene.add(g);
+  g.userData.front = p.clone().add(V3(Math.sin(ang) * 2.4, 0, Math.cos(ang) * 2.4));
+  g.userData.back = p.clone().add(V3(-Math.sin(ang) * 0.5, 0, -Math.cos(ang) * 0.5));
+  return g;
+}
+function boothSpotOk(x, z, list) {
+  const y = terrainAt(x, z);
+  if (hasBlock(x, y + 1, z) || hasBlock(x + 1.6, y + 1, z) || hasBlock(x - 1.6, y + 1, z) || hasBlock(x, y + 1, z + 1.6) || hasBlock(x, y + 1, z - 1.6)) return false;
+  if (Math.abs(terrainAt(x + 1.5, z) - y) > 1 || Math.abs(terrainAt(x, z + 1.5) - y) > 1) return false;
+  return !list.some(q => Math.hypot(q.x - x, q.z - z) < 4.2);
+}
+// 길가 부스 거리: 보행로 가운데선에서 양옆으로 4.5 m, 7 m 간격
+function boothStreet(center, R, max, list, kk) {
+  const out = [];
+  const edges = WG.edges.filter(e => e.p.some(([x, z]) => Math.hypot(x - center.x, z - center.z) < R)).sort((a, b) => Math.hypot(a.p[0][0] - center.x, a.p[0][1] - center.z) - Math.hypot(b.p[0][0] - center.x, b.p[0][1] - center.z));
+  for (const e of edges) {
+    let carry = 0;
+    for (let i = 0; i < e.p.length - 1 && out.length < max; i++) {
+      const [x1, z1] = e.p[i], [x2, z2] = e.p[i + 1], L = Math.hypot(x2 - x1, z2 - z1); if (L < 0.1) continue;
+      const ux = (x2 - x1) / L, uz = (z2 - z1) / L;
+      for (let d = carry; d < L && out.length < max; d += 7) {
+        const mx = x1 + ux * d, mz = z1 + uz * d; if (Math.hypot(mx - center.x, mz - center.z) > R) continue;
+        for (const side of [1, -1]) {
+          const x = mx - uz * side * 4.6, z = mz + ux * side * 4.6;
+          if (!boothSpotOk(x, z, list)) continue;
+          const p = V3(x, terrainAt(x, z), z), ang = Math.atan2(uz * side, -ux * side);   // 앞면이 길 쪽
+          const b = makeBooth2(p, ang, kk.k++); list.push(p); out.push(b);
+        }
+      }
+      carry = 0;
+    }
+  }
+  return out;
+}
+// 상허광장 테두리를 따라 안쪽 5 m에 광장 가운데를 보는 부스
+function boothPlaza(list, kk) {
+  const out = [], P = PLAZA_POLY;
+  for (let i = 0; i < P.length - 1; i++) {
+    const [x1, z1] = P[i], [x2, z2] = P[i + 1], L = Math.hypot(x2 - x1, z2 - z1);
+    for (let d = 4; d < L - 3; d += 7.5) {
+      let x = x1 + (x2 - x1) * d / L, z = z1 + (z2 - z1) * d / L; const dx = PLAZA_C.x - x, dz = PLAZA_C.z - z, dl = Math.hypot(dx, dz) || 1;
+      x += dx / dl * 5; z += dz / dl * 5;
+      if (!boothSpotOk(x, z, list)) continue;
+      const p = V3(x, terrainAt(x, z), z); const b = makeBooth2(p, Math.atan2(dx, dz), kk.k++); list.push(p); out.push(b);
+    }
+  }
+  return out;
+}
+function makeFestStage(c, title) {
+  const g = new THREE.Group();
+  const deck = new THREE.Mesh(new THREE.BoxGeometry(12, 1.2, 7), M_(0x3a3a40)); deck.position.y = 0.6;
+  const back = new THREE.Mesh(new THREE.BoxGeometry(12, 6, 0.4), M_(0x1d1d24)); back.position.set(0, 3.6, -3.3);
+  const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128; const x = cv.getContext('2d'); const gr = x.createLinearGradient(0, 0, 512, 0); gr.addColorStop(0, '#ff5a8a'); gr.addColorStop(1, '#ffc83d'); x.fillStyle = gr; x.fillRect(0, 0, 512, 128); x.fillStyle = '#1a0d07'; x.font = '900 64px "Noto Sans KR",sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(title, 256, 66);
+  const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace;
+  const banner = new THREE.Mesh(new THREE.PlaneGeometry(10, 2.5), new THREE.MeshStandardMaterial({ map: t, emissive: 0xffffff, emissiveMap: t, emissiveIntensity: .3 })); banner.position.set(0, 5.2, -3.05);
+  for (const sx of [-5.6, 5.6]) { const tr = new THREE.Mesh(new THREE.BoxGeometry(0.4, 7.5, 0.4), bPoleMat); tr.position.set(sx, 3.75, -3); g.add(tr); }
+  const truss = new THREE.Mesh(new THREE.BoxGeometry(11.6, 0.35, 0.35), bPoleMat); truss.position.set(0, 7.4, -3); g.add(truss);
+  g.add(deck, back, banner); const y = terrainAt(c.x, c.z); g.position.set(c.x, y, c.z);
+  g.rotation.y = Math.atan2(PLAZA_C.x - c.x, PLAZA_C.z - c.z) || 0; g.traverse(o => { if (o.isMesh) o.castShadow = true; }); scene.add(g);
+  return g;
+}
+function placeBooths(F, center) {
+  const list = [], kk = { k: (Math.random() * 18) | 0 }; let bs = [];
+  if (F.at === 'plaza') { bs = boothPlaza(list, kk); bs = bs.concat(boothStreet(PLAZA_C, 120, 34 - bs.length, list, kk)); fest.props.push(makeFestStage(PLAZA_C.clone().add(V3(0, 0, 18)), F.name)); }
+  else if (F.mode === 'race') { const T = fest.track; bs = boothStreet(T.c, Math.max(T.a, T.b) + 45, 12, list, kk); }
+  else bs = boothStreet(center, F.mode === 'stroll' ? 140 : 70, F.booths || 10, list, kk);
+  fest.props.push(...bs); fest.fronts = bs.map(b => b.userData.front);
+  // 부스 안 상인 (앞치마)
+  for (const b of bs) { const a = addAgent({ pos: b.userData.back.clone(), kind: 'fest', role: Math.random() < 0.5 ? 'male' : 'female', vest: 0xffffff, think: (a, dt) => { a.yawT = b.rotation.y; } }); if (a) fest.list.push(a); }
+  return bs.length;
+}
+function closingCeremony() {
+  fest.closing = true; const F = FESTS[fest.kind];
+  banner(`${F.name} 폐막식`, '🎆 불꽃놀이가 시작됩니다! 모두 가운데로 모여요', 'gold'); SFX.cheer(fest.center);
+  for (const a of fest.list) if (!a.dead && a.think !== raceThink && Math.random() < 0.8) { a.face = fest.center; a.goal = fest.center.clone().add(V3(rand(-14, 14), 0, rand(-14, 14))); a.think = (a, dt) => { if (stepTo(a, a.goal.x, a.goal.z, 1.6, dt)) cheerThink(a, dt); }; }
+  if (fest.center.distanceTo(controls.target) > 120) flyTo(fest.center.clone().add(V3(60, 70, 60)), fest.center.clone().setY(terrainAt(fest.center.x, fest.center.z) + 25));
+}
+function festFireworks(dt) {
+  const left = fest.dur - fest.t, c = fest.center, y = terrainAt(c.x, c.z) + 2;
+  if (Math.random() < dt * (left < 4 ? 10 : 4)) launchFirework(V3(c.x + rand(-30, 30), y, c.z + rand(-30, 30)), true);
+  if (!fest.finale && left < 1.2) { fest.finale = true; for (let k = 0; k < 12; k++) after(k * 0.08, () => launchFirework(V3(c.x + rand(-20, 20), y, c.z + rand(-20, 20)), true)); }
+}
+
 function startFestival(kind) {
   if (fest.kind) { toast(`이미 ${FESTS[fest.kind].name} 중이에요`); return; }
   const F = FESTS[kind]; let center;
   if (F.mode === 'race') { fest.track = trackInfo(); if (!fest.track) return; center = fest.track.c.clone(); }
+  else if (F.at === 'plaza') center = PLAZA_C.clone();
   else if (F.bld) { const b = byName(F.bld) || CAMPUS_BUILDINGS[0]; center = freeSpots(bbCenter(b), 1, Math.hypot(b.bb[1] - b.bb[0], b.bb[3] - b.bb[2]) / 2 + 10)[0] || bbCenter(b); }
   else center = V3(-40, 0, 20);
-  Object.assign(fest, { kind, t: 0, dur: 90, center, props: [], list: [] });
-  for (let k = 0; k < (F.booths || 0); k++) { const a = k / F.booths * Math.PI * 2, p = center.clone().add(V3(Math.cos(a) * 13, 0, Math.sin(a) * 13)); if (hasBlock(p.x, terrainAt(p.x, p.z) + 1, p.z)) continue; p.y = terrainAt(p.x, p.z); fest.props.push(makeBooth(p, -a + Math.PI / 2, k)); }
+  Object.assign(fest, { kind, t: 0, dur: 120, center, props: [], list: [], fronts: [], closing: false, finale: false });
+  const nb = placeBooths(F, center);
   if (F.mode === 'race') {
     const T = fest.track;
     for (let k = 0; k < 10; k++) { const a = addAgent({ pos: T.c.clone(), kind: 'fest', role: k % 2 ? 'male' : 'female', shirt: [0xd9443a, 0x2f6fd6, 0xf2c230, 0x3aa56b, 0x8a52c8][k % 5], speed: rand(5.2, 6.8), think: raceThink }); if (a) { a.lap = k * 0.12; a.lane = (k % 5) * 1.1; fest.list.push(a); } }
@@ -4535,12 +4669,12 @@ function startFestival(kind) {
   } else if (F.mode === 'stroll') {
     spawnPeds(F.people); fest.cherryT = []; trees.forEach((t, i) => { if (inPoly(t.p.x, t.p.z, C.campus) && Math.random() < 0.7) { crownMesh.setColorAt(i, _col.setHSL(0.93 + rand(-0.03, 0.03), 0.75, rand(0.78, 0.88))); fest.cherryT.push(i); } }); crownMesh.instanceColor.needsUpdate = true;
   } else {
-    for (let k = 0; k < F.people; k++) { const p = center.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); const a = addAgent({ pos: p, kind: 'fest', role: Math.random() < 0.1 ? 'council' : undefined, speed: rand(0.8, 1.3), think: mingleThink }); if (a) { a.home = center; fest.list.push(a); } }
+    for (let k = 0; k < F.people; k++) { const p = (fest.fronts.length && Math.random() < 0.7 ? pick(fest.fronts) : center).clone().add(V3(rand(-5, 5), 0, rand(-5, 5))); const a = addAgent({ pos: p, kind: 'fest', role: Math.random() < 0.1 ? 'council' : undefined, speed: rand(0.8, 1.3), think: mingleThink }); if (a) { a.home = center; fest.list.push(a); } }
   }
-  banner(`${F.name} 개막!`, F.desc + ' · 90초 · 근처에서 폭발하면 축제가 중단돼요', 'gold'); SFX.cheer(center);
+  banner(`${F.name} 개막!`, F.desc + ` · 부스 ${nb}개 · 2분 뒤 폐막식 불꽃놀이 · 근처에서 폭발하면 중단돼요`, 'gold'); SFX.cheer(center);
   if (Math.random() < 0.6) after(4, () => chungjuman(center));
 }
-function mingleThink(a, dt) { if (a.wait > 0) { a.wait -= dt; a.bob = Math.abs(Math.sin(clock * 4 + a.pos.x)) * 0.15; a.yawT = Math.atan2(fest.center.x - a.pos.x, fest.center.z - a.pos.z); return; } if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = a.home.clone().add(V3(rand(-11, 11), 0, rand(-11, 11))); a.wait = rand(1, 5); } }
+function mingleThink(a, dt) { if (a.wait > 0) { a.wait -= dt; a.bob = Math.abs(Math.sin(clock * 4 + a.pos.x)) * 0.15; a.yawT = Math.atan2(fest.center.x - a.pos.x, fest.center.z - a.pos.z); return; } if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { const fr = fest.fronts && fest.fronts.length && Math.random() < 0.75 ? pick(fest.fronts) : null; a.goal = fr ? fr.clone().add(V3(rand(-1, 1), 0, rand(-1, 1))) : a.home.clone().add(V3(rand(-11, 11), 0, rand(-11, 11))); a.wait = rand(2, 6); } }
 function cheerThink(a, dt) { a.cheer = true; a.bob = Math.max(0, Math.sin(clock * 6 + a.pos.x)) * 0.3; a.yawT = Math.atan2(a.face.x - a.pos.x, a.face.z - a.pos.z); }
 function raceThink(a, dt) {
   const T = fest.track; a.lap += a.speed * dt / (Math.PI * (T.a + T.b));
@@ -4553,7 +4687,7 @@ function endFestival(broken) {
   for (const p of fest.props) scene.remove(p);
   for (const a of fest.list) if (!a.dead) a.fadeOut = true;
   if (fest.cherryT) { for (const i of fest.cherryT) crownMesh.setColorAt(i, trees[i].target > 0 ? _col.copy(trees[i].c).multiplyScalar(0.55) : trees[i].c); crownMesh.instanceColor.needsUpdate = true; fest.cherryT = null; }
-  banner(broken ? `${F.name} 중단!` : `${F.name} 폐막`, broken ? '놀란 학생들이 흩어졌어요' : '즐거운 축제였어요 · 참여 보상 장학금 ₩200,000', broken ? 'red' : 'gold');
+  banner(broken ? `${F.name} 중단!` : `${F.name} 폐막`, broken ? '놀란 학생들이 흩어졌어요' : '폐막식 불꽃놀이까지 무사히 끝났어요 · 참여 보상 장학금 ₩200,000', broken ? 'red' : 'gold');
   if (broken) mEvent('festBroken'); else { wallet.won += 200000; uiDirty = true; }
   fest.kind = null; uncard('fest');
 }
@@ -4561,11 +4695,13 @@ function updateFestival(dt) {
   if (!fest.kind) return; const F = FESTS[fest.kind];
   fest.t += dt; fest.list = fest.list.filter(a => !a.dead);
   card('fest', `${F.name} · ${Math.max(0, Math.ceil(fest.dur - fest.t))}초`, F.desc, 1 - fest.t / fest.dur, 'gold');
+  if (!fest.closing && fest.t > fest.dur - 15) closingCeremony();
+  if (fest.closing) festFireworks(dt);
   if (F.fireworks && Math.random() < dt * 0.4) launchFirework(fest.center.clone().add(V3(rand(-20, 20), terrainAt(fest.center.x, fest.center.z) + 2, rand(-20, 20))));
   if (Math.random() < dt * 0.2) SFX.cheer(fest.center);
   if (fest.t > fest.dur) endFestival(false);
 }
-function festBoom(p, R) { if (fest.kind && fest.center && Math.hypot(p.x - fest.center.x, p.z - fest.center.z) < 45 + R) endFestival(true); }
+function festBoom(p, R) { if (!fest.kind || !fest.center) return; const near = Math.hypot(p.x - fest.center.x, p.z - fest.center.z) < 45 + R || (fest.fronts || []).some(q => Math.hypot(p.x - q.x, p.z - q.z) < 12 + R); if (near) endFestival(true); }
 // ── 시험 기간 (단기 이벤트) ──
 const exam = { until: 0 };
 const examOn = () => clock < exam.until;
@@ -4924,7 +5060,7 @@ function speak(text, { pitch = 1, rate = 1.1, volume = 1, urgent = false } = {})
   if (!VO.voice) VO.voice = pickVoice(); if (!VO.voice) return;      // 한국어 음성이 없는 기기는 말풍선만
   if (speechSynthesis.speaking) { if (!urgent) return; speechSynthesis.cancel(); }
   const u = new SpeechSynthesisUtterance(text.replace(/[~…!?.]+$/g, m => m.includes('!') ? '!' : m.includes('?') ? '?' : ''));
-  u.voice = VO.voice; u.lang = VO.voice.lang; u.pitch = clamp(pitch, 0.1, 2); u.rate = clamp(rate, 0.5, 1.8); u.volume = clamp(volume, 0, 1);
+  u.voice = VO.voice; u.lang = VO.voice.lang; u.pitch = clamp(pitch, 0.1, 2); u.rate = clamp(rate, 0.5, 1.8); u.volume = clamp(volume * SET.v_voice, 0, 1); if (u.volume < 0.02) return; caption('voice', '🗣️ 학생 대화');
   speechSynthesis.speak(u);
 }
 function lineFor(a) {
@@ -4978,7 +5114,7 @@ function updateVoices(dt) {
   for (const b of VO.bubbles) { if (!b.o.visible) continue; if (clock > b.until || !b.a || b.a.dead) { b.o.visible = false; continue; } b.o.position.set(b.a.pos.x, b.a.y + 2.6 * (b.a.scale || 1) * (b.a.sy || 1), b.a.pos.z); }
   if (!AU.ctx || !AU.on) { if (VO.murmur) VO.murmur.g.gain.value = 0; return; }
   const camD = camera.position.distanceTo(controls.target);
-  if ((VO.murmurT -= dt) <= 0) {
+  if (false) {   // 예전 잡음 웅성거림 → 12-28 babble로 바뀜
     VO.murmurT = 0.3;
     let near = 0; const cx = camera.position.x, cz = camera.position.z;
     if (camD < 90) for (const a of agents) if (Math.abs(a.pos.x - cx) < 30 && Math.abs(a.pos.z - cz) < 30) near++;
@@ -5198,6 +5334,63 @@ function updateShop() {
 }
 
 /* =====================================================================
+   12-28. 소리 정리: 종류별 음량 · 소리 자막 · 자연스러운 웅성거림 · 송풍기
+   - 버스: 음악(공연) · 효과음 · 주변(새·풀벌레·웅성거림·송풍기) · 목소리(음성 합성)
+   - 소리 자막: 어떤 소리가 났는지 오른쪽 아래에 짧게 표시 (설정에서 끄기)
+   ===================================================================== */
+const CAP = {
+  boom: '💥 폭발', hit: '🔨 쇠파이프 타격', clang: '🔩 쇠 부딪힘', shot: '🔫 총소리', cannon: '💣 대포 발사', whoosh: '🌠 날아가는 소리',
+  beep: '⏱️ 폭탄 째깍 (곧 터져요)', rumble: '🌋 땅 울림·붕괴', scream: '😱 비명', cheer: '🙌 환호', siren: '🚨 사이렌 (막는 세력 출동)',
+  chant: '📢 시위 구호', bell: '🔔 알림·이벤트', shield: '🛡️ 방패에 막힘', ding: '✨ 획득·완료', jet: '✈️ 전투기', chirp: '🐦 새소리 (낮)',
+  cricket: '🦗 풀벌레 (밤)', honk: '🚗 경적',
+};
+const capT = {};
+function caption(k, txt) {
+  if (!SET.caps || !AU.on) return; const now = performance.now(); if (now - (capT[k] || 0) < 3500) return; capT[k] = now;
+  const box = $('caps'), d = document.createElement('div'); d.textContent = txt || CAP[k] || k; box.appendChild(d);
+  while (box.children.length > 4) box.firstChild.remove();
+  setTimeout(() => d.classList.add('out'), 2600); setTimeout(() => d.remove(), 3200);
+}
+for (const k of Object.keys(CAP)) { const f = SFX[k]; if (typeof f === 'function') SFX[k] = function (...a) { if (this.ok()) caption(k); return f.apply(this, a); }; }
+function applyMix() {
+  if (!AU.ctx) return;
+  AU.musicMix.gain.value = SET.v_music; AU.sfx.gain.value = 0.9 * SET.v_sfx; AU.amb.gain.value = SET.v_amb;
+}
+// 웅성거림: 잡음 대신 짧은 '말소리 음절'을 무작위로 겹쳐서 멀리서 들리는 대화처럼
+const VOWELS = [[730, 1090], [270, 2290], [300, 870], [530, 1840], [570, 840]];
+function babble(n, lvl) {
+  const t0 = AU.ctx.currentTime;
+  for (let k = 0; k < n; k++) {
+    const t = t0 + Math.random() * 0.3, dur = rand(0.09, 0.22), f = Math.random() < 0.5 ? rand(105, 150) : rand(190, 260), v = pick(VOWELS);
+    const o = osc('sawtooth', f, t, dur); o.frequency.linearRampToValueAtTime(f * rand(0.88, 1.12), t + dur);
+    const g = gain(); env(g, t, 0.025, lvl, dur * 0.8);
+    const a = filt('bandpass', v[0], 6), b = filt('bandpass', v[1], 8);
+    o.connect(a).connect(g); o.connect(b).connect(g); g.connect(AU.amb);
+  }
+}
+const blower = { node: null };
+function blowerNode() {
+  if (blower.node || !AU.ctx) return blower.node;
+  const s = AU.ctx.createBufferSource(); s.buffer = AU.noise; s.loop = true; const hp = filt('bandpass', 900, 0.7);
+  const o = AU.ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = 118; const lo = filt('lowpass', 500), og = gain(); og.gain.value = 0.25;
+  const g = gain(); g.gain.value = 0; s.connect(hp).connect(g); o.connect(lo).connect(og).connect(g); g.connect(AU.amb); s.start(); o.start();
+  return blower.node = g;
+}
+let ambT = 0;
+function updateAmbience(dt) {
+  if (!AU.ctx || !AU.on || (ambT -= dt) > 0) return; ambT = 0.3;
+  const camD = camera.position.distanceTo(controls.target), cx = camera.position.x, cz = camera.position.z;
+  let near = 0, cl = 1e9;
+  if (camD < 90) for (const a of agents) { if (Math.abs(a.pos.x - cx) < 30 && Math.abs(a.pos.z - cz) < 30) near++; if (a.kind === 'cleaner') cl = Math.min(cl, Math.hypot(a.pos.x - cx, a.pos.z - cz)); }
+  const lvl = Math.min(0.05, near * 0.0025) * clamp((90 - camD) / 60, 0, 1) * (state.night ? 0.5 : 1);
+  if (lvl > 0.003) { babble(Math.min(7, 1 + (near / 5 | 0)), lvl); if (near > 6) caption('babble', '👥 사람들 웅성거림'); }
+  const bg = blowerNode(), bl = cl < 40 ? clamp(1 - cl / 40, 0, 1) * 0.12 : 0;
+  if (bg) bg.gain.setTargetAtTime(bl, AU.ctx.currentTime, 0.3);
+  if (bl > 0.02) caption('blower', '🍂 환경미화원 송풍기');
+  if (concert.state === 'play' && camera.position.distanceTo(STAGE) < 300) caption('music', '🎵 노천극장 공연 음악');
+}
+
+/* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
 const ray = new THREE.Raycaster();
@@ -5294,7 +5487,7 @@ function attack(x, y) {
    14. 화면(UI)
    ===================================================================== */
 const state = { names: true, night: false };
-const SET = { power: 1, quake: 1, quality: SMALL ? 'mid' : 'high', town: true, fps: false, vibe: true, autoq: true };
+const SET = { power: 1, quake: 1, quality: SMALL ? 'mid' : 'high', town: true, fps: false, vibe: true, autoq: true, v_music: 1, v_sfx: 1, v_amb: 1, v_voice: 1, caps: !SMALL };
 let uiDirty = true;
 function buildTools() {
   const box = $('tools');
@@ -5401,6 +5594,8 @@ for (const k of ['power', 'quake']) {
 }
 $('setmenu').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { applyQuality(b.dataset.q); saveSet(); });
 $('s_town').checked = SET.town; $('s_town').onchange = e => { applyTown(e.target.checked); saveSet(); };
+for (const k of ['v_music', 'v_sfx', 'v_amb', 'v_voice']) { const inp = $('s_' + k), out = $('o_' + k); inp.value = SET[k]; out.textContent = Math.round(SET[k] * 100) + '%'; inp.oninput = () => { SET[k] = +inp.value; out.textContent = Math.round(SET[k] * 100) + '%'; applyMix(); saveSet(); }; }
+$('s_caps').checked = SET.caps; $('s_caps').onchange = e => { SET.caps = e.target.checked; saveSet(); };
 $('s_autoq').checked = SET.autoq; $('s_autoq').onchange = e => { SET.autoq = e.target.checked; saveSet(); };
 $('s_vibe').checked = SET.vibe; $('s_vibe').onchange = e => { SET.vibe = e.target.checked; saveSet(); };
 $('s_fps').checked = SET.fps; $('fps').hidden = !SET.fps; $('s_fps').onchange = e => { SET.fps = e.target.checked; $('fps').hidden = !SET.fps; saveSet(); };
@@ -5525,7 +5720,7 @@ function loop(now) {
   updateProjectiles(dt); updateQuake(dt); updatePipe(dt); updateTracers(dt); updateRings(dt); updateRockets(dt); updateTrees(dt);
   updateConcert(dt, beat);
   updateEvents(dt); updateAgents(dt); updateNet(dt); updatePeopleTags(dt); updateUnits(dt); updateSky(dt); updateBirds(dt); updateDefense(dt); updateTutorial(dt);
-  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop();
+  updateMayor(dt); updateCjman(dt); updateFestival(dt); updateExam(); updateOwned(dt); updateRank(); updateKto(dt); updateVoices(dt); updateScheme(dt); updateFountain(dt); updateShop(); updateAmbience(dt);
   if (AU.ctx && Math.random() < dt * (state.night ? 0.9 : 0.35) && camera.position.y < 200) state.night ? SFX.cricket() : SFX.chirp();
   frameNo++;
   if (Math.floor(clock * 30) % 2 === 0) drawScreen(beat);
