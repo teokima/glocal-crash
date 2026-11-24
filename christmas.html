@@ -227,6 +227,74 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 .named.ku{background:linear-gradient(90deg,#1f8a4a,#d9a441)!important;border-color:#fff2c8!important}
 @media (max-width:640px){#wanted{top:auto;bottom:212px;font-size:13px}}
 #whatsnew{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(440px,calc(100% - 24px));padding:16px 18px;box-sizing:border-box;box-shadow:0 0 0 100vmax rgba(5,8,14,.5)}#whatsnew[hidden]{display:none}#whatsnew .wnT{font-size:18px;color:#ffd27a}#whatsnew ul{margin:10px 0;padding-left:4px;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:13.5px;line-height:1.45}#whatsnew .wnB{display:flex;gap:8px}#whatsnew .wnB button{flex:1;padding:11px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);font-weight:800}#whatsnew .wnB .hot{background:linear-gradient(90deg,#ff7a2e,#ffb02e);color:#1a1206;border:0}
+#admin{position:fixed;inset:12px;z-index:60;overflow:auto;padding:16px 18px;box-sizing:border-box}#admin[hidden]{display:none}#admin .ah{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}#admin .ah b{font-size:18px;color:#ffd27a}#admin .ah button,#admCopy{padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.07);font-weight:800;margin-left:6px}
+#admin .acards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}#admin .acard{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line)}#admin .acard small{display:block;font-size:12px;color:var(--dim)}#admin .acard b{font-size:26px}#admin .acard em{font-style:normal;font-size:12px;margin-left:3px;color:var(--dim)}#admin .acard.hot{border-color:#3fbf7f;background:rgba(63,191,127,.12)}
+#admin h4{margin:16px 0 6px;font-size:13px;color:#e8e4da}#admin .abars{display:flex;align-items:flex-end;gap:4px;height:130px;padding:6px;border-radius:12px;background:rgba(255,255,255,.04)}#admin .abars div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-size:10px}#admin .abars i{display:block;width:70%;min-height:2px;border-radius:4px 4px 0 0;background:linear-gradient(#ffb02e,#ff7a2e)}#admin .abars b{font-size:10.5px}#admin .abars small,#admin .abars em{font-size:9.5px;color:var(--dim);font-style:normal}#admin .abars.h{height:90px}
+#admin .atab{width:100%;border-collapse:collapse;font-size:12.5px}#admin .atab th,#admin .atab td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left}#admin .anote{font-size:12.5px;color:#e8e4da;line-height:1.6;margin:10px 0}#admin .asql{width:100%;height:190px;box-sizing:border-box;background:#0b0e14;color:#8affc0;border:1px solid var(--line);border-radius:10px;font:12px monospace;padding:10px}
+
+/* ── 13.7판 화면 간단하게 ── */
+#dock{padding:6px;width:236px;box-sizing:border-box}
+#dock .dtabs{display:flex;gap:4px}
+#dock .dtabs button{flex:1;padding:7px 4px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:12px;font-weight:800;white-space:nowrap}
+#dock .dtabs button.on{background:rgba(255,176,46,.18);border-color:#ffb02e;color:#ffd27a}
+#dock .dtabs button.hot{border-color:#ff5a5a;color:#ffb0b0;animation:namedPulse 1s infinite}
+#dock .dtabs button[hidden]{display:none}
+#dock .dbody>*{display:none!important}
+#dock .dbody>.dshow{display:block!important;margin-top:6px}
+#dock .dbody>#warbox.dshow[hidden]{display:none!important}
+#dock #facbox,#dock #warbox,#dock #missions{width:auto!important;padding:2px!important;background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+#dock #missions .mh{display:none}#dock #missions.fold #mlist{display:block!important}#dock #facbox.fold #fbRows{display:grid!important}
+#zoom .vh.vhc{display:flex;justify-content:space-between;align-items:center}#zoom #compass{width:26px;height:26px;padding:0;background:none;border:0;box-shadow:none}#zoom #compass svg{width:22px;height:22px}
+#situ.fold #situList{display:flex!important}#situ.fold .si:nth-child(n+2){display:none}#situ.fold .si span{display:none}#situ .sh small{display:none}
+#evcards>.evcard:nth-child(n+4){display:none!important}
+#namedbar .more3{display:none!important}#namedbar .plus{padding:6px 10px;border-radius:999px;background:rgba(40,30,10,.88);color:#ffd27a;font-weight:800;font-size:12px;cursor:pointer;border:1px solid rgba(255,210,74,.5)}
+#stagepct,#scorecard .ttl small{display:none}
+#scorecard{padding:10px 14px}#score{font-size:30px}
+.tool{width:72px}.tool b{white-space:nowrap;font-size:12px}
+#acts{display:flex;gap:6px}#acts .tg{padding:6px 10px;font-size:11.5px}
+@media (min-width:641px){#acts{position:fixed;left:16px;bottom:24px;flex-direction:column;z-index:6}#bottom{padding-left:128px!important}}
+@media (max-width:640px){#dock{width:min(236px,60vw)}#dock .dtabs button{font-size:11px;padding:6px 2px}}
+
+/* ── 13.7판 휴대폰: 위 띠 한 줄 · 왼쪽 아이콘 탭 · 아래 소식 한 줄 · 나머지는 메뉴 ── */
+#dock .dtabs i{font-style:normal}
+@media (max-width:640px){
+  #top{left:8px!important;right:8px!important;top:8px!important;gap:6px}
+  #scorecard{display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center;padding:6px 10px!important;border-radius:14px;min-width:0;flex:1;max-width:none}
+  #scorecard .ttl,#scorecard .stagebox,#scorecard #sub{display:none!important}
+  #score{font-size:19px!important;line-height:1.1;grid-column:1;grid-row:1}
+  #money{font-size:10.5px!important;grid-column:1;grid-row:2;white-space:nowrap}
+  #combo{grid-column:1/3;height:auto!important;font-size:12px!important}
+  #wk{grid-column:2;grid-row:1/3;margin:0!important;padding:3px 7px!important;min-width:0}
+  #wkT{font-size:10px!important;max-width:none!important}#wk small{font-size:11px!important;max-width:none!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#wk .wkt{display:none}
+  #toggles>[data-t="sound"]{display:none!important}#more .tg{padding:8px 12px!important}
+  #toggles{flex-wrap:nowrap;gap:5px}#toggles>.tg{padding:9px 11px!important;font-size:14px!important}#toggles .txt-long{display:none}
+  #more{right:0;top:46px;max-height:70vh;overflow:auto;width:min(260px,80vw)}#more .tg{width:100%;justify-content:flex-start;font-size:13px!important;padding:10px 12px!important}
+  #side{left:6px!important;gap:6px}
+  #dock{width:auto!important;padding:4px!important;border-radius:14px}
+  #dock .dtabs{flex-direction:column;gap:4px}#dock .dtabs button{width:40px;height:40px;padding:0!important;font-size:18px!important;border-radius:12px}#dock .dtabs button span{display:none}
+  #dock:not(.closed){display:flex;gap:6px;align-items:flex-start}
+  #dock:not(.closed) .dbody{width:min(250px,64vw);max-height:46vh;overflow:auto;background:rgba(18,20,28,.94);border-radius:12px;padding:6px 8px;border:1px solid var(--line)}
+  #dock .dbody>.dshow{margin-top:0!important}
+  #missions .mi{font-size:11.5px}
+  #vToggle{display:none!important}
+  #zoom.open{position:fixed!important;right:8px;bottom:120px;z-index:8;width:150px}
+  #acts{display:none!important}
+  #situ{left:8px!important;right:8px!important;width:auto!important;bottom:104px!important;max-height:28px!important;padding:4px 10px!important;border-radius:999px;overflow:hidden}
+  #situ .sh{display:none!important}#situ #situList{display:flex!important}#situ .si{padding:2px 4px;background:none;border-left:0}#situ .si:nth-child(n+2){display:none!important}#situ .si span,#situ .si em{display:none!important}#situ .si b{font-size:11.5px}
+  #evcards{top:auto!important;bottom:140px!important;left:8px!important;right:8px!important;width:auto!important}#evcards>.evcard:nth-child(n+2){display:none!important}#evcards .evcard{padding:6px 10px}#evcards .evcard span{display:none}
+  #namedbar{top:62px!important;right:8px!important;max-width:70vw!important}#namedbar button{font-size:10.5px!important;padding:4px 8px!important}
+  #wanted{top:auto!important;bottom:140px!important;font-size:12px!important}
+  #claims{top:66px!important}#claimChip{bottom:146px!important;right:8px!important}
+  #tip{top:70px!important;bottom:auto!important;padding:8px 10px!important}#tip p{font-size:12px!important}#tip .n{font-size:18px}
+  #mgInvite{bottom:146px!important}
+  #bottom{bottom:8px!important;padding:0 6px!important;gap:6px}
+  #tools{padding:4px!important;gap:2px!important}.tool{width:56px!important;padding:5px 1px!important}.tool svg{width:20px!important;height:20px!important}.tool b{font-size:10.5px!important}.tool kbd{display:none}.tool small{display:none!important}
+  .lbl{font-size:9.5px!important;padding:2px 6px!important}.lbl em,.lbl i{display:none!important}
+  .named{transform:scale(.78)!important;padding:3px 8px!important}.named small{display:none!important}.named b{font-size:12px!important}
+  #banner b{font-size:22px!important}#banner span{font-size:12px!important}
+  #attr{display:none!important}
+  #facbox .fh small,#fbT{display:none}
+}
 #who{display:flex;gap:8px;margin:12px 0 4px}#who input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
 #who input:focus,.rkedit input:focus{outline:2px solid var(--hot)}
 .rkme{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px}.rkme span{font-weight:700}
@@ -538,6 +606,7 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 <div id="whatsnew" class="card" hidden><b class="wnT">🆕 새로워진 글로컬 크래시</b><ul>
 <li>📅 <b>한 학기 16주차</b> 시나리오 · 난이도 4단계 · 중간·기말고사</li><li>🎮 <b>미니게임</b>: 몰래 춤추기 · 출석하고 튀기 · 장기자랑 · 전산실 해킹</li><li>🧍 <b>1인칭(V)</b> — 걸어 다니며 캐고 쌓기 · ✨ <b>특수 무기(G)</b></li><li>🚨 <b>수배 ★1~5</b> · 🚁 헬기 · 🟦 조남주 학생주임 · 🐂 마스코트 쿠</li><li>🏛️ 대리석 상허광장 · 황소상 · 가로수길 · 대운동장 · 마을 3곳 · 계절 음악</li></ul>
 <div class="wnB"><button id="wnMg">🎮 미니게임 해 보기</button><button id="wnClose" class="hot">바로 부수러 가기 ▶</button></div></div>
+<div id="admin" class="card" hidden></div>
 <div id="mg" class="card" hidden><div class="ph"><b id="mgTitle">🎮 미니게임</b><button data-close="mg">✕</button></div><div id="mgBody"></div></div>
 <button id="mgInvite" hidden></button>
 <div id="helpmenu" class="card panel wide" hidden>
@@ -691,7 +760,7 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
     <datalist id="deptList"><option value="컴퓨터공학과"><option value="소프트웨어학과"><option value="전기전자공학부"><option value="기계자동차공학과"><option value="바이오메디컬공학과"><option value="식품영양학과"><option value="간호학과"><option value="의학과"><option value="경영학과"><option value="경찰학과"><option value="소방방재융합학과"><option value="유아교육과"><option value="사회복지학과"><option value="산업디자인학과"><option value="실내디자인학과"><option value="패션디자인학과"><option value="미디어학부"><option value="문헌정보학과"><option value="영어문화학과"><option value="교직원"><option value="졸업생"><option value="충주 시민"></datalist>
     <button id="start" disabled>불러오는 중…</button>
     <div class="credit">만든이 <b>컴퓨터공학과 김태오</b> · <a href="#" id="donateBtn">후원하기</a> · <a id="themeLink" href="christmas.html">크리스마스 버전 🎄</a></div>
-    <p class="fine">학생이 만든 비공식 팬 게임입니다. 학교 로고·교표는 쓰지 않았습니다. 건물 위치·모양·도로는 OpenStreetMap 지도 데이터(© OpenStreetMap 기여자, ODbL)를 썼고, 층수와 건물 색은 추정입니다. 땅의 높낮이는 AWS Terrain Tiles 고도 자료(SRTM 기반)로 만들었습니다.</p>
+    <p class="fine">학생이 만든 비공식 팬 게임입니다. 온라인 기록을 켠 경우 이름 없이 익명 방문 통계(플레이 시간·기기 종류)만 모읍니다. 학교 로고·교표는 쓰지 않았습니다. 건물 위치·모양·도로는 OpenStreetMap 지도 데이터(© OpenStreetMap 기여자, ODbL)를 썼고, 층수와 건물 색은 추정입니다. 땅의 높낮이는 AWS Terrain Tiles 고도 자료(SRTM 기반)로 만들었습니다.</p>
   </div>
 </div>
 
@@ -1002,7 +1071,7 @@ function updateBirds(dt) {
 /* =====================================================================
    3. 블록 건물 — 실제 윤곽선을 건물 방향대로 돌린 2 m 격자로 채움
    ===================================================================== */
-let epoch = 0;
+let epoch = 0, shEpoch = -1;
 const boxGeo = new THREE.BoxGeometry(1, 1, 1);
 const blockMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.82, metalness: 0.04 });
 // 유리창: 반투명, 밤에는 블록 색만큼 빛남 (불 켜진 창 / 꺼진 창)
@@ -2043,6 +2112,14 @@ function edgePt(e, dir, s, off, out, fwd) {
   return out;
 }
 // 버스정류장 쉼터 (OSM 정류장 위치)
+// 정적 장식 묶기: 그룹 안 메시들을 재질별로 하나로 합침 (그리기 호출 줄이기 · 13.7판)
+function bakeStatic(g, shadow = true) {
+  g.updateMatrixWorld(true); const inv = new THREE.Matrix4().copy(g.matrixWorld).invert(), by = new Map(), keep = [];
+  g.traverse(o => { if (o === g) return; if (o.isMesh && !o.isInstancedMesh && o.geometry && o.geometry.index) { const k = o.material.uuid; if (!by.has(k)) by.set(k, { m: o.material, list: [] }); by.get(k).list.push(o.geometry.clone().applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld))); } else if (o.isCSS2DObject) keep.push(o); });
+  const parts = [...g.children]; for (const c of parts) if (!c.isCSS2DObject) g.remove(c);
+  for (const { m, list } of by.values()) { const geo = list.length > 1 ? mergeGeometries(list.map(x => x.toNonIndexed ? x : x)) : list[0]; if (!geo) continue; const mesh = new THREE.Mesh(geo, m); mesh.castShadow = shadow; mesh.receiveShadow = true; g.add(mesh); }
+  return g;
+}
 const BUS_STOPS = C.busStops.map(([x, z, n]) => ({ x, z, n }));
 {
   const shelterMat = new THREE.MeshStandardMaterial({ color: 0x2c6e4f, roughness: .6 }), glass = new THREE.MeshStandardMaterial({ color: 0x9fc6d8, transparent: true, opacity: .45 });
@@ -2055,7 +2132,7 @@ const BUS_STOPS = C.busStops.map(([x, z, n]) => ({ x, z, n }));
     const post = new THREE.Mesh(new THREE.BoxGeometry(.15, 2.7, .15), shelterMat); post.position.set(-2.9, 1.35, 0);
     const post2 = post.clone(); post2.position.x = 2.9;
     const sign = new THREE.Mesh(new THREE.BoxGeometry(.7, .7, .08), new THREE.MeshStandardMaterial({ color: 0x1d58c4 })); sign.position.set(3.5, 3, 0);
-    g.add(roof, back, post, post2, sign); g.position.set(st.x, terrainAt(st.x, st.z), st.z); g.rotation.y = -ang; g.traverse(o => o.castShadow = true); scene.add(g);
+    g.add(roof, back, post, post2, sign); g.position.set(st.x, terrainAt(st.x, st.z), st.z); g.rotation.y = -ang; bakeStatic(g); scene.add(g);
   }
 }
 // 차 모양: 상자들을 하나로 합쳐(정점 색) 차 1대 = 그리기 2번
@@ -2203,7 +2280,7 @@ class Vehicle {
     if (this.state !== 'drive') { this.vel.add(impulse.clone().multiplyScalar(0.5)); this.settled = false; return; }
     this.hp -= dmg;
     if (this.hp > 0) { fxSparks(this.g.position.clone().setY(1.5), 6, 8); return; }
-    this.state = 'wreck'; this.t = 0; this.settled = false;
+    this.state = 'wreck'; this.t = 0; this.settled = false; if (this.parked) { PB.dirty = true; this.g.visible = true; }
     this.vel.copy(impulse); const k = impulse.length() / 10 + 0.6;
     this.av.set(rand(-3, 3) * k, rand(-1.5, 1.5) * k, rand(-3, 3) * k);
     this.body.material = charMat; this.lights.visible = false;
@@ -2236,10 +2313,18 @@ class Vehicle {
   respawn() {
     this.state = 'drive'; this.hp = this.type === 'bus' ? 14 : this.type === 'moto' ? 2 : 6; this.speed = 0; this.settled = false;
     if (!this.parked) this.spawnOnRoad(); else { const i = movers.indexOf(this); if (i >= 0) movers.splice(i, 1); }
-    this.build();
+    this.build(); if (this.parked) PB.dirty = true;
   }
 }
 const movers = [];          // 달리는 차 + 부서진 차 (앞차 감지 대상)
+// 주차된 차는 한 덩어리로 그림 (그리기 호출 약 90번 → 1번)
+const PB = { mesh: null, dirty: true };
+function pbRebuild() {
+  PB.dirty = false; if (PB.mesh) { scene.remove(PB.mesh); PB.mesh.geometry.dispose(); PB.mesh = null; }
+  const geos = [];
+  for (const v of vehicles) { const inB = v.parked && v.state === 'drive'; v.g.visible = !inB; if (inB) { v.g.updateMatrixWorld(true); geos.push(v.body.geometry.clone().applyMatrix4(v.body.matrixWorld)); } }
+  if (geos.length) { const g = mergeGeometries(geos); if (g) { PB.mesh = new THREE.Mesh(g, vMat); PB.mesh.receiveShadow = true; scene.add(PB.mesh); } }
+}
 {
   for (let i = 0; i < 30; i++) movers.push(new Vehicle('car', { pref: 'main' }));
   for (let i = 0; i < 14; i++) movers.push(new Vehicle('car', { pref: 'any' }));
@@ -5864,7 +5949,7 @@ function nearPlace(p) {
 }
 // 상황판: 알림(배너)과 소리를 "무엇 · 왜 · 어디서"로 쌓음
 function situLog(icon, title, why, tone, key) {
-  const S = situLog.st || (situLog.st = { list: [], fold: (() => { try { return JSON.parse(localStorage.getItem('glocalcrash.situFold')) || false; } catch { return false; } })() });
+  const S = situLog.st || (situLog.st = { list: [], fold: (() => { try { return JSON.parse(localStorage.getItem('glocalcrash.situFold2')) ?? true; } catch { return true; } })() });
   const now = performance.now(); key = key || title;
   const same = S.list.find(e => e.key === key && now - e.t < 6000);
   if (same) { same.n++; same.t = now; same.why = why || same.why; } else { S.list.unshift({ key, icon, title, why, tone, t: now, n: 1 }); if (S.list.length > 30) S.list.length = 30; }
@@ -7265,7 +7350,7 @@ const PLAZA_R = 30;
     parts.add(pole, head); if (!hasBlock(bx, by + 0.5, bz)) parts.add(bench);
   }
   for (let k = 0; k < 24; k++) { if (k % 6 === 0) continue; const a = (k + 0.5) / 24 * Math.PI * 2, x = PLAZA_C.x + Math.cos(a) * (PLAZA_R + 0.8), z = PLAZA_C.z + Math.sin(a) * (PLAZA_R + 0.8), y = terrainAt(x, z); if (hasBlock(x, y + 0.5, z)) continue; const h = new THREE.Mesh(new THREE.BoxGeometry(7, 0.9, 1.2), hedgeMat); h.position.set(x, y + 0.45, z); h.rotation.y = -a + Math.PI / 2; parts.add(h); }
-  parts.traverse(o => { if (o.isMesh) o.castShadow = true; }); scene.add(parts);
+  bakeStatic(parts); scene.add(parts);
 }
 // ── 행정관 앞 황소상 (청동, 화강암 받침) ──
 const bull = (() => {
@@ -7283,7 +7368,7 @@ const bull = (() => {
   for (const s of [-1, 1]) { add(new THREE.ConeGeometry(0.13, 0.9, 8), bronze, 2.2, 3.55, s * 0.55, s * 0.9, 0, -0.9); }   // 뿔
   for (const [x, z] of [[1.1, 0.5], [1.1, -0.5], [-1.2, 0.5], [-1.2, -0.5]]) add(new THREE.BoxGeometry(0.35, 1.4, 0.35), bronze, x, 2.2, z, 0, 0, x > 0 ? 0.25 : -0.15);
   add(new THREE.CylinderGeometry(0.06, 0.08, 1.2, 6), bronze, -1.75, 3.1, 0, 0, 0, 0.6);   // 꼬리
-  g.position.copy(p); g.rotation.y = Math.atan2(-(nd[1] - p.z), nd[0] - p.x); g.scale.setScalar(1.25); scene.add(g);
+  g.position.copy(p); g.rotation.y = Math.atan2(-(nd[1] - p.z), nd[0] - p.x); g.scale.setScalar(1.25); bakeStatic(g); scene.add(g);
   const div = document.createElement('div'); div.className = 'lbl'; div.textContent = '🐂 황소상 · 행정관 앞'; const lb = new CSS2DObject(div); lb.position.set(0, 6, 0); g.add(lb);
   return { g, p };
 })();
@@ -7480,7 +7565,7 @@ function updateSpecials(dt) {
 // ── 🧍 1인칭 (마인크래프트처럼) ──
 const FP = { on: false, pos: V3(), vel: V3(), yaw: 0, pitch: 0, ground: false, keys: {}, lock: false, swing: 0, hand: null, touch: { mv: null, lk: null, mx: 0, mz: 0 } };
 function fpEnter() {
-  if (FP.on) return; FP.on = true; fly = null; controls.enabled = false;
+  if (FP.on) return; FP.on = true; TELE.fp = true; fly = null; controls.enabled = false;
   const t = controls.target.clone(); FP.pos.set(t.x, surfaceBelow(t.x, t.y + 60, t.z) + 0.05, t.z);
   FP.yaw = Math.atan2(camera.position.x - t.x, camera.position.z - t.z) + Math.PI; FP.pitch = -0.1; FP.vel.set(0, 0, 0);
   if (!FP.hand) {   // 손 + 곡괭이 (카메라에 붙임)
@@ -7698,8 +7783,8 @@ function makeKu() {
   }
   add(new THREE.TorusGeometry(0.55, 0.11, 8, 24), green, 0, 1.55, 0).rotation.x = Math.PI / 2;    // 초록 목도리
   const tag = document.createElement('div'); tag.className = 'named ku'; tag.innerHTML = '<b>🐂 쿠</b><small>마스코트 · 누르면 응원!</small>';
-  const o = new CSS2DObject(tag); o.position.set(0, 3.3, 0); g.add(o); g.scale.setScalar(1.25);
-  return { g, head, tag };
+  const o = new CSS2DObject(tag); o.position.set(0, 3.3, 0); g.add(o); bakeStatic(g); g.scale.setScalar(1.25);
+  return { g, head: g, tag };
 }
 const KU = { k: null, goal: null, cheerCool: 0, buffUntil: 0, hurtT: 0 };
 function spawnKu(at) {
@@ -7713,7 +7798,7 @@ function updateKu(dt) {
   const dx = KU.goal.x - g.position.x, dz = KU.goal.z - g.position.z, d = Math.hypot(dx, dz), s = Math.min(d, 1.6 * dt);
   g.position.x += dx / (d || 1) * s; g.position.z += dz / (d || 1) * s; g.rotation.y = Math.atan2(dx, dz);
   const hop = Math.abs(Math.sin(clock * (clock < KU.buffUntil ? 9 : 5))) * 0.35; g.position.y = terrainAt(g.position.x, g.position.z) + hop;
-  KU.k.head.rotation.z = Math.sin(clock * 3) * 0.12;
+  KU.k.g.rotation.z = Math.sin(clock * 3) * 0.06;
   if (clock < KU.buffUntil) for (const a of raiders()) a.hitT = Math.min(a.hitT || 0, 0.7);   // 응원: 돌격대가 더 빨리 부숨
 }
 function kuClick(x, y) {
@@ -7922,6 +8007,161 @@ function ktoAura(dt) {
   NET.remote = false;
 }
 
+/* =====================================================================
+   12-40. 파편 정리 · 방문 기록 · 관리자 모드 (13.7판)
+   - 땅에 떨어진 파편은 45초(낮음 30초) 뒤 천천히 가라앉아 사라짐 → 잔해 더미도 다시 계산
+   - 방문 기록(익명): 무작위 기기 번호 · 플레이 시간 · 기기 종류 · 도달 주차 · 미니게임 수. 이름·IP는 보내지 않음
+   - 관리자 모드: 주소 뒤에 ?admin → 방문자·플레이 시간 통계 (Supabase 연결 시 전체, 아니면 이 기기)
+   ===================================================================== */
+// ── 파편 정리 ──
+const CLEAN = { sink: [], t: 0, freed: 0 };
+function updateDebrisClean(dt) {
+  if ((CLEAN.t -= dt) <= 0) {
+    CLEAN.t = 0.5; const life = SET.quality === 'low' ? 30 : 45;
+    for (const d of settledQ) { if (d.state !== 2 || d.sinking) continue; if (d.st == null) d.st = clock; else if (clock - d.st > life + rand(0, 8)) { d.sinking = 1; CLEAN.sink.push(d); } if (CLEAN.sink.length > 400) break; }
+  }
+  if (!CLEAN.sink.length) return;
+  for (let i = CLEAN.sink.length - 1; i >= 0; i--) {
+    const d = CLEAN.sink[i];
+    if (d.state !== 2) { d.sinking = 0; d.st = null; CLEAN.sink.splice(i, 1); continue; }
+    d.sinking += dt; const k = Math.max(0, 1 - d.sinking / 2.5);
+    d.p.y -= dt * 0.35; _m.compose(d.p, d.q, _s.set(d.s * k, d.s * k, d.s * k)); debrisMesh.setMatrixAt(d.i, _m);
+    if (k <= 0) { d.sinking = 0; d.st = null; const qi = settledQ.indexOf(d); if (qi >= 0) settledQ.splice(qi, 1); freeDebris(d); CLEAN.sink.splice(i, 1); CLEAN.freed++; }
+  }
+  debrisMesh.instanceMatrix.needsUpdate = true;
+  if (CLEAN.freed > 40 || (!CLEAN.sink.length && CLEAN.freed)) { CLEAN.freed = 0; rebuildRubble(); }
+}
+// ── 방문 기록 (익명) ──
+const TELE = { vid: store.get('vid', null), sid: Math.random().toString(36).slice(2, 10) + Date.now().toString(36), secs: 0, last: performance.now(), started: new Date().toISOString(), on: false };
+if (!TELE.vid) { TELE.vid = Math.random().toString(36).slice(2, 12); store.set('vid', TELE.vid); }
+function teleTick() { const n = performance.now(); if (TELE.on && !document.hidden) TELE.secs += Math.min(5, (n - TELE.last) / 1000); TELE.last = n; }
+function teleSend(final) {
+  teleTick(); if (TELE.on) career.playSecs = TELE.base + Math.round(TELE.secs); if (!TELE.on || !ONLINE()) return;
+  const C = window.GLOCAL_RANK;
+  const body = { sid: TELE.sid, vid: TELE.vid, started: TELE.started, last: new Date().toISOString(), secs: Math.round(TELE.secs), device: SMALL ? 'mobile' : 'pc', theme: XMAS ? 'xmas' : SEASON, diff: DIFF.key, week: STG.week + (STG.sem - 1) * 16, score: Math.round(score), mg: career.mgPlay || 0, fp: !!TELE.fp };
+  try { fetch(`${C.url}/rest/v1/glocal_visits`, { method: 'POST', keepalive: !!final, headers: { apikey: C.key, Authorization: 'Bearer ' + C.key, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(body) }).catch(() => {}); } catch {}
+}
+function teleStart() { if (TELE.on) return; TELE.on = true; TELE.base = career.playSecs || 0; TELE.last = performance.now(); career.visits = (career.visits || 0) + 1; saveCareer(); setTimeout(() => teleSend(), 5000); }
+setInterval(teleTick, 1000);
+setInterval(() => { if (TELE.on) { teleSend(); saveCareer(); } }, 60000);
+addEventListener('pagehide', () => teleSend(true));
+document.addEventListener('visibilitychange', () => { if (document.hidden) teleSend(true); });
+// ── 관리자 모드 (?admin) ──
+const ADMIN_SQL = `-- Supabase → SQL Editor 에 붙여 넣고 Run (한 번만)
+create table if not exists glocal_visits (
+  sid text primary key, vid text not null,
+  started timestamptz not null default now(), last timestamptz not null default now(),
+  secs int not null default 0 check (secs between 0 and 86400),
+  device text, theme text, diff text, week int, score bigint, mg int default 0, fp boolean default false
+);
+alter table glocal_visits enable row level security;
+create policy "visits insert" on glocal_visits for insert to anon with check (true);
+create policy "visits update" on glocal_visits for update to anon using (true) with check (true);
+create policy "visits read" on glocal_visits for select to anon using (true);`;
+async function openAdmin() {
+  $('intro').style.display = 'none'; window.__mgPause = true;
+  const box = $('admin'); box.hidden = false;
+  const mine = store.get('adminVid', null);
+  const head = `<div class="ah"><b>📊 관리자 모드 · 글로컬 크래시</b><span><button id="admMe">${mine ? '내 기기 포함하기' : '내 기기 빼고 보기'}</button><button id="admPlay">게임으로 ▶</button></span></div>`;
+  if (!ONLINE()) {
+    box.innerHTML = head + `<div class="anote"><b>아직 온라인 기록이 꺼져 있어요.</b> 지금은 이 기기 기록만 보여요.<br>여러 사람의 방문·플레이 시간을 보려면 ① supabase.com에서 무료 프로젝트 만들기 → ② 아래 SQL을 SQL Editor에 붙여 넣고 Run → ③ rank-config.js에 URL과 anon 키 넣고 배포.</div>
+      <div class="acards">${acard('이 기기 방문', career.visits || 0, '번')}${acard('이 기기 플레이', Math.round((career.playSecs || 0) / 60), '분')}${acard('미니게임', career.mgPlay || 0, '판')}${acard('최고 점수', (career.best || 0).toLocaleString('ko-KR'), '점')}</div>
+      <textarea class="asql" readonly>${ADMIN_SQL}</textarea><button id="admCopy">SQL 복사</button>`;
+    $('admCopy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText(ADMIN_SQL); toast('SQL을 복사했어요'); };
+  } else {
+    box.innerHTML = head + '<div class="anote">불러오는 중…</div>';
+    const C = window.GLOCAL_RANK, since = new Date(Date.now() - 30 * 864e5).toISOString();
+    let rows = [];
+    try { const r = await fetch(`${C.url}/rest/v1/glocal_visits?select=*&started=gte.${since}&order=started.desc&limit=10000`, { headers: { apikey: C.key, Authorization: 'Bearer ' + C.key } }); rows = r.ok ? await r.json() : []; if (!r.ok) throw new Error(r.status); }
+    catch (e) { box.innerHTML = head + `<div class="anote">불러오기 실패 (${e.message}) · SQL을 실행했는지 확인하세요.</div><textarea class="asql" readonly>${ADMIN_SQL}</textarea>`; bindAdmin(); return; }
+    if (mine) rows = rows.filter(r => r.vid !== mine);
+    const now = Date.now(), day = 864e5, dayKey = t => new Date(t).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
+    const uniq = ms => new Set(rows.filter(r => now - Date.parse(r.started) < ms).map(r => r.vid)).size;
+    const secs = rows.reduce((s, r) => s + (r.secs || 0), 0), live = rows.filter(r => now - Date.parse(r.last) < 2.5 * 60e3).length;
+    const vis = new Set(rows.map(r => r.vid)).size, mob = rows.filter(r => r.device === 'mobile').length;
+    const days = []; for (let i = 13; i >= 0; i--) { const t0 = new Date(new Date(now - i * day).toDateString()).getTime(); const rs = rows.filter(r => { const t = Date.parse(r.started); return t >= t0 && t < t0 + day; }); days.push({ k: dayKey(t0), v: new Set(rs.map(r => r.vid)).size, m: Math.round(rs.reduce((s, r) => s + (r.secs || 0), 0) / 60) }); }
+    const hours = new Array(24).fill(0); for (const r of rows) hours[new Date(r.started).getHours()]++;
+    const back = rows.length - vis, avgWeek = rows.length ? (rows.reduce((s, r) => s + (r.week || 0), 0) / rows.length).toFixed(1) : 0;
+    const maxD = Math.max(1, ...days.map(d => d.v)), maxH = Math.max(1, ...hours);
+    box.innerHTML = head + `<div class="acards">${acard('지금 접속 중', live, '명', true)}${acard('오늘 방문자', uniq(day), '명')}${acard('7일 방문자', uniq(7 * day), '명')}${acard('30일 방문자', vis, '명')}${acard('총 플레이', (secs / 3600).toFixed(1), '시간')}${acard('1인당 평균', vis ? Math.round(secs / vis / 60) : 0, '분')}${acard('다시 온 방문', back, '번')}${acard('휴대폰 비율', rows.length ? Math.round(mob / rows.length * 100) : 0, '%')}${acard('평균 도달 주차', avgWeek, '주')}${acard('미니게임 한 사람', rows.filter(r => r.mg > 0).length, '명')}${acard('1인칭 써 본 사람', rows.filter(r => r.fp).length, '명')}${acard('최고 점수', Math.max(0, ...rows.map(r => r.score || 0)).toLocaleString('ko-KR'), '점')}</div>
+      <h4>최근 14일 방문자 (명) · 플레이 (분)</h4><div class="abars">${days.map(d => `<div><i style="height:${d.v / maxD * 100}%"></i><b>${d.v}</b><small>${d.k}</small><em>${d.m}분</em></div>`).join('')}</div>
+      <h4>시간대별 방문</h4><div class="abars h">${hours.map((v, i) => `<div><i style="height:${v / maxH * 100}%"></i><small>${i}</small></div>`).join('')}</div>
+      <h4>최근 방문 20개</h4><table class="atab"><tr><th>시작</th><th>플레이</th><th>기기</th><th>난이도</th><th>주차</th><th>점수</th></tr>${rows.slice(0, 20).map(r => `<tr><td>${new Date(r.started).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td><td>${Math.round((r.secs || 0) / 60)}분</td><td>${r.device === 'mobile' ? '📱' : '💻'}</td><td>${{ easy: '쉬움', normal: '보통', hard: '어려움', hell: '지옥' }[r.diff] || '-'}</td><td>${r.week || '-'}</td><td>${(r.score || 0).toLocaleString('ko-KR')}</td></tr>`).join('')}</table>
+      <p class="anote">기록은 익명(무작위 기기 번호)이에요 · 최근 30일 · ${mine ? '내 기기는 뺐어요' : '내 기기도 포함'}</p>`;
+  }
+  bindAdmin();
+}
+function acard(t, v, u, hot) { return `<div class="acard${hot ? ' hot' : ''}"><small>${t}</small><b>${v}</b><em>${u}</em></div>`; }
+function bindAdmin() {
+  const me = $('admMe'), pl = $('admPlay');
+  if (me) me.onclick = () => { if (store.get('adminVid', null)) store.set('adminVid', null); else store.set('adminVid', TELE.vid); openAdmin(); };
+  if (pl) pl.onclick = () => { $('admin').hidden = true; window.__mgPause = false; history.replaceState(null, '', location.pathname); startGame(); };
+}
+if (/[?&#]admin\b/.test(location.search + location.hash)) setTimeout(openAdmin, 300);
+
+/* =====================================================================
+   12-41. 화면 간단하게 (13.7판)
+   - 왼쪽: 미션 · 세력 판도 · 내 세력을 탭 하나로 (평소엔 접힘)
+   - 위 오른쪽: 🔊 · 🎁 뽑기 · ☰ 메뉴 (이벤트·랭킹·로그인은 메뉴 안)
+   - 상황판은 한 줄, 나침반은 시점 판 안, 큰 알림은 연달아 뜨지 않게
+   ===================================================================== */
+{
+  const side = $('side'), dock = document.createElement('div'); dock.id = 'dock'; dock.className = 'card';
+  const tabs = document.createElement('div'); tabs.className = 'dtabs';
+  const T = [['missions', '🎯 미션'], ['facbox', '🏳️ 세력'], ['warbox', '⚔️ 내 세력']];
+  const body = document.createElement('div'); body.className = 'dbody';
+  for (const [id, label] of T) {
+    const b = document.createElement('button'); b.dataset.p = id; b.textContent = label; tabs.appendChild(b);
+    const el2 = $(id); el2.classList.remove('card'); body.appendChild(el2);
+    b.onclick = () => { const cur = dock.dataset.open; dock.dataset.open = cur === id ? '' : id; store.set('dockTab', dock.dataset.open); syncDock(); };
+  }
+  dock.append(tabs, body); side.insertBefore(dock, side.firstChild);
+  dock.dataset.open = store.get('dockTab', SMALL ? '' : 'missions');
+  $('missions').classList.remove('fold');                       // 탭 안에서는 늘 펼침
+  if ($('siderow')) $('siderow').hidden = true;                 // 노천극장 칩은 숨김(상황판에 나옴)
+  const vh = $('zoom').querySelector('.vh'); if (vh) { vh.classList.add('vhc'); vh.appendChild($('compass')); }
+  // 위 오른쪽: 이벤트·랭킹·로그인 → 메뉴 안
+  const more = $('more');
+  for (const t of ['acct', 'rank', 'events']) { const b = document.querySelector(`#toggles > .tg[data-t="${t}"]`); if (b) { b.classList.remove('hot'); more.insertBefore(b, more.firstChild); } }
+  $('moreBtn').textContent = '☰ 메뉴';
+}
+function syncDock() {
+  const dock = $('dock'), open = dock.dataset.open;
+  dock.querySelectorAll('.dtabs button').forEach(b => {
+    b.classList.toggle('on', b.dataset.p === open);
+    if (b.dataset.p === 'warbox') { const has = myBases().length > 0 || raiders().length > 0; b.hidden = !has; b.classList.toggle('hot', !!retake.b); }
+  });
+  for (const id of ['missions', 'facbox', 'warbox']) $(id).classList.toggle('dshow', id === open);
+  dock.classList.toggle('closed', !open);
+}
+setInterval(() => { try { syncDock(); } catch {} }, 700); syncDock();
+// 큰 알림이 연달아 뜨지 않게: 2.5초 안에 또 오면 상황판에만 (중요한 것은 예외)
+{
+  const banner0 = banner; let lastB = 0;
+  banner = (title, sub, tone = '') => {
+    const now = performance.now(), big = /붕괴|등장|총반격|정복|중간고사|기말|격추|와해|목표 달성|학기|김태오|수배 ★★★/.test(title);
+    if (!big && now - lastB < 2500) { situLog('📣', title, sub, tone); return; }
+    lastB = now; banner0(title, sub, tone);
+  };
+}
+// 네임드 단추는 3개까지 (+N)
+setInterval(() => { const bar = $('namedbar'); if (!bar) return; const bs = [...bar.querySelectorAll('button')]; const LIM = SMALL ? 1 : 3; bs.forEach((b, i) => b.classList.toggle('more3', i >= LIM && !bar.classList.contains('all'))); let plus = bar.querySelector('.plus'); if (bs.length > LIM) { if (!plus) { plus = document.createElement('span'); plus.className = 'plus'; plus.onclick = () => bar.classList.toggle('all'); bar.appendChild(plus); } plus.textContent = bar.classList.contains('all') ? '접기' : `+${bs.length - LIM}`; } else if (plus) plus.remove(); }, 1000);
+
+// ── 휴대폰 화면 (13.7판): 화면을 최대한 비움 ──
+if ($('siderow')) $('siderow').style.display = 'none';
+document.querySelectorAll('#dock .dtabs button').forEach(b => { const [ic, ...rest] = b.textContent.split(' '); b.innerHTML = `<i>${ic}</i><span>${rest.join(' ')}</span>`; });
+$('toggles').querySelector('[data-t="gacha"]').innerHTML = '<i>🎁</i><span class="txt-long"> 뽑기·보관함</span>';
+if (SMALL) {
+  const more = $('more');
+  const mk = (txt, fn) => { const b = document.createElement('button'); b.className = 'tg mob'; b.innerHTML = '<span class="dot"></span>' + txt; b.onclick = e => { e.stopPropagation(); more.hidden = true; fn(); }; more.insertBefore(b, more.firstChild); return b; };
+  mk('🔄 전부 복구', () => $('reset').click());
+  mk('↶ 되돌리기', () => $('undo').click());
+  mk('🧍 1인칭 (걸어 다니며 부수기)', () => FP.on ? fpExit() : fpEnter());
+  mk('🎥 시점 판 열기/닫기', () => $('vToggle').click());
+  mk('🔊 소리 켜기/끄기 (M)', () => document.querySelector('#toggles > [data-t="sound"]').click());
+  $('moreBtn').textContent = '☰';
+  document.body.classList.add('mob');
+}
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
@@ -8144,7 +8384,7 @@ $('setmenu').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { apply
 $('s_town').checked = SET.town; $('s_town').onchange = e => { applyTown(e.target.checked); saveSet(); };
 for (const k of ['v_music', 'v_sfx', 'v_amb', 'v_voice']) { const inp = $('s_' + k), out = $('o_' + k); inp.value = SET[k]; out.textContent = Math.round(SET[k] * 100) + '%'; inp.oninput = () => { SET[k] = +inp.value; out.textContent = Math.round(SET[k] * 100) + '%'; applyMix(); saveSet(); }; }
 $('s_caps').checked = SET.caps; $('situ').hidden = !SET.caps; $('s_caps').onchange = e => { SET.caps = e.target.checked; $('situ').hidden = !SET.caps; saveSet(); };
-$('situHead').onclick = () => { const S = situLog.st || (situLog('ℹ️', '상황판', '소리·알림이 생기면 이유가 여기에 쌓여요'), situLog.st); S.fold = !S.fold; try { localStorage.setItem('glocalcrash.situFold', JSON.stringify(S.fold)); } catch {} situRender(); };
+$('situHead').onclick = () => { const S = situLog.st || (situLog('ℹ️', '상황판', '소리·알림이 생기면 이유가 여기에 쌓여요'), situLog.st); S.fold = !S.fold; try { localStorage.setItem('glocalcrash.situFold2', JSON.stringify(S.fold)); } catch {} situRender(); };
 situRender();
 $('s_autoq').checked = SET.autoq; $('s_autoq').onchange = e => { SET.autoq = e.target.checked; saveSet(); };
 $('s_vibe').checked = SET.vibe; $('s_vibe').onchange = e => { SET.vibe = e.target.checked; saveSet(); };
@@ -8297,7 +8537,7 @@ $('mhead').onclick = () => { $('missions').classList.toggle('fold'); $('mfold').
 if (SMALL) { $('missions').classList.add('fold'); $('mfold').textContent = '▸'; }
 $('tipSkip').onclick = () => { tipI = -1; store.set('tutorialDone', true); showTip(); };
 let started = false;
-function startGame() { if (started) return; started = true; $('intro').style.display = 'none'; audioInit(); startTutorial(false); setTimeout(showWhatsNew, 1500); applyDiffHP(); after(4, () => startWeek(1)); }
+function startGame() { if (started) return; started = true; teleStart(); $('intro').style.display = 'none'; audioInit(); startTutorial(false); setTimeout(showWhatsNew, 1500); applyDiffHP(); after(4, () => startWeek(1)); }
 $('start').onclick = startGame;
 buildTools();
 
@@ -8321,8 +8561,9 @@ function loop(now) {
   updateFPSel();
   const beat = beatNow();
   updateSpecials(dt);
-  updateDebris(dt);
+  updateDebris(dt); updateDebrisClean(dt);
   for (const v of movers) v.update(dt);
+  if (PB.dirty && frameNo % 6 === 0) pbRebuild();
   updateProjectiles(dt); updateQuake(dt); updatePipe(dt); updateTracers(dt); updateRings(dt); updateRockets(dt); updateTrees(dt);
   updateConcert(dt, beat);
   updateEvents(dt); updateAgents(dt); updateNet(dt); updatePeopleTags(dt); updateUnits(dt); updateSky(dt); updateBirds(dt); updateDefense(dt); updateTutorial(dt);
@@ -8338,7 +8579,7 @@ function loop(now) {
   if (frameNo % 15 === 3) {
     const camD = camera.position.distanceTo(controls.target), inside = camD < 150;
     for (const m of [seatRestI, seatTorsoI, deskI, propI, seatLongI]) if (m.visible !== inside) m.visible = inside;
-    const far = SET.quality === 'high' ? 1e9 : SET.quality === 'mid' ? 700 : 450, tx = controls.target.x, tz = controls.target.z;
+    const far = SET.quality === 'high' ? 1e9 : SET.quality === 'mid' ? 520 : 360, tx = controls.target.x, tz = controls.target.z;
     for (const b of buildings) if (!b.campus && !b.userChunk) { const v = SET.town && Math.hypot((b.bb[0] + b.bb[1]) / 2 - tx, (b.bb[2] + b.bb[3]) / 2 - tz) < far; if (b.meshes[0] && b.meshes[0].visible !== v) b.meshes.forEach(m => m.visible = v); }
   }
   if (frameNo % 15 === 0) for (const b of buildings) if (b.lblDiv) {
@@ -8366,7 +8607,7 @@ function loop(now) {
   shakeOff.set(rand(-1, 1), rand(-1, 1), rand(-1, 1)).multiplyScalar(shakeAmp);
   shakeAmp *= Math.exp(-dt * 5); if (shakeAmp < 0.01) shakeAmp = 0;
   camera.position.add(shakeOff);
-  if (sun.castShadow) renderer.shadowMap.needsUpdate = frameNo % 2 === 0 || !!fly;
+  if (sun.castShadow) { const busy = epoch !== shEpoch || movingTrees.size > 0 || activeD.size > 0; shEpoch = epoch; renderer.shadowMap.needsUpdate = busy ? frameNo % 2 === 0 : frameNo % 10 === 0; }
   if (composer && SET.quality === 'high') composer.render(); else renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
   camera.position.sub(shakeOff);
@@ -8378,7 +8619,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, ktoGod, kto, fpSel, showWhatsNew, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateDebrisClean(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, debris, CLEAN, TELE, teleSend, openAdmin, ADMIN_SQL, updateDebrisClean, PB, pbRebuild, bakeStatic, ktoGod, kto, fpSel, showWhatsNew, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
