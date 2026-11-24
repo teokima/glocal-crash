@@ -29,7 +29,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 #scorecard .ttl{font-family:'Black Han Sans',sans-serif;font-size:15px;letter-spacing:.5px;color:var(--hot2)}
 #scorecard .ttl small{font-family:'Noto Sans KR';font-weight:400;color:var(--dim);font-size:11px;margin-left:6px}
 #score{font-family:'Black Han Sans',sans-serif;font-size:34px;line-height:1.05;font-variant-numeric:tabular-nums}
-#sub{font-size:12px;color:var(--dim);margin-top:2px}
+#sub{display:none}
+#evcards>.evcard:nth-child(n+5){display:none}
+#siderow{display:flex;gap:8px;align-items:center}
+#claims{top:96px!important}
 #combo{font-family:'Black Han Sans',sans-serif;color:var(--hot);font-size:18px;height:22px;opacity:0;transition:opacity .2s}
 #toggles{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto;max-width:440px}
 .tg{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;display:flex;align-items:center;gap:6px;backdrop-filter:blur(10px)}
@@ -52,7 +55,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tool{position:relative;flex:0 0 auto;width:82px;padding:8px 4px 7px;border-radius:10px;border:1px solid transparent;background:transparent;display:flex;flex-direction:column;align-items:center;gap:3px}
 .tool svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .tool b{font-size:13px}
-.tool small{font-size:10px;color:var(--dim);white-space:nowrap}
+.tool small{font-size:10px;color:var(--dim);white-space:nowrap;display:none}.tool.sel small,.tool:hover small{display:block}
 .tool kbd{position:absolute;top:4px;left:6px;font-size:10px;color:var(--dim);font-family:inherit}
 .tool.sel{background:linear-gradient(180deg,rgba(255,90,54,.28),rgba(255,90,54,.10));border-color:rgba(255,120,80,.6)}
 .tool.sel small{color:#ffd2c4}
@@ -63,8 +66,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 #attr{position:fixed;right:10px;bottom:6px;z-index:5;font-size:10.5px;color:rgba(255,255,255,.75);text-shadow:0 1px 2px #000}
 #attr a{color:inherit}
 
-.lbl{font-size:11.5px;font-weight:700;color:#fff;background:rgba(15,17,22,.72);border:1px solid rgba(255,255,255,.18);
-  padding:3px 8px;border-radius:999px;white-space:nowrap;transform:translateY(-6px);pointer-events:none}
+.lbl{position:relative;font-size:11.5px;font-weight:800;letter-spacing:-.2px;color:#fff;background:linear-gradient(180deg,rgba(32,36,48,.9),rgba(14,16,22,.9));border:1px solid rgba(255,255,255,.22);box-shadow:0 2px 8px rgba(0,0,0,.35);
+  padding:3px 9px;border-radius:999px;white-space:nowrap;transform:translateY(-8px);pointer-events:none;text-shadow:0 1px 1px rgba(0,0,0,.5)}
+.lbl::after{content:'';position:absolute;left:50%;bottom:-9px;margin-left:-4px;border:4px solid transparent;border-top-color:rgba(14,16,22,.9)}
 .lbl i{font-style:normal;color:var(--hot2);font-weight:400;margin-left:5px}
 .lbl.big{background:rgba(120,20,60,.78);border-color:rgba(255,120,180,.5)}
 .hide-labels .lbl{display:none}
@@ -130,6 +134,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .slot .sbtn button.del{color:#ff9a8a}
 @media (max-width:640px){#gInv{grid-template-columns:repeat(4,1fr)}}
 .chip{font-size:11.5px;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+#specialbar{display:flex;gap:6px;padding:6px;pointer-events:auto;flex-wrap:wrap;justify-content:center;max-width:100%}#specialbar[hidden]{display:none}#specialbar button{display:flex;flex-direction:column;align-items:flex-start;padding:7px 10px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);text-align:left}#specialbar button.on{border-color:#ffb02e;background:rgba(255,176,46,.2)}#specialbar b{font-size:13px}#specialbar small{font-size:10.5px;color:var(--dim)}
+body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;z-index:30;pointer-events:none;background:linear-gradient(#fff,#fff) center/2px 18px no-repeat,linear-gradient(#fff,#fff) center/18px 2px no-repeat;filter:drop-shadow(0 0 2px #000)}
+#fpPad{position:fixed;right:12px;bottom:150px;z-index:20;display:none;flex-direction:column;gap:8px}body.fp #fpPad{display:flex}#fpPad button{width:66px;height:54px;border-radius:14px;border:1px solid rgba(255,255,255,.3);background:rgba(20,24,32,.75);color:#fff;font-weight:900;font-size:13px}
+@media (pointer:fine){#fpPad .tc{display:none}}
 #summonbar{display:flex;gap:6px;padding:6px;pointer-events:auto;flex-wrap:wrap;justify-content:center;max-width:100%}
 #summonbar[hidden]{display:none}
 #summonbar button{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:700}
@@ -198,6 +206,20 @@ button{font:inherit;color:inherit;cursor:pointer}
 .claim b{font-size:14px;color:#ffc83d}.claim span{font-size:12px;color:#ddd8cf;line-height:1.4}
 .claim button{padding:8px;border-radius:8px;border:0;background:linear-gradient(90deg,#7a52c8,#b06bff);color:#fff;font-weight:700}.claim button.x{background:transparent;border:1px solid var(--line);color:var(--dim);padding:4px}
 @media (max-width:640px){#claims{top:120px}#claimChip{top:auto;bottom:240px;right:10px}}
+@media (max-width:640px){#wkT{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}#wk small{font-size:10.5px;max-width:46vw}#wk{padding:5px 7px}.tool.sel small{display:none!important}}
+#wk{margin:6px 0 2px;padding:6px 8px;border-radius:10px;background:rgba(255,200,60,.08);border:1px solid rgba(255,200,60,.25)}#wkT{font-size:12px;font-weight:800;color:#ffd27a}#wk small{display:block;font-size:11.5px;color:#e8e4da;margin-top:3px;line-height:1.35}
+#wk .wkb{height:5px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:4px;overflow:hidden}#wkBar{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb02e,#ffe28a)}#wk .wkt{height:2px;margin-top:4px;background:rgba(255,255,255,.08)}#wkTime{display:block;height:100%;width:0;background:rgba(255,255,255,.45)}
+#diffSel{display:flex;align-items:center;gap:6px;margin:8px 0 4px}#diffSel span{font-size:13px;color:var(--dim);margin-right:4px}#diffSel button{flex:1;padding:8px 0;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;font-weight:800;font-size:13px}#diffSel button.on{background:linear-gradient(90deg,#ff7a2e,#ffb02e);border-color:#ffb02e;color:#1a1206}
+#mg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:40;width:min(780px,calc(100% - 20px));max-height:calc(100% - 20px);overflow:auto;padding:12px;box-sizing:border-box}#mg[hidden]{display:none}#mg .ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}#mg .ph b{font-size:16px}#mg .ph button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:#fff;font-size:16px}#mg{box-shadow:0 0 0 100vmax rgba(5,8,14,.55),0 20px 60px rgba(0,0,0,.6)}
+.mggrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mgcard{text-align:left;padding:14px;border-radius:14px;border:1px solid rgba(255,200,60,.35);background:linear-gradient(160deg,rgba(255,176,46,.14),rgba(123,82,200,.14));display:flex;flex-direction:column;gap:6px}.mgcard:hover{border-color:#ffb02e;transform:translateY(-1px)}.mgcard b{font-size:16px}.mgcard small{font-size:12.5px;color:#e8e4da;line-height:1.45}.mgcard em{font-style:normal;font-size:11.5px;color:#ffd27a}
+.mgwrap canvas{width:100%;height:auto;display:block;border-radius:12px;background:#000;touch-action:none}.mgctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;justify-content:center}.mgbtn{padding:14px 22px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);font-weight:900;font-size:16px;user-select:none;-webkit-user-select:none;touch-action:none}.mgbtn.down{background:#7a52c8}.mgbtn.hot{background:linear-gradient(90deg,#ff7a2e,#ffb02e);color:#1a1206}.mgbtn.lane{min-width:64px}
+.mgres{flex-basis:100%;text-align:center;padding:8px;border-radius:12px}.mgres b{display:block;font-size:20px}.mgres span{font-size:13px;color:#e8e4da}.mgres.win{background:rgba(58,165,107,.25)}.mgres.lose{background:rgba(192,57,43,.25)}.mgnote{font-size:12px;color:var(--dim);margin:8px 0 0;text-align:center}
+#mgInvite{position:fixed;left:50%;transform:translateX(-50%);bottom:180px;z-index:9;padding:9px 16px;border-radius:999px;border:0;background:linear-gradient(90deg,#ff5a7a,#b06bff);color:#fff;font-weight:900;font-size:13px;box-shadow:0 0 18px rgba(255,90,122,.5);animation:namedPulse 1.6s infinite}#mgInvite[hidden]{display:none}
+@media (max-width:640px){.mggrid{grid-template-columns:1fr}#mgInvite{bottom:250px;font-size:12px;max-width:90vw}}
+.lbl.village{font-size:15px!important;padding:6px 12px!important;background:rgba(40,60,30,.82)!important;border-color:#a6e04a!important}.lbl.village em{display:block;font-style:normal;font-size:11px;opacity:.8}
+#wanted{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;top:48px;z-index:8;padding:5px 12px;border-radius:999px;background:rgba(20,10,10,.8);border:1px solid rgba(255,90,90,.6);font-size:16px;display:flex;align-items:center;gap:2px;pointer-events:none}#wanted[hidden]{display:none}#wanted b{color:#ffd24a;text-shadow:0 0 8px #ff9a2e}#wanted i{font-style:normal;color:rgba(255,255,255,.2)}#wanted small{font-size:10.5px;color:#ffb0b0;margin-left:8px}#wanted.hot{animation:namedPulse .4s infinite;border-color:#ff5a5a}
+.named.ku{background:linear-gradient(90deg,#1f8a4a,#d9a441)!important;border-color:#fff2c8!important}
+@media (max-width:640px){#wanted{top:auto;bottom:212px;font-size:13px}}
 #who{display:flex;gap:8px;margin:12px 0 4px}#who input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
 #who input:focus,.rkedit input:focus{outline:2px solid var(--hot)}
 .rkme{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px}.rkme span{font-weight:700}
@@ -294,7 +316,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 #buildbar .sw{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,.25)}
 #buildbar .sw.on{border-color:#fff;box-shadow:0 0 0 2px var(--hot2)}
 #vToggle{display:none;padding:8px 12px;border-radius:12px;font-weight:800;font-size:13px}
-@media (min-width:641px) and (max-height:900px){#vToggle{display:block}#zoom{display:none!important}#zoom.open{display:flex!important}}
+@media (min-width:641px){#bottom{padding-right:208px!important;padding-left:16px}#tip{margin-right:200px}#zoom{position:fixed;right:16px;bottom:24px;z-index:6;width:176px;box-shadow:0 8px 24px rgba(0,0,0,.35)}#situ{bottom:236px!important;max-height:calc(100vh - var(--rtop,104px) - 300px)!important}#attr{right:206px!important}}
 @media (max-width:640px){#vToggle{display:block}#zoom{display:none!important}#zoom.open{display:flex!important}#situ{left:10px!important;right:10px!important;width:auto!important;bottom:150px!important;max-height:84px}#situ .si span{display:none}#tip{bottom:240px}}
 #zoom{display:flex;flex-direction:column;gap:4px;border-radius:12px;padding:6px;width:150px;box-sizing:border-box}
 #zoom .vh{font-size:11px;color:var(--dim);font-weight:700;padding-left:2px}
@@ -394,6 +416,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     <div id="score">0</div>
     <div id="money">장학금 ₩500,000</div>
     <div class="stagebox"><span id="stage">피해 0단계 · 평온</span><div class="sbar"><i id="stagebar"></i></div><div id="stagepct"></div></div>
+    <div id="wk"><div id="wkT">📅 1주차</div><div class="wkb"><i id="wkBar"></i></div><small id="wkG"></small><div class="wkt" title="이번 주 남은 시간"><i id="wkTime"></i></div></div>
     <div id="sub">최고 0</div>
     <div id="combo"></div>
   </div>
@@ -410,6 +433,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <button class="tg" data-t="shot"><span class="dot"></span>사진</button>
       <button class="tg" data-t="top"><span class="dot"></span>위에서 보기</button>
       <button class="tg" data-t="home"><span class="dot"></span>처음 시점</button>
+      <button class="tg hot" data-t="minigame"><span class="dot"></span>🎮 미니게임</button>
       <button class="tg hot" data-t="help"><span class="dot"></span>📖 조작·명령 모음 (H)</button>
       <button class="tg" data-t="tutorial"><span class="dot"></span>안내 다시 보기</button>
       <button class="tg" data-t="settings"><span class="dot"></span>설정</button>
@@ -435,7 +459,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <button id="vRotL" title="왼쪽으로 돌기 (Q)">⟲</button><button id="vUp" title="위에서 보기 쪽으로 (R)">▲</button><button id="vRotR" title="오른쪽으로 돌기 (E)">⟳</button>
       <button id="zin" title="확대">＋</button><button id="vDown" title="낮게 눕혀 보기 (F)">▼</button><button id="zout" title="축소">－</button>
     </div>
-    <div class="vrow"><button id="zclose" title="화면 가운데를 아주 가까이">◎ 가까이</button><button id="vEye" title="사람 눈높이로">👁 눈높이</button><button id="vTop" title="바로 위에서">⬒ 위에서</button></div>
+    <div class="vrow"><button id="vFP" title="1인칭으로 걸어 다니며 부수기 (V)">🧍 1인칭</button><button id="zclose" title="화면 가운데를 아주 가까이">◎ 가까이</button><button id="vEye" title="사람 눈높이로">👁 눈높이</button><button id="vTop" title="바로 위에서">⬒ 위에서</button></div>
     <button id="vDrag" class="vdrag" title="한 손가락·왼쪽 끌기를 회전으로 바꿈">✋ 끌기: 이동</button>
   </div>
 </div>
@@ -482,7 +506,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div class="ph"><b>설정</b><button data-close="setmenu">✕</button></div>
   <label class="rng">무기 세기 <output id="o_power">×1.0</output><input type="range" id="s_power" min="0.5" max="2" step="0.1" value="1"></label>
   <div class="mixh">소리 크기</div>
-  <label class="rng">공연 음악 <output id="o_v_music">100%</output><input type="range" id="s_v_music" min="0" max="1.5" step="0.05" value="1"></label>
+  <label class="rng">음악 (배경·공연) <output id="o_v_music">100%</output><input type="range" id="s_v_music" min="0" max="1.5" step="0.05" value="1"></label>
   <label class="rng">효과음 <output id="o_v_sfx">100%</output><input type="range" id="s_v_sfx" min="0" max="1.5" step="0.05" value="1"></label>
   <label class="rng">주변 소리 <output id="o_v_amb">100%</output><input type="range" id="s_v_amb" min="0" max="1.5" step="0.05" value="1"></label>
   <label class="rng">학생 목소리 <output id="o_v_voice">100%</output><input type="range" id="s_v_voice" min="0" max="1" step="0.05" value="1"></label>
@@ -503,6 +527,9 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="setnote">느리면 화질을 낮추고 원룸촌을 끄세요. 설정은 이 브라우저에 저장돼요.</div>
 </div>
 <div id="fps" class="card" hidden></div>
+<div id="fpPad"><button id="fpHit" class="tc">⛏ 캐기</button><button id="fpPut" class="tc">🧱 놓기</button><button id="fpJump" class="tc">⤴ 점프</button><button id="fpOut">✕ 1인칭</button></div>
+<div id="mg" class="card" hidden><div class="ph"><b id="mgTitle">🎮 미니게임</b><button data-close="mg">✕</button></div><div id="mgBody"></div></div>
+<button id="mgInvite" hidden></button>
 <div id="helpmenu" class="card panel wide" hidden>
   <div class="ph"><b>📖 조작 · 명령 모음</b><button data-close="helpmenu">✕</button></div>
   <div class="helpgrid">
@@ -511,7 +538,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <li><b>휴대폰</b> 한 손가락 이동, 두 손가락 회전·확대</li><li><b>✋/🔄 끌기 바꾸기</b> 시점 판에서 끌기를 회전으로</li></ul></section>
     <section><h4>⌨️ 단축키</h4><ul>
       <li><b>1~9</b> 쇠파이프·총·대포·폭탄·운석·핵폭탄·지진·용역·복구 · <b>0</b> 짓기 · <b>-</b> 소환 · <b>=</b> 전투기</li>
-      <li><b>Q / E</b> 시점 돌기 · <b>R / F</b> 기울이기</li><li><b>Ctrl+Z</b> 되돌리기 · <b>N</b> 밤 · <b>L</b> 이름표 · <b>M</b> 소리 · <b>H</b> 이 창</li></ul></section>
+      <li><b>V</b> 🧍 1인칭 (WASD·마우스·왼쪽 캐기·오른쪽 블록 놓기·Space 점프) · <b>G</b> ✨ 특수 무기</li><li><b>Q / E</b> 시점 돌기 · <b>R / F</b> 기울이기</li><li><b>Ctrl+Z</b> 되돌리기 · <b>N</b> 밤 · <b>L</b> 이름표 · <b>M</b> 소리 · <b>H</b> 이 창</li></ul></section>
     <section><h4>⚔️ 내 세력 명령 (왼쪽 '내 세력' 판)</h4><ul>
       <li><b>🎯 총공격</b> 누른 뒤 남의 건물을 찍으면 돌격대 전원이 60초 동안 그 건물만 부숨</li>
       <li><b>🛡️ 방어</b> 탈환대가 오면 돌격대가 기지로 돌아가 막음</li>
@@ -528,6 +555,11 @@ button{font:inherit;color:inherit;cursor:pointer}
       <li><b>수비대</b> 공격받으면 출동해 내 돌격대와 몸싸움 · 부서진 곳을 고침 · 근처를 터뜨리면 흩어짐</li>
       <li><b>복구·탈환</b> 25초 조용하면 스스로 고치고, 빼앗긴 건물은 원래 세력이 탈환대를 보냄</li>
       <li><b>와해</b> 한 세력의 건물을 모두 빼앗으면 장학금 300만 · 줄 누르면 그 세력 건물로 이동</li></ul></section>
+    <section><h4>🚨 수배 · 네임드 활동 · 찾기</h4><ul>
+      <li><b>수배 ★1~5</b> 많이 부수면 올라가요: 경비 → 경찰 → 군 → 🚁 헬기(폭발로 격추) → 특전사·전투기 · 12초 조용하면 내려감</li>
+      <li><b>모금·모집</b> 총장 발전기금 · 학장 연구 인력 · 조남주 선도부 · 시장 봉사단 → 부스 근처를 3번 폭발시켜 막기</li>
+      <li><b>🟦 조남주</b> 학생주임: 생활지도·호루라기·벌점 · <b>🐂 쿠</b> 마스코트를 누르면 응원(다치게 하면 시위)</li>
+      <li><b>🔍 찾기</b> 파란 옷 학생 · 커플 · 낮잠 자는 학생 — 힌트 보고 그 사람을 눌러요</li></ul></section>
     <section><h4>🎁 뽑기 · 보관함</h4><ul>
       <li><b>🎒 아이템 10칸</b> 유닛·무기 [쓰기] · 장학금 봉투 [사용] · [버리기]</li><li><b>🛡️ 장비 2칸</b> [착용]/[해제]한 것만 효과</li>
       <li><b>소환</b> 도구판 [소환](-) 고르고 목표를 누름</li></ul></section>
@@ -564,6 +596,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="rkMine"></div><div id="rkList"></div><div id="rkNote"></div>
 </div>
 <div id="namedbar" hidden></div>
+<div id="wanted" hidden></div>
 <button id="claimChip" hidden></button>
 <div id="ktobar" class="card" hidden><b>👑 김태오</b><span>최강 네임드</span><div class="bb"><i id="ktofill"></i></div><em id="ktohp">300 / 300</em></div>
 <div id="bossbar" class="card" hidden><b>총장</b><span>권위</span><div class="bb"><i id="bossfill"></i></div><em id="bosshp">100 / 100</em></div>
@@ -612,6 +645,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div id="bottom">
   <div id="buildbar" class="card" hidden><div class="shapes"><button data-shape="block" class="on">1칸</button><button data-shape="wall">벽</button><button data-shape="house">작은 집</button><button data-shape="tower">탑</button><button data-shape="hq" class="hqs">🏢 내 건물 300만~</button></div><div class="swatches" id="swatches"></div></div>
   <div id="summonbar" class="card" hidden></div>
+  <div id="specialbar" class="card" hidden></div>
   <div id="tools" class="card"></div>
   <div id="acts">
     <button id="undo" class="tg">되돌리기 <span style="color:var(--dim)">Ctrl+Z</span></button>
@@ -642,6 +676,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <li><b>N / L / M</b><span>밤 · 이름표 · 소리 켜고 끄기</span></li>
     </ul>
     <div id="who"><input id="nick" maxlength="12" placeholder="닉네임 (랭킹에 표시)" autocomplete="off"><input id="dept" maxlength="16" list="deptList" placeholder="학과" autocomplete="off"></div>
+    <div id="diffSel"><span>난이도</span><button data-d="easy">쉬움</button><button data-d="normal">보통</button><button data-d="hard">어려움</button><button data-d="hell">지옥</button></div>
     <button id="acctOpen" class="acctlink">👤 로그인 · 회원가입 <small>기록을 계정에 계속 쌓기</small></button>
     <datalist id="deptList"><option value="컴퓨터공학과"><option value="소프트웨어학과"><option value="전기전자공학부"><option value="기계자동차공학과"><option value="바이오메디컬공학과"><option value="식품영양학과"><option value="간호학과"><option value="의학과"><option value="경영학과"><option value="경찰학과"><option value="소방방재융합학과"><option value="유아교육과"><option value="사회복지학과"><option value="산업디자인학과"><option value="실내디자인학과"><option value="패션디자인학과"><option value="미디어학부"><option value="문헌정보학과"><option value="영어문화학과"><option value="교직원"><option value="졸업생"><option value="충주 시민"></datalist>
     <button id="start" disabled>불러오는 중…</button>
@@ -820,7 +855,7 @@ if (TER) {
 }
 fillPoly(C.campus, snowy(0x93bf66, 0.8));
 const AREA_STYLE = { farm: [0xb3b874, 2], greenhouse: [0xe3e7e4, 3], golf: [0xa3d46e, 3], heath: [0x9ea96c, 3], paved: [0xc2bba9, 3],
-  wood: [0x547d3e, 4], grass: [0x88bd5c, 5], track: [0xb4553f, 6], pitch: [0x5ea545, 7], parking: [0x5d6066, 8], water: [0x4a8cc0, 9] };
+  wood: [0x547d3e, 4], grass: [0x88bd5c, 5], track: [0xb4553f, 6], pitch: [0x3fa04a, 7], parking: [0x5d6066, 8], water: [0x4a8cc0, 9] };
 const AREAS = {};
 for (const a of C.areas) (AREAS[a.k] = AREAS[a.k] || []).push(a);
 for (const [k, list] of Object.entries(AREAS).sort((a, b) => (AREA_STYLE[a[0]] || [0, 3])[1] - (AREA_STYLE[b[0]] || [0, 3])[1])) {
@@ -830,6 +865,25 @@ for (const [k, list] of Object.entries(AREAS).sort((a, b) => (AREA_STYLE[a[0]] |
   for (const a of list) fillPoly(a.p, color);
   if (k === 'pitch') for (const a of list) { pg.lineWidth = 0.3 * PX; pg.strokeStyle = 'rgba(255,255,255,.75)'; pg.setLineDash([]); pg.beginPath(); a.p.forEach((q, i) => { const [x, y] = P(q); i ? pg.lineTo(x, y) : pg.moveTo(x, y); }); pg.closePath(); pg.stroke(); }
   if (['water', 'pitch', 'track', 'parking', 'greenhouse'].includes(k)) list.forEach(a => markPoly(a.p));
+}
+// 해오름학사 뒤 운동장 (13.2판): 빨간 우레탄 트랙 + 흰 레인 + 인조잔디(줄무늬)
+{
+  const tr = (AREAS.track || [])[0];
+  if (tr && !WINTER) {
+    const cen = tr.p.reduce((s, q) => [s[0] + q[0] / tr.p.length, s[1] + q[1] / tr.p.length], [0, 0]);
+    const scaleP = (p, k) => p.map(([x, z]) => [cen[0] + (x - cen[0]) * k, cen[1] + (z - cen[1]) * k]);
+    fillPoly(tr.p, 0xc23a2c);
+    for (let k = 1; k <= 5; k++) { const q = scaleP(tr.p, 1 - k * 0.028); strokeLine([...q, q[0]], 0.12, 0xf4efe6); }
+    const field = (AREAS.pitch || []).find(a => { const c2 = a.p.reduce((s, q) => [s[0] + q[0] / a.p.length, s[1] + q[1] / a.p.length], [0, 0]); return Math.hypot(c2[0] - cen[0], c2[1] - cen[1]) < 30 && polyArea(a.p) < polyArea(tr.p) * 0.8; });
+    const inner = field ? field.p : scaleP(tr.p, 0.8);
+    fillPoly(inner, 0x2f9a45);
+    pg.save(); pg.beginPath(); inner.forEach((q, i) => { const [a, b] = P(q); i ? pg.lineTo(a, b) : pg.moveTo(a, b); }); pg.closePath(); pg.clip();
+    const [ox, oy] = P(cen); pg.translate(ox, oy); pg.rotate(Math.atan2(inner[1][1] - inner[0][1], inner[1][0] - inner[0][0]));
+    for (let i = -12; i <= 12; i++) if (i % 2 === 0) { pg.fillStyle = 'rgba(255,255,255,.07)'; pg.fillRect(i * 6 * PX, -120 * PX, 6 * PX, 240 * PX); }
+    pg.restore();
+    strokeLine([...inner, inner[0]], 0.25, 0xffffff);
+    window.__trackPoly = tr.p; window.__trackCen = cen;
+  }
 }
 const ROAD_W = { secondary: 7.5, secondary_link: 5, tertiary: 9, tertiary_link: 5.5, residential: 6, unclassified: 6, living_street: 5, service: 4.5, pedestrian: 4, footway: 2.2, cycleway: 2.2, path: 1.6, steps: 2.4, track: 3, bridleway: 2 };
 const roadCls = t => /secondary|tertiary|residential|unclassified/.test(t) ? 'main' : /living|service/.test(t) ? 'minor' : t === 'track' ? 'dirt' : 'walk';
@@ -1265,6 +1319,35 @@ if (XMAS) {
 const CAMPUS_BUILDINGS = buildings.filter(b => b.campus);
 const TOTAL_BLOCKS = CAMPUS_BUILDINGS.reduce((s, b) => s + b.total, 0);
 console.log('[glocal] buildings', buildings.length, 'blocks', buildings.reduce((s, b) => s + b.total, 0), 'campus blocks', TOTAL_BLOCKS);
+// 마을 (13.2판): OpenStreetMap에 집이 거의 없는 모시래마을·단월마을, 그리고 신촌마을에 원룸·주택을 채움 (부술 수 있음)
+const VILLAGES = [
+  { name: '모시래마을', sub: '원룸촌 · 학생들 자취방', c: [95, -390], R: 150, n: SMALL ? 16 : 30, ang: 0.62, floors: [3, 5], pals: ['white', 'cream', 'pink', 'brick', 'gray'] },
+  { name: '신촌마을', sub: '원룸 · 하숙집 골목', c: [-525, 110], R: 120, n: SMALL ? 5 : 10, ang: 0.35, floors: [2, 4], pals: ['cream', 'brick', 'white'] },
+  { name: '단월마을', sub: '단월동 · 오래된 주택가', c: [-640, 240], R: 120, n: SMALL ? 9 : 16, ang: -0.2, floors: [1, 2], pals: ['brick', 'cream', 'pink', 'white'] },
+];
+{
+  let seed = 4242; const rr = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (const V of VILLAGES) {
+    let got = 0;
+    for (let k = 0; k < V.n * 30 && got < V.n; k++) {
+      const a = rr() * Math.PI * 2, r = Math.sqrt(rr()) * V.R, cx = V.c[0] + Math.cos(a) * r, cz = V.c[1] + Math.sin(a) * r;
+      if (inPoly(cx, cz, C.campus) || Math.abs(cx) > WORLD - 30 || Math.abs(cz) > WORLD - 30) continue;
+      const W = 4 + Math.floor(rr() * 4), D = 4 + Math.floor(rr() * 3), ang = V.ang + (rr() < 0.3 ? Math.PI / 2 : 0);
+      const c = Math.cos(ang), s = Math.sin(ang), hw = W * B / 2 + 2, hd = D * B / 2 + 2;
+      const poly = [[-hw, -hd], [hw, -hd], [hw, hd], [-hw, hd]].map(([x, z]) => [cx + x * c - z * s, cz + x * s + z * c]);
+      // 길·물·운동장·다른 건물과 겹치지 않고, 땅이 너무 기울지 않은 곳만
+      let ok = true, lo = 1e9, hi = -1e9;
+      for (let dx = -hw; dx <= hw && ok; dx += 2) for (let dz = -hd; dz <= hd && ok; dz += 2) { const x = cx + dx * c - dz * s, z = cz + dx * s + dz * c, m = mIdx(x, z); if (m < 0 || mask[m]) ok = false; const h = terrainAt(x, z); lo = Math.min(lo, h); hi = Math.max(hi, h); }
+      if (!ok || hi - lo > 4) continue;
+      const bb0 = bbox(poly); if (buildingsNear(bb0.minx - 3, bb0.maxx + 3, bb0.minz - 3, bb0.maxz + 3).size) continue;
+      const inner = [[-hw + 2, -hd + 2], [hw - 2, -hd + 2], [hw - 2, hd - 2], [-hw + 2, hd - 2]].map(([x, z]) => [cx + x * c - z * s, cz + x * s + z * c]);
+      const fp = footprint(inner, null, ang), fl = V.floors[0] + Math.floor(rr() * (V.floors[1] - V.floors[0] + 1));
+      new Building({ name: '', ...fp, H: Math.max(2, Math.round(fl * 3.2 / B)), ang, gen: stdGen, pal: V.pals[Math.floor(rr() * V.pals.length)], campus: false, village: V.name });
+      markPoly(poly); got++;
+    }
+    V.got = got;
+  }
+}
 for (const b of buildings) { const [a, c, e, f] = b.bb; markPoly([[a, e], [c, e], [c, f], [a, f]]); }
 
 /* =====================================================================
@@ -1602,7 +1685,7 @@ const SFX = {
 /* =====================================================================
    8. 나무 (숲·정원·캠퍼스 잔디에 심고, 폭발에 쓰러짐)
    ===================================================================== */
-const TREE_MAX = 2200;
+const TREE_MAX = 2800;
 const trees = [];
 const trunkMesh = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.25, 0.38, 3.2, 6).translate(0, 1.6, 0), new THREE.MeshStandardMaterial({ color: 0x6b4a32, roughness: 1 }), TREE_MAX);
 const crownMesh = new THREE.InstancedMesh(XMAS ? new THREE.ConeGeometry(2.3, 5.5, 7).translate(0, 5.2, 0) : new THREE.IcosahedronGeometry(2.3, 0).translate(0, 4.6, 0), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, flatShading: true }), TREE_MAX);
@@ -1634,6 +1717,45 @@ function plantIn(poly, n) {
 for (const a of AREAS.wood || []) plantIn(a.p, Math.min(700, polyArea(a.p) / 55));
 for (const a of AREAS.grass || []) plantIn(a.p, Math.min(60, polyArea(a.p) / 160));
 plantIn(C.campus, 650);
+// 정문 → 후문 가로수길 (13.2판): 큰길을 따라 양쪽에 8 m마다 나무 (봄엔 벚꽃, 가을엔 노란 은행)
+const AVENUE = [];
+{
+  const key = ([x, z]) => Math.round(x) + ',' + Math.round(z), V = new Map(), adj = [];
+  const vid = p => { const k = key(p); let i = V.get(k); if (i == null) { i = adj.length; V.set(k, i); adj.push({ p, e: [] }); } return i; };
+  for (const r of C.roads) {
+    const cls = roadCls(r.t); if (cls === 'dirt') continue; const w = cls === 'main' ? 1 : cls === 'minor' ? 1.6 : 4;
+    for (let i = 1; i < r.p.length; i++) { const a = vid(r.p[i - 1]), b = vid(r.p[i]), d = Math.hypot(r.p[i][0] - r.p[i - 1][0], r.p[i][1] - r.p[i - 1][1]) * w; adj[a].e.push([b, d, r]); adj[b].e.push([a, d, r]); }
+  }
+  const near = (x, z) => { let bi = -1, bd = 1e9; adj.forEach((v, i) => { const d = Math.hypot(v.p[0] - x, v.p[1] - z); if (d < bd) { bd = d; bi = i; } }); return bi; };
+  const segs = []; for (const r of C.roads) { const w = (ROAD_W[r.t] || 2) / 2 + 1.2; for (let i = 1; i < r.p.length; i++) segs.push([r.p[i - 1], r.p[i], w]); }
+  const onRoad = (x, z) => segs.some(([[ax, az], [bx, bz], w]) => { const dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz || 1, t = clamp(((x - ax) * dx + (z - az) * dz) / L2, 0, 1); return Math.hypot(x - ax - dx * t, z - az - dz * t) < w; });
+  const A = near(-327, -216), Z = near(434, 138);
+  if (A >= 0 && Z >= 0) {
+    const N = adj.length, dist = new Float64Array(N).fill(Infinity), prev = new Int32Array(N).fill(-1), pr = new Array(N), done = new Uint8Array(N); dist[A] = 0;
+    for (;;) { let u = -1, b = Infinity; for (let i = 0; i < N; i++) if (!done[i] && dist[i] < b) { b = dist[i]; u = i; } if (u < 0 || u === Z) break; done[u] = 1; for (const [v, d, r] of adj[u].e) if (dist[u] + d < dist[v]) { dist[v] = dist[u] + d; prev[v] = u; pr[v] = r; } }
+    const path = []; for (let v = Z; v >= 0; v = prev[v]) { path.unshift(adj[v]); if (v === A) break; }
+    let carry = 0;
+    for (let i = 1; i < path.length; i++) {
+      const [x0, z0] = path[i - 1].p, [x1, z1] = path[i].p, L = Math.hypot(x1 - x0, z1 - z0); if (L < 0.01) continue;
+      const r = pr[adj.indexOf(path[i])] || { t: 'tertiary' }, off = (ROAD_W[r.t] || 6) / 2 + 2.6, nx = -(z1 - z0) / L, nz = (x1 - x0) / L;
+      let s = carry;
+      for (; s < L; s += 8) {
+        const x = x0 + (x1 - x0) * s / L, z = z0 + (z1 - z0) * s / L;
+        for (const sg of [-1, 1]) {
+          const tx = x + nx * off * sg, tz = z + nz * off * sg, m = mIdx(tx, tz);
+          if (m < 0 || trees.length >= TREE_MAX || hasBlock(tx, terrainAt(tx, tz) + 1, tz) || onRoad(tx, tz) || (AREAS.water || []).some(w => inPoly(tx, tz, w.p))) continue;
+          const c = new THREE.Color();
+          if (XMAS || SEASON === 'winter') c.setHSL(0.08, 0.1, 0.6).lerp(new THREE.Color(0xf4f7fa), 0.6);
+          else if (SEASON === 'spring') c.setHSL(0.93 + rand(-0.02, 0.02), rand(0.65, 0.8), rand(0.82, 0.88));
+          else if (SEASON === 'autumn') c.setHSL(rand(0.12, 0.14), 0.85, rand(0.5, 0.58));
+          else c.setHSL(rand(0.29, 0.33), 0.6, rand(0.24, 0.3));
+          trees.push({ p: V3(tx, 0, tz), s: 1.25, tilt: 0, target: 0, axis: V3(1, 0, 0), c, avenue: true }); AVENUE.push([tx, tz]);
+        }
+      }
+      carry = s - L;
+    }
+  }
+}
 trunkMesh.count = crownMesh.count = trees.length;
 function placeTree(i) {
   const t = trees[i];
@@ -2218,6 +2340,7 @@ function collapse(set, act, from) {
   return total;
 }
 function afterDamage(n, p, act) {
+  impactFX(n, p); if (n > 0) wantAdd(n * 0.06);
   if (n) { addScore(n * 10, act); popText(V3(p.x, p.y + 3, p.z), '+' + n * 10); }
   if (theater.building.ratio() > 0 && p.distanceTo(screenMesh.position) < 4 + (act.R || 0) * 0.6) theater.screenBroken = true;
   if (stageHealth() < 0.5 && concert.state === 'play') stopConcert(p);
@@ -2251,7 +2374,7 @@ function resetAll() {
   for (const pr of projectiles) scene.remove(pr.mesh); projectiles.length = 0;
   theater.screenBroken = false; concert.state = 'play'; quake.active = false;
   endAllEvents(); repairScore = 0; clearBuilt();
-  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); resetFactions(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
+  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); resetFactions(); Object.assign(STG, { week: 1, t: 0, sem: 1, done: false, g0: stats.blocks, kills: 0, auth: 50, don: 120, noClaim: 0 }); applyDiffHP(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
   dmgLog.length = 0; EVS.facCool = clock + 20; DEF.lvl = 0;
   for (const d of [...boss.domes]) d.retreat(false); if (boss.active) { scene.remove(boss.fig.g); scene.remove(boss.podium); boss.active = false; $('bossbar').hidden = true; } boss.defeated = false;
   for (const j of defJets) scene.remove(j.g); defJets.length = 0;
@@ -2276,6 +2399,7 @@ const ICON = {
   crew: '<circle cx="9" cy="6" r="2.6"/><path d="M4 21v-5a5 5 0 0 1 10 0v5"/><path d="M15 9l6-4M18 4.5l3 3"/>',
   fix: '<path d="M4 20h16M6 20V10l6-5 6 5v10"/><path d="M10 20v-5h4v5"/>',
   fighter: '<path d="M12 2l2 6 8 4v2l-8-1-1 5 3 2v2l-4-1-4 1v-2l3-2-1-5-8 1v-2l8-4z" fill="currentColor" stroke="none"/>',
+  special: '<path d="M12 2l2.6 6.2L21 9l-5 4.4 1.6 6.6L12 16.6 6.4 20l1.6-6.6L3 9l6.4-.8z" fill="currentColor" stroke="none"/>',
   summon: '<path d="M12 2l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 16.3 6.2 19.8l1.6-6.6L2.6 8.8l6.8-.5z"/>',
   build: '<rect x="3" y="13" width="8" height="7"/><rect x="13" y="13" width="8" height="7"/><rect x="8" y="5" width="8" height="7"/>',
 };
@@ -2292,6 +2416,7 @@ const WEAPONS = [
   { id: 'build', name: '짓기', desc: '블록·벽·집·탑', R: 1.2 },
   { id: 'summon', name: '소환', desc: '뽑은 유닛 부르기', R: 3 },
   { id: 'fighter', name: '전투기 공습', desc: '장학금 100만', R: 8, cost: 1000000 },
+  { id: 'special', name: '특수 무기', desc: '토네이도·블랙홀…', R: 4 },
 ];
 let weapon = 'pipe';
 function explode(p, R, power, act) {
@@ -2307,7 +2432,7 @@ function explode(p, R, power, act) {
   for (const t of teams) if (t.kind !== 'facility') for (const a of t.crew) if (a.pos.distanceTo(p) < R * 2 + 3) a.down = 2;
   scarePeople(p, R * 4 + 25); protestPanic(p, R * 3 + 15);
   if (boss.active && p.distanceTo(boss.pos) < 45) bossDamage(R * 0.5, '근처 폭발');
-  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R); crateBoom(p, R); facBoom(p, R);
+  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R); crateBoom(p, R); facBoom(p, R); ktoCloneBoom(p, R); boom134(p, R);
   if (NET.on && !NET.remote) sendNet({ t: 'fx', k: 'boom', p: [p.x, p.y, p.z], R });
   R *= SET.power; power *= Math.sqrt(SET.power);
   act.R = R;
@@ -4627,7 +4752,7 @@ function useFighters(hit) {
 }
 
 // ── 총장 (보스) ──
-const boss = { active: false, hp: 100, fig: null, defeated: false, skillT: 0, skillI: 0, domes: [], label: null };
+const boss = { active: false, hp: 250, max: 250, fig: null, defeated: false, skillT: 0, skillI: 0, domes: [], label: null };
 function spawnBoss() {
   if (boss.active || boss.defeated) return;
   const adm = byName('행정관') || CAMPUS_BUILDINGS[0], c = bbCenter(adm);
@@ -4641,19 +4766,19 @@ function spawnBoss() {
   const div = document.createElement('div'); div.className = 'bubble boss'; div.textContent = '우리 캠퍼스는 내가 지킨다!';
   const lbl = new CSS2DObject(div); lbl.position.set(0, 3.2, 0); f.g.add(lbl);
   addBeacon(f.g, 0xffc83d); regNamed('총장 (보스)', () => boss.fig.g.position, () => boss.active);
-  Object.assign(boss, { active: true, hp: 100, fig: f, podium, pos, adm, skillT: 6, skillI: 0, bubble: div });
+  Object.assign(boss, { active: true, hp: boss.max, fig: f, podium, pos, adm, skillT: 6, skillI: 0, bubble: div });
   $('bossbar').hidden = false; updateBossBar();
   banner('총장 등장!', '행정관을 부수고 방어막을 깨서 총장의 권위를 무너뜨리세요', 'gold'); SFX.bell(); shake(0.4, pos);
   if (NET.on && !NET.remote) sendNet({ t: 'ev', e: 'boss' });
 }
-function updateBossBar() { $('bossfill').style.width = Math.max(0, boss.hp) + '%'; $('bosshp').textContent = `${Math.max(0, Math.ceil(boss.hp))} / 100`; }
+function updateBossBar() { $('bossfill').style.width = Math.max(0, boss.hp / boss.max * 100) + '%'; $('bosshp').textContent = `${Math.max(0, Math.ceil(boss.hp))} / ${boss.max}`; }
 function bossDamage(v, why) {
   if (!boss.active) return;
   boss.hp -= v; updateBossBar();
-  if (!boss.offered && boss.hp < 50 && boss.hp > 0) {
+  if (!boss.offered && boss.hp < boss.max * 0.5 && boss.hp > 0) {
     boss.offered = true;
     negotiate({ who: '총장', face: '🎓', text: '그만하시오! 명예 졸업장과 장학금을 주겠소. 60초만 멈춰 주시오.', offer: '수락하면 장학금 ₩1,500,000 · 60초 휴전 · 총장 권위 +20',
-      accept: () => { wallet.won += 1500000; uiDirty = true; boss.hp = Math.min(100, boss.hp + 20); updateBossBar(); startTruce(60, '총장'); boss.bubble.textContent = '현명한 선택이오'; },
+      accept: () => { wallet.won += 1500000; uiDirty = true; boss.hp = Math.min(boss.max, boss.hp + boss.max * 0.2); updateBossBar(); startTruce(60, '총장'); boss.bubble.textContent = '현명한 선택이오'; },
       decline: () => { banner('협상 거절', '총장이 분노합니다! 특별 명령이 빨라져요', 'red'); boss.angry = true; boss.skillT = 3; boss.bubble.textContent = '좋소, 끝까지 가 봅시다!'; } });
   }
   if (why) popText(boss.fig.g.position.clone().setY(boss.fig.g.position.y + 5), `권위 −${Math.round(v)} · ${why}`);
@@ -4672,7 +4797,7 @@ function castDome(bd) {
   c.y = bd.base;
   const mesh = new THREE.Mesh(new THREE.SphereGeometry(r, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), domeMat.clone()); mesh.position.copy(c); scene.add(mesh);
   const wire = new THREE.Mesh(mesh.geometry, new THREE.MeshBasicMaterial({ color: 0xffe28a, wireframe: true, transparent: true, opacity: 0.25 })); wire.position.copy(c); scene.add(wire);
-  const d = { kind: 'dome', state: 'hold', zone: c, zoneR: r, hp: 120, crew: [], mesh, wire, until: clock + 25, retreat(broken) {
+  const d = { kind: 'dome', state: 'hold', zone: c, zoneR: r, hp: Math.round(120 * Math.min(2.5, threat())), crew: [], mesh, wire, until: clock + 25, retreat(broken) {
     if (this.gone) return; this.gone = true; this.hp = 0; scene.remove(this.mesh); scene.remove(this.wire); boss.domes.splice(boss.domes.indexOf(this), 1);
     if (broken) { fxSparks(this.zone.clone().setY(this.zone.y + this.zoneR * 0.6), 60, 20); SFX.boom(this.zone, 0.6); bossDamage(20, '방어막 파괴'); banner('황금 방어막 파괴!', '총장의 권위가 크게 흔들립니다', 'gold'); }
   } };
@@ -4694,10 +4819,11 @@ function updateBoss(dt) {
   for (const d of [...boss.domes]) { d.mesh.material.opacity = 0.1 + 0.08 * (d.hp / 120) + 0.04 * Math.sin(clock * 4); if (clock > d.until) d.retreat(false); }
   boss.skillT -= dt;
   if (boss.skillT <= 0) {
-    boss.skillT = boss.angry ? 9 : 15;
-    const order = ['restore', 'dome', 'army'], s = order[boss.skillI++ % 3];
-    boss.bubble.textContent = { restore: '긴급 복구령을 내린다!', dome: '황금 방어막을 펼쳐라!', army: '군 지원을 요청하겠소!' }[s];
-    if (s === 'restore') bossRestore();
+    boss.skillT = (boss.angry ? 9 : 15) / Math.min(2, threat());
+    const order = ['restore', 'dome', 'auth', 'army'], s = order[boss.skillI++ % 4];
+    boss.bubble.textContent = { auth: '총장 권한을 발동한다!', restore: '긴급 복구령을 내린다!', dome: '황금 방어막을 펼쳐라!', army: '군 지원을 요청하겠소!' }[s];
+    if (s === 'auth') useAuthority();
+    else if (s === 'restore') bossRestore();
     else if (s === 'dome') { const b = [...CAMPUS_BUILDINGS].filter(b => b.name).sort((p, q) => (q === boss.adm) - (p === boss.adm) || q.ratio() - p.ratio())[0]; if (b) castDome(b); }
     else { if (!teams.some(t => t.kind === 'army')) dispatchTeam('army', true); else bossRestore(); }
   }
@@ -4713,7 +4839,7 @@ function updateDefense(dt) {
   if (lvl > DEF.lvl && live) banner(`방어 세력 ${lvl}단계 · ${DEF_LV[lvl][1]}`, DEF_DESC[lvl], lvl >= 3 ? 'red' : 'blue');
   DEF.lvl = lvl;
   const army = teams.filter(t => t.kind === 'army').length, staff = teams.filter(t => t.kind === 'staff').length;
-  card('defense', `막는 세력 · ${lvl}단계 ${DEF_LV[lvl][1]}`, `교직원 ${staff ? '출동' : '-'} · 시설팀 ${teams.some(t => t.kind === 'facility') ? '출동' : '-'} · 군 ${army ? '출동' : '-'} · 대공포 ${aaGuns.length} · 방공기 ${defJets.length}${boss.active ? ' · 총장 등장' : ''} · 격추 ${stats.shotDown || 0} · 요격 ${stats.intercepted || 0}`, lvl / 4, lvl >= 3 ? 'red' : 'blue');
+  if (lvl === 0 && !boss.active && !teams.some(t => t.kind !== 'contractor')) uncard('defense'); else card('defense', `막는 세력 · ${lvl}단계 ${DEF_LV[lvl][1]}`, `교직원 ${staff ? '출동' : '-'} · 시설팀 ${teams.some(t => t.kind === 'facility') ? '출동' : '-'} · 군 ${army ? '출동' : '-'} · 대공포 ${aaGuns.length} · 방공기 ${defJets.length}${boss.active ? ' · 총장 등장' : ''} · 격추 ${stats.shotDown || 0} · 요격 ${stats.intercepted || 0}`, lvl / 4, lvl >= 3 ? 'red' : 'blue');
   if (!EVS.auto || !solo || !live || jong.state === 'wave') return;
   if (lvl >= 1 && !staff && clock > DEF.staffCool && (protest.active || Math.random() < 0.15)) { DEF.staffCool = clock + 70; dispatchTeam('staff'); }
   if (lvl >= 3 && !army && clock > DEF.armyCool) { DEF.armyCool = clock + 80; dispatchTeam('army'); }
@@ -5107,6 +5233,7 @@ function refreshClaims() {
   const n = claimable().length, chip = $('claimChip'); chip.hidden = !n; chip.textContent = `👑 점령 가능 ${n}`;
 }
 function claimBuilding(b) {
+  if (clock < (STG.noClaim || 0)) { toast(`행정 처분 중 · ${Math.ceil(STG.noClaim - clock)}초 뒤 점령할 수 있어요`); return false; }
   if (!spend(500000, `${b.name} 점령`)) return false;
   if (b.claimCard) { b.claimCard.remove(); b.claimCard = null; }
   owned.add(b); mEvent('claims'); b.prod = 'income'; b.prodT = 0;
@@ -5317,13 +5444,14 @@ function spawnKto() {
   f.g.position.copy(spot); scene.add(f.g);
   Object.assign(kto, { active: true, hp: kto.max, fig: f, pos: spot.clone(), skillT: 5, i: 0, shieldUntil: 0, nextShield: clock + 12, offered: false, aura, bubble: div, scr, halo, pillar, beacon });
   $('ktobar').hidden = false; updateKtoBar();
-  banner('최강 네임드 등장!', '만든이 김태오 (컴퓨터공학과) · 체력 300 · 코드 방어막과 Ctrl+Z를 씁니다', 'gold'); SFX.bell(); whiteFlash(); shake(0.6, spot);
+  banner('최강 네임드 등장!', `만든이 김태오 (컴퓨터공학과) · 체력 ${kto.max} · 코드 레이저·분신술·Ctrl+Z · 3단계 변신`, 'gold'); SFX.bell(); whiteFlash(); shake(0.6, spot);
   flyTo(spot.clone().add(V3(22, 18, 22)), spot.clone().setY(spot.y + 3));
 }
 function updateKtoBar() { $('ktofill').style.width = Math.max(0, kto.hp / kto.max * 100) + '%'; $('ktohp').textContent = `${Math.max(0, Math.ceil(kto.hp))} / ${kto.max}`; $('ktobar').classList.toggle('shield', clock < kto.shieldUntil); }
 function ktoDamage(v, why) {
   if (!kto.active) return;
-  if (clock < kto.shieldUntil) { v *= 0.2; why = '코드 방어막'; }
+  kto.lastHit = clock;
+  if (clock < kto.shieldUntil) { v *= 0.12; why = '코드 방어막'; }
   kto.hp -= v; updateKtoBar();
   popText(kto.fig.g.position.clone().setY(kto.fig.g.position.y + 7), `김태오 −${Math.round(v)}${why ? ' · ' + why : ''}`);
   if (!kto.offered && kto.hp < kto.max * 0.4 && kto.hp > 0) {
@@ -5342,8 +5470,9 @@ function ktoDamage(v, why) {
 }
 function ktoSkill() {
   const p = kto.fig.g.position;
-  const list = ['hotfix', 'undo', 'dome', 'call', 'kill', 'hotfix', 'teleport'];
+  const list = ['hotfix', 'laser', 'undo', 'dome', 'call', 'drain', 'kill', 'laser', 'teleport'];
   const s = list[kto.i++ % list.length];
+  if (s === 'laser' || s === 'drain') { ktoExtra(s); SFX.bell(); return; }
   if (s === 'hotfix') {
     const bs = [...CAMPUS_BUILDINGS].filter(b => b.name).sort((a, b) => b.ratio() - a.ratio()).slice(0, 3).filter(b => b.ratio() > 0.02);
     let n = 0; for (const b of bs) { const dead = []; b.blocks.forEach((k, i) => { if (!k.alive) dead.push(i); }); dead.sort((x, y) => b.blocks[x].y - b.blocks[y].y); for (const i of dead.slice(0, 220)) if (b.revive(i)) n++; const c = bbCenter(b); for (let j = 0; j < 30; j++) fire.spawn(c.x + rand(-12, 12), b.base + rand(0, b.H * B), c.z + rand(-12, 12), 0, rand(1, 4), 0, 0.3, 1, 0.5, 0.2, 1, 0.6, 1, 0, 1); }
@@ -5381,11 +5510,12 @@ function updateKto(dt) {
   if (inTruce()) return;
   if (clock > kto.nextShield) { kto.shieldUntil = clock + 6; kto.nextShield = clock + (kto.rage ? 18 : 30); banner('김태오 · 코드 방어막', '6초 동안 받는 피해 −80%', 'blue'); updateKtoBar(); }
   if ((kto.skillT -= dt) <= 0) { kto.skillT = kto.rage || kto.hp < kto.max / 3 ? 6 : 11; ktoSkill(); }
+  ktoPhase();
   if (Math.random() < dt * 0.08) kto.bubble.textContent = pick(KTO_LINES);
   if (frameNo % 20 === 0) updateKtoBar();
 }
 function ktoBoom(p, R) { if (kto.active && kto.fig && p.distanceTo(kto.fig.g.position) < 30 + R) ktoDamage(R * 0.9 * (1 - p.distanceTo(kto.fig.g.position) / (30 + R) * 0.6), '폭발'); }
-function clearKto() { if (kto.fig) scene.remove(kto.fig.g); Object.assign(kto, { active: false, defeated: false, queued: false, rage: false, hp: kto.max }); $('ktobar').hidden = true; }
+function clearKto() { if (kto.fig) scene.remove(kto.fig.g); Object.assign(kto, { active: false, defeated: false, queued: false, rage: false, ph2: false, ph3: false, hp: kto.max }); for (const c of kto.clones || []) scene.remove(c.f.g); kto.clones = []; $('ktobar').hidden = true; }
 
 /* =====================================================================
    12-25. 사람 목소리 · 웅성거림 · 시위 구호
@@ -6109,14 +6239,14 @@ function startRetake(b) {
   b = b || pick([...owned, ...myBuilds]); if (!b) return;
   const c = bbCenter(b), nd = G.nodes[nearestNode(c.x, c.z)], from = nd ? V3(nd[0], 0, nd[1]) : c;
   Object.assign(retake, { b, crew: [], prog: 0 });
-  const FB = facForRetake(b), NB = 10 + (FB.fund >= 600000 ? (FB.fund -= 600000, 2 + Math.round(facLvlSum(FB) / 4)) : 0); retake.fac = FB;
-  for (let k = 0; k < NB; k++) { const a = addAgent({ pos: from.clone().add(V3(rand(-6, 6), 0, rand(-6, 6))), kind: 'guard', role: k % 2 ? 'army' : 'facility', shirt: k % 3 ? FB.shirt : (k % 2 ? 0x5d6b47 : 0xff7a1a), pants: 0x2b3040, hat: k % 3 ? FB.hat : 0x3a4a2a, shield: k % 3 === 0, speed: 2.6, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = c.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); a.swing = 0.8; } } }); if (a) retake.crew.push(a); }
+  const FB = facForRetake(b), NB = Math.round((10 + (FB.fund >= 600000 ? (FB.fund -= 600000, 2 + Math.round(facLvlSum(FB) / 4)) : 0)) * Math.min(2.2, threat())); retake.fac = FB;
+  for (let k = 0; k < NB; k++) { const a = addAgent({ pos: from.clone().add(V3(rand(-6, 6), 0, rand(-6, 6))), kind: 'guard', role: k % 2 ? 'army' : 'facility', shirt: k % 3 ? FB.shirt : (k % 2 ? 0x5d6b47 : 0xff7a1a), pants: 0x2b3040, hat: k % 3 ? FB.hat : 0x3a4a2a, shield: k % 3 === 0, speed: 2.6, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = c.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); a.swing = 0.8; } } }); if (a) { retake.crew.push(a); if (Math.random() < eliteP()) makeElite(a); } }
   banner('⚔️ 탈환 작전!', `${FB.icon} ${FB.name} 탈환대 ${NB}명이 ${b.name}을(를) 부수며 빼앗으러 옵니다 · 근처를 공격하거나 [🛡️ 방어] 명령`, 'red'); SFX.siren(c);
   regNamed('⚔️ 탈환대', () => { const L = retake.crew.filter(a => !a.dead); return L.length ? L[0].pos.clone().setY(L[0].y) : c; }, () => !!retake.b);
 }
 function updateRetake(dt) {
   const all = [...owned, ...myBuilds];
-  if (!retake.b) { if (all.length && (retake.cool -= dt) <= 0) { retake.cool = rand(75, 120); startRetake(); } return; }
+  if (!retake.b) { if (all.length && (retake.cool -= dt) <= 0) { retake.cool = rand(75, 120) / Math.min(2, threat()); startRetake(); } return; }
   const b = retake.b, c = bbCenter(b);
   retake.crew = retake.crew.filter(a => !a.dead && !a.fadeOut);
   const here = retake.crew.filter(a => a.down <= 0 && Math.hypot(a.pos.x - c.x, a.pos.z - c.z) < 30).length;
@@ -6131,7 +6261,7 @@ function updateRetake(dt) {
     // 몸싸움: 탈환대 ↔ 내 돌격대·학생
     const mine = agents.filter(m => m.kind === 'mine' && m.down <= 0 && !m.fadeOut);
     for (const e of retake.crew) { if (e.down > 0 || e.fadeOut) continue; const m = mine.find(m => m.pos.distanceTo(e.pos) < 6); if (!m) continue;
-      const myWin = Math.random() < 0.5 + 0.08 * (lvlOf(b) - 1), l = myWin ? e : m; l.down = 2; l.hits = (l.hits || 0) + 1; popText(l.pos.clone().setY(l.y + 2.4), myWin ? '탈환대 밀림!' : '돌격대 밀림!'); SFX.hit(l.pos, 0.4); if (l.hits >= 3) { l.fadeOut = true; if (myWin) situLog('⚔️', '탈환대원 퇴각', `${b.name} 앞 몸싸움에서 이김`, 'gold'); } }
+      const myWin = Math.random() < 0.5 + 0.08 * (lvlOf(b) - 1) - (e.elite ? 0.2 : 0), l = myWin ? e : m; l.down = 2; l.hits = (l.hits || 0) + 1; popText(l.pos.clone().setY(l.y + 2.4), myWin ? '탈환대 밀림!' : '돌격대 밀림!'); SFX.hit(l.pos, 0.4); if (l.hits >= tough(l)) { l.fadeOut = true; if (myWin) STG.kills++; if (myWin) situLog('⚔️', '탈환대원 퇴각', `${b.name} 앞 몸싸움에서 이김`, 'gold'); } }
   }
   card('retake', `탈환 작전 · ${b.name}`, `막는 세력 ${retake.crew.length}명 · 내 학생 ${def}명이 막는 중 · 근처를 공격하면 쫓아내요`, retake.prog, 'red');
   if (retake.prog >= 1) { endRetake(); loseBuilding(b, '탈환 작전에 빼앗겼어요 · 다시 부수고 점령할 수 있어요'); }
@@ -6206,7 +6336,7 @@ function updateWar(dt) {
   if (WAR.order && WAR.order.ratio() >= CLAIM_AT) { banner('총공격 성공!', `${WAR.order.name}이(가) 무너졌어요 · 점령할 수 있어요`, 'gold'); offerClaim(WAR.order); WAR.order = null; uncard('order'); }
   // 내 세력 판
   if (frameNo % 20 === 0) { renderWarBox(); checkDomination(); }
-  updateCrates(dt); updateGold(dt); updateRain(dt); updateHero(dt); updateCounter(dt); updateTowers(dt); updateFactions(dt);
+  updateCrates(dt); updateGold(dt); updateRain(dt); updateHero(dt); updateCounter(dt); updateTowers(dt); updateFactions(dt); updateStage(dt); updateKtoClones(dt); updateMgInvite(dt); update134(dt);
 }
 // ── 명령 ──
 function orderAttack() { if (!raiders().length && !myBases().length) { toast('아직 내 세력이 없어요 · 건물을 점령하거나 직접 세우세요'); return; } WAR.orderMode = true; toast('🎯 총공격할 캠퍼스 건물을 누르세요'); }
@@ -6343,7 +6473,7 @@ function updateHero(dt) {
   if (d > 4) { const s = Math.min(d - 3, 3.2 * dt); g.position.x += dx / d * s; g.position.z += dz / d * s; g.rotation.y = Math.atan2(dx, dz); hero.f.armL.rotation.x = Math.sin(clock * 7) * 0.6; hero.f.armR.rotation.x = -Math.sin(clock * 7) * 0.6; }
   else { hero.f.armR.rotation.x = -2.6 + Math.sin(clock * 6) * 0.4; }
   g.position.y = terrainAt(g.position.x, g.position.z);
-  if ((hero.smashT -= dt) <= 0 && retake.b) { hero.smashT = 2; for (const e of retake.crew) if (!e.dead && e.pos.distanceTo(g.position) < 7) { fleeFrom(e, g.position, 9, 2); e.hits = (e.hits || 0) + 1; if (e.hits >= 3) e.fadeOut = true; popText(e.pos.clone().setY(e.y + 2.5), '대장의 일격!'); } }
+  if ((hero.smashT -= dt) <= 0 && retake.b) { hero.smashT = 2; for (const e of retake.crew) if (!e.dead && e.pos.distanceTo(g.position) < 7) { fleeFrom(e, g.position, 9, 2); e.hits = (e.hits || 0) + 1; if (e.hits >= tough(e)) { e.fadeOut = true; STG.kills++; } popText(e.pos.clone().setY(e.y + 2.5), '대장의 일격!'); } }
 }
 // ── 교직원 연합 총반격: 지배율 25%를 넘으면 한 번, 그 뒤 4분마다 기지 3개 이상이면 ──
 function startCounter() {
@@ -6369,6 +6499,10 @@ const ACH = [
   ['dom50', '캠퍼스 정복자', '지배율 50%', () => WAR.domDone && WAR.domDone.has(50), 5000000],
   ['boss', '총장 사퇴', '총장 보스를 쓰러뜨림', () => career.bossDown >= 1, 1000000],
   ['kto', '만든이를 넘어서', '최강 네임드 김태오를 쓰러뜨림', () => career.ktoDown >= 1, 5000000],
+  ['heli', '헬기 사냥꾼', '군 헬기를 격추', () => (career.heli || 0) >= 1, 1500000],
+  ['finder', '매의 눈', '찾기 미션 3번 성공', () => (career.finds || 0) >= 3, 1000000],
+  ['zj', '생활지도 졸업', '조남주 학생주임을 쫓아냄', () => (career.zjDown || 0) >= 1, 1000000],
+  ['ku', '쿠의 친구', '쿠에게 응원 5번 받기', () => (career.ku || 0) >= 5, 800000],
   ['facdown', '세력 와해', '총장·교수·시장 세력 중 하나의 건물을 모두 빼앗음', () => (career.facDown || 0) >= 1, 2000000],
   ['blocks10k', '철거 장인', '누적 블록 1만 개', () => career.blocks >= 10000, 1000000],
   ['blocks100k', '철거 전설', '누적 블록 10만 개', () => career.blocks >= 100000, 5000000],
@@ -6428,7 +6562,7 @@ function updateTowers(dt) {
     const e = foes[0]; t.head.rotation.y = Math.atan2(-(e.pos.z - gp.z), e.pos.x - gp.x);
     if (t.cool > 0) continue; t.cool = 1.1 / (1 + 0.3 * ((t.b.lvl || 1) - 1));
     const m = t.muzzle(); tracer(m, e.pos.clone().setY(e.y + 1.2), new THREE.LineBasicMaterial({ color: 0xd6b8ff, transparent: true, blending: THREE.AdditiveBlending }));
-    e.down = 1.8; e.hits = (e.hits || 0) + 1; fxSparks(e.pos.clone().setY(e.y + 1), 6, 6); if (e.hits >= 3) { e.fadeOut = true; popText(e.pos.clone().setY(e.y + 2.5), '포탑 격퇴!'); }
+    e.down = 1.8; e.hits = (e.hits || 0) + 1; fxSparks(e.pos.clone().setY(e.y + 1), 6, 6); if (e.hits >= tough(e)) { e.fadeOut = true; STG.kills++; popText(e.pos.clone().setY(e.y + 2.5), '포탑 격퇴!'); }
     if (++t.shots % 3 === 1) SFX.shot(m);
   }
 }
@@ -6487,7 +6621,7 @@ function facDispatch(F, b, n) {
   let k = 0;
   for (; k < n; k++) {
     const a = addAgent({ pos: from.clone().add(V3(rand(-4, 4), 0, rand(-4, 4))), kind: 'guard', role: 'facility', shirt: F.shirt, pants: 0x1f2633, hat: F.hat, shield: k % 3 === 0, tool: k % 3 !== 0, speed: rand(2.6, 3.1), think: facGuardThink });
-    if (!a) break; a.fac = F; a.post = b; a.fixT = rand(0.5, 1.5); F.guards.push(a);
+    if (!a) break; a.fac = F; a.post = b; a.fixT = rand(0.5, 1.5); F.guards.push(a); if (Math.random() < eliteP()) makeElite(a, `${F.short} 정예`);
   }
   if (k) { b.guardT = clock; situLog(F.icon, `${F.name} 수비대 ${k}명 → ${b.name}`, '공격받는 건물을 지키고 부서진 곳을 고쳐요 · 근처를 터뜨리면 흩어져요', 'red', 'facg' + b.name); }
   return k;
@@ -6519,15 +6653,15 @@ function facBrawl() {
   if (!mine.length) return;
   for (const F of FACS) for (const e of F.guards) {
     if (e.down > 0 || e.fadeOut) continue; const m = mine.find(m => m.pos.distanceTo(e.pos) < 2.5); if (!m) continue;
-    const L = lvlOf(e.post), myWin = Math.random() < 0.55 - 0.07 * (L - 1) + (heroNear(m) ? 0.18 : 0), l = myWin ? e : m;
+    const L = lvlOf(e.post), myWin = Math.random() < 0.55 - 0.07 * (L - 1) - (e.elite ? 0.2 : 0) + (heroNear(m) ? 0.18 : 0), l = myWin ? e : m;
     l.down = 2; l.hits = (l.hits || 0) + 1; popText(l.pos.clone().setY(l.y + 2.4), myWin ? `${F.short} 수비대 밀림!` : '돌격대 밀림!'); SFX.hit(l.pos, 0.4);
-    if (l.hits >= 3) { l.fadeOut = true; if (myWin) { wallet.won += 30000; uiDirty = true; } }
+    if (l.hits >= tough(l)) { l.fadeOut = true; if (myWin) { STG.kills++; wallet.won += e.elite ? 150000 : 30000; uiDirty = true; } }
   }
 }
 // 폭발에 수비대가 흩어짐 (3번 맞으면 퇴각)
 function facBoom(p, R0) {
   for (const F of FACS) for (const a of F.guards) if (!a.fadeOut && a.pos.distanceTo(p) < R0 * 2 + 5) {
-    fleeFrom(a, p, 7, 2); a.hits = (a.hits || 0) + 2; if (a.hits >= 3) { a.fadeOut = true; popText(a.pos.clone().setY(a.y + 2.5), `${F.short} 수비대 퇴각`); }
+    fleeFrom(a, p, 7, 2); a.hits = (a.hits || 0) + 2; if (a.hits >= tough(a)) { a.fadeOut = true; STG.kills++; popText(a.pos.clone().setY(a.y + 2.5), `${F.short} 수비대 퇴각`); }
   }
 }
 // 세력 AI
@@ -6537,7 +6671,7 @@ function updateFactions(dt) {
   for (const F of FACS) {
     F.guards = F.guards.filter(a => !a.dead && !a.fadeOut);
     const bs = facBldgs(F);
-    F.fund += dt * (bs.length ? 2500 + 1600 * facLvlSum(F) : 0) * (exam.until > clock ? 0.7 : 1);
+    F.fund += dt * (bs.length ? 2500 + 1600 * facLvlSum(F) : 0) * (exam.until > clock ? 0.7 : 1) * DIFF.fund * (1 + 0.06 * (STG.week - 1)) * (1 + domRatio());
     // 와해: 이 세력 건물이 하나도 안 남음
     if (!bs.length && !F.gone && CAMPUS_BUILDINGS.some(b => b.fac === F.key)) {
       F.gone = true; wallet.won += 3000000; uiDirty = true; addScore(3000);
@@ -6554,7 +6688,7 @@ function updateFactions(dt) {
     for (const b of bs) {
       const hot = clock - (b.hitAt || 0) < 4 && b.ratio() > 0.04;
       if (!hot || clock - (b.guardT || -99) < 25 || F.fund < 150000 || inTruce()) continue;
-      const n = 3 + 2 * lvlOf(b) + (F.fund > 3000000 ? 2 : 0);
+      const n = Math.round((3 + 2 * lvlOf(b) + (F.fund > 3000000 ? 2 : 0)) * Math.min(2, threat()));
       if (facDispatch(F, b, n)) F.fund -= 150000;
     }
     // ② 조용한 건물은 스스로 복구 (25초 동안 안 맞으면 3초마다 단계만큼 더)
@@ -6601,6 +6735,1116 @@ function resetFactions() {
   for (const b of CAMPUS_BUILDINGS) if (b.fac) { b.lvl = 1; b.guardT = 0; b.wasDown = false; facApply(b); }
 }
 
+/* =====================================================================
+   12-35. 난이도 · 학기 주차(스테이지) · 시나리오 · 적 권한 · 정예 (13판)
+   - 난이도 4단계(쉬움·보통·어려움·지옥): 적 체력·힘·자금 배율
+   - 학기 16주차: 2분 30초마다 한 주가 지나며 적이 강해짐. 주마다 시나리오 목표·보상, 8주차 중간고사, 16주차 기말(총장+김태오)
+   - 위협도 = 난이도 × (1 + 주차 보정) × (1 + 지배율 보정) → 내가 많이 차지할수록 어려워짐
+   - 세력 권한: 총장(등록금 인상·징계위원회·행정 처분) · 교수(출석 체크·시험 감독 강화) · 시장(공권력 투입·재개발 승인)
+   - 정예: 크고 금빛 모자, 7번 맞아야 퇴각
+   ===================================================================== */
+const DIFFS = {
+  easy:   { key: 'easy',   name: '쉬움',   hp: 0.7, pow: 0.75, fund: 0.7 },
+  normal: { key: 'normal', name: '보통',   hp: 1,   pow: 1,    fund: 1 },
+  hard:   { key: 'hard',   name: '어려움', hp: 1.6, pow: 1.3,  fund: 1.4 },
+  hell:   { key: 'hell',   name: '지옥',   hp: 2.5, pow: 1.7,  fund: 2 },
+};
+let DIFF = DIFFS[store.get('diff', 'normal')] || DIFFS.normal;
+function setDiff(k) { DIFF = DIFFS[k] || DIFFS.normal; store.set('diff', DIFF.key); document.querySelectorAll('#diffSel button').forEach(b => b.classList.toggle('on', b.dataset.d === DIFF.key)); applyDiffHP(); }
+const domRatio = () => owned.size / Math.max(1, CAMPUS_BUILDINGS.filter(b => b.name).length);
+const STG = { week: 1, t: 0, len: 150, sem: 1, goal: null, g0: 0, done: false, kills: 0, auth: 50, don: 120, final: false };
+const threat = () => DIFF.pow * (1 + 0.07 * (STG.week - 1) + 0.25 * (STG.sem - 1)) * (1 + 1.4 * domRatio());
+const hpMul = () => DIFF.hp * (1 + 0.04 * (STG.week - 1) + 0.2 * (STG.sem - 1));
+const tough = a => a.elite ? 7 : 3;
+// 체력 배율 (총장·김태오·방어막)
+function applyDiffHP() {
+  const bm = Math.round(250 * hpMul()); if (!boss.active) { boss.max = bm; boss.hp = bm; }
+  const km = Math.round(900 * DIFF.hp * (1 + 0.15 * (STG.sem - 1))); if (!kto.active) { kto.max = km; kto.hp = km; }
+}
+// 정예 만들기
+function makeElite(a, label) {
+  if (!a) return a; a.elite = true; a.scale = 1.4; a.hat = 0xffc83d; a.shield = true; a.speed *= 1.1; agentsDirty = true;
+  if (label) popText(a.pos.clone().setY(a.y + 3.4), label);
+  return a;
+}
+const eliteP = () => clamp(0.05 + 0.18 * (threat() - 1), 0.03, 0.55);
+// ── 주차별 시나리오 목표 ──
+const blocksNow = () => stats.blocks;
+const bRatio = n => { const b = byName(n); return b ? b.ratio() : 0; };
+const WEEKS = [
+  null,
+  { t: 'OT 주간 · 캠퍼스에 인사하기', d: '블록 300개 부수기', v: () => blocksNow() - STG.g0, goal: 300, pay: 300000 },
+  { t: '수강 정정 · 학생회관 뒤흔들기', d: '학생회관 30% 부수기', v: () => bRatio('학생회관') * 100, goal: 30, abs: true, pay: 500000 },
+  { t: '동아리 모집 · 첫 깃발', d: '캠퍼스 건물 1채 점령', v: () => owned.size, goal: 1, abs: true, pay: 800000 },
+  { t: '수비대와의 첫 충돌', d: '세력 수비대·탈환대 5명 물리치기', v: () => STG.kills - STG.g0, goal: 5, pay: 800000 },
+  { t: '교수연구동 포위', d: '교수연구동 50% 부수기', v: () => bRatio('교수연구동') * 100, goal: 50, abs: true, pay: 1000000 },
+  { t: '조별 과제 · 세력 넓히기', d: '기지 2개 갖기 (점령·직접 세우기)', v: () => myBases().length, goal: 2, abs: true, pay: 1200000 },
+  { t: '캠퍼스 생활 · 미니게임', d: '미니게임 아무거나 1번 성공 (☰ 더보기 → 🎮)', v: () => (career.mgWin || 0) - STG.g0, goal: 1, pay: 1000000 },
+  { t: '📝 중간고사 · 교수 세력 총력전', d: '기지 2개를 주말까지 지키기', v: () => myBases().length, goal: 2, abs: true, hold: true, pay: 2000000 },
+  { t: '세력 확장', d: '캠퍼스 지배율 15%', v: () => Math.round(domRatio() * 100), goal: 15, abs: true, pay: 1500000 },
+  { t: '🎓 총장과의 대면', d: '총장의 권위를 절반 깎기', v: () => boss.max ? Math.round((1 - Math.max(0, boss.hp) / boss.max) * 100) : 0, goal: 50, abs: true, pay: 2000000, start: () => { if (!boss.active && !boss.defeated) spawnBoss(); } },
+  { t: '축제 주간 · 장기자랑', d: '장기자랑 미니게임 출전', v: () => (career.mgTalent || 0) - STG.g0, goal: 1, pay: 1500000 },
+  { t: '탈환 저지 작전', d: '탈환대 2번 막기', v: () => (career.repel || 0) - STG.g0, goal: 2, pay: 2000000, start: () => { retake.cool = Math.min(retake.cool, 20); } },
+  { t: '💻 전산실 침투', d: '전산실 해킹 성공', v: () => (career.mgHack || 0) - STG.g0, goal: 1, pay: 2000000 },
+  { t: '캠퍼스 반란', d: '캠퍼스 지배율 25%', v: () => Math.round(domRatio() * 100), goal: 25, abs: true, pay: 3000000 },
+  { t: '종강 전야 · 대공세', d: '아무 세력이나 건물 3채 더 무너뜨리기(70%)', v: () => CAMPUS_BUILDINGS.filter(b => b.name && b.ratio() >= 0.7).length - STG.g0, goal: 3, pay: 3000000 },
+  { t: '🔥 기말고사 · 최종 결전', d: '김태오를 쓰러뜨리거나 지배율 50%', v: () => kto.defeated || domRatio() >= 0.5 ? 1 : 0, goal: 1, abs: true, pay: 10000000, start: () => { if (!boss.active && !boss.defeated) spawnBoss(); if (!kto.active && !kto.defeated) { kto.queued = true; after(8, spawnKto); } } },
+];
+function weekBase(w) { const W = WEEKS[w]; if (!W || W.abs) return 0; if (w === 1) return blocksNow(); if (w === 4) return STG.kills; if (w === 7) return career.mgWin || 0; if (w === 11) return career.mgTalent || 0; if (w === 12) return career.repel || 0; if (w === 13) return career.mgHack || 0; if (w === 15) return CAMPUS_BUILDINGS.filter(b => b.name && b.ratio() >= 0.7).length; return 0; }
+function startWeek(w) {
+  STG.week = w; STG.t = 0; STG.done = false; STG.g0 = weekBase(w); const W = WEEKS[w];
+  banner(`📅 ${STG.sem > 1 ? STG.sem + '회차 · ' : ''}${w}주차 · ${W.t}`, `목표: ${W.d} · 보상 ${won(W.pay)} · 위협도 ${threat().toFixed(1)}`, w === 8 || w === 16 ? 'red' : 'gold');
+  situLog('📅', `${w}주차 시작`, `${W.t} · 적 세력이 조금 더 강해졌어요 (위협도 ${threat().toFixed(1)})`, 'gold', 'week');
+  if (w === 8) { triggerEvent('exam'); for (const b of CAMPUS_BUILDINGS) if (b.fac === 'prof' && !owned.has(b) && lvlOf(b) < 3) { b.lvl = lvlOf(b) + 1; facApply(b); } banner('📝 중간고사!', '교수 세력 건물이 모두 한 단계 올라갔어요 · 시험 감독 강화', 'red'); }
+  if (W.start) W.start();
+  applyDiffHP(); renderStage();
+}
+function weekProgress() { const W = WEEKS[STG.week]; if (!W) return 0; let v = 0; try { v = W.v(); } catch {} return clamp(v / W.goal, 0, 1); }
+function updateStage(dt) {
+  if ($('intro').style.display !== 'none' || jong.state === 'wave') return;
+  STG.t += dt; const W = WEEKS[STG.week];
+  if (W && !STG.done && !W.hold && weekProgress() >= 1) weekClear();
+  if (STG.t >= STG.len) {
+    if (W && W.hold && !STG.done && weekProgress() >= 1) weekClear();
+    if (STG.week >= 16) { endSemesterRun(); return; }
+    startWeek(STG.week + 1);
+  }
+  // 기부: 2~3분마다 (예전보다 자주)
+  if ((STG.don -= dt) <= 0 && EVS.auto && !(NET.on && !NET.host)) { STG.don = rand(110, 170); if (campusPct > 0.5) triggerEvent(Math.random() < 0.55 ? 'donate_new' : 'remodel'); }
+  // 세력 권한 발동
+  if ((STG.auth -= dt * threat()) <= 0 && !inTruce() && myBases().length + (campusPct > 2 ? 1 : 0) > 0) { STG.auth = rand(45, 75); useAuthority(); }
+  if (frameNo % 15 === 0) renderStage();
+}
+function weekClear() {
+  const W = WEEKS[STG.week]; STG.done = true; wallet.won += W.pay; uiDirty = true; addScore(500 * STG.week);
+  banner(`✅ ${STG.week}주차 목표 달성!`, `${W.t} · 장학금 ${won(W.pay)}`, 'gold'); SFX.cheer(controls.target);
+  career.weeks = (career.weeks || 0) + 1; renderStage();
+}
+function endSemesterRun() {
+  const win = kto.defeated || domRatio() >= 0.5, cleared = career.weeks || 0;
+  const grade = win ? (DIFF.key === 'hell' ? 'S+' : DIFF.key === 'hard' ? 'S' : 'A') : domRatio() >= 0.25 ? 'B' : 'C';
+  career.bestGrade = career.bestGrade || ''; if (grade > career.bestGrade || !career.bestGrade) career.bestGrade = grade;
+  negotiate({ who: `${STG.sem}회차 학기 종료`, face: win ? '🏆' : '📄', text: win ? `캠퍼스를 무너뜨리고 학기를 마쳤어요! 난이도 ${DIFF.name} · 성적 ${grade}` : `학기가 끝났어요. 지배율 ${Math.round(domRatio() * 100)}% · 성적 ${grade}`,
+    offer: `수락 = ${STG.sem + 1}회차 다음 학기 시작 (적이 더 강해지고 보상도 커져요) · 거절 = 이대로 계속`,
+    accept: () => { STG.sem++; startWeek(1); }, decline: () => { STG.week = 16; STG.t = 0; } });
+  if (win) { for (let k = 0; k < 20; k++) after(k * 0.15, () => launchFirework(controls.target.clone().add(V3(rand(-50, 50), 0, rand(-50, 50))), true)); }
+  saveCareer();
+}
+function renderStage() {
+  const W = WEEKS[STG.week]; if (!W) return; const p = weekProgress();
+  $('wkT').textContent = SMALL ? `📅 ${STG.week}주차 · 위협 ${threat().toFixed(1)}` : `📅 ${STG.sem > 1 ? STG.sem + '회차 ' : ''}${STG.week}주차 · ${DIFF.name} · 위협 ${threat().toFixed(1)}`;
+  $('wkG').textContent = STG.done ? `✅ ${W.d}` : `🎯 ${W.d}`;
+  $('wkBar').style.width = (STG.done ? 100 : p * 100) + '%';
+  $('wkTime').style.width = (STG.t / STG.len * 100) + '%';
+}
+// ── 세력 권한 ──
+function useAuthority() {
+  const live = FACS.filter(F => facBldgs(F).length); if (!live.length) return;
+  const F = pick(live), bases = myBases(), rs = raiders();
+  const T = threat();
+  if (F.key === 'pres') {
+    const s = pick(bases.length ? ['tuition', 'discipline', 'order'] : ['tuition', 'order']);
+    if (s === 'tuition') { const v = Math.min(Math.round(wallet.won * 0.08 * Math.min(2, T)), 3000000); if (v > 0) { wallet.won -= v; F.fund += v; uiDirty = true; } banner('🎓 총장 권한 · 등록금 인상', `장학금 ${won(v)}이(가) 총장 세력 자금으로 넘어갔어요`, 'red'); }
+    else if (s === 'discipline') { const n = Math.min(rs.length, Math.round(4 + 3 * T)); rs.sort(() => Math.random() - 0.5).slice(0, n).forEach(a => { a.fadeOut = true; popText(a.pos.clone().setY(a.y + 2.4), '징계!'); }); banner('🎓 총장 권한 · 징계위원회', `내 돌격대 ${n}명이 징계로 돌아갔어요`, 'red'); }
+    else { STG.noClaim = clock + 25 * Math.min(2, T); banner('🎓 총장 권한 · 행정 처분', `${Math.round(STG.noClaim - clock)}초 동안 점령할 수 없어요`, 'red'); }
+  } else if (F.key === 'prof') {
+    const s = pick(rs.length ? ['attend', 'exam'] : ['exam']);
+    if (s === 'attend') { for (const a of rs) { a.down = 3 + T * 2; } banner('📚 교수 권한 · 출석 체크', `돌격대 ${rs.length}명이 ${Math.round(3 + T * 2)}초 동안 출석 부르느라 멈췄어요`, 'red'); }
+    else { STG.examUntil = clock + 25; for (const b of facBldgs(F)) b.armor = Math.min(0.8, (b.armor || 0) + 0.25); banner('📚 교수 권한 · 시험 감독 강화', '25초 동안 교수 세력 건물이 25% 더 단단해져요', 'red'); after(25, () => { for (const b of facBldgs(F)) facApply(b); }); }
+  } else {
+    const s = pick(bases.length ? ['police', 'redev'] : ['redev']);
+    if (s === 'police' && bases.length) {
+      const b = pick(bases), c = bbCenter(b), nd = G.nodes[nearestNode(c.x + 40, c.z + 40)], from = nd ? V3(nd[0], 0, nd[1]) : c; let k = 0;
+      for (let i = 0; i < Math.round(3 + 2 * T); i++) { const a = addAgent({ pos: from.clone().add(V3(rand(-4, 4), 0, rand(-4, 4))), kind: 'guard', role: 'army', shirt: 0x1d2c4a, pants: 0x14192a, hat: 0x1d2c4a, shield: true, speed: 3, think: (a, dt) => { if (a.down > 0) return; if (!myBases().includes(b)) { a.fadeOut = true; return; } const foe = raiders().find(m => m.pos.distanceTo(a.pos) < 14); const g = foe ? foe.pos : c; if (stepTo(a, g.x + (foe ? 0 : rand(-8, 8)), g.z + (foe ? 0 : rand(-8, 8)), a.speed, dt) && !foe && (a.hitT = (a.hitT || 0) - dt) <= 0) { a.hitT = 1.3; const p = b.built ? null : nearestAliveBlock(b, a.pos); if (p) { a.swing = 1.4; damageSphere(p, 1.3, 5, warAct()); } } } }); if (a) { a.fac = F; a.post = b; F.guards.push(a); if (i < 2) makeElite(a, '정예 기동대'); k++; } }
+      banner('🏛️ 시장 권한 · 공권력 투입', `기동대 ${k}명(정예 포함)이 ${b.name}을(를) 압박해요 · 폭발로 흩어 놓으세요`, 'red'); SFX.siren(c);
+    } else {
+      const b = facBldgs(F).sort((p, q) => q.ratio() - p.ratio())[0]; if (!b) return;
+      restoreBuilding(b); if (lvlOf(b) < 3) b.lvl = lvlOf(b) + 1; facApply(b);
+      banner('🏛️ 시장 권한 · 재개발 승인', `${b.name}이(가) 다시 지어지고 ${'★'.repeat(lvlOf(b))}로 보강됐어요`, 'red');
+    }
+  }
+  SFX.bell(); career.authSeen = (career.authSeen || 0) + 1;
+}
+// ── 김태오 강화 기술 ──
+function ktoExtra(s) {
+  const p = kto.fig.g.position;
+  if (s === 'laser') {   // 코드 레이저: 가까운 돌격대 쓸어버리고 내 기지 블록을 태움
+    const rs = raiders().filter(a => a.pos.distanceTo(p) < 90); let n = 0;
+    for (const a of rs.slice(0, 12)) { tracer(p.clone().setY(p.y + 6), a.pos.clone().setY(a.y + 1), new THREE.LineBasicMaterial({ color: 0x39ff88, transparent: true, blending: THREE.AdditiveBlending })); a.fadeOut = true; n++; }
+    const b = myBases().sort((x, y) => bbCenter(x).distanceTo(p) - bbCenter(y).distanceTo(p))[0];
+    if (b && !b.built) { const q = nearestAliveBlock(b, p); if (q) { tracer(p.clone().setY(p.y + 6), q, new THREE.LineBasicMaterial({ color: 0x39ff88, transparent: true, blending: THREE.AdditiveBlending })); damageSphere(q, 4, 10, warAct()); } }
+    banner('김태오 · 코드 레이저', `돌격대 ${n}명 삭제${b ? ' · ' + b.name + ' 직격' : ''}`, 'red'); kto.bubble.textContent = 'rm -rf ./돌격대';
+  } else if (s === 'clone') {   // 분신 3명: 20초 동안 주변 건물 복구, 폭발로 지움
+    kto.clones = kto.clones || [];
+    for (let k = 0; k < 3; k++) {
+      const f = makeNamed('김태오 (분신)', '핫픽스 담당', 0x111522, 0x39ff88, 2.2), ang = k / 3 * Math.PI * 2, q = p.clone().add(V3(Math.cos(ang) * 14, 0, Math.sin(ang) * 14)); q.y = terrainAt(q.x, q.z);
+      f.g.position.copy(q); scene.add(f.g); kto.clones.push({ f, until: clock + 20, fixT: 1 });
+    }
+    banner('김태오 · 분신술 (git fork)', '분신 3명이 20초 동안 건물을 고쳐요 · 근처를 폭발시켜 지우세요', 'red'); kto.bubble.textContent = 'git fork ×3';
+  } else if (s === 'drain') {   // 서버 비용 청구
+    const v = Math.min(Math.round(wallet.won * 0.12), 5000000); wallet.won -= v; uiDirty = true;
+    for (const F of FACS) F.fund += v / 3;
+    banner('김태오 · 서버비 청구', `장학금 ${won(v)}을(를) 적 세력 셋에게 나눠 줬어요`, 'red'); kto.bubble.textContent = 'AWS 요금이 많이 나왔네.';
+  }
+}
+function updateKtoClones(dt) {
+  if (!kto.clones || !kto.clones.length) return;
+  for (const c of [...kto.clones]) {
+    const g = c.f.g; g.rotation.y += dt * 2; g.position.y = terrainAt(g.position.x, g.position.z) + 0.3 + Math.sin(clock * 3 + g.position.x) * 0.3;
+    if ((c.fixT -= dt) <= 0) { c.fixT = 1; const b = [...CAMPUS_BUILDINGS].filter(x => x.name && x.ratio() > 0.01 && !owned.has(x)).sort((x, y) => bbCenter(x).distanceTo(g.position) - bbCenter(y).distanceTo(g.position))[0]; if (b) { NET.remote = true; for (let t = 0; t < 12; t++) { const i = facDeadLow(b); if (i < 0 || !b.revive(i)) break; } NET.remote = false; } }
+    if (clock > c.until || !kto.active) { scene.remove(g); kto.clones.splice(kto.clones.indexOf(c), 1); }
+  }
+}
+function ktoCloneBoom(p, R) { if (!kto.clones) return; for (const c of [...kto.clones]) if (c.f.g.position.distanceTo(p) < R + 6) { fxSparks(c.f.g.position.clone().setY(c.f.g.position.y + 3), 30, 12); scene.remove(c.f.g); kto.clones.splice(kto.clones.indexOf(c), 1); popText(c.f.g.position.clone().setY(c.f.g.position.y + 5), '분신 삭제!'); ktoDamage(kto.max * 0.03, '분신 삭제'); } }
+// 단계 전환: 50% · 25%
+function ktoPhase() {
+  if (!kto.active) return;
+  const r = kto.hp / kto.max;
+  if (r < 0.5 && !kto.ph2) { kto.ph2 = true; kto.rage = true; ktoExtra('clone'); banner('⚠️ 김태오 2단계 · 디버그 모드', '기술이 빨라지고 분신을 부릅니다', 'red'); kto.fig.g.scale.multiplyScalar(1.12); }
+  if (r < 0.25 && !kto.ph3) { kto.ph3 = true; kto.hp += kto.max * 0.2; updateKtoBar(); kto.shieldUntil = clock + 10; for (const F of FACS) F.fund += 2000000; banner('🔥 김태오 3단계 · 최종 배포', '체력 20% 회복 · 10초 방어막 · 적 세력 모두 자금 +200만', 'red'); whiteFlash(); shake(0.8, kto.fig.g.position); }
+  // 6초 동안 안 맞으면 초당 0.6% 회복
+  if (clock - (kto.lastHit || 0) > 6 && kto.hp < kto.max) { kto.hp = Math.min(kto.max, kto.hp + kto.max * 0.006 * (1 / 60)); if (frameNo % 30 === 0) updateKtoBar(); }
+}
+
+document.querySelectorAll('#diffSel button').forEach(b => b.onclick = () => setDiff(b.dataset.d)); setDiff(DIFF.key);
+/* =====================================================================
+   12-36. 미니게임 (13.1판): 💃 강의시간 몰래 춤추기 · 🏃 출석하고 튀기 · 🎤 장기자랑 · 💻 전산실 해킹
+   - ☰ 더보기 → 🎮 미니게임, 또는 가끔 뜨는 초대 단추. 하는 동안 캠퍼스 시간은 멈춤
+   - 결과는 장학금·세력 전쟁 효과로 이어짐 (해킹 → 방어막 해제·자금 탈취·수비대 마비)
+   ===================================================================== */
+const MG = { on: null, raf: 0, keys: {}, hold: false, cv: null, g: null, W: 720, H: 420, t: 0, last: 0, inviteT: 90 };
+const MG_LIST = [
+  { id: 'dance', icon: '💃', name: '강의시간 몰래 춤추기', desc: '교수님이 칠판을 볼 때만 춤추기! 돌아보는 순간 멈춰요. 게이지 100%면 성공', ctrl: 'Space 또는 [춤추기] 꾹 누르기' },
+  { id: 'attend', icon: '🏃', name: '출석하고 튀기', desc: '내 이름이 불리면 "네!" → 교수님 몰래 뒷문으로 탈출', ctrl: 'Space 또는 [네! / 몰래 이동]' },
+  { id: 'talent', icon: '🎤', name: '장기자랑 나가기', desc: '노천극장 무대! 떨어지는 음표를 박자에 맞춰 누르기', ctrl: 'D F J K 또는 칸 누르기' },
+  { id: 'hack', icon: '💻', name: '전산실 해킹', desc: '가로·세로 번갈아 코드를 골라 명령어를 완성. 성공하면 적 세력에 타격', ctrl: '칸 누르기 (가로줄 → 세로줄 번갈아)' },
+];
+const mgEl = id => document.getElementById(id);
+function mgShow() { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu', 'helpmenu']) { const e = mgEl(k); if (e) e.hidden = true; } mgEl('mg').hidden = false; mgEl('mgInvite').hidden = true; }
+function mgMenu() {
+  mgShow(); mgStop(); mgEl('mgTitle').textContent = '🎮 미니게임';
+  const best = career.mgBest || {};
+  mgEl('mgBody').innerHTML = '<div class="mggrid">' + MG_LIST.map(m => `<button class="mgcard" data-g="${m.id}"><b>${m.icon} ${m.name}</b><small>${m.desc}</small><em>${m.ctrl}${best[m.id] ? ' · 최고 ' + best[m.id] : ''}</em></button>`).join('') + '</div><p class="mgnote">미니게임을 하는 동안 캠퍼스 시간은 멈춰요 · 성공하면 장학금과 세력 전쟁 보너스</p>';
+  mgEl('mgBody').querySelectorAll('.mgcard').forEach(b => b.onclick = () => mgStart(b.dataset.g));
+}
+function mgStart(id) {
+  const M = MG_LIST.find(m => m.id === id); if (!M) return;
+  mgShow(); audioInit(); window.__mgPause = true;
+  mgEl('mgTitle').textContent = `${M.icon} ${M.name}`;
+  mgEl('mgBody').innerHTML = `<div class="mgwrap"><canvas id="mgCv" width="${MG.W}" height="${MG.H}"></canvas></div><div class="mgctl" id="mgCtl"></div><p class="mgnote">${M.desc} · ${M.ctrl}</p>`;
+  MG.cv = mgEl('mgCv'); MG.g = MG.cv.getContext('2d'); MG.on = { id, t: 0, over: false };
+  MG.cv.onpointerdown = e => { const r = MG.cv.getBoundingClientRect(); mgTap((e.clientX - r.left) / r.width * MG.W, (e.clientY - r.top) / r.height * MG.H); };
+  ({ dance: danceInit, attend: attendInit, talent: talentInit, hack: hackInit })[id]();
+  MG.last = performance.now(); cancelAnimationFrame(MG.raf); MG.raf = requestAnimationFrame(mgLoop);
+}
+function mgButton(label, holdable, fn) {
+  const b = document.createElement('button'); b.className = 'mgbtn'; b.textContent = label;
+  if (holdable) { const on = e => { e.preventDefault(); MG.hold = true; b.classList.add('down'); }, off = () => { MG.hold = false; b.classList.remove('down'); }; b.onpointerdown = on; b.onpointerup = b.onpointerleave = b.onpointercancel = off; }
+  else b.onclick = fn;
+  mgEl('mgCtl').appendChild(b); return b;
+}
+function mgStop() { cancelAnimationFrame(MG.raf); MG.on = null; MG.hold = false; MG.keys = {}; window.__mgPause = false; if (MG.song) { try { MG.song.stop(); } catch {} MG.song = null; } }
+function mgLoop(now) {
+  if (!MG.on || mgEl('mg').hidden) { mgStop(); return; }
+  MG.raf = requestAnimationFrame(mgLoop);
+  const dt = Math.min(0.05, (now - MG.last) / 1000); MG.last = now; MG.on.t += dt;
+  const S = MG.on; if (!S.over) S.update(dt); S.draw(MG.g);
+}
+function mgTap(x, y) { const S = MG.on; if (S && !S.over && S.tap) S.tap(x, y); }
+function mgEnd(win, title, sub, pay, extra) {
+  const S = MG.on; if (!S || S.over) return; S.over = true; MG.hold = false;
+  const id = S.id; career.mgPlay = (career.mgPlay || 0) + 1;
+  if (win) { career.mgWin = (career.mgWin || 0) + 1; wallet.won += pay; uiDirty = true; }
+  if (id === 'talent') career.mgTalent = (career.mgTalent || 0) + 1;
+  if (id === 'hack' && win) career.mgHack = (career.mgHack || 0) + 1;
+  if (id === 'dance' && win) career.mgDance = (career.mgDance || 0) + 1;
+  saveCareer();
+  const ctl = mgEl('mgCtl'); ctl.innerHTML = `<div class="mgres ${win ? 'win' : 'lose'}"><b>${title}</b><span>${sub}${win && pay ? ' · 장학금 ' + won(pay) : ''}</span></div>`;
+  const again = document.createElement('button'); again.className = 'mgbtn'; again.textContent = '↻ 다시'; again.onclick = () => mgStart(id);
+  const back = document.createElement('button'); back.className = 'mgbtn'; back.textContent = '목록'; back.onclick = mgMenu;
+  const out = document.createElement('button'); out.className = 'mgbtn hot'; out.textContent = '캠퍼스로 ▶'; out.onclick = () => { mgEl('mg').hidden = true; mgStop(); if (extra) extra(); };
+  ctl.append(again, back, out);
+  if (win) SFX.cheer(controls.target); else SFX.ding();
+}
+// 공통 그림
+function mgText(g, s, x, y, size = 20, col = '#fff', al = 'center', w = 800) { g.font = `${w} ${size}px "Noto Sans KR",sans-serif`; g.fillStyle = col; g.textAlign = al; g.fillText(s, x, y); }
+function mgPerson(g, x, y, s, shirt, opts = {}) {   // 앞(얼굴)/뒤 모습, 팔 각도
+  const { back = false, armL = 0.3, armR = -0.3, hair = '#2a211a', bob = 0, skin = '#f0c8a0' } = opts;
+  g.save(); g.translate(x, y + bob); g.scale(s, s);
+  g.fillStyle = '#2b2f3a'; g.fillRect(-11, 18, 9, 30); g.fillRect(2, 18, 9, 30);
+  const arm = (ax, ang) => { g.save(); g.translate(ax, -14); g.rotate(ang); g.fillStyle = shirt; g.fillRect(-4, 0, 8, 26); g.fillStyle = skin; g.fillRect(-4, 24, 8, 7); g.restore(); };
+  arm(-16, armL); arm(16, armR);
+  g.fillStyle = shirt; g.beginPath(); g.roundRect(-15, -18, 30, 40, 6); g.fill();
+  g.fillStyle = skin; g.beginPath(); g.arc(0, -30, 13, 0, Math.PI * 2); g.fill();
+  g.fillStyle = hair; g.beginPath(); g.arc(0, back ? -30 : -34, back ? 13.5 : 12, Math.PI, back ? Math.PI * 3 : Math.PI * 2); g.fill();
+  if (!back) { g.fillStyle = '#1a1208'; g.fillRect(-6, -32, 3, 3); g.fillRect(3, -32, 3, 3); if (opts.angry) { g.fillRect(-8, -37, 6, 2); g.fillRect(2, -37, 6, 2); } g.fillStyle = '#9a4a3a'; g.fillRect(-4, -24, 8, 2); }
+  if (opts.glasses && !back) { g.strokeStyle = '#222'; g.lineWidth = 1.5; g.strokeRect(-9, -35, 7, 6); g.strokeRect(2, -35, 7, 6); }
+  g.restore();
+}
+function mgClass(g, light = '#e9e2d0') {
+  g.fillStyle = light; g.fillRect(0, 0, MG.W, MG.H);
+  g.fillStyle = '#cfc6b0'; g.fillRect(0, 300, MG.W, 120);
+  g.fillStyle = '#2f4a3a'; g.fillRect(160, 40, 400, 150); g.strokeStyle = '#8a6a3a'; g.lineWidth = 8; g.strokeRect(160, 40, 400, 150);
+  g.fillStyle = 'rgba(255,255,255,.75)'; g.font = '700 18px "Noto Sans KR",sans-serif'; g.textAlign = 'left';
+  g.fillText('자료구조 · 7주차', 180, 72); g.fillText('void push(Node* n) {', 180, 102); g.fillText('  top = n; size++;', 180, 128); g.fillText('}  // 시험에 나옴!!', 180, 154);
+  g.fillStyle = '#6b8fb5'; g.fillRect(40, 50, 90, 120); g.fillStyle = '#a8c8e8'; g.fillRect(46, 56, 78, 108);
+}
+function mgDesks(g, rows, cols, y0, skip, people) {
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const x = 120 + c * 120 + (r % 2) * 10, y = y0 + r * 52;
+    if (people && !(skip && skip(r, c))) mgPerson(g, x, y - 18, 0.62, people[(r * cols + c) % people.length], { back: true, armL: 0.15, armR: -0.15, hair: ['#2a211a', '#5a3a2a', '#1a1208', '#8a5a3a'][(r + c) % 4] });
+    g.fillStyle = '#b08a5a'; g.fillRect(x - 40, y, 80, 14); g.fillStyle = '#8a6a3a'; g.fillRect(x - 36, y + 14, 6, 22); g.fillRect(x + 30, y + 14, 6, 22);
+  }
+}
+const SHIRTS = ['#2f6fd6', '#d9443a', '#3aa56b', '#f2c230', '#8a52c8', '#e8dcc5', '#222428', '#6fb7d8'];
+// 교수님 상태 기계: write(칠판) → warn(멈칫) → look(돌아봄)
+function profTick(P, dt, speed = 1) {
+  P.t -= dt * speed;
+  if (P.t > 0) return;
+  if (P.st === 'write') { P.st = 'warn'; P.t = rand(0.45, 0.85); }
+  else if (P.st === 'warn') { P.st = 'look'; P.t = rand(1.3, 2.3); }
+  else { P.st = 'write'; P.t = rand(1.8, 3.6); }
+}
+function drawProf(g, P, x = 360, y = 235) {
+  const back = P.st === 'write', warn = P.st === 'warn';
+  mgPerson(g, x + (warn ? Math.sin(MG.on.t * 40) * 2 : 0), y, 1.25, '#2b2f3a', { back, armR: back ? -2.4 + Math.sin(MG.on.t * 9) * 0.2 : -0.2, armL: 0.2, hair: '#9a9a9a', glasses: true, angry: P.st === 'look' && P.caught > 0 });
+  if (warn) { g.fillStyle = '#fff'; g.beginPath(); g.roundRect(x + 30, y - 110, 70, 34, 10); g.fill(); mgText(g, '흠…?', x + 65, y - 86, 18, '#333'); }
+  if (P.st === 'look') { g.fillStyle = '#fff'; g.beginPath(); g.roundRect(x + 30, y - 110, 120, 34, 10); g.fill(); mgText(g, P.caught > 0 ? '거기 학생!!' : '다들 잘 듣고…', x + 90, y - 86, 16, P.caught > 0 ? '#c0392b' : '#333'); }
+}
+// ── 💃 몰래 춤추기 ──
+function danceInit() {
+  const S = MG.on; Object.assign(S, { meter: 0, strikes: 0, P: { st: 'write', t: 2.5, caught: 0 }, flash: 0, combo: 0, dur: 45, notes: [] });
+  mgButton('💃 춤추기 (꾹)', true);
+  S.update = dt => {
+    const P = S.P; profTick(P, dt, 1 + S.meter / 140); P.caught = Math.max(0, P.caught - dt); S.flash = Math.max(0, S.flash - dt);
+    const dancing = MG.hold || MG.keys[' '];
+    if (dancing) {
+      if (P.st === 'look') { if (P.caught <= 0) { S.strikes++; P.caught = 1.4; S.flash = 0.6; S.meter = Math.max(0, S.meter - 12); SFX.ding(); } }
+      else { S.meter += dt * (P.st === 'warn' ? 26 : 13); if (Math.random() < dt * 6) S.notes.push({ x: rand(-20, 20), y: 0, t: 0 }); }
+    }
+    for (const n of S.notes) { n.t += dt; n.y -= dt * 60; } S.notes = S.notes.filter(n => n.t < 1.2);
+    if (S.meter >= 100) mgEnd(true, '🕺 완벽한 몰래 댄스!', `적발 ${S.strikes}번 · 반 친구들이 몰래 박수`, 600000 + (3 - S.strikes) * 200000);
+    else if (S.strikes >= 3) mgEnd(false, '🚨 적발 3번!', '교수님: "학생, 앞으로 나와서 춰 보세요"', 0);
+    else if (S.t > S.dur) mgEnd(false, '⏰ 수업 끝', `게이지 ${Math.round(S.meter)}%`, 0);
+  };
+  S.draw = g => {
+    mgClass(g); const P = S.P; drawProf(g, P);
+    const dancing = (MG.hold || MG.keys[' ']) && !S.over, t = S.t;
+    mgDesks(g, 2, 5, 330, (r, c) => r === 1 && c === 2, SHIRTS);
+    // 나 (가운데 뒷줄)
+    const px = 370, py = 364;
+    mgPerson(g, px, py - 30 + (dancing ? Math.abs(Math.sin(t * 10)) * -8 : 0), 0.75, '#7a52c8', { back: true, armL: dancing ? -2.6 + Math.sin(t * 12) * 0.6 : 0.15, armR: dancing ? 2.6 - Math.sin(t * 12 + 1) * 0.6 : -0.15, hair: '#1a1208' });
+    for (const n of S.notes) mgText(g, '♪', px + n.x, py - 70 + n.y, 22, `rgba(176,107,255,${1 - n.t})`);
+    mgText(g, '나', px, py + 30, 14, '#7a52c8');
+    if (S.flash > 0) { g.fillStyle = `rgba(220,40,40,${S.flash * 0.5})`; g.fillRect(0, 0, MG.W, MG.H); mgText(g, '적발!', MG.W / 2, 220, 64, '#fff', 'center', 900); }
+    mgHud(g, `💃 게이지 ${Math.round(S.meter)}%`, S.meter / 100, `적발 ${S.strikes} / 3 · ${Math.max(0, Math.ceil(S.dur - S.t))}초`, P.st === 'warn' ? '⚠️ 멈칫! (지금 추면 2배지만 위험)' : P.st === 'look' ? '👀 보고 있어요! 멈춰!' : '✍️ 판서 중 — 지금이야!');
+  };
+}
+function mgHud(g, a, p, b, c) {
+  g.fillStyle = 'rgba(0,0,0,.55)'; g.fillRect(0, 0, MG.W, 30);
+  mgText(g, a, 12, 21, 15, '#ffd27a', 'left'); mgText(g, b, MG.W - 12, 21, 14, '#fff', 'right', 700);
+  g.fillStyle = 'rgba(255,255,255,.15)'; g.fillRect(200, 11, 200, 9); g.fillStyle = '#ffb02e'; g.fillRect(200, 11, 200 * clamp(p, 0, 1), 9);
+  if (c) { g.fillStyle = 'rgba(0,0,0,.6)'; g.beginPath(); g.roundRect(MG.W / 2 - 170, 392, 340, 24, 8); g.fill(); mgText(g, c, MG.W / 2, 409, 14, '#fff', 'center', 700); }
+}
+// ── 🏃 출석하고 튀기 ──
+function attendInit() {
+  const S = MG.on, me = (profile.nick || '김글로컬').slice(0, 6);
+  const fake = n => n.length > 1 ? n.slice(0, -1) + pick(['민', '수', '진', '현', '아', '훈']) : n + '수';
+  const pool = ['박서준', '이지은', '최민호', '정하늘', '한유진', '오세훈', '윤아름', '장도윤', '신예린', '강태민'];
+  const order = pool.sort(() => Math.random() - 0.5).slice(0, 7); const at = 3 + (Math.random() * 3 | 0);
+  order.splice(at, 0, me); order.splice(at + (Math.random() < 0.5 ? 2 : -1), 0, fake(me) === me ? me + '이' : fake(me));
+  Object.assign(S, { phase: 'call', order, i: 0, it: 1.4, me, answered: false, strikes: 0, P: { st: 'write', t: 2, caught: 0 }, x: 0, flash: 0, msg: '' });
+  const btn = mgButton('🙋 네!', false, () => attendAns()); MG.attBtn = btn;
+  S.update = dt => {
+    S.flash = Math.max(0, S.flash - dt);
+    if (S.phase === 'call') {
+      S.it -= dt; if (S.it <= 0) { if (S.order[S.i] === S.me && !S.answered) { mgEnd(false, '📛 결석 처리', '내 이름을 놓쳤어요…', 0); return; } S.i++; S.it = 1.25; if (S.i >= S.order.length) S.i = S.order.length - 1; }
+      if (MG.keys[' '] && !S.kd) { S.kd = true; attendAns(); } if (!MG.keys[' ']) S.kd = false;
+    } else {
+      const P = S.P; profTick(P, dt, 1.35); P.caught = Math.max(0, P.caught - dt);
+      const mv = MG.hold || MG.keys[' '];
+      if (mv) { if (P.st === 'look') { if (P.caught <= 0) { S.strikes++; P.caught = 1.4; S.flash = 0.6; S.x = Math.max(0, S.x - 0.12); SFX.ding(); } } else S.x += dt * 0.11; }
+      if (S.x >= 1) mgEnd(true, '🚪 탈출 성공!', `출석 인정 + 자유 시간 · 들킬 뻔 ${S.strikes}번`, 500000 + (3 - S.strikes) * 150000);
+      else if (S.strikes >= 3) mgEnd(false, '🚨 붙잡힘!', '"출석만 하고 가려고? 결석 처리합니다"', 0);
+      else if (S.t > 50) mgEnd(false, '⏰ 수업 끝', '결국 끝까지 들었어요', 100000);
+    }
+  };
+  S.draw = g => {
+    mgClass(g); const P = S.P;
+    if (S.phase === 'call') {
+      mgPerson(g, 360, 235, 1.25, '#2b2f3a', { back: false, hair: '#9a9a9a', glasses: true });
+      g.fillStyle = '#fff'; g.beginPath(); g.roundRect(400, 120, 230, 56, 12); g.fill();
+      mgText(g, `${S.order[S.i]}?`, 515, 157, 26, '#222', 'center', 900);
+      mgDesks(g, 2, 5, 330, null, SHIRTS);
+      mgHud(g, '📋 출석 부르는 중', S.i / S.order.length, `내 이름: ${S.me}`, '내 이름일 때만 [네!] · 비슷한 이름 조심');
+    } else {
+      drawProf(g, P);
+      mgDesks(g, 2, 5, 330, (r, c) => r === 1 && c === 2, SHIRTS);
+      // 뒷문
+      g.fillStyle = '#7a5a3a'; g.fillRect(MG.W - 70, 250, 56, 110); g.fillStyle = '#3aa56b'; mgText(g, '🚪 EXIT', MG.W - 42, 244, 14, '#3aa56b');
+      const px = 370 + S.x * (MG.W - 70 - 370), crouch = MG.hold || MG.keys[' '];
+      mgPerson(g, px, 334 + (crouch ? 14 : 0), crouch ? 0.6 : 0.75, '#7a52c8', { back: true, armL: crouch ? 0.9 : 0.15, armR: crouch ? -0.9 : -0.15, hair: '#1a1208' });
+      if (S.flash > 0) { g.fillStyle = `rgba(220,40,40,${S.flash * 0.5})`; g.fillRect(0, 0, MG.W, MG.H); mgText(g, '움찔!', MG.W / 2, 220, 56, '#fff', 'center', 900); }
+      mgHud(g, '🏃 뒷문까지', S.x, `들킴 ${S.strikes} / 3`, P.st === 'look' ? '👀 멈춰!' : P.st === 'warn' ? '⚠️ 멈칫…' : '✍️ 지금 살금살금!');
+    }
+  };
+}
+function attendAns() {
+  const S = MG.on; if (!S || S.over || S.phase !== 'call') return;
+  if (S.order[S.i] === S.me) { S.answered = true; S.phase = 'sneak'; S.P = { st: 'write', t: 2.2, caught: 0 }; mgEl('mgCtl').textContent = ''; mgButton('🤫 몰래 이동 (꾹)', true); SFX.ding(); }
+  else { S.strikes++; S.flash = 0.5; if (S.strikes >= 2) mgEnd(false, '😳 엉뚱한 대답 두 번', `"${S.order[S.i]} 학생 아니잖아요?"`, 0); }
+}
+// ── 🎤 장기자랑 (리듬) ──
+function talentInit() {
+  const S = MG.on, bpm = 124, beat = 60 / bpm, dur = 36;
+  const notes = []; let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  for (let b = 4; b < dur / beat - 2; b += 0.5) { const strong = b % 1 === 0; if (rnd() < (strong ? 0.78 : 0.28)) notes.push({ t: b * beat, lane: (rnd() * 4) | 0, hit: null }); if (b > 24 && strong && rnd() < 0.2) notes.push({ t: b * beat, lane: ((rnd() * 4) | 0), hit: null }); }
+  Object.assign(S, { bpm, beat, dur, notes, score: 0, combo: 0, maxCombo: 0, judge: '', jt: 0, perfect: 0, good: 0, miss: 0, lanesFx: [0, 0, 0, 0], crowd: 0.3 });
+  S.t0 = AU.ctx ? AU.ctx.currentTime + 0.6 : 0; S.p0 = performance.now() / 1000 + 0.6;
+  S.now = () => AU.ctx ? AU.ctx.currentTime - S.t0 : performance.now() / 1000 - S.p0;
+  talentSong(S);
+  ['D', 'F', 'J', 'K'].forEach((k, i) => { const b = mgButton(k, false, () => talentHit(i)); b.classList.add('lane'); });
+  S.tap = (x, y) => { if (y > 120) talentHit(Math.min(3, Math.max(0, Math.floor((x - 180) / 90)))); };
+  S.update = () => {
+    const now = S.now();
+    for (const n of S.notes) if (!n.hit && now - n.t > 0.16) { n.hit = 'miss'; S.miss++; S.combo = 0; S.judge = 'MISS'; S.jt = 0.5; S.crowd = Math.max(0, S.crowd - 0.06); }
+    ['d', 'f', 'j', 'k'].forEach((k, i) => { if (MG.keys[k] && !S['k' + i]) { S['k' + i] = true; talentHit(i); } if (!MG.keys[k]) S['k' + i] = false; });
+    S.jt -= 1 / 60; S.lanesFx = S.lanesFx.map(v => Math.max(0, v - 0.05));
+    if (now > S.dur) {
+      const tot = S.notes.length, acc = (S.perfect + S.good * 0.6) / Math.max(1, tot), grade = acc > 0.92 ? 'S' : acc > 0.8 ? 'A' : acc > 0.65 ? 'B' : acc > 0.45 ? 'C' : 'D';
+      const best = career.mgBest || (career.mgBest = {}); if (!best.talent || grade < best.talent) best.talent = grade;
+      mgEnd(acc > 0.65, `🎤 ${grade} 등급!`, `정확도 ${Math.round(acc * 100)}% · 최대 콤보 ${S.maxCombo} · 관객 ${acc > 0.8 ? '열광' : acc > 0.65 ? '환호' : '어색한 박수'}`, { S: 2000000, A: 1200000, B: 700000 }[grade] || 0);
+    }
+  };
+  S.draw = g => {
+    const now = S.now();
+    const sky = g.createLinearGradient(0, 0, 0, MG.H); sky.addColorStop(0, '#120a24'); sky.addColorStop(1, '#3a1a4a'); g.fillStyle = sky; g.fillRect(0, 0, MG.W, MG.H);
+    for (let i = 0; i < 6; i++) { g.fillStyle = `hsla(${(i * 60 + now * 80) % 360},90%,60%,.12)`; g.beginPath(); g.moveTo(60 + i * 120, 0); g.lineTo(i * 120 + 10, MG.H); g.lineTo(i * 120 + 110, MG.H); g.fill(); }
+    // 관객
+    for (let i = 0; i < 24; i++) { const x = 20 + i * 30, jump = Math.max(0, Math.sin(now * 8 + i)) * 8 * S.crowd; g.fillStyle = '#0a0612'; g.beginPath(); g.arc(x, 392 - jump, 12, 0, Math.PI * 2); g.fill(); g.fillRect(x - 12, 392 - jump, 24, 30); if (S.crowd > 0.5 && i % 3 === 0) { g.fillStyle = '#ffe28a'; g.fillRect(x - 2, 360 - jump, 4, 14); } }
+    // 나 (무대 가운데 춤)
+    mgPerson(g, 90, 250 + Math.abs(Math.sin(now * Math.PI * 2 * S.bpm / 120)) * -10, 1.1, '#7a52c8', { armL: -2.4 + Math.sin(now * 8) * 0.8, armR: 2.4 - Math.sin(now * 8 + 2) * 0.8, hair: '#1a1208' });
+    // 레인
+    for (let l = 0; l < 4; l++) { const x = 180 + l * 90; g.fillStyle = `rgba(255,255,255,${0.05 + S.lanesFx[l] * 0.4})`; g.fillRect(x + 4, 40, 82, 320); mgText(g, 'DFJK'[l], x + 45, 382, 16, 'rgba(255,255,255,.5)'); }
+    g.fillStyle = '#ffd24a'; g.fillRect(180, 330, 360, 4);
+    for (const n of S.notes) { if (n.hit && n.hit !== 'miss') continue; const y = 330 - (n.t - now) * 220; if (y < 30 || y > 370) continue; const x = 180 + n.lane * 90; g.fillStyle = ['#ff5a7a', '#5ab0ff', '#5aff9a', '#ffd24a'][n.lane]; g.beginPath(); g.roundRect(x + 10, y - 9, 70, 18, 8); g.fill(); }
+    if (S.jt > 0) mgText(g, S.judge, 360, 300, 34, S.judge === 'PERFECT' ? '#ffe28a' : S.judge === 'GOOD' ? '#8affc0' : '#ff7a7a', 'center', 900);
+    if (S.combo > 3) mgText(g, `${S.combo} COMBO`, 640, 200, 26, '#fff', 'center', 900);
+    mgHud(g, `🎤 점수 ${S.score}`, now / S.dur, `P ${S.perfect} · G ${S.good} · M ${S.miss}`, now < 0 ? '곧 시작! 노란 선에 닿을 때 누르기' : '');
+  };
+}
+function talentHit(l) {
+  const S = MG.on; if (!S || S.over) return; const now = S.now(); S.lanesFx[l] = 1;
+  let best = null, bd = 1; for (const n of S.notes) if (!n.hit && n.lane === l) { const d = Math.abs(n.t - now); if (d < bd) { bd = d; best = n; } }
+  if (!best || bd > 0.16) return;
+  if (bd <= 0.07) { best.hit = 'p'; S.perfect++; S.score += 300 + S.combo * 5; S.judge = 'PERFECT'; } else { best.hit = 'g'; S.good++; S.score += 150; S.judge = 'GOOD'; }
+  S.combo++; S.maxCombo = Math.max(S.maxCombo, S.combo); S.jt = 0.4; S.crowd = Math.min(1, S.crowd + 0.03);
+}
+function talentSong(S) {   // 직접 만든 곡 (저작권 없는 자작 멜로디)
+  if (!AU.ctx) return; const ctx = AU.ctx, out = ctx.createGain(); out.gain.value = 0.5; out.connect(AU.musicMix || AU.master);
+  const b = S.beat, mel = [72, 74, 76, 79, 76, 74, 72, 69, 72, 74, 76, 79, 81, 79, 76, 74], bass = [48, 48, 45, 45, 41, 41, 43, 43];
+  for (let i = 0; i < S.dur / b; i++) {
+    const t = S.t0 + i * b;
+    const k = osc('sine', 120, t, 0.25); k.frequency.exponentialRampToValueAtTime(40, t + 0.1); const kg = gain(); env(kg, t, 0.002, 0.7, 0.2); k.connect(kg).connect(out);
+    if (i % 2) { const n = nsrc(t, 0.12), ng = gain(); env(ng, t, 0.002, 0.25, 0.1); n.connect(filt('highpass', 1800)).connect(ng).connect(out); }
+    const bo = osc('sawtooth', mtof(bass[(i >> 1) % 8]), t, b * 0.9), bg = gain(); env(bg, t, 0.005, 0.16, b * 0.8); bo.connect(filt('lowpass', 600, 2)).connect(bg).connect(out);
+    if (i >= 4) for (const h of [0, 0.5]) { const m = mel[((i * 2 + h * 2) | 0) % 16] + (i > 32 ? 12 : 0), o = osc('square', mtof(m), t + h * b, b * 0.45), og = gain(); env(og, t + h * b, 0.004, 0.06, b * 0.4); o.connect(filt('lowpass', 2600)).connect(og).connect(out); }
+  }
+  MG.song = { stop: () => { out.gain.setValueAtTime(0, ctx.currentTime); setTimeout(() => out.disconnect(), 100); } };
+}
+// ── 💻 전산실 해킹 (가로·세로 번갈아 고르기) ──
+function hackInit() {
+  const S = MG.on, CODES = ['1C', '55', 'BD', 'E9', '7A', 'FF'], N = 5;
+  const grid = Array.from({ length: N }, () => Array.from({ length: N }, () => pick(CODES)));
+  // 풀 수 있는 길을 먼저 만들고 그 길에서 명령어를 뽑음
+  const path = []; let row = true, line = 0; const used = new Set();
+  for (let k = 0; k < 7; k++) { let r, c, tries = 0; do { const j = (Math.random() * N) | 0; r = row ? line : j; c = row ? j : line; tries++; } while (used.has(r * N + c) && tries < 30); used.add(r * N + c); path.push(grid[r][c]); line = row ? c : r; row = !row; }
+  const seqs = [{ len: 2, at: 0, name: '방화벽 해제', fx: '총장·김태오 방어막 해제' }, { len: 3, at: 2, name: '예산 시스템 침투', fx: '가장 부자 세력 자금 30% 탈취' }, { len: 4, at: 3, name: '출입 통제 장악', fx: '수비대·탈환대 20초 마비' }].map(s => ({ ...s, code: path.slice(s.at, s.at + s.len), ok: false }));
+  Object.assign(S, { grid, N, seqs, buf: [], bufMax: 7, row: true, line: 0, picked: new Set(), dur: 40, hover: null });
+  S.tap = (x, y) => {
+    const c = Math.floor((x - 40) / 64), r = Math.floor((y - 70) / 58); if (c < 0 || r < 0 || c >= N || r >= N) return;
+    if (S.row ? r !== S.line : c !== S.line) return; if (S.picked.has(r * N + c)) return;
+    S.picked.add(r * N + c); S.buf.push(S.grid[r][c]); S.line = S.row ? c : r; S.row = !S.row; SFX.ding();
+    const bs = S.buf.join(' '); for (const q of S.seqs) if (!q.ok && bs.includes(q.code.join(' '))) { q.ok = true; SFX.bell(); }
+    if (S.seqs.every(q => q.ok) || S.buf.length >= S.bufMax) hackFinish();
+  };
+  S.update = () => { if (S.t > S.dur) hackFinish(); };
+  S.draw = g => {
+    g.fillStyle = '#060b10'; g.fillRect(0, 0, MG.W, MG.H);
+    for (let i = 0; i < 40; i++) { g.fillStyle = 'rgba(57,255,136,.05)'; g.fillText(pick(['0', '1']), (i * 37) % MG.W, (S.t * 80 + i * 53) % MG.H); }
+    mgText(g, 'KU-GLOCAL 전산실 · 접속 프로토콜', 40, 56, 14, '#39ff88', 'left', 700);
+    for (let r = 0; r < S.N; r++) for (let c = 0; c < S.N; c++) {
+      const x = 40 + c * 64, y = 70 + r * 58, active = S.row ? r === S.line : c === S.line, used = S.picked.has(r * S.N + c);
+      g.fillStyle = active ? 'rgba(57,255,136,.12)' : 'rgba(255,255,255,.03)'; g.fillRect(x + 2, y + 2, 60, 54);
+      mgText(g, used ? '[ ]' : S.grid[r][c], x + 32, y + 36, 20, used ? '#335' : active ? '#d8ffe8' : '#4a8a6a', 'center', 800);
+    }
+    // 버퍼 · 명령어
+    mgText(g, '버퍼', 380, 90, 14, '#8affc0', 'left', 700);
+    for (let i = 0; i < S.bufMax; i++) { g.strokeStyle = '#39ff88'; g.lineWidth = 1; g.strokeRect(380 + i * 44, 100, 40, 32); if (S.buf[i]) mgText(g, S.buf[i], 400 + i * 44, 122, 15, '#d8ffe8'); }
+    S.seqs.forEach((q, k) => { const y = 180 + k * 62; mgText(g, (q.ok ? '✅ ' : '▫️ ') + q.name, 380, y, 16, q.ok ? '#39ff88' : '#fff', 'left', 800); mgText(g, q.code.join('  '), 380, y + 24, 18, q.ok ? '#39ff88' : '#ffd27a', 'left', 800); mgText(g, q.fx, 700, y + 24, 11, '#8a9aa8', 'right', 600); });
+    mgHud(g, '💻 해킹', 1 - S.t / S.dur, `${Math.max(0, Math.ceil(S.dur - S.t))}초 · 버퍼 ${S.buf.length}/${S.bufMax}`, S.row ? '밝은 가로줄에서 고르기' : '밝은 세로줄에서 고르기');
+  };
+}
+function hackFinish() {
+  const S = MG.on; if (!S || S.over) return; const ok = S.seqs.filter(q => q.ok);
+  const fx = () => {
+    for (const q of ok) {
+      if (q.len === 2) { for (const d of [...boss.domes]) d.retreat(true); if (kto.active) { kto.shieldUntil = 0; kto.nextShield = clock + 40; } banner('💻 방화벽 해제', '총장·김태오 방어막이 꺼졌어요', 'gold'); }
+      if (q.len === 3) { const F = [...FACS].sort((a, b) => b.fund - a.fund)[0]; const v = Math.round(F.fund * 0.3); F.fund -= v; wallet.won += v; uiDirty = true; banner('💻 예산 시스템 침투', `${F.name} 자금 ${won(v)} 탈취!`, 'gold'); }
+      if (q.len === 4) { for (const F of FACS) for (const a of F.guards) a.down = 20; for (const a of retake.crew) a.down = 20; retake.prog = Math.max(0, retake.prog - 0.5); banner('💻 출입 통제 장악', '수비대·탈환대가 20초 동안 멈췄어요', 'gold'); }
+    }
+    if (!ok.length) { banner('🚨 해킹 실패 · 보안팀 출동', '추적당했어요!', 'red'); if (myBases().length) { retake.cool = 0; } else dispatchTeam('staff', true); }
+  };
+  const best = career.mgBest || (career.mgBest = {}); best.hack = Math.max(best.hack || 0, ok.length);
+  mgEnd(ok.length >= 1, ok.length === 3 ? '🔓 완전 장악!' : ok.length ? `🔓 명령어 ${ok.length}개 성공` : '🔒 접속 차단', ok.length ? ok.map(q => q.name).join(' · ') + ' — 캠퍼스로 돌아가면 효과 발동' : '보안팀이 추적을 시작했어요', ok.length * 400000, fx);
+}
+// 키보드: 미니게임 중엔 게임 단축키를 막음
+window.addEventListener('keydown', e => { if (!MG.on || mgEl('mg').hidden) return; MG.keys[e.key.toLowerCase()] = true; if (e.key === 'Escape') { mgEl('mg').hidden = true; mgStop(); } e.stopPropagation(); if (e.key === ' ') e.preventDefault(); }, true);
+window.addEventListener('keyup', e => { if (!MG.on) return; MG.keys[e.key.toLowerCase()] = false; e.stopPropagation(); }, true);
+// 초대: 가끔 "지금 ○○ 수업 중 · 몰래 춤추기?" 단추
+function updateMgInvite(dt) {
+  const chip = mgEl('mgInvite'); if (!chip) return;
+  if ((MG.inviteT -= dt) > 0) { if (chip.dataset.until && clock > +chip.dataset.until) chip.hidden = true; return; }
+  MG.inviteT = rand(100, 160);
+  const m = pick(MG_LIST), where = { dance: pick(['종합강의동', '교양강의동', '인문사회관']) + ' 수업 중', attend: pick(['자연과학관', '생명과학관', '창의예술관']) + ' 출석 시간', talent: '노천극장 장기자랑 참가자 모집', hack: 'KU Station 전산실 문이 열려 있음' }[m.id];
+  chip.textContent = `${m.icon} ${where} · ${m.name}!`; chip.dataset.g = m.id; chip.dataset.until = clock + 35; chip.hidden = false;
+  situLog(m.icon, where, `위 단추나 ☰ 더보기 → 🎮 미니게임에서 [${m.name}]`, 'gold', 'mginv');
+}
+
+mgEl('mgInvite').onclick = () => mgStart(mgEl('mgInvite').dataset.g);
+$('vFP').onclick = () => FP.on ? fpExit() : fpEnter(); $('fpOut').onclick = fpExit; $('fpHit').onclick = () => fpAction(0); $('fpPut').onclick = () => fpAction(2); $('fpJump').onclick = () => { FP.touch.jump = true; };
+/* =====================================================================
+   12-37. 캠퍼스 꾸미기 (13.2판): 대리석 상허광장 · 큰 분수 · 황소상 · 운동장 울타리 · 마을 · 계절 음악/캐럴
+   ===================================================================== */
+// ── 상허광장: 반지름 30 m 대리석 바닥(방사형 무늬) + 분수 2.2배 + 가로등·벤치·화단 ──
+const PLAZA_R = 30;
+{
+  const cv = document.createElement('canvas'); cv.width = cv.height = 1024; const g = cv.getContext('2d'), M = 512;
+  g.clearRect(0, 0, 1024, 1024);
+  g.save(); g.beginPath(); g.arc(M, M, M - 2, 0, Math.PI * 2); g.clip();
+  g.fillStyle = '#ece7de'; g.fillRect(0, 0, 1024, 1024);
+  for (let i = 0; i < 900; i++) { g.fillStyle = `rgba(${150 + Math.random() * 60},${145 + Math.random() * 55},${140 + Math.random() * 50},${Math.random() * 0.08})`; g.fillRect(Math.random() * 1024, Math.random() * 1024, rand(2, 30), rand(2, 30)); }
+  g.strokeStyle = 'rgba(120,110,100,.18)'; g.lineWidth = 1.5; for (let i = 0; i < 60; i++) { g.beginPath(); let x = Math.random() * 1024, y = Math.random() * 1024; g.moveTo(x, y); for (let k = 0; k < 6; k++) { x += rand(-40, 40); y += rand(-40, 40); g.lineTo(x, y); } g.stroke(); }   // 대리석 결
+  const ring = (r, w, col) => { g.strokeStyle = col; g.lineWidth = w; g.beginPath(); g.arc(M, M, r, 0, Math.PI * 2); g.stroke(); };
+  for (let r = 60; r < M; r += 34) ring(r, 2, 'rgba(110,100,90,.35)');
+  for (let k = 0; k < 32; k++) { const a = k / 32 * Math.PI * 2; g.strokeStyle = 'rgba(110,100,90,.3)'; g.lineWidth = 2; g.beginPath(); g.moveTo(M + Math.cos(a) * 60, M + Math.sin(a) * 60); g.lineTo(M + Math.cos(a) * M, M + Math.sin(a) * M); g.stroke(); }
+  ring(150, 22, 'rgba(70,74,84,.85)'); ring(150, 6, 'rgba(210,180,110,.9)');            // 검은 화강암 띠 + 금빛 선
+  ring(M - 26, 26, 'rgba(70,74,84,.8)'); ring(M - 26, 5, 'rgba(210,180,110,.8)');
+  for (let k = 0; k < 8; k++) { const a = k / 8 * Math.PI * 2; g.save(); g.translate(M + Math.cos(a) * 330, M + Math.sin(a) * 330); g.rotate(a); g.fillStyle = 'rgba(80,84,96,.75)'; g.beginPath(); g.moveTo(-34, 0); g.lineTo(0, -14); g.lineTo(34, 0); g.lineTo(0, 14); g.closePath(); g.fill(); g.restore(); }   // 별 무늬
+  g.restore();
+  const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+  const geo = new THREE.PlaneGeometry(PLAZA_R * 2, PLAZA_R * 2, 30, 30); geo.rotateX(-Math.PI / 2);
+  const pa = geo.attributes.position; for (let i = 0; i < pa.count; i++) { const x = pa.getX(i) + PLAZA_C.x, z = pa.getZ(i) + PLAZA_C.z; pa.setY(i, terrainAt(x, z) + 0.09); }
+  geo.computeVertexNormals();
+  const floor = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: 0.5, roughness: 0.35, metalness: 0.05, polygonOffset: true, polygonOffsetFactor: -2 }));
+  floor.position.set(PLAZA_C.x, 0, PLAZA_C.z); floor.receiveShadow = true; scene.add(floor);
+  trees.forEach((t, i) => { if (Math.hypot(t.p.x - PLAZA_C.x, t.p.z - PLAZA_C.z) < PLAZA_R + 1.5) { t.s = 0.0001; placeTree(i); } }); trunkMesh.instanceMatrix.needsUpdate = crownMesh.instanceMatrix.needsUpdate = true;   // 광장 위 나무 치움
+  if (fountain2) { fountain2.g.scale.setScalar(2.2); fountain2.g.children.forEach(o => { if (o.isCSS2DObject) o.position.y = 3.2; }); }
+  // 가로등 8개 · 벤치 8개 · 화단 링
+  const lampMat = new THREE.MeshStandardMaterial({ color: 0x2b2f3a, metalness: 0.6, roughness: 0.4 }), bulbMat = new THREE.MeshStandardMaterial({ color: 0xfff3d0, emissive: 0xffd88a, emissiveIntensity: 0.9 });
+  const benchMat = new THREE.MeshStandardMaterial({ color: 0x8a5a32, roughness: 0.8 }), hedgeMat = new THREE.MeshStandardMaterial({ color: SEASON === 'autumn' ? 0x8a6a2a : WINTER ? 0xe8eef2 : 0x3f7a3a, roughness: 1 });
+  const parts = new THREE.Group();
+  for (let k = 0; k < 8; k++) {
+    const a = k / 8 * Math.PI * 2 + Math.PI / 8, x = PLAZA_C.x + Math.cos(a) * 25, z = PLAZA_C.z + Math.sin(a) * 25, y = terrainAt(x, z);
+    if (hasBlock(x, y + 1, z)) continue;
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 5.5, 8), lampMat); pole.position.set(x, y + 2.75, z);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.45, 12, 8), bulbMat); head.position.set(x, y + 5.7, z);
+    const bx = PLAZA_C.x + Math.cos(a + Math.PI / 8) * 21, bz = PLAZA_C.z + Math.sin(a + Math.PI / 8) * 21, by = terrainAt(bx, bz);
+    const bench = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.5, 0.7), benchMat); bench.position.set(bx, by + 0.45, bz); bench.rotation.y = -(a + Math.PI / 8);
+    parts.add(pole, head); if (!hasBlock(bx, by + 0.5, bz)) parts.add(bench);
+  }
+  for (let k = 0; k < 24; k++) { if (k % 6 === 0) continue; const a = (k + 0.5) / 24 * Math.PI * 2, x = PLAZA_C.x + Math.cos(a) * (PLAZA_R + 0.8), z = PLAZA_C.z + Math.sin(a) * (PLAZA_R + 0.8), y = terrainAt(x, z); if (hasBlock(x, y + 0.5, z)) continue; const h = new THREE.Mesh(new THREE.BoxGeometry(7, 0.9, 1.2), hedgeMat); h.position.set(x, y + 0.45, z); h.rotation.y = -a + Math.PI / 2; parts.add(h); }
+  parts.traverse(o => { if (o.isMesh) o.castShadow = true; }); scene.add(parts);
+}
+// ── 행정관 앞 황소상 (청동, 화강암 받침) ──
+const bull = (() => {
+  const adm = byName('행정관'); if (!adm) return null;
+  const c = bbCenter(adm), nd = G.nodes[nearestNode(c.x, c.z)] || [c.x, c.z];
+  const dx = nd[0] - c.x, dz = nd[1] - c.z, L = Math.hypot(dx, dz) || 1;
+  let p = V3(c.x + dx * 0.55 + (-dz / L) * 9, 0, c.z + dz * 0.55 + (dx / L) * 9); const fs = freeSpots(p, 1, 0)[0]; if (fs) p.copy(fs); p.y = terrainAt(p.x, p.z);
+  const g = new THREE.Group(), bronze = new THREE.MeshStandardMaterial({ color: 0xb07a3c, metalness: 0.45, roughness: 0.4, emissive: 0x2a1606 }), granite = new THREE.MeshStandardMaterial({ color: 0x55585e, roughness: 0.7 });
+  const add = (geo, m, x, y, z, rx = 0, ry = 0, rz = 0) => { const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); o.rotation.set(rx, ry, rz); o.castShadow = true; g.add(o); return o; };
+  add(new THREE.BoxGeometry(5.2, 1.6, 2.6), granite, 0, 0.8, 0); add(new THREE.BoxGeometry(5.6, 0.25, 3), granite, 0, 1.68, 0);
+  add(new THREE.BoxGeometry(3.2, 1.5, 1.4), bronze, 0, 3.2, 0);                       // 몸통
+  add(new THREE.BoxGeometry(1.3, 1.8, 1.55), bronze, 1.1, 3.3, 0);                    // 어깨 (불룩)
+  add(new THREE.BoxGeometry(1.0, 0.9, 0.9), bronze, 2.1, 3.0, 0, 0, 0, -0.5);          // 머리 (숙여 돌진하는 자세)
+  add(new THREE.BoxGeometry(0.5, 0.45, 0.7), bronze, 2.55, 2.6, 0, 0, 0, -0.5);        // 코
+  for (const s of [-1, 1]) { add(new THREE.ConeGeometry(0.13, 0.9, 8), bronze, 2.2, 3.55, s * 0.55, s * 0.9, 0, -0.9); }   // 뿔
+  for (const [x, z] of [[1.1, 0.5], [1.1, -0.5], [-1.2, 0.5], [-1.2, -0.5]]) add(new THREE.BoxGeometry(0.35, 1.4, 0.35), bronze, x, 2.2, z, 0, 0, x > 0 ? 0.25 : -0.15);
+  add(new THREE.CylinderGeometry(0.06, 0.08, 1.2, 6), bronze, -1.75, 3.1, 0, 0, 0, 0.6);   // 꼬리
+  g.position.copy(p); g.rotation.y = Math.atan2(-(nd[1] - p.z), nd[0] - p.x); g.scale.setScalar(1.25); scene.add(g);
+  const div = document.createElement('div'); div.className = 'lbl'; div.textContent = '🐂 황소상 · 행정관 앞'; const lb = new CSS2DObject(div); lb.position.set(0, 6, 0); g.add(lb);
+  return { g, p };
+})();
+// ── 운동장: 연두색 쇠 울타리 (트랙 바깥 둘레) ──
+const trackFence = (() => {
+  const tp = window.__trackPoly, cen = window.__trackCen; if (!tp) return null;
+  const out = tp.map(([x, z]) => { const dx = x - cen[0], dz = z - cen[1], L = Math.hypot(dx, dz) || 1; return [x + dx / L * 5, z + dz / L * 5]; });
+  const cv = document.createElement('canvas'); cv.width = cv.height = 64; const g = cv.getContext('2d'); g.strokeStyle = '#a6e04a'; g.lineWidth = 3;
+  for (let i = -64; i < 128; i += 16) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i + 64, 64); g.stroke(); g.beginPath(); g.moveTo(i + 64, 0); g.lineTo(i, 64); g.stroke(); }
+  const tex = new THREE.CanvasTexture(cv); tex.wrapS = tex.wrapT = THREE.RepeatWrapping; tex.colorSpace = THREE.SRGBColorSpace;
+  const geos = [], posts = []; const H = 3.2;
+  for (let i = 0; i < out.length; i++) {
+    const [x0, z0] = out[i], [x1, z1] = out[(i + 1) % out.length], L = Math.hypot(x1 - x0, z1 - z0); if (L < 0.2) continue;
+    const pg2 = new THREE.PlaneGeometry(L, H); pg2.translate(0, H / 2, 0);
+    const uv = pg2.attributes.uv; for (let k = 0; k < uv.count; k++) uv.setXY(k, uv.getX(k) * L / 2, uv.getY(k) * H / 2);
+    const m = new THREE.Matrix4().makeRotationY(-Math.atan2(z1 - z0, x1 - x0)); m.setPosition((x0 + x1) / 2, terrainAt((x0 + x1) / 2, (z0 + z1) / 2), (z0 + z1) / 2); pg2.applyMatrix4(m); geos.push(pg2);
+    posts.push([x0, z0]);
+  }
+  if (!geos.length) return null;
+  const mesh = new THREE.Mesh(mergeGeometries(geos), new THREE.MeshStandardMaterial({ map: tex, transparent: true, alphaTest: 0.3, side: THREE.DoubleSide, color: 0xb8f060 })); scene.add(mesh);
+  const pm = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.07, 0.07, H + 0.2, 6).translate(0, (H + 0.2) / 2, 0), new THREE.MeshStandardMaterial({ color: 0x8acc3a, metalness: 0.5, roughness: 0.4 }), posts.length);
+  posts.forEach(([x, z], i) => { _m.makeTranslation(x, terrainAt(x, z), z); pm.setMatrixAt(i, _m); }); scene.add(pm);
+  const c = V3(cen[0], 0, cen[1]); c.y = terrainAt(c.x, c.z);
+  const div = document.createElement('div'); div.className = 'lbl'; div.textContent = '🏃 대운동장 · 트랙 · 인조잔디'; const lb = new CSS2DObject(div); lb.position.set(c.x, c.y + 6, c.z); scene.add(lb);
+  return { mesh, pm };
+})();
+// ── 마을 이름표 · 마을 비석 ──
+for (const V of VILLAGES) {
+  const x = V.c[0], z = V.c[1], y = terrainAt(x, z);
+  const div = document.createElement('div'); div.className = 'lbl village'; div.innerHTML = `🏘️ ${V.name}<em>${V.sub}</em>`; const lb = new CSS2DObject(div); lb.position.set(x, y + 28, z); scene.add(lb);
+  V.lb = lb;
+  const stone = new THREE.Mesh(new THREE.BoxGeometry(1.4, 2.4, 0.6), new THREE.MeshStandardMaterial({ color: 0x8a8578, roughness: 0.9 }));
+  const sp = V.name === '신촌마을' ? V3(-602, 0, 150) : freeSpots(V3(x, 0, z), 1, 0)[0] || V3(x, 0, z); stone.position.set(sp.x, terrainAt(sp.x, sp.z) + 1.2, sp.z); stone.castShadow = true; scene.add(stone);
+}
+setInterval(() => { for (const V of VILLAGES) if (V.lb) { const d = Math.hypot(camera.position.x - V.c[0], camera.position.z - V.c[1]); V.lb.visible = d < (FP.on ? 220 : 650); } }, 500);
+// ── 계절 배경 음악 · 크리스마스 캐럴 ──
+// 크리스마스 캐럴은 모두 저작권이 끝난 전통곡. 계절 곡은 이 게임을 위해 만든 자작곡.
+const parseMel = s => s.trim().split(/\s+/).filter(t => t !== '|').map(t => { const [n, d] = t.split(':'); if (n === 'R') return [null, +d]; const m = n.match(/^([A-G])(#|b)?(\d)$/); const semi = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0); return [12 * (+m[3] + 1) + semi, +d]; });
+const SONGS = {
+  spring: [{ name: '캠퍼스 꽃길', by: '자작곡', bpm: 96, tone: 'pluck', mel: 'F#5:1 E5:0.5 D5:0.5 E5:1 A4:1 | B4:0.5 D5:0.5 E5:1 F#5:2 | G5:1 F#5:0.5 E5:0.5 D5:1 B4:1 | A4:1 B4:0.5 D5:0.5 E5:2 | F#5:1 E5:0.5 D5:0.5 E5:1 A5:1 | G5:0.5 F#5:0.5 E5:1 D5:2 | B4:1 D5:1 E5:0.5 F#5:0.5 E5:1 | D5:4', bass: 'D3:4 G2:4 B2:4 A2:4 D3:4 G2:4 E2:4 D3:4' }],
+  summer: [{ name: '한여름 축제', by: '자작곡', bpm: 126, tone: 'pluck', drum: true, mel: 'E5:0.5 G5:0.5 A5:0.5 G5:0.5 E5:1 C5:1 | D5:0.5 E5:0.5 G5:1 E5:1 R:1 | E5:0.5 G5:0.5 A5:0.5 C6:0.5 A5:1 G5:1 | E5:0.5 D5:0.5 C5:1 D5:2 | E5:0.5 G5:0.5 A5:0.5 G5:0.5 E5:1 C5:1 | D5:0.5 E5:0.5 G5:1 A5:1 R:1 | C6:0.5 A5:0.5 G5:0.5 E5:0.5 D5:1 E5:1 | C5:4', bass: 'C3:4 A2:4 F2:4 G2:4 C3:4 A2:4 F2:4 C3:4' }],
+  autumn: [{ name: '낙엽 지는 도서관', by: '자작곡', bpm: 80, tone: 'piano', mel: 'E5:1.5 D5:0.5 C5:1 B4:1 | A4:2 E4:2 | F4:1 A4:1 C5:1 B4:1 | A4:1 G#4:1 B4:2 | E5:1.5 D5:0.5 C5:1 B4:1 | A4:1 C5:1 E5:2 | D5:1 C5:1 B4:1 G#4:1 | A4:4', bass: 'A2:4 A2:4 F2:4 E2:4 A2:4 A2:4 D3:4 A2:4' }],
+  winter: [{ name: '첫눈 오는 캠퍼스', by: '자작곡', bpm: 88, tone: 'bell', mel: 'A5:1 C6:1 A5:1 F5:1 | G5:1 A5:0.5 G5:0.5 F5:2 | D5:1 F5:1 A5:1 G5:1 | E5:2 C5:2 | A5:1 C6:1 D6:1 C6:1 | A5:1 G5:0.5 F5:0.5 G5:2 | F5:1 A5:1 G5:1 E5:1 | F5:4', bass: 'F2:4 C3:4 D3:4 C3:4 F2:4 C3:4 C3:4 F2:4' }],
+  xmas: [
+    { name: '징글벨 (Jingle Bells)', by: '전통 캐럴', bpm: 132, tone: 'bell', drum: true, mel: 'E5:1 E5:1 E5:2 | E5:1 E5:1 E5:2 | E5:1 G5:1 C5:1.5 D5:0.5 | E5:4 | F5:1 F5:1 F5:1.5 F5:0.5 | F5:1 E5:1 E5:1 E5:0.5 E5:0.5 | E5:1 D5:1 D5:1 E5:1 | D5:2 G5:2 | E5:1 E5:1 E5:2 | E5:1 E5:1 E5:2 | E5:1 G5:1 C5:1.5 D5:0.5 | E5:4 | F5:1 F5:1 F5:1.5 F5:0.5 | F5:1 E5:1 E5:1 E5:0.5 E5:0.5 | G5:1 G5:1 F5:1 D5:1 | C5:4', bass: 'C3:4 C3:4 C3:4 C3:4 F2:4 C3:4 G2:4 G2:4 C3:4 C3:4 C3:4 C3:4 F2:4 C3:4 G2:4 C3:4' },
+    { name: '고요한 밤 거룩한 밤 (Silent Night)', by: '전통 캐럴', bpm: 84, tone: 'bell', mel: 'G4:1.5 A4:0.5 G4:1 | E4:3 | G4:1.5 A4:0.5 G4:1 | E4:3 | D5:2 D5:1 | B4:3 | C5:2 C5:1 | G4:3 | A4:2 A4:1 | C5:1.5 B4:0.5 A4:1 | G4:1.5 A4:0.5 G4:1 | E4:3 | A4:2 A4:1 | C5:1.5 B4:0.5 A4:1 | G4:1.5 A4:0.5 G4:1 | E4:3 | D5:2 D5:1 | F5:1.5 D5:0.5 B4:1 | C5:3 | E5:3 | C5:1 G4:1 E4:1 | G4:1.5 F4:0.5 D4:1 | C4:3 | R:3', bass: 'C3:3 C3:3 C3:3 C3:3 G2:3 G2:3 C3:3 C3:3 F2:3 F2:3 C3:3 C3:3 F2:3 F2:3 C3:3 C3:3 G2:3 G2:3 C3:3 C3:3 C3:3 G2:3 C3:3 C3:3' },
+    { name: '기쁘다 구주 오셨네 (Joy to the World)', by: '전통 캐럴', bpm: 100, tone: 'pluck', mel: 'C5:1 B4:0.75 A4:0.25 G4:1.5 F4:0.5 | E4:1 D4:1 C4:1.5 G4:0.5 | A4:1.5 A4:0.5 B4:1.5 B4:0.5 | C5:3.5 C5:0.5 | C5:0.5 B4:0.5 A4:0.5 G4:0.5 G4:0.75 F4:0.25 E4:1 | C5:0.5 C5:0.5 B4:0.5 A4:0.5 G4:0.75 F4:0.25 E4:1 | E4:0.5 E4:0.5 E4:0.5 E4:0.25 F4:0.25 G4:1.5 F4:0.25 E4:0.25 | D4:0.5 D4:0.5 D4:0.5 D4:0.25 E4:0.25 F4:1.5 E4:0.25 D4:0.25 | C4:0.5 C5:1 A4:0.5 G4:0.75 F4:0.25 E4:0.5 F4:0.5 | E4:1 D4:1 C4:2', bass: 'C3:4 C3:4 F2:4 C3:4 C3:4 C3:4 C3:4 G2:4 F2:4 C3:4' },
+    { name: '우리 모두 즐거운 성탄 (We Wish You a Merry Christmas)', by: '전통 캐럴', bpm: 120, tone: 'bell', mel: 'G4:1 | C5:1 C5:0.5 D5:0.5 C5:0.5 B4:0.5 | A4:1 A4:1 A4:1 | D5:1 D5:0.5 E5:0.5 D5:0.5 C5:0.5 | B4:1 G4:1 G4:1 | E5:1 E5:0.5 F5:0.5 E5:0.5 D5:0.5 | C5:1 A4:1 G4:0.5 G4:0.5 | A4:1 D5:1 B4:1 | C5:2 R:1', bass: 'G2:1 C3:3 F2:3 D3:3 G2:3 E3:3 A2:3 F2:1 G2:2 C3:3' },
+  ],
+};
+const BGM = { list: XMAS ? SONGS.xmas : SONGS[SEASON] || SONGS.spring, si: 0, loop: 0, t: 0, mi: 0, bi: 0, mt: 0, bt: 0, out: null, started: false };
+BGM.list.forEach(s => { s.M = parseMel(s.mel); s.B = parseMel(s.bass); s.len = s.M.reduce((a, n) => a + n[1], 0); });
+function bgmVoice(tone, f, t, dur, vol) {
+  const out = BGM.out;
+  if (tone === 'bell') { for (const [mul, v] of [[1, 1], [2.76, 0.35], [5.4, 0.12]]) { const o = osc('sine', f * mul, t, dur + 1.2), g = gain(); env(g, t, 0.004, vol * v, dur + 1); o.connect(g).connect(out); } }
+  else if (tone === 'piano') { const o = osc('triangle', f, t, dur + 0.8), g = gain(); env(g, t, 0.005, vol, dur + 0.7); o.connect(filt('lowpass', 2400)).connect(g).connect(out); const o2 = osc('sine', f * 2, t, dur), g2 = gain(); env(g2, t, 0.004, vol * 0.25, dur * 0.8); o2.connect(g2).connect(out); }
+  else { const o = osc('triangle', f, t, dur + 0.3), g = gain(); env(g, t, 0.003, vol, Math.min(0.5, dur) + 0.2); o.connect(filt('lowpass', 3200)).connect(g).connect(out); }
+}
+function updateBGM() {
+  if (!AU.ctx || !AU.on || window.__mgPause || $('intro').style.display !== 'none' || AU.ctx.state !== 'running') return;
+  if (!BGM.out) { BGM.out = AU.ctx.createGain(); BGM.out.gain.value = 0.0001; BGM.out.connect(AU.musicMix); }
+  const ctx = AU.ctx, S = BGM.list[BGM.si], spb = 60 / S.bpm;
+  // 공연장 음악이 들리면 배경 음악은 작게
+  const duck = AU.music && AU.music.gain.value > 0.05 ? 0.25 : 1;
+  BGM.out.gain.setTargetAtTime(0.22 * duck, ctx.currentTime, 0.5);
+  if (!BGM.started) { BGM.started = true; BGM.mt = BGM.bt = ctx.currentTime + 0.3; BGM.mi = BGM.bi = 0; BGM.songT0 = BGM.mt; situLog('🎵', `${S.name}`, `${S.by} · ${XMAS ? '크리스마스' : { spring: '봄', summer: '여름', autumn: '가을', winter: '겨울' }[SEASON]} 배경 음악 · 설정에서 음악 크기 조절`, '', 'bgm'); }
+  while (BGM.mt < ctx.currentTime + 0.4) {
+    const [m, d] = S.M[BGM.mi]; if (m != null) bgmVoice(S.tone, mtof(m), BGM.mt, d * spb * 0.9, 0.16);
+    BGM.mt += d * spb; BGM.mi++;
+    if (BGM.mi >= S.M.length) {
+      BGM.mi = 0; BGM.loop++;
+      if (BGM.loop >= 2) { BGM.loop = 0; BGM.si = (BGM.si + 1) % BGM.list.length; BGM.mt += spb * 4; BGM.bt = BGM.mt; BGM.bi = 0; BGM.started = BGM.list.length > 1 ? false : true; if (!BGM.started) { BGM.started = true; const N = BGM.list[BGM.si]; situLog('🎵', N.name, `${N.by} · 다음 곡`, '', 'bgm'); } return; }
+      BGM.bt = BGM.mt; BGM.bi = 0;
+    }
+  }
+  while (BGM.bt < BGM.mt && BGM.bt < ctx.currentTime + 0.4) {
+    const [m, d] = S.B[BGM.bi % S.B.length];
+    for (let k = 0; k < d; k++) { const t = BGM.bt + k * spb; const o = osc('sine', mtof(m), t, spb * 0.8), g = gain(); env(g, t, 0.01, 0.2, spb * 0.7); o.connect(g).connect(BGM.out);
+      if (S.drum) { const kk = osc('sine', 110, t, 0.2); kk.frequency.exponentialRampToValueAtTime(40, t + 0.1); const kg = gain(); env(kg, t, 0.002, 0.35, 0.15); kk.connect(kg).connect(BGM.out); const n = nsrc(t + spb / 2, 0.05), ng = gain(); env(ng, t + spb / 2, 0.001, 0.08, 0.04); n.connect(filt('highpass', 7000)).connect(ng).connect(BGM.out); } }
+    BGM.bt += d * spb; BGM.bi++;
+  }
+}
+setInterval(() => { try { updateBGM(); } catch {} }, 120);
+
+/* =====================================================================
+   12-38. 부수기 손맛 · 특수 무기 · 1인칭 (13.3판)
+   - 손맛: 크게 부수면 잠깐 멈칫(히트스톱)·화면 흔들림, 건물이 무너지면 슬로모션 + '붕괴!' + 연쇄 붕괴 보너스
+   - ✨ 특수 무기(G): 🔥 화염방사기 · 🌪️ 토네이도 · 🕳️ 블랙홀 · 🎳 거대 볼링공 · ⚡ 번개 폭풍
+   - 🧍 1인칭(V): 마인크래프트처럼 걸어 다니며 블록을 캐고(왼쪽) 쌓기(오른쪽), 다른 무기도 화면 가운데로 발사
+   ===================================================================== */
+// ── 시간 배율 (히트스톱 · 슬로모션) ──
+const TS = { stopUntil: 0, slowUntil: 0, slowK: 1 };
+function timeScale() { const t = performance.now(); if (t < TS.stopUntil) return 0.06; if (t < TS.slowUntil) return TS.slowK; return 1; }
+function hitStop(ms) { TS.stopUntil = Math.max(TS.stopUntil, performance.now() + ms); }
+function slowMo(sec, k = 0.35) { TS.slowUntil = performance.now() + sec * 1000; TS.slowK = k; }
+const CHAIN = { n: 0, until: 0 };
+function impactFX(n, p) {
+  if (n >= 160) { hitStop(110); shake(1.2, p); } else if (n >= 45) { hitStop(55); shake(0.6, p); }
+}
+function checkCollapses() {
+  for (const b of CAMPUS_BUILDINGS) {
+    if (!b.name) continue; const r = b.ratio();
+    if (r < 0.3) { b.fell = false; continue; }
+    if (r >= 0.7 && !b.fell) {
+      b.fell = true; const c = bbCenter(b); c.y = b.base + b.H * B * 0.6;
+      CHAIN.n = clock < CHAIN.until ? CHAIN.n + 1 : 1; CHAIN.until = clock + 8;
+      const bonus = 1500 * CHAIN.n; addScore(bonus); wallet.won += 200000 * CHAIN.n; uiDirty = true;
+      slowMo(1.1, 0.3); shake(1.4, c); fxSparks(c, 80, 26);
+      popText(c, CHAIN.n > 1 ? `💥 연쇄 붕괴 ×${CHAIN.n}! +${bonus}` : `💥 ${b.name} 붕괴! +${bonus}`);
+      banner(CHAIN.n > 1 ? `💥 연쇄 붕괴 ×${CHAIN.n}!` : `💥 ${b.name} 붕괴!`, `8초 안에 또 무너뜨리면 보너스가 커져요 · 장학금 ${won(200000 * CHAIN.n)}`, 'gold');
+      career.collapses = (career.collapses || 0) + 1;
+    }
+  }
+}
+setInterval(() => { try { if (started) checkCollapses(); } catch {} }, 400);
+// ── ✨ 특수 무기 ──
+const SPECIALS = [
+  { id: 'flame', icon: '🔥', name: '화염방사기', desc: '불길이 번지며 8초 동안 태움', cost: 200000 },
+  { id: 'tornado', icon: '🌪️', name: '토네이도', desc: '15초 동안 돌아다니며 빨아들임', cost: 800000 },
+  { id: 'hole', icon: '🕳️', name: '블랙홀', desc: '3초 끌어당긴 뒤 안쪽으로 폭발', cost: 1200000 },
+  { id: 'bowl', icon: '🎳', name: '거대 볼링공', desc: '굴러가며 줄줄이 뚫고 지나감', cost: 500000 },
+  { id: 'storm', icon: '⚡', name: '번개 폭풍', desc: '7초 동안 번개 14번', cost: 600000 },
+];
+let special = 'flame';
+const SPX = { burns: [], tornados: [], holes: [], balls: [], storms: [] };
+function renderSpecialBar() {
+  const bar = $('specialbar'); bar.textContent = '';
+  for (const s of SPECIALS) { const b = document.createElement('button'); b.className = s.id === special ? 'on' : ''; b.innerHTML = `<b>${s.icon} ${s.name}</b><small>${s.desc} · ${won(s.cost)}</small>`; b.onclick = () => { special = s.id; renderSpecialBar(); }; bar.appendChild(b); }
+}
+function useSpecial(hit) {
+  const S = SPECIALS.find(s => s.id === special); if (!spend(S.cost, S.name)) return;
+  const p = hit.point.clone(), act = beginAction(special); mEvent('special');
+  if (special === 'flame') {
+    const from = camera.position.clone(), dir = p.clone().sub(from).normalize();
+    for (let k = 0; k < 14; k++) after(k * 0.06, () => { const q = p.clone().addScaledVector(dir, rand(-3, 2)).add(V3(rand(-2, 2), rand(-1, 2), rand(-2, 2))); fxFire(q, 2, 14); const n = damageSphere(q, 2.2, 5, act); afterDamage(n, q, act); });
+    SPX.burns.push({ p, act, until: clock + 8, t: 0, r: 3 }); SFX.boom(p, 0.4); popText(p.clone().setY(p.y + 3), '🔥 화르륵!');
+  } else if (special === 'tornado') {
+    const g = new THREE.Group(); const mat = new THREE.MeshBasicMaterial({ color: 0x9aa3ad, transparent: true, opacity: 0.38, side: THREE.DoubleSide, depthWrite: false });
+    for (let i = 0; i < 4; i++) { const m = new THREE.Mesh(new THREE.CylinderGeometry(3 + i * 2.2, 1 + i * 1.6, 9, 20, 1, true), mat); m.position.y = 4.5 + i * 8; g.add(m); }
+    g.position.copy(p).setY(terrainAt(p.x, p.z)); scene.add(g);
+    SPX.tornados.push({ g, act, until: clock + 15, vel: V3(rand(-1, 1), 0, rand(-1, 1)).normalize().multiplyScalar(6), t: 0 });
+    banner('🌪️ 토네이도!', '15초 동안 캠퍼스를 휩쓸어요', 'gold'); SFX.jet(p);
+  } else if (special === 'hole') {
+    const core = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 16), new THREE.MeshBasicMaterial({ color: 0x0a0010 })), halo = new THREE.Mesh(new THREE.TorusGeometry(3, 0.5, 8, 40), new THREE.MeshBasicMaterial({ color: 0xb06bff, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false }));
+    const g = new THREE.Group(); g.add(core, halo); g.position.copy(p).addScaledVector(hit.normal, 2); scene.add(g);
+    SPX.holes.push({ g, core, halo, act, t: 0 }); popText(p.clone().setY(p.y + 4), '🕳️ 빨려 들어간다…');
+  } else if (special === 'bowl') {
+    const dir = p.clone().sub(camera.position).setY(0).normalize(), start = p.clone().addScaledVector(dir, -30);
+    const tex = (() => { const cv = document.createElement('canvas'); cv.width = 128; cv.height = 64; const g = cv.getContext('2d'); g.fillStyle = '#1b2a6b'; g.fillRect(0, 0, 128, 64); g.fillStyle = '#ffd24a'; for (let i = 0; i < 3; i++) { g.beginPath(); g.arc(30 + i * 12, 22, 5, 0, Math.PI * 2); g.fill(); } g.fillStyle = '#fff'; g.font = '900 16px sans-serif'; g.fillText('KU', 80, 40); const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(4.5, 28, 20), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.2, metalness: 0.3 })); ball.castShadow = true; ball.position.copy(start); scene.add(ball);
+    SPX.balls.push({ ball, dir, act, t: 0, hitT: 0 }); banner('🎳 거대 볼링공!', '스트라이크를 노려 보세요', 'gold');
+  } else if (special === 'storm') {
+    SPX.storms.push({ p, act, n: 0, t: 0 }); scene.fog.color.multiplyScalar(0.8); banner('⚡ 번개 폭풍', '7초 동안 번개 14번', 'gold');
+  }
+}
+const _boltMat = new THREE.LineBasicMaterial({ color: 0xd8ecff, transparent: true, blending: THREE.AdditiveBlending });
+function updateSpecials(dt) {
+  for (const B0 of [...SPX.burns]) {   // 불길: 주변으로 조금씩 번짐
+    B0.t -= dt; if (B0.t > 0) continue; B0.t = 0.35; B0.r = Math.min(9, B0.r + 0.25);
+    const q = B0.p.clone().add(V3(rand(-B0.r, B0.r), rand(-1, B0.r * 0.7), rand(-B0.r, B0.r))); fxFire(q, 1.6, 10);
+    const n = damageSphere(q, 1.6, 4, B0.act); afterDamage(n, q, B0.act); if (Math.random() < 0.3) fxSmoke(q, 2, 4);
+    if (clock > B0.until) SPX.burns.splice(SPX.burns.indexOf(B0), 1);
+  }
+  for (const T of [...SPX.tornados]) {
+    const g = T.g; g.rotation.y += dt * 6; T.vel.applyAxisAngle(UP, rand(-0.6, 0.6) * dt); g.position.addScaledVector(T.vel, dt); g.position.y = terrainAt(g.position.x, g.position.z);
+    g.children.forEach((m, i) => { m.rotation.y -= dt * (3 + i); m.position.x = Math.sin(clock * 2 + i) * i * 0.6; });
+    if ((T.t -= dt) <= 0) { T.t = 0.22; const q = g.position.clone().add(V3(rand(-3, 3), rand(1, 22), rand(-3, 3))); const n = damageSphere(q, 3.2, 14, T.act); afterDamage(n, q, T.act); fxSmoke(q, 3, 4);
+      for (const v of vehicles) if (v.g.position.distanceTo(g.position) < 10) v.hit(V3(rand(-4, 4), 14, rand(-4, 4)), T.act);
+      for (let i = 0; i < trees.length; i++) { const t = trees[i]; if (Math.abs(t.p.x - g.position.x) < 9 && Math.abs(t.p.z - g.position.z) < 9) knockTree(i, g.position, T.act); }
+      scarePeople(g.position, 30); ktoBoom(g.position, 3); facBoom(g.position, 3); retakeBoom(g.position, 3); }
+    if (clock > T.until) { scene.remove(g); SPX.tornados.splice(SPX.tornados.indexOf(T), 1); }
+  }
+  for (const H of [...SPX.holes]) {
+    H.t += dt; H.halo.rotation.z += dt * 8; H.halo.rotation.x = 1.2; const s = 1 + H.t * 0.8; H.core.scale.setScalar(s); H.halo.scale.setScalar(1 + H.t * 0.5);
+    if (Math.random() < dt * 30) { const a = rand(0, 6.28), q = H.g.position.clone().add(V3(Math.cos(a) * 14, rand(-4, 6), Math.sin(a) * 14)); fire.spawn(q.x, q.y, q.z, (H.g.position.x - q.x) * 1.5, (H.g.position.y - q.y) * 1.5, (H.g.position.z - q.z) * 1.5, 0.7, 0.4, 1, 0.3, 1, 0.8, 1, 0, 1); }
+    if (H.t > 3) { const q = H.g.position.clone(); scene.remove(H.g); SPX.holes.splice(SPX.holes.indexOf(H), 1); hitStop(160); explode(q, 11, 26, H.act); whiteFlash(); }
+  }
+  for (const Bl of [...SPX.balls]) {
+    Bl.t += dt; const b = Bl.ball; b.position.addScaledVector(Bl.dir, dt * 26); b.position.y = Math.max(terrainAt(b.position.x, b.position.z), surfaceBelow(b.position.x, b.position.y + 2, b.position.z)) + 4.5;
+    b.rotateOnWorldAxis(V3(Bl.dir.z, 0, -Bl.dir.x), dt * 26 / 4.5);
+    if ((Bl.hitT -= dt) <= 0) { Bl.hitT = 0.12; const n = damageSphere(b.position, 5, 16, Bl.act); if (n) { afterDamage(n, b.position, Bl.act); shake(0.4, b.position); if (n > 30 && Math.random() < 0.3) popText(b.position.clone().setY(b.position.y + 6), pick(['스트라이크!', '스페어!', '쿵!'])); }
+      for (const v of vehicles) if (v.g.position.distanceTo(b.position) < 7) v.hit(Bl.dir.clone().multiplyScalar(20).setY(10), Bl.act);
+      for (let i = 0; i < trees.length; i++) { const t = trees[i]; if (Math.abs(t.p.x - b.position.x) < 6 && Math.abs(t.p.z - b.position.z) < 6) knockTree(i, b.position, Bl.act); } }
+    if (Bl.t > 16 || Math.abs(b.position.x) > WORLD - 20 || Math.abs(b.position.z) > WORLD - 20) { scene.remove(b); SPX.balls.splice(SPX.balls.indexOf(Bl), 1); }
+  }
+  for (const St of [...SPX.storms]) {
+    St.t -= dt; if (St.t > 0) continue; St.t = 0.5;
+    const q = St.p.clone().add(V3(rand(-35, 35), 0, rand(-35, 35))); q.y = surfaceBelow(q.x, q.y + 80, q.z);
+    const pts = [q.clone().setY(q.y + 140)]; for (let k = 1; k < 8; k++) pts.push(V3(q.x + rand(-6, 6), q.y + 140 - k * 18, q.z + rand(-6, 6))); pts.push(q);
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), _boltMat); scene.add(line); setTimeout(() => scene.remove(line), 160);
+    explode(q, 4, 14, St.act); if (++St.n >= 14) SPX.storms.splice(SPX.storms.indexOf(St), 1);
+  }
+}
+// ── 🧍 1인칭 (마인크래프트처럼) ──
+const FP = { on: false, pos: V3(), vel: V3(), yaw: 0, pitch: 0, ground: false, keys: {}, lock: false, swing: 0, hand: null, touch: { mv: null, lk: null, mx: 0, mz: 0 } };
+function fpEnter() {
+  if (FP.on) return; FP.on = true; fly = null; controls.enabled = false;
+  const t = controls.target.clone(); FP.pos.set(t.x, surfaceBelow(t.x, t.y + 60, t.z) + 0.05, t.z);
+  FP.yaw = Math.atan2(camera.position.x - t.x, camera.position.z - t.z) + Math.PI; FP.pitch = -0.1; FP.vel.set(0, 0, 0);
+  if (!FP.hand) {   // 손 + 곡괭이 (카메라에 붙임)
+    const h = new THREE.Group(), skin = new THREE.MeshStandardMaterial({ color: 0xf0c8a0 }), wood = new THREE.MeshStandardMaterial({ color: 0x8a5a32 }), iron = new THREE.MeshStandardMaterial({ color: 0x9aa3ad, metalness: 0.6, roughness: 0.3 });
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.5), skin); arm.position.set(0, 0, 0.1);
+    const stick = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.42, 0.04), wood); stick.position.set(0, 0.15, -0.15);
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.06, 0.06), iron); head.position.set(0, 0.35, -0.15);
+    h.add(arm, stick, head); h.position.set(0.32, -0.3, -0.55); h.rotation.set(-0.2, -0.3, 0); camera.add(h); FP.hand = h;
+    for (const m of [arm, stick, head]) { m.material.depthTest = false; m.renderOrder = 50; }
+    if (!camera.parent) scene.add(camera);
+  }
+  FP.hand.visible = true; document.body.classList.add('fp');
+  if (matchMedia('(pointer:fine)').matches) { try { const pr = renderer.domElement.requestPointerLock(); if (pr && pr.catch) pr.catch(() => {}); } catch {} }
+  banner('🧍 1인칭', SMALL ? '왼쪽 끌기 이동 · 오른쪽 끌기 보기 · ⛏ 캐기 · 🧱 놓기 · ⤴ 점프' : 'WASD 이동 · 마우스 보기 · 왼쪽 클릭 캐기(다른 무기는 발사) · 오른쪽 클릭 블록 놓기 · Space 점프 · Shift 달리기 · V 나가기', 'blue');
+}
+function fpExit() {
+  if (!FP.on) return; FP.on = false; controls.enabled = true; if (FP.hand) FP.hand.visible = false; document.body.classList.remove('fp');
+  if (document.pointerLockElement) document.exitPointerLock();
+  const fwd = V3(Math.sin(FP.yaw), 0, Math.cos(FP.yaw)), t = FP.pos.clone().addScaledVector(fwd, 10);
+  controls.target.copy(t); camera.position.copy(t).add(V3(-fwd.x * 40, 35, -fwd.z * 40)); camera.lookAt(t);
+}
+const fpSolid = (x, y, z) => hasBlock(x, y, z) || y < terrainAt(x, z) - 0.05;
+function updateFP(dt) {
+  const K = FP.keys, sp = (K.shift ? 11 : 6) * (equipped('sneakers') ? 1.4 : 1);
+  let mx = (K.d ? 1 : 0) - (K.a ? 1 : 0) + FP.touch.mx, mz = (K.w ? 1 : 0) - (K.s ? 1 : 0) + FP.touch.mz;
+  const fwd = V3(Math.sin(FP.yaw), 0, Math.cos(FP.yaw)), right = V3(-fwd.z, 0, fwd.x);
+  const L = Math.hypot(mx, mz); if (L > 1) { mx /= L; mz /= L; }
+  const want = fwd.multiplyScalar(mz * sp).addScaledVector(right, mx * sp);
+  FP.vel.x = want.x; FP.vel.z = want.z; FP.vel.y -= 24 * dt;
+  if ((K[' '] || FP.touch.jump) && FP.ground) { FP.vel.y = 8.2 * (equipped('sneakers') ? 1.25 : 1); FP.ground = false; FP.touch.jump = false; }
+  const p = FP.pos, r = 0.35;
+  // 가로 이동: 막히면 한 칸(2 m)까지는 올라감
+  for (const ax of ['x', 'z']) {
+    const d = FP.vel[ax] * dt; if (!d) continue; const n = p.clone(); n[ax] += d + Math.sign(d) * r;
+    const blocked = fpSolid(n.x, p.y + 0.5, n.z) || fpSolid(n.x, p.y + 1.5, n.z);
+    if (!blocked) p[ax] += d;
+    else if (FP.ground && !fpSolid(n.x, p.y + 2.5, n.z) && !fpSolid(n.x, p.y + 3.5, n.z) && !fpSolid(p.x, p.y + 3.5, p.z)) { p.y += B; p[ax] += d; }
+  }
+  p.y += FP.vel.y * dt;
+  const floor = surfaceBelow(p.x, p.y + 1, p.z);
+  if (p.y <= floor) { p.y = floor; FP.vel.y = 0; FP.ground = true; } else FP.ground = p.y - floor < 0.05;
+  if (FP.vel.y > 0 && fpSolid(p.x, p.y + 1.9, p.z)) FP.vel.y = 0;
+  p.x = clamp(p.x, -WORLD + 5, WORLD - 5); p.z = clamp(p.z, -WORLD + 5, WORLD - 5);
+  const bob = FP.ground && (mx || mz) ? Math.sin(clock * (K.shift ? 14 : 10)) * 0.06 : 0;
+  camera.position.set(p.x, p.y + 1.65 + bob, p.z);
+  const look = V3(Math.sin(FP.yaw) * Math.cos(FP.pitch), Math.sin(FP.pitch), Math.cos(FP.yaw) * Math.cos(FP.pitch));
+  camera.lookAt(camera.position.clone().add(look)); controls.target.copy(camera.position).addScaledVector(look, 12);
+  mouse.x = innerWidth / 2; mouse.y = innerHeight / 2; mouse.over = true; hoverDirty = true;
+  FP.swing = Math.max(0, FP.swing - dt * 5); if (FP.hand) FP.hand.rotation.x = -0.2 - Math.sin(FP.swing * Math.PI) * 1.2;
+}
+function fpAction(btn) {
+  const cx = innerWidth / 2, cy = innerHeight / 2; FP.swing = 1;
+  if (btn === 0 && (findClick(cx, cy) || kuClick(cx, cy))) return;
+  if (btn === 2 || (btn === 0 && weapon === 'build')) {   // 블록 놓기
+    const hit = pickAt(cx, cy); if (!hit || hit.point.distanceTo(camera.position) > 9) return;
+    const keep = buildOpt.shape; buildOpt.shape = 'block'; useBuild(hit); buildOpt.shape = keep; return;
+  }
+  if (weapon === 'pipe') {   // 캐기: 눈앞 블록 하나(+주변 조금)
+    if (inTruce()) { toast('휴전 중이에요'); return; }
+    const hit = pickAt(cx, cy); if (!hit || hit.point.distanceTo(camera.position) > 8) return;
+    if (!hit.building) { if (hit.vehicle) hit.vehicle.hit(V3().subVectors(hit.vehicle.g.position, camera.position).setY(0).normalize().multiplyScalar(14).setY(6), beginAction('fp')); return; }
+    const q = hit.point.clone().addScaledVector(hit.normal, -0.6), act = beginAction('fp');
+    const n = damageSphere(q, 1.15 * (equipped('gloves') ? 1.7 : 1), 6, act); if (n) { afterDamage(n, q, act); fxSparks(hit.point, 10, 6); SFX.hit(hit.point, 0.6); }
+    return;
+  }
+  attack(cx, cy);
+}
+// 입력: 1인칭일 땐 창 전체에서 먼저 가로챔
+window.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase(); if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+  if (k === 'v' && started && !window.__mgPause) { FP.on ? fpExit() : fpEnter(); e.stopPropagation(); return; }
+  if (k === 'g' && started && !FP.on) { selectWeapon('special'); }
+  if (!FP.on) return;
+  if (['w', 'a', 's', 'd', ' ', 'shift', 'q', 'e', 'r', 'f', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) { FP.keys[{ arrowup: 'w', arrowdown: 's', arrowleft: 'a', arrowright: 'd' }[k] || k] = true; e.stopPropagation(); e.preventDefault(); }
+  if (k === 'escape') fpExit();
+  if (k === 'g') selectWeapon('special');
+}, true);
+window.addEventListener('keyup', e => { const k = e.key.toLowerCase(); FP.keys[{ arrowup: 'w', arrowdown: 's', arrowleft: 'a', arrowright: 'd' }[k] || k] = false; }, true);
+window.addEventListener('pointerdown', e => {
+  if (!FP.on || e.target !== renderer.domElement || e.pointerType === 'touch') return;
+  e.stopPropagation();
+  if (!document.pointerLockElement && matchMedia('(pointer:fine)').matches) { try { const pr = renderer.domElement.requestPointerLock(); if (pr && pr.catch) pr.catch(() => {}); } catch {} return; }
+  audioInit(); fpAction(e.button);
+}, true);
+window.addEventListener('pointerup', e => { if (FP.on && e.target === renderer.domElement && e.pointerType !== 'touch') e.stopPropagation(); }, true);
+renderer.domElement.addEventListener('contextmenu', e => { if (FP.on) e.preventDefault(); });
+document.addEventListener('mousemove', e => { if (!FP.on || document.pointerLockElement !== renderer.domElement) return; FP.yaw -= e.movementX * 0.0024; FP.pitch = clamp(FP.pitch - e.movementY * 0.0024, -1.45, 1.45); });
+// 휴대폰: 왼쪽 반 끌기 = 이동, 오른쪽 반 끌기 = 보기
+window.addEventListener('pointerdown', e => {
+  if (!FP.on || e.pointerType !== 'touch' || e.target !== renderer.domElement) return; e.stopPropagation();
+  if (e.clientX < innerWidth / 2) FP.touch.mv = { id: e.pointerId, x: e.clientX, y: e.clientY }; else FP.touch.lk = { id: e.pointerId, x: e.clientX, y: e.clientY };
+}, true);
+window.addEventListener('pointermove', e => {
+  if (!FP.on || e.pointerType !== 'touch') return; const T = FP.touch;
+  if (T.mv && T.mv.id === e.pointerId) { T.mx = clamp((e.clientX - T.mv.x) / 50, -1, 1); T.mz = clamp(-(e.clientY - T.mv.y) / 50, -1, 1); }
+  if (T.lk && T.lk.id === e.pointerId) { FP.yaw -= (e.clientX - T.lk.x) * 0.006; FP.pitch = clamp(FP.pitch - (e.clientY - T.lk.y) * 0.006, -1.45, 1.45); T.lk.x = e.clientX; T.lk.y = e.clientY; }
+}, true);
+window.addEventListener('pointerup', e => { if (e.pointerType !== 'touch') return; const T = FP.touch; if (T.mv && T.mv.id === e.pointerId) { T.mv = null; T.mx = T.mz = 0; } if (T.lk && T.lk.id === e.pointerId) T.lk = null; }, true);
+
+/* =====================================================================
+   12-39. 수배 등급 · 조남주 학생주임 · 마스코트 쿠 · 네임드 모금/모집 · 찾기 미션 · 새 아이템 (13.4판)
+   ===================================================================== */
+const $find = id => document.getElementById(id);
+// 화면 좌표 → 가까운 사람/인물 (누르기 판정용)
+function screenOf(p) { const s = p.clone().project(camera); return s.z < 1 ? [(s.x + 1) / 2 * innerWidth, (1 - s.y) / 2 * innerHeight] : null; }
+function nearScreen(list, x, y, r = 30) { let best = null, bd = r; for (const [o, p] of list) { const s = screenOf(p); if (!s) continue; const d = Math.hypot(s[0] - x, s[1] - y); if (d < bd) { bd = d; best = o; } } return best; }
+// ── 🚨 수배 등급 (GTA처럼 ★1~5) ──
+const WANT = { heat: 0, lvl: 0, quiet: 0, cool: {}, heli: null, flash: 0 };
+const WANT_AT = [0, 15, 50, 120, 250, 450];
+function wantAdd(v) { WANT.heat = Math.min(700, WANT.heat + v); WANT.quiet = 0; }
+function updateWanted(dt) {
+  if (!started || inTruce()) return;
+  WANT.quiet += dt; if (WANT.quiet > 12) WANT.heat = Math.max(0, WANT.heat - dt * (4 + WANT.heat * 0.02));
+  const k = Math.sqrt(threat()); let lvl = 0; for (let i = 1; i <= 5; i++) if (WANT.heat >= WANT_AT[i] / k) lvl = i;
+  if (lvl > WANT.lvl) { WANT.flash = 3; banner(`🚨 수배 ${'★'.repeat(lvl)}`, ['', '교내 경비가 순찰을 시작해요', '경찰 기동대가 출동해요', '군 병력이 투입돼요', '⚠️ 군 헬기가 떴어요! 폭발로 격추하세요', '🔥 특전사 정예 + 전투기 출격'][lvl] + ' · 12초 동안 안 부수면 내려가요', lvl >= 4 ? 'red' : 'blue'); SFX.siren(controls.target); }
+  if (lvl < WANT.lvl) situLog('🚨', `수배 ${lvl ? '★'.repeat(lvl) : '해제'}`, '조용히 숨어서 등급이 내려갔어요', 'blue', 'want');
+  WANT.lvl = lvl; WANT.flash = Math.max(0, WANT.flash - dt);
+  const el2 = $find('wanted'); el2.hidden = !lvl; if (lvl) { el2.innerHTML = '🚨 ' + '<b>★</b>'.repeat(lvl) + '<i>★</i>'.repeat(5 - lvl) + `<small>${WANT.quiet > 12 ? '숨는 중… 내려가요' : '부수면 올라가요'}</small>`; el2.classList.toggle('hot', WANT.flash > 0); }
+  const C = WANT.cool, at = controls.target, cd = (key, sec) => { if ((C[key] || 0) > clock) return false; C[key] = clock + sec / Math.min(2, threat()); return true; };
+  if (lvl >= 1 && cd('guard', 40)) wantSquad(4, 'facility', 0x3a5a8a, 0xf2f2f2, '교내 경비', 0);
+  if (lvl >= 2 && cd('police', 45)) wantSquad(6, 'army', 0x1d2c4a, 0x1d2c4a, '경찰 기동대', 1);
+  if (lvl >= 3 && cd('army', 60) && !teams.some(t => t.kind === 'army')) dispatchTeam('army', true);
+  if (lvl >= 4 && !WANT.heli && cd('heli', 50)) spawnHeli();
+  if (lvl >= 5 && cd('sf', 70)) { wantSquad(8, 'army', 0x2a3320, 0x111111, '특전사', 8); launchInterceptors(at.clone()); }
+  if (WANT.heli) updateHeli(dt);
+}
+function wantSquad(n, role, shirt, hat, label, elites) {
+  const t = controls.target, nd = G.nodes[nearestNode(t.x + rand(-60, 60), t.z + rand(-60, 60))], from = nd ? V3(nd[0], 0, nd[1]) : t.clone(); let k = 0;
+  for (let i = 0; i < n; i++) {
+    const a = addAgent({ pos: from.clone().add(V3(rand(-4, 4), 0, rand(-4, 4))), kind: 'guard', role, shirt, pants: 0x1f2633, hat, shield: i % 2 === 0, speed: 3.1, think: (a, dt) => {
+      if (a.down > 0) return; if (clock > a.until) { a.fadeOut = true; return; }
+      const foe = raiders().find(m => m.pos.distanceTo(a.pos) < 30);
+      const g = foe ? foe.pos : a.goal || (a.goal = controls.target.clone().add(V3(rand(-25, 25), 0, rand(-25, 25))));
+      if (stepTo(a, g.x, g.z, a.speed, dt) && !foe) a.goal = null;
+      if (foe && foe.pos.distanceTo(a.pos) < 1.8 && (a.hitT = (a.hitT || 0) - dt) <= 0) { a.hitT = 1.2; a.swing = 1.4; const win = Math.random() < (a.elite ? 0.75 : 0.5); const l = win ? foe : a; l.down = 2; l.hits = (l.hits || 0) + 1; if (l.hits >= tough(l)) { l.fadeOut = true; if (!win) STG.kills++; } popText(l.pos.clone().setY(l.y + 2.4), win ? '돌격대 체포!' : `${label} 밀림!`); }
+    } });
+    if (a) { a.until = clock + 70; a.wanted = true; if (i < elites) makeElite(a); k++; }
+  }
+  if (k) situLog('🚨', `${label} ${k}명 출동`, `수배 ${'★'.repeat(WANT.lvl)} · 돌격대를 체포하러 와요`, 'red', 'want' + label);
+}
+// 군 헬기: 머리 위를 돌며 돌격대·유닛·기지를 쏨. 폭발로 격추
+function spawnHeli() {
+  const m = makeHeli(); m.scale.setScalar(1.5); m.traverse(o => { if (o.isMesh && o.material && o.material.color) { o.material = o.material.clone(); o.material.color.lerp(new THREE.Color(0x3a4a2a), 0.6); } });
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(9, 40, 20, 1, true).translate(0, -20, 0), new THREE.MeshBasicMaterial({ color: 0xfff6c8, transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide })); m.add(cone);
+  const t = controls.target; m.position.set(t.x + 150, t.y + 55, t.z); scene.add(m);
+  WANT.heli = { m, hp: Math.round(40 * hpMul()), max: Math.round(40 * hpMul()), ang: 0, fire: 2 };
+  regNamed('🚁 군 헬기', () => m.position, () => !!WANT.heli && WANT.heli.m === m);
+}
+function updateHeli(dt) {
+  const H = WANT.heli, m = H.m, t = controls.target;
+  H.ang += dt * 0.35; const goal = V3(t.x + Math.cos(H.ang) * 45, terrainAt(t.x, t.z) + 50, t.z + Math.sin(H.ang) * 45);
+  m.position.lerp(goal, Math.min(1, dt * 0.8)); m.rotation.y = -H.ang; m.children.forEach(o => { if (o.userData && o.userData.rotor) o.rotation.y += dt * 30; });
+  if ((H.fire -= dt) > 0) return; H.fire = 1.6;
+  const mp = m.position.clone().setY(m.position.y - 2);
+  const r = raiders().filter(a => a.pos.distanceTo(mp) < 110)[0];
+  if (r) { tracer(mp, r.pos.clone().setY(r.y + 1), new THREE.LineBasicMaterial({ color: 0xffe28a, transparent: true, blending: THREE.AdditiveBlending })); r.fadeOut = true; SFX.shot(mp); return; }
+  const u = units.find(u => u.mesh && u.mesh.position.distanceTo(mp) < 140);
+  if (u) { tracer(mp, u.mesh.position.clone(), new THREE.LineBasicMaterial({ color: 0xff8a5a, transparent: true })); u.age += 3; SFX.shot(mp); return; }
+  const b = myBases().find(b => bbCenter(b).distanceTo(mp) < 150);
+  if (b && !b.built) { const q = nearestAliveBlock(b, mp); if (q) { tracer(mp, q, new THREE.LineBasicMaterial({ color: 0xff8a5a, transparent: true })); damageSphere(q, 2.2, 8, warAct()); SFX.shot(mp); } }
+}
+function heliBoom(p, R) {
+  const H = WANT.heli; if (!H) return; const d = H.m.position.distanceTo(p); if (d > R + 14) return;
+  H.hp -= R * 1.6 + 4; popText(H.m.position.clone().setY(H.m.position.y + 4), `헬기 ${Math.max(0, Math.round(H.hp))}/${H.max}`);
+  if (H.hp <= 0) { const q = H.m.position.clone(); scene.remove(H.m); WANT.heli = null; explode(q.setY(Math.max(terrainAt(q.x, q.z) + 2, q.y - 40)), 6, 14, warAct()); banner('🚁 헬기 격추!', '장학금 ₩1,500,000 · 수배 등급이 한 칸 내려가요', 'gold'); wallet.won += 1500000; uiDirty = true; WANT.heat = WANT_AT[Math.max(0, WANT.lvl - 1)] / Math.sqrt(threat()); career.heli = (career.heli || 0) + 1; }
+}
+// ── 🟦 조남주 학생주임 (네임드) ──
+const ZJ = { f: null, hp: 0, max: 0, skillT: 6, until: 0, cool: 200, goal: null, i: 0 };
+function spawnZJ() {
+  if (ZJ.f) return; const c = bbCenter(byName('학생회관') || CAMPUS_BUILDINGS[0]), nd = G.nodes[nearestNode(c.x, c.z)], p = nd ? V3(nd[0], 0, nd[1]) : c; p.y = terrainAt(p.x, p.z);
+  const f = makeNamed('🟦 조남주', '학생주임 · 생활지도 · 체력 ' + Math.round(160 * hpMul()), 0x2b3a55, 0x3fa0ff, 2.1); f.g.position.copy(p); scene.add(f.g);
+  const wh = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.2, 8), new THREE.MeshStandardMaterial({ color: 0xc0c0c0, metalness: 0.8 })); wh.position.set(0.15, 1.7, 0.25); wh.rotation.z = Math.PI / 2; f.g.add(wh);
+  Object.assign(ZJ, { f, hp: Math.round(160 * hpMul()), max: Math.round(160 * hpMul()), skillT: 5, until: clock + 150, i: 0 });
+  banner('🟦 학생주임 조남주 등장!', '생활지도·벌점·호루라기로 돌격대를 단속해요 · 폭발로 쫓아내면 보상', 'red'); SFX.bell();
+}
+function updateZJ(dt) {
+  if (!ZJ.f) { if (started && STG.week >= 3 && (ZJ.cool -= dt) <= 0 && !inTruce()) { ZJ.cool = rand(220, 320) / Math.min(2, threat()); spawnZJ(); } return; }
+  const g = ZJ.f.g, rs = raiders();
+  const goal = rs.length ? rs[0].pos : bbCenter(byName('학생회관') || CAMPUS_BUILDINGS[0]);
+  const dx = goal.x - g.position.x, dz = goal.z - g.position.z, d = Math.hypot(dx, dz);
+  if (d > 4) { const s = Math.min(d - 3, 3.4 * dt); g.position.x += dx / d * s; g.position.z += dz / d * s; g.rotation.y = Math.atan2(dx, dz); ZJ.f.armL.rotation.x = Math.sin(clock * 7) * 0.6; ZJ.f.armR.rotation.x = -Math.sin(clock * 7) * 0.6; } else ZJ.f.armR.rotation.x = -2.6;
+  g.position.y = terrainAt(g.position.x, g.position.z);
+  if ((ZJ.skillT -= dt) <= 0 && !inTruce()) {
+    ZJ.skillT = 7 / Math.min(1.8, threat()); let s = ['guide', 'whistle', 'fine'][ZJ.i++ % 3]; const p = g.position; if (s !== 'fine' && !rs.some(a => a.pos.distanceTo(p) < 40)) s = 'fine';
+    if (s === 'guide') { let n = 0; for (const a of rs) if (a.pos.distanceTo(p) < 25) { a.fadeOut = true; n++; popText(a.pos.clone().setY(a.y + 2.4), '생활지도!'); } banner('🟦 조남주 · 생활지도', `돌격대 ${n}명이 교무실로 끌려갔어요`, 'red'); }
+    else if (s === 'whistle') { for (const a of rs) a.down = 3; banner('🟦 조남주 · 호루라기', '삐익—! 모든 돌격대가 3초 동안 얼어붙었어요', 'red'); SFX.ding(); }
+    else { const v = Math.min(Math.round(wallet.won * 0.05), 1500000); wallet.won -= v; uiDirty = true; banner('🟦 조남주 · 벌점 부과', `벌점 10점 · 장학금 ${won(v)} 감액`, 'red'); }
+  }
+  if (clock > ZJ.until) { banner('조남주 퇴근', '오늘 생활지도는 여기까지', ''); scene.remove(g); ZJ.f = null; }
+}
+function zjBoom(p, R) {
+  if (!ZJ.f || p.distanceTo(ZJ.f.g.position) > R + 12) return;
+  ZJ.hp -= R * 1.2 + 3; popText(ZJ.f.g.position.clone().setY(ZJ.f.g.position.y + 5), `조남주 ${Math.max(0, Math.round(ZJ.hp))}/${ZJ.max}`);
+  if (ZJ.hp <= 0) { const q = ZJ.f.g.position.clone(); scene.remove(ZJ.f.g); ZJ.f = null; wallet.won += 1500000; uiDirty = true; addScore(3000); banner('🟦 조남주 후퇴!', '"오늘은 봐준다…" · 장학금 ₩1,500,000', 'gold'); fxSparks(q.setY(q.y + 2), 40, 12); career.zjDown = (career.zjDown || 0) + 1; }
+}
+// ── 🐂 마스코트 쿠 (게임용으로 새로 그린 귀여운 황소) ──
+function makeKu() {
+  const g = new THREE.Group(), M = (c, o = {}) => new THREE.MeshStandardMaterial({ color: c, roughness: 0.6, ...o });
+  const add = (geo, m, x, y, z, s) => { const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); if (s) o.scale.set(...s); o.castShadow = true; g.add(o); return o; };
+  const fur = M(0xd9a441), cream = M(0xfff1dc), dark = M(0x1a1208), green = M(0x1f8a4a), horn = M(0xfff8e8);
+  add(new THREE.SphereGeometry(0.75, 20, 16), fur, 0, 0.95, 0, [1, 1.05, 0.9]);                 // 몸
+  add(new THREE.SphereGeometry(0.42, 16, 12), cream, 0, 0.85, 0.5, [1, 1.1, 0.5]);              // 배
+  const head = add(new THREE.SphereGeometry(0.72, 24, 18), fur, 0, 2.15, 0.05, [1.08, 0.95, 0.95]);
+  add(new THREE.SphereGeometry(0.4, 16, 12), cream, 0, 1.92, 0.58, [1.25, 0.8, 0.7]);           // 주둥이
+  for (const s of [-1, 1]) {
+    add(new THREE.SphereGeometry(0.05, 8, 6), dark, s * 0.15, 1.95, 0.86);                        // 콧구멍
+    add(new THREE.SphereGeometry(0.11, 12, 10), dark, s * 0.27, 2.3, 0.62);                       // 눈
+    add(new THREE.SphereGeometry(0.035, 8, 6), M(0xffffff, { emissive: 0xffffff }), s * 0.24, 2.34, 0.72);   // 눈 반짝
+    add(new THREE.SphereGeometry(0.08, 10, 8), M(0xffa0a0), s * 0.45, 2.08, 0.55, [1, 0.6, 0.4]); // 볼터치
+    const hn = add(new THREE.ConeGeometry(0.11, 0.42, 10), horn, s * 0.48, 2.75, 0); hn.rotation.z = -s * 0.7;
+    const ear = add(new THREE.SphereGeometry(0.16, 10, 8), fur, s * 0.75, 2.4, 0, [1.4, 0.6, 0.7]); ear.rotation.z = s * 0.4;
+    add(new THREE.SphereGeometry(0.2, 10, 8), fur, s * 0.75, 1.15, 0.1, [0.9, 1.2, 0.9]);         // 팔
+    add(new THREE.SphereGeometry(0.24, 10, 8), M(0x6b4a2a), s * 0.35, 0.22, 0.05, [1, 0.7, 1.2]); // 발굽
+  }
+  add(new THREE.TorusGeometry(0.55, 0.11, 8, 24), green, 0, 1.55, 0).rotation.x = Math.PI / 2;    // 초록 목도리
+  const tag = document.createElement('div'); tag.className = 'named ku'; tag.innerHTML = '<b>🐂 쿠</b><small>마스코트 · 누르면 응원!</small>';
+  const o = new CSS2DObject(tag); o.position.set(0, 3.3, 0); g.add(o); g.scale.setScalar(1.25);
+  return { g, head, tag };
+}
+const KU = { k: null, goal: null, cheerCool: 0, buffUntil: 0, hurtT: 0 };
+function spawnKu(at) {
+  if (KU.k) return; KU.k = makeKu(); const p = (at || PLAZA_C).clone(); p.x += rand(-8, 8); p.z += rand(-8, 8); p.y = terrainAt(p.x, p.z); KU.k.g.position.copy(p); scene.add(KU.k.g);
+  regNamed('🐂 쿠 (마스코트)', () => KU.k ? KU.k.g.position : PLAZA_C, () => !!KU.k);
+}
+function updateKu(dt) {
+  if (!KU.k) { if (started && (KU.hurtT -= dt) <= 0) spawnKu(fest.kind && fest.center ? fest.center : null); return; }
+  const g = KU.k.g, home = fest.kind && fest.center ? fest.center : PLAZA_C;
+  if (!KU.goal || g.position.distanceTo(KU.goal) < 1) KU.goal = home.clone().add(V3(rand(-20, 20), 0, rand(-20, 20)));
+  const dx = KU.goal.x - g.position.x, dz = KU.goal.z - g.position.z, d = Math.hypot(dx, dz), s = Math.min(d, 1.6 * dt);
+  g.position.x += dx / (d || 1) * s; g.position.z += dz / (d || 1) * s; g.rotation.y = Math.atan2(dx, dz);
+  const hop = Math.abs(Math.sin(clock * (clock < KU.buffUntil ? 9 : 5))) * 0.35; g.position.y = terrainAt(g.position.x, g.position.z) + hop;
+  KU.k.head.rotation.z = Math.sin(clock * 3) * 0.12;
+  if (clock < KU.buffUntil) for (const a of raiders()) a.hitT = Math.min(a.hitT || 0, 0.7);   // 응원: 돌격대가 더 빨리 부숨
+}
+function kuClick(x, y) {
+  if (!KU.k) return false; const s = screenOf(KU.k.g.position.clone().setY(KU.k.g.position.y + 2)); if (!s || Math.hypot(s[0] - x, s[1] - y) > 40) return false;
+  if (clock < KU.cheerCool) { toast(`쿠가 숨 고르는 중… ${Math.ceil(KU.cheerCool - clock)}초`); return true; }
+  KU.cheerCool = clock + 90; KU.buffUntil = clock + 30; wallet.won += 100000; uiDirty = true;
+  banner('🐂 쿠의 응원!', '30초 동안 돌격대가 더 빨리 부숴요 · 장학금 ₩100,000', 'gold'); SFX.cheer(KU.k.g.position); fxSparks(KU.k.g.position.clone().setY(KU.k.g.position.y + 3), 40, 10);
+  popText(KU.k.g.position.clone().setY(KU.k.g.position.y + 4.5), '쿠쿠! 힘내라!'); career.ku = (career.ku || 0) + 1; return true;
+}
+function kuBoom(p, R) {
+  if (!KU.k || p.distanceTo(KU.k.g.position) > R + 6) return;
+  const q = KU.k.g.position.clone(); scene.remove(KU.k.g); KU.k = null; KU.hurtT = 120;
+  banner('😢 쿠가 다쳤어요!', '학생들이 화가 나서 시위를 시작해요 · 2분 뒤 돌아와요', 'red'); popText(q.setY(q.y + 3), '쿠우… 😭');
+  if (!protest.active) startProtest(); wallet.won = Math.max(0, wallet.won - 300000); uiDirty = true;
+}
+// ── 네임드 모금·모집 활동 (막으면 보상, 못 막으면 적이 강해짐) ──
+const CAMPS = [
+  { id: 'fund', who: '🎓 총장', title: '발전기금 모금', where: '행정관', fac: 'pres', col: 0xffc83d, done: () => { FAC.pres.fund += Math.round(3000000 * threat()); triggerEvent('donate_new'); return `총장 세력 자금 +${won(Math.round(3000000 * threat()))} · 기부 신축`; } },
+  { id: 'lab', who: '📚 학장', title: '연구 인력 모집', where: '교수연구동', fac: 'prof', col: 0xe0a040, done: () => { const b = byName('교수연구동'); if (b && !owned.has(b)) { b.hitAt = clock; facDispatch(FAC.prof, b, 6); FAC.prof.guards.slice(-6).forEach(a => makeElite(a)); } return '교수 세력 정예 연구원 6명 배치'; } },
+  { id: 'patrol', who: '🟦 조남주', title: '선도부 모집', where: '학생회관', fac: 'pres', col: 0x3fa0ff, done: () => { spawnZJ(); wantSquad(8, 'facility', 0x3fa0ff, 0xffffff, '선도부', 2); return '학생주임과 선도부 8명 순찰 시작'; } },
+  { id: 'civic', who: '🏛️ 시장', title: '시민 봉사단 모집', where: '건국체육관', fac: 'mayor', col: 0x3fbf7f, done: () => { let n = 0; for (const b of facBldgs(FAC.mayor).sort((p, q) => q.ratio() - p.ratio()).slice(0, 2)) { b.blocks.forEach((k, i) => { if (!k.alive && Math.random() < 0.5 && b.revive(i)) n++; }); } return `시장 세력 건물 블록 ${n}개 복구`; } },
+];
+const CAMP = { list: [], t: 70 };
+function startCamp(C0) {
+  const b = byName(C0.where); if (!b || owned.has(b) || CAMP.list.some(c => c.C === C0)) return;
+  const c = bbCenter(b), nd = G.nodes[nearestNode(c.x, c.z)], p = nd ? V3((nd[0] + c.x) / 2, 0, (nd[1] + c.z) / 2) : c; const fs = freeSpots(p, 1, 0)[0]; if (fs) p.copy(fs); p.y = terrainAt(p.x, p.z);
+  const g = new THREE.Group(), table = new THREE.Mesh(new THREE.BoxGeometry(3, 1, 1.2), new THREE.MeshStandardMaterial({ color: 0xf2f2f2 })); table.position.y = 0.5;
+  const box = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.8, 0.8), new THREE.MeshStandardMaterial({ color: C0.col, emissive: C0.col, emissiveIntensity: 0.25 })); box.position.set(0.8, 1.4, 0);
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 4, 6), new THREE.MeshStandardMaterial({ color: 0x888888 })); pole.position.set(-1.6, 2, 0);
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 96; const x2 = cv.getContext('2d'); x2.fillStyle = '#' + C0.col.toString(16).padStart(6, '0'); x2.fillRect(0, 0, 256, 96); x2.fillStyle = '#1a1206'; x2.font = '900 30px "Noto Sans KR",sans-serif'; x2.textAlign = 'center'; x2.fillText(C0.title, 128, 60);
+  const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace;
+  const flag = new THREE.Mesh(new THREE.PlaneGeometry(3, 1.1), new THREE.MeshStandardMaterial({ map: tx, side: THREE.DoubleSide })); flag.position.set(-0.1, 3.4, 0);
+  g.add(table, box, pole, flag); g.position.copy(p); g.lookAt(camera.position.x, p.y, camera.position.z); scene.add(g);
+  const f = makeNamed(C0.who, `${C0.title} 중`, FAC[C0.fac].shirt, C0.col, 1.6); f.g.position.copy(p).add(V3(0, 0, 1.6)); scene.add(f.g);
+  const dur = 70 / Math.min(1.8, threat());
+  CAMP.list.push({ C: C0, g, f, p, prog: 0, dur, hits: 0 });
+  banner(`${C0.who} · ${C0.title} 시작!`, `${C0.where} 앞 부스 · ${Math.round(dur)}초 안에 근처를 폭발시켜 막으세요 (3번)`, 'red'); SFX.bell();
+}
+function updateCamps(dt) {
+  if (!started) return;
+  if ((CAMP.t -= dt * Math.min(2, threat())) <= 0 && CAMP.list.length < 2 && !inTruce()) { CAMP.t = rand(80, 120); startCamp(pick(CAMPS)); }
+  for (const c of [...CAMP.list]) {
+    if (!inTruce()) c.prog += dt / c.dur;
+    c.f.armR.rotation.x = -2 + Math.sin(clock * 5) * 0.4;
+    card('camp-' + c.C.id, `${c.C.who} · ${c.C.title}`, `${c.C.where} 앞 · 막기 ${c.hits}/3 · 다 모이면: 적이 강해져요`, c.prog, 'red');
+    if (c.prog >= 1) { const msg = c.C.done(); banner(`${c.C.title} 완료`, msg, 'red'); endCamp(c); }
+  }
+}
+function endCamp(c) { scene.remove(c.g); scene.remove(c.f.g); uncard('camp-' + c.C.id); CAMP.list.splice(CAMP.list.indexOf(c), 1); }
+function campBoom(p, R) {
+  for (const c of [...CAMP.list]) if (p.distanceTo(c.p) < R + 18) {
+    c.hits++; c.prog = Math.max(0, c.prog - 0.3); popText(c.p.clone().setY(c.p.y + 5), `${c.C.title} 방해! ${c.hits}/3`);
+    if (c.hits >= 3) { wallet.won += 500000; uiDirty = true; addScore(1500); banner(`${c.C.title} 무산!`, '부스를 엎었어요 · 장학금 ₩500,000', 'gold'); career.campStop = (career.campStop || 0) + 1; endCamp(c); }
+  }
+}
+// ── 🔍 찾기 미션: 파란 옷 학생 · 연애하는 커플 · 몰래 낮잠 자는 학생 ──
+const FIND = { cur: null, t: 130 };
+const FIND_KINDS = [
+  { id: 'blue', icon: '🔵', name: '파란 옷 학생 찾기', hint: '파란 모자 · 파란 옷 · 노란 가방', pay: 600000 },
+  { id: 'couple', icon: '💕', name: '연애하는 커플 찾기', hint: '손잡고 붙어 다니는 둘 · 하트가 뿅', pay: 700000 },
+  { id: 'nap', icon: '😴', name: '몰래 낮잠 자는 학생 찾기', hint: '잔디밭에 누워 Zzz', pay: 500000 },
+];
+function startFind(K) {
+  if (FIND.cur) return; K = K || pick(FIND_KINDS);
+  const spots = [PLAZA_C, ...CAMPUS_BUILDINGS.filter(b => b.name && b.ratio() < 0.5).map(bbCenter)], c = pick(spots).clone().add(V3(rand(-25, 25), 0, rand(-25, 25)));
+  const sp = freeSpots(c, 2, 0); const p = sp[0] || c, p2 = sp[1] || p.clone().add(V3(1, 0, 0));
+  const near = (CAMPUS_BUILDINGS.filter(b => b.name).sort((a, b) => bbCenter(a).distanceTo(p) - bbCenter(b).distanceTo(p))[0] || {}).name || '캠퍼스';
+  const ts = [];
+  const wander = (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) a.goal = (freeSpots(p.clone().add(V3(rand(-14, 14), 0, rand(-14, 14))), 1, 0)[0]) || p; };
+  if (K.id === 'blue') { const a = addAgent({ pos: p, kind: 'ped', role: 'male', shirt: 0x1e5fff, pants: 0x1f2633, speed: 1.2, think: wander }); if (a) { a.cap = 0x1e5fff; a.pack = 0xffd21e; a.outer = null; a.vest = null; agentsDirty = true; ts.push(a); } }
+  else if (K.id === 'couple') { const a = addAgent({ pos: p, kind: 'ped', role: 'male', speed: 1.0, think: wander }), b = addAgent({ pos: p2, kind: 'ped', role: 'female', speed: 1.0, think: (b, dt) => { if (a) { const t = a.pos.clone().add(V3(0.9, 0, 0)); stepTo(b, t.x, t.z, 1.6, dt); } } }); if (a) ts.push(a); if (b) ts.push(b); }
+  else { const a = addAgent({ pos: p, kind: 'ped', role: pick(['male', 'female']), speed: 0, think: a => { a.down = 5; } }); if (a) { a.down = 5; ts.push(a); } }
+  if (!ts.length) return;
+  for (const a of ts) a.findT = true;
+  FIND.cur = { K, ts, until: clock + 75, near, fx: 0 };
+  banner(`🔍 ${K.icon} ${K.name}`, `${near} 근처 · 힌트: ${K.hint} · 찾으면 눌러요 (75초)`, 'gold'); SFX.bell();
+}
+function updateFind(dt) {
+  if (!started) return;
+  if (!FIND.cur) { if ((FIND.t -= dt) <= 0) { FIND.t = rand(150, 220); startFind(); } return; }
+  const F0 = FIND.cur; card('find', `🔍 ${F0.K.name}`, `${F0.near} 근처 · ${F0.K.hint} · 찾으면 그 사람을 눌러요`, (F0.until - clock) / 75, 'gold');
+  if ((F0.fx -= dt) <= 0) { F0.fx = 3; const a = F0.ts[0]; if (a && !a.dead) popText(a.pos.clone().setY(a.y + 2.4), F0.K.id === 'couple' ? '💕' : F0.K.id === 'nap' ? 'Zzz' : '?'); }
+  if (clock > F0.until || F0.ts.every(a => a.dead || a.fadeOut)) { banner('🔍 시간 끝', `${F0.K.name} 실패…`, ''); endFind(); }
+}
+function endFind() { const F0 = FIND.cur; if (!F0) return; for (const a of F0.ts) if (!a.dead) a.fadeOut = true; uncard('find'); FIND.cur = null; }
+function findClick(x, y) {
+  const F0 = FIND.cur; if (!F0) return false;
+  const hit = nearScreen(F0.ts.filter(a => !a.dead).map(a => [a, a.pos.clone().setY(a.y + 1)]), x, y, 34); if (!hit) return false;
+  wallet.won += F0.K.pay; uiDirty = true; addScore(1000); career.finds = (career.finds || 0) + 1;
+  banner(`🔍 찾았다! ${F0.K.icon}`, `${F0.K.name} 성공 · 장학금 ${won(F0.K.pay)}`, 'gold'); SFX.cheer(hit.pos); popText(hit.pos.clone().setY(hit.y + 3), F0.K.id === 'couple' ? '들켰다! 💘' : F0.K.id === 'nap' ? '헉 깼다!' : '저요?!');
+  endFind(); return true;
+}
+// ── 새 뽑기 아이템 10종 ──
+GACHA.push(
+  { id: 'supply', r: 'common', name: '보급 요청권', type: 'bonus', desc: '[사용]하면 보급 상자가 떨어져요', icon: '📦' },
+  { id: 'sneakers', r: 'common', name: '날개 운동화', type: 'equip', desc: '착용하면 1인칭 이동 ×1.4 · 점프 높게', icon: '👟' },
+  { id: 'u_bowl', r: 'rare', name: '거대 볼링공', type: 'unit', desc: '굴러가며 줄줄이 뚫음 (특수 무기 무료 1회)', icon: '🎳' },
+  { id: 'u_storm', r: 'rare', name: '번개 부적', type: 'unit', desc: '번개 폭풍 14번 (무료 1회)', icon: '⚡' },
+  { id: 'gloves', r: 'rare', name: '강철 장갑', type: 'equip', desc: '착용하면 1인칭 캐기 범위 ×1.7', icon: '🧤' },
+  { id: 'magnet', r: 'rare', name: '보급 자석', type: 'equip', desc: '착용하면 화면 근처 보급 상자가 자동으로 열림', icon: '🧲' },
+  { id: 'u_tornado', r: 'epic', name: '토네이도 병', type: 'unit', desc: '토네이도 15초 (무료 1회)', icon: '🌪️' },
+  { id: 'veto', r: 'epic', name: '총학 거부권', type: 'bonus', desc: '[사용]하면 진행 중인 탈환·모금·모집을 모두 무산', icon: '📜' },
+  { id: 'u_hole', r: 'legend', name: '블랙홀 캡슐', type: 'unit', desc: '블랙홀 1회 (무료)', icon: '🕳️' },
+  { id: 'kaiju', r: 'legend', name: '거대 쿠-질라', type: 'unit', desc: '30 m 황소 괴수가 걸어와 짓밟음 (25초)', icon: '🐂' },
+);
+{
+  const summon0 = summon, useBonus0 = useBonus;
+  summon = hit => {
+    const slot = inv.slots[summonPick]; if (!slot) return summon0(hit);
+    const id = slot.id, map = { u_bowl: 'bowl', u_storm: 'storm', u_tornado: 'tornado', u_hole: 'hole' };
+    if (!map[id] && id !== 'kaiju') return summon0(hit);
+    slot.uses--; if (slot.uses <= 0) inv.slots.splice(summonPick, 1); saveInv(); renderInv(); mEvent('summons');
+    if (id === 'kaiju') { spawnKaiju(hit); return; }
+    const keep = special; special = map[id]; const S = SPECIALS.find(s => s.id === special), c0 = S.cost; S.cost = 0; useSpecial(hit); S.cost = c0; special = keep;
+  };
+  useBonus = i => {
+    const s = inv.slots[i]; if (!s) return;
+    if (s.id === 'supply') { inv.slots.splice(i, 1); saveInv(); renderInv(); dropCrate(); return; }
+    if (s.id === 'veto') { inv.slots.splice(i, 1); saveInv(); renderInv(); if (retake.b) endRetake(); for (const c of [...CAMP.list]) endCamp(c); banner('📜 총학 거부권 발동!', '진행 중인 탈환 작전·모금·모집이 모두 무산됐어요', 'gold'); return; }
+    return useBonus0(i);
+  };
+}
+// 쿠-질라: 30 m 황소 괴수 (쿠 모양을 크게) — 걸어와 1초마다 짓밟기
+const KAIJU = [];
+function spawnKaiju(hit) {
+  const k = makeKu(); k.g.scale.setScalar(11); k.tag.innerHTML = '<b>🐂 쿠-질라</b><small>거대 괴수 · 25초</small>'; k.tag.className = 'named';
+  const dir = V3().subVectors(hit.point, camera.position).setY(0).normalize(), p = hit.point.clone().addScaledVector(dir, -60); p.y = terrainAt(p.x, p.z);
+  k.g.position.copy(p); k.g.rotation.y = Math.atan2(dir.x, dir.z); scene.add(k.g);
+  KAIJU.push({ k, dir, t: 0, stomp: 1, act: beginAction('kaiju') }); banner('🐂 거대 쿠-질라 출현!', '캠퍼스를 짓밟으며 걸어가요', 'gold'); SFX.rumble(p, 2); shake(0.8, p);
+}
+function updateKaiju(dt) {
+  for (const K of [...KAIJU]) {
+    K.t += dt; const g = K.k.g; g.position.addScaledVector(K.dir, dt * 5); g.position.y = terrainAt(g.position.x, g.position.z) + Math.abs(Math.sin(K.t * 3)) * 2;
+    if ((K.stomp -= dt) <= 0) { K.stomp = 1; const foot = g.position.clone().addScaledVector(K.dir, 8).add(V3(rand(-6, 6), 0, rand(-6, 6))); foot.y = surfaceBelow(foot.x, foot.y + 40, foot.z) + 2; explode(foot, 6.5, 18, K.act); }
+    if (K.t > 25) { scene.remove(g); KAIJU.splice(KAIJU.indexOf(K), 1); }
+  }
+}
+// 장비 효과: 날개 운동화 · 강철 장갑 · 보급 자석
+setInterval(() => { try { if (equipped('magnet')) for (const c of [...WAR.crates]) if (c.landed && c.g.position.distanceTo(controls.target) < 120) openCrate(c); } catch {} }, 1000);
+function update134(dt) { updateWanted(dt); updateZJ(dt); updateKu(dt); updateCamps(dt); updateFind(dt); updateKaiju(dt); }
+function boom134(p, R) { heliBoom(p, R); zjBoom(p, R); kuBoom(p, R); campBoom(p, R); }
+
+{ const r = document.createElement('div'); r.id = 'siderow'; $('side').insertBefore(r, $('live')); r.append($('compass'), $('live')); }
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
@@ -6670,6 +7914,7 @@ window.addEventListener('pointerup', e => {
 });
 window.addEventListener('pointercancel', e => { activePointers.delete(e.pointerId); press = null; stopAuto(); });
 function attack(x, y) {
+  if (findClick(x, y) || kuClick(x, y)) return;
   if (WAR.orderMode) { applyOrder(pickAt(x, y)); return; }
   { const cr = crateAtScreen(x, y); if (cr && cr.landed) { openCrate(cr); return; } }
   if (inTruce() && weapon !== 'fix' && weapon !== 'build') { toast(`휴전 중이에요 · ${Math.ceil(truce.until - clock)}초 남음 (복구·짓기는 돼요)`); return; }
@@ -6688,6 +7933,7 @@ function attack(x, y) {
     if (weapon === 'nuke') useNuke(hit); else if (weapon === 'fighter') { useFighters(hit); mEvent('fighters'); } else summonContractor(hit);
     return;
   }
+  if (weapon === 'special') { const hit = pickAt(x, y); if (hit) useSpecial(hit); return; }
   if (weapon === 'gun') { gunAct = null; let k = 0; const burst = () => { gunShot(x, y); if (++k < 4) setTimeout(burst, 75); else gunAct = null; }; burst(); return; }
   const hit = pickAt(x, y); if (!hit) return;
   if (weapon === 'pipe') usePipe(hit);
@@ -6706,7 +7952,7 @@ function buildTools() {
   const box = $('tools');
   WEAPONS.forEach((w, i) => {
     const b = document.createElement('button'); b.className = 'tool' + (w.id === weapon ? ' sel' : ''); b.dataset.id = w.id;
-    b.innerHTML = `<kbd>${i === 9 ? 0 : i === 10 ? '-' : i === 11 ? '=' : i + 1}</kbd><svg viewBox="0 0 24 24">${ICON[w.id]}</svg><b>${w.name}</b><small>${w.desc}</small>`;
+    b.innerHTML = `<kbd>${i === 9 ? 0 : i === 10 ? '-' : i === 11 ? '=' : i === 12 ? 'G' : i + 1}</kbd><svg viewBox="0 0 24 24">${ICON[w.id]}</svg><b>${w.name}</b><small>${w.desc}</small>`;
     b.onclick = () => { if (b.classList.contains('off')) { toast('지금 역할에서는 쓸 수 없어요'); return; } selectWeapon(w.id); };
     box.appendChild(b);
   });
@@ -6717,6 +7963,7 @@ function selectWeapon(id) {
   cannon.g.visible = id === 'cannon' && cannon.placed;
   $('buildbar').hidden = id !== 'build';
   $('summonbar').hidden = id !== 'summon'; if (id === 'summon') renderInv();
+  $('specialbar').hidden = id !== 'special'; if (id === 'special') renderSpecialBar();
   hoverDirty = true; audioInit();
 }
 let toastT = 0;
@@ -6783,6 +8030,7 @@ document.querySelectorAll('#toggles .tg').forEach(b => b.addEventListener('click
   if (t === 'gacha') { pop('gacha'); renderInv(); }
   if (t === 'acct') { pop('acctmenu'); renderAcct(); }
   if (t === 'help') pop('helpmenu');
+  if (t === 'minigame') mgMenu();
   if (t === 'rank') { pop('rankmenu'); RK.online = null; renderRank(); if (ONLINE()) loadOnline(); }
 }));
 $('live').addEventListener('click', () => flyTo(STAGE_VIEW.pos.clone(), STAGE_VIEW.tgt.clone()));
@@ -6862,7 +8110,7 @@ $('vDrag').onclick = () => { SET.dragRotate = !SET.dragRotate; applyDrag(); save
 applyDrag();
 $('zclose').onclick = () => { const h = pickAt(innerWidth / 2, innerHeight / 2); const tg = h ? h.point.clone() : controls.target.clone(); const off = camera.position.clone().sub(controls.target).setLength(9); off.y = Math.max(off.y, 3.5); flyTo(tg.clone().add(off), tg); toast('가까이 보기 · 유리창 너머로 수업 중인 학생들이 보여요'); };
 // 이벤트 메뉴
-const pop = id => { for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu', 'helpmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
+const pop = id => { if (id !== 'mg') { $('mg').hidden = true; } for (const k of ['evmenu', 'mpmenu', 'donate', 'setmenu', 'statmenu', 'gacha', 'rankmenu', 'acctmenu', 'helpmenu']) if (k !== id) $(k).hidden = true; $(id).hidden = !$(id).hidden; };
 $('evmenu').querySelectorAll('button[data-ev]').forEach(b => b.onclick = () => { triggerEvent(b.dataset.ev); $('evmenu').hidden = true; });
 $('statmenu').querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { $('statmenu').querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b)); $('stPeople').hidden = b.dataset.tab !== 'people'; $('stBld').hidden = b.dataset.tab !== 'bld'; });
 spawnCleaners(SMALL ? 3 : 5);
@@ -6969,7 +8217,7 @@ $('mhead').onclick = () => { $('missions').classList.toggle('fold'); $('mfold').
 if (SMALL) { $('missions').classList.add('fold'); $('mfold').textContent = '▸'; }
 $('tipSkip').onclick = () => { tipI = -1; store.set('tutorialDone', true); showTip(); };
 let started = false;
-function startGame() { started = true; $('intro').style.display = 'none'; audioInit(); startTutorial(false); }
+function startGame() { if (started) return; started = true; $('intro').style.display = 'none'; audioInit(); startTutorial(false); applyDiffHP(); after(4, () => startWeek(1)); }
 $('start').onclick = startGame;
 buildTools();
 
@@ -6981,15 +8229,17 @@ const LABEL_FAR = SMALL ? 260 : 420;
 const needle = $('needle');
 function loop(now) {
   requestAnimationFrame(loop);
-  const tnow = performance.now(), dt = Math.min(0.05, Math.max(0, (tnow - last) / 1000)); last = tnow; clock += dt;   // 시각이 뒤로 가도 시간이 거꾸로 흐르지 않게
+  if (window.__mgPause) { last = performance.now(); return; }   // 미니게임 중엔 캠퍼스 시간 멈춤
+  const tnow = performance.now(), dt = Math.min(0.05, Math.max(0, (tnow - last) / 1000)) * timeScale(); last = tnow; clock += dt;   // 시각이 뒤로 가도 시간이 거꾸로 흐르지 않게
   for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) { const t = timers.splice(i, 1)[0]; t.fn(); }
   if (fly) {
     fly.t = Math.min(1, fly.t + dt / 1.1); const e = 1 - Math.pow(1 - fly.t, 3);
     camera.position.lerpVectors(fly.p0, fly.p1, e); controls.target.lerpVectors(fly.t0, fly.t1, e);
     if (fly.t >= 1) fly = null;
   }
-  controls.update();
+  if (FP.on) updateFP(dt); else controls.update();
   const beat = beatNow();
+  updateSpecials(dt);
   updateDebris(dt);
   for (const v of movers) v.update(dt);
   updateProjectiles(dt); updateQuake(dt); updatePipe(dt); updateTracers(dt); updateRings(dt); updateRockets(dt); updateTrees(dt);
@@ -7047,7 +8297,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
