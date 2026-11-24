@@ -4,6 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>글로컬 크래시 크리스마스</title>
+<meta name="description" content="건국대 글로컬캠퍼스(충주)를 실제 지도 그대로 부수는 웹게임 · 한 학기 16주차 · 미니게임 · 1인칭 · 세력 전쟁">
+<meta property="og:type" content="website"><meta property="og:title" content="글로컬 크래시 · 캠퍼스를 부숴라">
+<meta property="og:description" content="건국대 글로컬캠퍼스를 실제 지도 그대로 부수는 웹게임 · 설치 없이 바로 플레이">
+<meta property="og:image" content="https://teokima.github.io/glocal-crash/og.png"><meta property="og:url" content="https://teokima.github.io/glocal-crash/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#14161c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
@@ -220,6 +226,7 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 #wanted{position:fixed;left:0;right:0;margin:0 auto;width:fit-content;top:48px;z-index:8;padding:5px 12px;border-radius:999px;background:rgba(20,10,10,.8);border:1px solid rgba(255,90,90,.6);font-size:16px;display:flex;align-items:center;gap:2px;pointer-events:none}#wanted[hidden]{display:none}#wanted b{color:#ffd24a;text-shadow:0 0 8px #ff9a2e}#wanted i{font-style:normal;color:rgba(255,255,255,.2)}#wanted small{font-size:10.5px;color:#ffb0b0;margin-left:8px}#wanted.hot{animation:namedPulse .4s infinite;border-color:#ff5a5a}
 .named.ku{background:linear-gradient(90deg,#1f8a4a,#d9a441)!important;border-color:#fff2c8!important}
 @media (max-width:640px){#wanted{top:auto;bottom:212px;font-size:13px}}
+#whatsnew{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:41;width:min(440px,calc(100% - 24px));padding:16px 18px;box-sizing:border-box;box-shadow:0 0 0 100vmax rgba(5,8,14,.5)}#whatsnew[hidden]{display:none}#whatsnew .wnT{font-size:18px;color:#ffd27a}#whatsnew ul{margin:10px 0;padding-left:4px;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:13.5px;line-height:1.45}#whatsnew .wnB{display:flex;gap:8px}#whatsnew .wnB button{flex:1;padding:11px 8px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);font-weight:800}#whatsnew .wnB .hot{background:linear-gradient(90deg,#ff7a2e,#ffb02e);color:#1a1206;border:0}
 #who{display:flex;gap:8px;margin:12px 0 4px}#who input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
 #who input:focus,.rkedit input:focus{outline:2px solid var(--hot)}
 .rkme{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px}.rkme span{font-weight:700}
@@ -528,6 +535,9 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 </div>
 <div id="fps" class="card" hidden></div>
 <div id="fpPad"><button id="fpHit" class="tc">⛏ 캐기</button><button id="fpPut" class="tc">🧱 놓기</button><button id="fpJump" class="tc">⤴ 점프</button><button id="fpOut">✕ 1인칭</button></div>
+<div id="whatsnew" class="card" hidden><b class="wnT">🆕 새로워진 글로컬 크래시</b><ul>
+<li>📅 <b>한 학기 16주차</b> 시나리오 · 난이도 4단계 · 중간·기말고사</li><li>🎮 <b>미니게임</b>: 몰래 춤추기 · 출석하고 튀기 · 장기자랑 · 전산실 해킹</li><li>🧍 <b>1인칭(V)</b> — 걸어 다니며 캐고 쌓기 · ✨ <b>특수 무기(G)</b></li><li>🚨 <b>수배 ★1~5</b> · 🚁 헬기 · 🟦 조남주 학생주임 · 🐂 마스코트 쿠</li><li>🏛️ 대리석 상허광장 · 황소상 · 가로수길 · 대운동장 · 마을 3곳 · 계절 음악</li></ul>
+<div class="wnB"><button id="wnMg">🎮 미니게임 해 보기</button><button id="wnClose" class="hot">바로 부수러 가기 ▶</button></div></div>
 <div id="mg" class="card" hidden><div class="ph"><b id="mgTitle">🎮 미니게임</b><button data-close="mg">✕</button></div><div id="mgBody"></div></div>
 <button id="mgInvite" hidden></button>
 <div id="helpmenu" class="card panel wide" hidden>
@@ -5444,7 +5454,7 @@ function spawnKto() {
   f.g.position.copy(spot); scene.add(f.g);
   Object.assign(kto, { active: true, hp: kto.max, fig: f, pos: spot.clone(), skillT: 5, i: 0, shieldUntil: 0, nextShield: clock + 12, offered: false, aura, bubble: div, scr, halo, pillar, beacon });
   $('ktobar').hidden = false; updateKtoBar();
-  banner('최강 네임드 등장!', `만든이 김태오 (컴퓨터공학과) · 체력 ${kto.max} · 코드 레이저·분신술·Ctrl+Z · 3단계 변신`, 'gold'); SFX.bell(); whiteFlash(); shake(0.6, spot);
+  banner('최강 네임드 등장!', `만든이 김태오 (컴퓨터공학과) · 체력 ${kto.max} · 캠퍼스 전체 롤백·관리자 권한·점령 회수·총장 복직·회복 오라 · 3단계 변신`, 'gold'); SFX.bell(); whiteFlash(); shake(0.6, spot);
   flyTo(spot.clone().add(V3(22, 18, 22)), spot.clone().setY(spot.y + 3));
 }
 function updateKtoBar() { $('ktofill').style.width = Math.max(0, kto.hp / kto.max * 100) + '%'; $('ktohp').textContent = `${Math.max(0, Math.ceil(kto.hp))} / ${kto.max}`; $('ktobar').classList.toggle('shield', clock < kto.shieldUntil); }
@@ -5470,9 +5480,10 @@ function ktoDamage(v, why) {
 }
 function ktoSkill() {
   const p = kto.fig.g.position;
-  const list = ['hotfix', 'laser', 'undo', 'dome', 'call', 'drain', 'kill', 'laser', 'teleport'];
+  const list = ['revert', 'laser', 'sudo', 'hotfix', 'firewall', 'drain', 'budget', 'multiundo', 'laser', 'purge', 'rehire', 'reclaim', 'call', 'teleport'];
   const s = list[kto.i++ % list.length];
   if (s === 'laser' || s === 'drain') { ktoExtra(s); SFX.bell(); return; }
+  if (['revert', 'sudo', 'reclaim', 'rehire', 'budget', 'firewall', 'multiundo', 'purge'].includes(s)) { ktoGod(s); SFX.bell(); return; }
   if (s === 'hotfix') {
     const bs = [...CAMPUS_BUILDINGS].filter(b => b.name).sort((a, b) => b.ratio() - a.ratio()).slice(0, 3).filter(b => b.ratio() > 0.02);
     let n = 0; for (const b of bs) { const dead = []; b.blocks.forEach((k, i) => { if (!k.alive) dead.push(i); }); dead.sort((x, y) => b.blocks[x].y - b.blocks[y].y); for (const i of dead.slice(0, 220)) if (b.revive(i)) n++; const c = bbCenter(b); for (let j = 0; j < 30; j++) fire.spawn(c.x + rand(-12, 12), b.base + rand(0, b.H * B), c.z + rand(-12, 12), 0, rand(1, 4), 0, 0.3, 1, 0.5, 0.2, 1, 0.6, 1, 0, 1); }
@@ -5509,13 +5520,13 @@ function updateKto(dt) {
   f.armL.rotation.x = -0.9 + Math.sin(clock * 14) * 0.15; f.armR.rotation.x = -0.9 - Math.sin(clock * 14) * 0.15;   // 타자 치기
   if (inTruce()) return;
   if (clock > kto.nextShield) { kto.shieldUntil = clock + 6; kto.nextShield = clock + (kto.rage ? 18 : 30); banner('김태오 · 코드 방어막', '6초 동안 받는 피해 −80%', 'blue'); updateKtoBar(); }
-  if ((kto.skillT -= dt) <= 0) { kto.skillT = kto.rage || kto.hp < kto.max / 3 ? 6 : 11; ktoSkill(); }
-  ktoPhase();
+  if ((kto.skillT -= dt) <= 0) { kto.skillT = (kto.ph3 ? 4 : kto.rage || kto.hp < kto.max / 3 ? 5.5 : 9) / Math.min(1.6, Math.sqrt(threat())); ktoSkill(); }
+  ktoPhase(); ktoAura(dt);
   if (Math.random() < dt * 0.08) kto.bubble.textContent = pick(KTO_LINES);
   if (frameNo % 20 === 0) updateKtoBar();
 }
 function ktoBoom(p, R) { if (kto.active && kto.fig && p.distanceTo(kto.fig.g.position) < 30 + R) ktoDamage(R * 0.9 * (1 - p.distanceTo(kto.fig.g.position) / (30 + R) * 0.6), '폭발'); }
-function clearKto() { if (kto.fig) scene.remove(kto.fig.g); Object.assign(kto, { active: false, defeated: false, queued: false, rage: false, ph2: false, ph3: false, hp: kto.max }); for (const c of kto.clones || []) scene.remove(c.f.g); kto.clones = []; $('ktobar').hidden = true; }
+function clearKto() { if (kto.fig) scene.remove(kto.fig.g); Object.assign(kto, { active: false, defeated: false, queued: false, rage: false, ph2: false, ph3: false, lockUntil: 0, hp: kto.max }); for (const c of kto.clones || []) scene.remove(c.f.g); kto.clones = []; $('ktobar').hidden = true; }
 
 /* =====================================================================
    12-25. 사람 목소리 · 웅성거림 · 시위 구호
@@ -7529,6 +7540,7 @@ function fpAction(btn) {
   }
   if (weapon === 'pipe') {   // 캐기: 눈앞 블록 하나(+주변 조금)
     if (inTruce()) { toast('휴전 중이에요'); return; }
+    if (clock < (kto.lockUntil || 0)) { toast('👑 관리자 권한 박탈 중'); return; }
     const hit = pickAt(cx, cy); if (!hit || hit.point.distanceTo(camera.position) > 8) return;
     if (!hit.building) { if (hit.vehicle) hit.vehicle.hit(V3().subVectors(hit.vehicle.g.position, camera.position).setY(0).normalize().multiplyScalar(14).setY(6), beginAction('fp')); return; }
     const q = hit.point.clone().addScaledVector(hit.normal, -0.6), act = beginAction('fp');
@@ -7845,6 +7857,71 @@ function update134(dt) { updateWanted(dt); updateZJ(dt); updateKu(dt); updateCam
 function boom134(p, R) { heliBoom(p, R); zjBoom(p, R); kuBoom(p, R); campBoom(p, R); }
 
 { const r = document.createElement('div'); r.id = 'siderow'; $('side').insertBefore(r, $('live')); r.append($('compass'), $('live')); }
+// ── 1인칭: 캘(놓을) 블록에 테두리 (마인크래프트처럼) ──
+const fpSel = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(B * 1.02, B * 1.02, B * 1.02)), new THREE.LineBasicMaterial({ color: 0x111111, transparent: true, opacity: 0.85 }));
+fpSel.visible = false; fpSel.renderOrder = 45; scene.add(fpSel);
+function updateFPSel() {
+  if (!FP.on || (weapon !== 'pipe' && weapon !== 'build') || frameNo % 3) { if (!FP.on) fpSel.visible = false; return; }
+  const hit = pickAt(innerWidth / 2, innerHeight / 2);
+  if (!hit || !hit.building || hit.point.distanceTo(camera.position) > 8.5) { fpSel.visible = false; return; }
+  hit.building.center(hit.instance, fpSel.position); fpSel.quaternion.copy(hit.building.quat); fpSel.visible = true;
+  fpSel.material.color.set(weapon === 'build' ? 0x2f9aff : 0x111111);
+}
+// ── 새로워진 점 (한 번만) ──
+function showWhatsNew() {
+  if (store.get('seen13', false) || !store.get('tutorialDone', false)) return;
+  store.set('seen13', true); $('whatsnew').hidden = false;
+}
+$('wnClose').onclick = () => { $('whatsnew').hidden = true; };
+$('wnMg').onclick = () => { $('whatsnew').hidden = true; mgMenu(); };
+// ── 김태오 전지전능 기술 (13.6판) ──
+// 캠퍼스 전체 롤백 · 관리자 권한(공격 봉인) · 점령 회수 · 총장 복직 · 예산 증액 · 방화벽 4중 · 다중 Ctrl+Z · 유닛 강제 종료 · 회복 오라(패시브)
+function ktoGod(s) {
+  const p = kto.fig.g.position;
+  const codeRain = q => { for (let j = 0; j < 40; j++) fire.spawn(q.x + rand(-12, 12), q.y + rand(8, 30), q.z + rand(-12, 12), 0, -rand(4, 9), 0, 0.2, 1, 0.5, 0.3, 1, 0.6, 1, 0, 1); };
+  if (s === 'revert') {   // git revert: 캠퍼스 전체 건물의 부서진 블록 35%를 되살림
+    let n = 0; NET.remote = true;
+    for (const b of CAMPUS_BUILDINGS) { if (owned.has(b)) continue; const dead = []; b.blocks.forEach((k, i) => { if (!k.alive) dead.push(i); }); dead.sort((x, y) => b.blocks[x].y - b.blocks[y].y); for (const i of dead.slice(0, Math.ceil(dead.length * 0.35))) if (b.revive(i)) n++; if (dead.length) codeRain(bbCenter(b)); }
+    NET.remote = false; whiteFlash(); shake(0.7, p);
+    banner('👑 김태오 · git revert --all', `캠퍼스 전체 블록 ${n.toLocaleString('ko-KR')}개를 한 번에 되돌렸어요`, 'red'); kto.bubble.textContent = '전부 되돌린다. 커밋은 내가 했으니까.';
+  } else if (s === 'sudo') {   // 관리자 권한: 6초 동안 내 공격 봉인 + 돌격대·유닛 정지
+    kto.lockUntil = clock + 6 + (kto.ph3 ? 3 : 0); for (const a of raiders()) a.down = 8; for (const u of units) u.age = Math.max(u.age, 0) + 0;
+    banner('👑 김태오 · sudo 권한 박탈', `${Math.round(kto.lockUntil - clock)}초 동안 무기를 쓸 수 없어요 · 돌격대도 멈춤`, 'red'); kto.bubble.textContent = 'sudo: 권한이 없습니다.';
+  } else if (s === 'reclaim') {   // 점령 회수: 내 기지 하나를 원래 세력에게 돌려 놓음 (2단계부터)
+    if (!kto.ph2) { ktoGod('revert'); return; }
+    const b = [...owned].sort((x, y) => lvlOf(x) - lvlOf(y))[0];
+    if (b) { loseBuilding(b, '김태오가 관리자 권한으로 소유권을 되돌렸어요'); restoreBuilding(b); facApply(b); codeRain(bbCenter(b)); banner('👑 김태오 · chown -R 학교', `${b.name}의 소유권이 학교로 돌아갔어요`, 'red'); kto.bubble.textContent = '소유권은 원래 주인에게.'; }
+    else ktoGod('revert');
+  } else if (s === 'rehire') {   // 총장 복직: 쓰러진 총장을 다시 세우거나 체력을 가득
+    if (boss.defeated && !boss.active) { boss.defeated = false; spawnBoss(); banner('👑 김태오 · 총장 복직', '사퇴했던 총장이 돌아왔어요 (권위 가득)', 'red'); }
+    else if (boss.active) { boss.hp = boss.max; updateBossBar(); banner('👑 김태오 · 총장 권위 복구', '총장의 권위가 가득 찼어요', 'red'); }
+    else { spawnBoss(); banner('👑 김태오 · 총장 호출', '총장이 등장했어요', 'red'); }
+    kto.bubble.textContent = '총장님, 다시 일하실 시간입니다.';
+  } else if (s === 'budget') {   // 예산 증액: 세 세력 자금 ×2 + 모든 세력 건물 한 단계 업
+    let up = 0; for (const F of FACS) { F.fund = F.fund * 2 + 1000000; for (const b of facBldgs(F)) if (lvlOf(b) < 3 && Math.random() < 0.5) { b.lvl = lvlOf(b) + 1; facApply(b); up++; } }
+    banner('👑 김태오 · 예산 증액 승인', `세 세력 자금 2배 · 건물 ${up}채 한 단계 업`, 'red'); kto.bubble.textContent = '예산은 내가 짠다.';
+  } else if (s === 'firewall') {   // 방화벽 4중: 가장 많이 남은 건물 4채에 체력 400 방어막
+    const bs = [...CAMPUS_BUILDINGS].filter(b => b.name && !owned.has(b) && b.alive > 40).sort((a, b) => bbCenter(a).distanceTo(p) - bbCenter(b).distanceTo(p)).slice(0, 4);
+    for (const b of bs) { castDome(b); const d = boss.domes[boss.domes.length - 1]; if (d) { d.hp = Math.round(400 * Math.min(2.5, threat())); d.until = clock + 35; d.mesh.material.color.set(0x39ff88); d.wire.material.color.set(0x8affc0); } }
+    banner('👑 김태오 · 방화벽 4중 전개', `건물 ${bs.length}채에 35초 방어막 (체력 ${Math.round(400 * Math.min(2.5, threat()))})`, 'red'); kto.bubble.textContent = 'iptables -A INPUT -j DROP';
+  } else if (s === 'multiundo') {   // Ctrl+Z ×5
+    let n = 0; for (let i = 0; i < 5 && actions.length; i++) { undo(); n++; }
+    banner('👑 김태오 · Ctrl+Z ×5', n ? `내 공격 ${n}개가 한꺼번에 되돌려졌어요` : '되돌릴 공격이 없네', 'red'); kto.bubble.textContent = '실행 취소, 실행 취소, 실행 취소…';
+  } else if (s === 'purge') {   // 유닛·특수 무기 강제 종료
+    let n = units.length; for (const u of units) { if (u.mesh) scene.remove(u.mesh); (u.drones || []).forEach(d => scene.remove(d.m)); (u.planes || []).forEach(q => scene.remove(q.m)); } units.length = 0;
+    for (const k of ['tornados', 'balls', 'holes']) for (const o of SPX[k]) { n++; scene.remove(o.g || o.ball); } SPX.tornados.length = SPX.balls.length = SPX.holes.length = SPX.burns.length = 0;
+    for (const K of KAIJU) { scene.remove(K.k.g); n++; } KAIJU.length = 0;
+    banner('👑 김태오 · kill -9', n ? `소환 유닛·특수 무기 ${n}개를 강제 종료했어요` : '종료할 프로세스가 없네', 'red'); kto.bubble.textContent = 'kill -9 $(pgrep 유닛)';
+  }
+}
+// 회복 오라: 김태오 주변 70 m 건물은 초당 8블록씩 되살아남 (3단계면 2배)
+function ktoAura(dt) {
+  if (!kto.active || inTruce()) return; kto.auraT = (kto.auraT || 0) - dt; if (kto.auraT > 0) return; kto.auraT = 0.5;
+  const p = kto.fig.g.position, k = kto.ph3 ? 8 : 4; NET.remote = true;
+  for (const b of CAMPUS_BUILDINGS) { if (owned.has(b) || b.alive >= b.total || bbCenter(b).distanceTo(p) > 70) continue; for (let t = 0; t < k; t++) { const i = facDeadLow(b); if (i < 0 || !b.revive(i)) break; } if (Math.random() < 0.3) { const c = bbCenter(b); fire.spawn(c.x + rand(-8, 8), b.base + rand(0, b.H * B), c.z + rand(-8, 8), 0, rand(1, 3), 0, 0.3, 1, 0.5, 0.3, 1, 0.6, 1, 0, 1); } }
+  NET.remote = false;
+}
+
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
@@ -7915,6 +7992,7 @@ window.addEventListener('pointerup', e => {
 window.addEventListener('pointercancel', e => { activePointers.delete(e.pointerId); press = null; stopAuto(); });
 function attack(x, y) {
   if (findClick(x, y) || kuClick(x, y)) return;
+  if (clock < (kto.lockUntil || 0) && weapon !== 'fix' && weapon !== 'build') { toast(`👑 김태오가 관리자 권한을 빼앗았어요 · ${Math.ceil(kto.lockUntil - clock)}초 뒤 공격 가능`); return; }
   if (WAR.orderMode) { applyOrder(pickAt(x, y)); return; }
   { const cr = crateAtScreen(x, y); if (cr && cr.landed) { openCrate(cr); return; } }
   if (inTruce() && weapon !== 'fix' && weapon !== 'build') { toast(`휴전 중이에요 · ${Math.ceil(truce.until - clock)}초 남음 (복구·짓기는 돼요)`); return; }
@@ -8195,12 +8273,14 @@ setInterval(layoutRight, 1000);
 layoutRight(); window.addEventListener('resize', layoutRight);
 const TIPS = [
   ['아래 도구판에서 <b>쇠파이프(1)</b>를 고르고 건물을 눌러 때려 보세요. 빠르게 연타하면 범위가 커져요.', () => stats.blocks > 0],
-  ['<b>끌어서</b> 지도를 옮기고, <b>휠</b>이나 왼쪽 <b>+ −</b>로 확대해요. <b>◎</b>를 누르면 유리창 너머 수업 중인 학생들이 보여요.', () => tipMoved],
+  ['<b>끌어서</b> 지도를 옮기고, <b>휠</b>이나 오른쪽 아래 <b>시점 판</b>으로 확대·회전해요. <b>◎</b>를 누르면 유리창 너머 수업 중인 학생들이 보여요.', () => tipMoved],
   ['캠퍼스가 부서질수록 <b>막는 세력</b>이 나타나요. 교직원 → 시설팀 → 군 방어부대 → <b>총장</b>. 오른쪽 카드에서 확인하세요.', () => tipT > 7],
   ['왼쪽 <b>미션</b>을 깨면 장학금과 뽑기권을 받아요. 부순 만큼 장학금도 쌓여요.', () => tipT > 7],
   ['오른쪽 위 <b>뽑기·보관함</b>에서 전차·거대 로봇 같은 유닛을 뽑아 <b>소환(-)</b>으로 불러 보세요.', () => tipT > 8],
   ['건물을 <b>70%</b> 넘게 부수면 위에 <b>점령하기</b>가 떠요. 점령한 건물(내 기지)에서는 <b>돌격대</b>가 계속 나와 캠퍼스를 부숴요!', () => tipT > 9 || owned.size > 0],
-  ['왼쪽 <b>⚔️ 내 세력</b> 판의 <b>🎯 총공격</b>으로 목표를 찍고, <b>지배율 50%</b>로 캠퍼스를 정복하세요. 탈환대가 오면 <b>🛡️ 방어</b>! 모든 조작은 <b>H</b> 키.', () => tipT > 10],
+  ['왼쪽 <b>⚔️ 내 세력</b> 판의 <b>🎯 총공격</b>으로 목표를 찍고, <b>지배율 50%</b>로 캠퍼스를 정복하세요. 탈환대가 오면 <b>🛡️ 방어</b>!', () => tipT > 10],
+  ['왼쪽 위 <b>📅 주차 상자</b>가 이번 주 목표예요. 한 학기 16주 — 8주차 중간고사, 16주차 기말 결전!', () => tipT > 8],
+  ['<b>V</b> = 🧍 1인칭(마인크래프트처럼 캐고 쌓기) · <b>G</b> = ✨ 특수 무기 · ☰ 더보기 → <b>🎮 미니게임</b>. 모든 조작은 <b>H</b> 키.', () => tipT > 10],
 ];
 let tipI = -1, tipT = 0, tipMoved = false;
 controls.addEventListener('change', () => { if (tipI === 1) tipMoved = true; });
@@ -8217,7 +8297,7 @@ $('mhead').onclick = () => { $('missions').classList.toggle('fold'); $('mfold').
 if (SMALL) { $('missions').classList.add('fold'); $('mfold').textContent = '▸'; }
 $('tipSkip').onclick = () => { tipI = -1; store.set('tutorialDone', true); showTip(); };
 let started = false;
-function startGame() { if (started) return; started = true; $('intro').style.display = 'none'; audioInit(); startTutorial(false); applyDiffHP(); after(4, () => startWeek(1)); }
+function startGame() { if (started) return; started = true; $('intro').style.display = 'none'; audioInit(); startTutorial(false); setTimeout(showWhatsNew, 1500); applyDiffHP(); after(4, () => startWeek(1)); }
 $('start').onclick = startGame;
 buildTools();
 
@@ -8238,6 +8318,7 @@ function loop(now) {
     if (fly.t >= 1) fly = null;
   }
   if (FP.on) updateFP(dt); else controls.update();
+  updateFPSel();
   const beat = beatNow();
   updateSpecials(dt);
   updateDebris(dt);
@@ -8297,7 +8378,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, ktoGod, kto, fpSel, showWhatsNew, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
