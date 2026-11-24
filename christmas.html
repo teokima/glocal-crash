@@ -303,6 +303,11 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 #story .stBot{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim)}#story .stBot span{flex:1;text-align:right;animation:stBlink 1.4s infinite}@keyframes stBlink{50%{opacity:.35}}body.storyon #banner,body.storyon #tip,body.storyon #mgInvite{visibility:hidden}#stSkip{padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.06);font-size:11.5px}
 #smList{display:flex;flex-direction:column;gap:5px}#smList button,#smToggle{text-align:left;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:12.5px}#smList button:disabled{opacity:.4}#smToggle{margin-top:8px;text-align:center;font-weight:800}.smNote{font-size:11.5px;color:var(--dim);margin:0 0 6px}
 @media (max-width:640px){#story{bottom:96px}#stFace{width:48px;height:48px;font-size:26px}#stText{font-size:14px;min-height:40px}#story .stIn{padding:10px 12px;gap:10px}}
+#relicList{display:flex;flex-direction:column;gap:10px}.rl{padding:10px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04)}.rl.done{border-color:#ffc83d;background:rgba(255,200,61,.1)}.rl b{font-size:14px}.rl em{display:block;font-style:normal;font-size:11.5px;color:#ffd27a;margin-top:6px}.rl ul{margin:6px 0 0;padding-left:16px;font-size:11.5px;color:#e8e4da;line-height:1.55}
+.rslots{display:flex;gap:5px;margin-top:6px}.rslots span{flex:1;display:flex;flex-direction:column;align-items:center;padding:5px 0;border-radius:9px;background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.2);font-size:18px;color:var(--dim)}.rslots span.on{border:1px solid #ffc83d;background:rgba(255,200,61,.15);color:#fff}.rslots small{font-size:9.5px}
+#relicDet{position:fixed;left:50%;transform:translateX(-50%);top:92px;z-index:9;padding:6px 14px;border-radius:999px;background:rgba(10,30,20,.88);border:1px solid #39ff88;color:#8affc0;font-weight:800;font-size:12.5px;pointer-events:none}#relicDet[hidden]{display:none}#relicDet.lv3{animation:namedPulse .5s infinite;color:#fff;border-color:#ffe28a}
+.named.relic{background:linear-gradient(90deg,#6b4a00,#2a6b4a)!important;border-color:#ffe28a!important}
+@media (max-width:640px){#relicDet{top:auto;bottom:140px;font-size:11px;max-width:92vw;white-space:nowrap}}
 #who{display:flex;gap:8px;margin:12px 0 4px}#who input{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;font-size:14px}
 #who input:focus,.rkedit input:focus{outline:2px solid var(--hot)}
 .rkme{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);margin-bottom:8px}.rkme span{font-weight:700}
@@ -516,6 +521,7 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
       <button class="tg" data-t="shot"><span class="dot"></span>사진</button>
       <button class="tg" data-t="top"><span class="dot"></span>위에서 보기</button>
       <button class="tg" data-t="home"><span class="dot"></span>처음 시점</button>
+      <button class="tg hot" data-t="relicbtn"><span class="dot"></span>🏺 유물 도감</button>
       <button class="tg hot" data-t="storybtn"><span class="dot"></span>📖 스토리</button>
       <button class="tg hot" data-t="minigame"><span class="dot"></span>🎮 미니게임</button>
       <button class="tg hot" data-t="help"><span class="dot"></span>📖 조작·명령 모음 (H)</button>
@@ -618,6 +624,8 @@ body.fp::after{content:'';position:fixed;left:50%;top:50%;width:18px;height:18px
 <div id="admin" class="card" hidden></div>
 <div id="story" hidden><div class="stIn card"><div id="stFace"></div><div class="stBody"><div class="stTop"><b id="stName"></b><small id="stTitle"></small></div><p id="stText"></p><div class="stBot"><small id="stNum"></small><span>눌러서 다음 ▼</span><button id="stSkip">건너뛰기</button></div></div></div></div>
 <div id="storymenu" class="card panel wide" hidden><div class="ph"><b>📖 스토리 · 버그의 학기</b><button data-close="storymenu">✕</button></div><p class="smNote">본 장면은 다시 볼 수 있어요</p><div id="smList"></div><button id="smToggle"></button></div>
+<div id="relicmenu" class="card panel wide" hidden><div class="ph"><b>🏺 유물 도감</b><button data-close="relicmenu">✕</button></div><p class="smNote">조각은 건물 속(절반 넘게 부수면 튀어나옴) · 땅속(힌트 자리를 폭발시켜 파내기, 📡 탐지기가 삐삐) · 전산실 해킹에 숨어 있어요. 찾은 조각과 완성한 유물은 영구 저장돼요.</p><div id="relicList"></div></div>
+<div id="relicDet" hidden></div>
 <div id="mg" class="card" hidden><div class="ph"><b id="mgTitle">🎮 미니게임</b><button data-close="mg">✕</button></div><div id="mgBody"></div></div>
 <button id="mgInvite" hidden></button>
 <div id="helpmenu" class="card panel wide" hidden>
@@ -2480,7 +2488,7 @@ function resetAll() {
   for (const pr of projectiles) scene.remove(pr.mesh); projectiles.length = 0;
   theater.screenBroken = false; concert.state = 'play'; quake.active = false;
   endAllEvents(); repairScore = 0; clearBuilt();
-  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); resetFactions(); Object.assign(STG, { week: 1, t: 0, sem: 1, done: false, g0: stats.blocks, kills: 0, auth: 50, don: 120, noClaim: 0 }); applyDiffHP(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
+  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); resetFactions(); relicSetup(); Object.assign(STG, { week: 1, t: 0, sem: 1, done: false, g0: stats.blocks, kills: 0, auth: 50, don: 120, noClaim: 0 }); applyDiffHP(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
   dmgLog.length = 0; EVS.facCool = clock + 20; DEF.lvl = 0;
   for (const d of [...boss.domes]) d.retreat(false); if (boss.active) { scene.remove(boss.fig.g); scene.remove(boss.podium); boss.active = false; $('bossbar').hidden = true; } boss.defeated = false;
   for (const j of defJets) scene.remove(j.g); defJets.length = 0;
@@ -6607,6 +6615,8 @@ const ACH = [
   ['dom50', '캠퍼스 정복자', '지배율 50%', () => WAR.domDone && WAR.domDone.has(50), 5000000],
   ['boss', '총장 사퇴', '총장 보스를 쓰러뜨림', () => career.bossDown >= 1, 1000000],
   ['kto', '만든이를 넘어서', '최강 네임드 김태오를 쓰러뜨림', () => career.ktoDown >= 1, 5000000],
+  ['relic1', '고고학자', '유물 하나 완성', () => RELICS.some(r => relicDone(r.id)), 2000000],
+  ['relic3', '유물 수집가', '유물 셋 모두 완성', () => RELICS.every(r => relicDone(r.id)), 5000000],
   ['heli', '헬기 사냥꾼', '군 헬기를 격추', () => (career.heli || 0) >= 1, 1500000],
   ['finder', '매의 눈', '찾기 미션 3번 성공', () => (career.finds || 0) >= 3, 1000000],
   ['zj', '생활지도 졸업', '조남주 학생주임을 쫓아냄', () => (career.zjDown || 0) >= 1, 1000000],
@@ -7298,6 +7308,7 @@ function hackInit() {
 function hackFinish() {
   const S = MG.on; if (!S || S.over) return; const ok = S.seqs.filter(q => q.ok);
   const fx = () => {
+    if (ok.length >= 2) relicHack();
     for (const q of ok) {
       if (q.len === 2) { for (const d of [...boss.domes]) d.retreat(true); if (kto.active) { kto.shieldUntil = 0; kto.nextShield = clock + 40; } banner('💻 방화벽 해제', '총장·김태오 방어막이 꺼졌어요', 'gold'); }
       if (q.len === 3) { const F = [...FACS].sort((a, b) => b.fund - a.fund)[0]; const v = Math.round(F.fund * 0.3); F.fund -= v; wallet.won += v; uiDirty = true; banner('💻 예산 시스템 침투', `${F.name} 자금 ${won(v)} 탈취!`, 'gold'); }
@@ -7632,7 +7643,7 @@ function updateFP(dt) {
 }
 function fpAction(btn) {
   const cx = innerWidth / 2, cy = innerHeight / 2; FP.swing = 1;
-  if (btn === 0 && (findClick(cx, cy) || kuClick(cx, cy))) return;
+  if (btn === 0 && (relicClick(cx, cy) || findClick(cx, cy) || kuClick(cx, cy))) return;
   if (btn === 2 || (btn === 0 && weapon === 'build')) {   // 블록 놓기
     const hit = pickAt(cx, cy); if (!hit || hit.point.distanceTo(camera.position) > 9) return;
     const keep = buildOpt.shape; buildOpt.shape = 'block'; useBuild(hit); buildOpt.shape = keep; return;
@@ -7643,7 +7654,7 @@ function fpAction(btn) {
     const hit = pickAt(cx, cy); if (!hit || hit.point.distanceTo(camera.position) > 8) return;
     if (!hit.building) { if (hit.vehicle) hit.vehicle.hit(V3().subVectors(hit.vehicle.g.position, camera.position).setY(0).normalize().multiplyScalar(14).setY(6), beginAction('fp')); return; }
     const q = hit.point.clone().addScaledVector(hit.normal, -0.6), act = beginAction('fp');
-    const n = damageSphere(q, 1.15 * (equipped('gloves') ? 1.7 : 1), 6, act); if (n) { afterDamage(n, q, act); fxSparks(hit.point, 10, 6); SFX.hit(hit.point, 0.6); }
+    relicBoom(q, 1); const n = damageSphere(q, 1.15 * (equipped('gloves') ? 1.7 : 1), 6, act); if (n) { afterDamage(n, q, act); fxSparks(hit.point, 10, 6); SFX.hit(hit.point, 0.6); }
     return;
   }
   attack(cx, cy);
@@ -7953,8 +7964,8 @@ function updateKaiju(dt) {
 }
 // 장비 효과: 날개 운동화 · 강철 장갑 · 보급 자석
 setInterval(() => { try { if (equipped('magnet')) for (const c of [...WAR.crates]) if (c.landed && c.g.position.distanceTo(controls.target) < 120) openCrate(c); } catch {} }, 1000);
-function update134(dt) { updateWanted(dt); updateZJ(dt); updateKu(dt); updateCamps(dt); updateFind(dt); updateKaiju(dt); }
-function boom134(p, R) { heliBoom(p, R); zjBoom(p, R); kuBoom(p, R); campBoom(p, R); }
+function update134(dt) { updateRelic(dt); updateWanted(dt); updateZJ(dt); updateKu(dt); updateCamps(dt); updateFind(dt); updateKaiju(dt); }
+function boom134(p, R) { relicBoom(p, R); heliBoom(p, R); zjBoom(p, R); kuBoom(p, R); campBoom(p, R); }
 
 { const r = document.createElement('div'); r.id = 'siderow'; $('side').insertBefore(r, $('live')); r.append($('compass'), $('live')); }
 // ── 1인칭: 캘(놓을) 블록에 테두리 (마인크래프트처럼) ──
@@ -8259,6 +8270,105 @@ function storyMenu() {
 $('smToggle').onclick = () => { SY.on = !SY.on; store.set('storyOn', SY.on); storyMenu(); toast(SY.on ? '스토리 대화를 켰어요' : '스토리 대화를 껐어요 (📖에서 다시 볼 수 있어요)'); };
 
 /* =====================================================================
+   12-43. 유물 조각 찾기 (14판): 조각 5개씩 모아 유물 3개 완성 → 영구 효과
+   - 조각 위치: 건물 속(절반 넘게 부수면 튀어나옴) · 땅속(보물 지도 힌트 자리를 폭발/1인칭으로 파냄) · 전산실 해킹 보상
+   - 📡 금속 탐지기: 땅속 조각 60 m 안이면 신호(약함·보통·강함)
+   - 완성한 유물은 이 기기·계정에 영구 저장
+   ===================================================================== */
+const RELICS = [
+  { id: 'bull', icon: '🐂', name: '황금 황소상', parts: ['뿔', '머리', '몸통', '다리', '꼬리'], col: 0xffc83d, fx: '점수·장학금 ×1.2 (영구)', src: ['b', 'b', 'b', 'g', 'g'] },
+  { id: 'plan', icon: '📜', name: '건국 비밀 설계도', parts: ['1쪽', '2쪽', '3쪽', '4쪽', '5쪽'], col: 0xe8dcc5, fx: '기지 업그레이드 비용 반값 (영구)', src: ['b', 'b', 'b', 'g', 'g'] },
+  { id: 'code', icon: '💾', name: '김태오의 소스코드', parts: ['USB 1', 'USB 2', 'USB 3', 'USB 4', 'USB 5'], col: 0x39ff88, fx: '김태오 방어막 무시 · 김태오에게 피해 ×1.3 (영구)', src: ['ku', 'b', 'hack', 'g', 'g'] },
+];
+career.relic = career.relic || {}; for (const R0 of RELICS) career.relic[R0.id] = career.relic[R0.id] || [];
+const relicDone = id => (career.relic[id] || []).length >= 5;
+const RL = { items: [], buried: [], inB: [], detT: 0, beepT: 0 };
+// 땅속 자리 (보물 지도 힌트)
+function relicSpots() {
+  const L = [];
+  L.push([PLAZA_C.clone().add(V3(22, 0, 0)), '상허광장 분수대 동쪽 가로등 밑']);
+  if (bull) L.push([bull.p.clone().add(V3(-7, 0, 3)), '행정관 앞 황소상 뒤꽁무니']);
+  if (window.__trackCen) L.push([V3(__trackCen[0], 0, __trackCen[1]), '대운동장 인조잔디 한가운데']);
+  if (fountain) L.push([fountain.p.clone().add(V3(0, 0, 11)), '중원도서관 앞 분수대 근처']);
+  L.push([V3(VILLAGES[0].c[0], 0, VILLAGES[0].c[1]), '모시래마을 원룸촌 한복판']);
+  L.push([V3(-602, 0, 154), '신촌마을 비석 옆']);
+  L.push([STAGE.clone().add(V3(0, 0, 8)), '노천극장 무대 앞']);
+  if (AVENUE.length) { const a = AVENUE[AVENUE.length >> 1]; L.push([V3(a[0], 0, a[1]), '정문~후문 가로수길 한가운데']); }
+  for (const s of L) s[0].y = terrainAt(s[0].x, s[0].z);
+  return L.sort(() => Math.random() - 0.5);
+}
+function relicSetup() {
+  for (const it of RL.items) scene.remove(it.g); RL.items = []; RL.buried = []; RL.inB = [];
+  const spots = relicSpots(), named = CAMPUS_BUILDINGS.filter(b => b.name && b.total > 200).sort(() => Math.random() - 0.5);
+  for (const R0 of RELICS) R0.parts.forEach((pn, i) => {
+    if (career.relic[R0.id].includes(i)) return;
+    const s = R0.src[i];
+    if (s === 'b') { const b = named.pop(); if (b) RL.inB.push({ R0, i, b }); }
+    else if (s === 'ku') { const b = byName('KU Station') || named.pop(); if (b) RL.inB.push({ R0, i, b }); }
+    else if (s === 'g') { const sp = spots.pop(); if (sp) RL.buried.push({ R0, i, p: sp[0], hint: sp[1] }); }
+  });
+}
+function relicPop(R0, i, p, why) {
+  const g = new THREE.Group(), m = new THREE.Mesh(new THREE.OctahedronGeometry(0.9), new THREE.MeshStandardMaterial({ color: R0.col, emissive: R0.col, emissiveIntensity: 0.6, metalness: 0.6, roughness: 0.3 }));
+  const beam = new THREE.Mesh(beaconGeo, new THREE.MeshBasicMaterial({ color: R0.col, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false })); beam.scale.set(2.5, 40, 2.5);
+  g.add(m, beam); g.position.copy(p); g.position.y = terrainAt(p.x, p.z) + 1.4; scene.add(g);
+  const div = document.createElement('div'); div.className = 'named relic'; div.innerHTML = `<b>✨ ${R0.icon} ${R0.name}</b><small>${R0.parts[i]} · 눌러서 줍기</small>`; const lb = new CSS2DObject(div); lb.position.y = 2.4; g.add(lb);
+  const it = { R0, i, g, m }; RL.items.push(it);
+  regNamed(`✨ 유물 · ${R0.parts[i]}`, () => g.position, () => !!g.parent);
+  banner(`✨ 유물 조각 발견! ${R0.icon}`, `${R0.name} · ${R0.parts[i]} — ${why} · 눌러서 주우세요`, 'gold'); SFX.bell(); fxSparks(g.position.clone(), 40, 12);
+}
+function relicTake(it) {
+  if (!RL.items.includes(it)) return; RL.items.splice(RL.items.indexOf(it), 1); scene.remove(it.g);
+  const arr = career.relic[it.R0.id]; if (!arr.includes(it.i)) arr.push(it.i); saveCareer();
+  const n = arr.length; popText(it.g.position.clone().setY(it.g.position.y + 3), `${it.R0.icon} ${it.R0.parts[it.i]} (${n}/5)`); SFX.ding(); wallet.won += 300000; uiDirty = true;
+  if (n >= 5) relicComplete(it.R0); else banner(`${it.R0.icon} ${it.R0.name} ${n}/5`, `조각을 모았어요 · 장학금 ₩300,000 · ☰ 메뉴 → 🏺 유물 도감에서 다음 힌트`, 'gold');
+  renderRelic();
+}
+function relicComplete(R0) {
+  banner(`🏺 유물 완성! ${R0.icon} ${R0.name}`, R0.fx, 'gold'); whiteFlash(); SFX.cheer(controls.target);
+  for (let k = 0; k < 14; k++) after(k * 0.15, () => launchFirework(controls.target.clone().add(V3(rand(-40, 40), 0, rand(-40, 40))), true));
+  wallet.won += 3000000; uiDirty = true; applyRelics(); career.relicDone = RELICS.filter(r => relicDone(r.id)).length; saveCareer();
+}
+// 영구 효과
+let relicApplied = {};
+function applyRelics() {
+  if (relicDone('plan') && !relicApplied.plan) { relicApplied.plan = true; for (let i = 0; i < UPG.length; i++) UPG[i] = Math.round(UPG[i] / 2); }
+}
+{
+  const addScore0 = addScore, ktoDamage0 = ktoDamage;
+  addScore = (pts, act) => addScore0(relicDone('bull') && pts > 0 ? Math.round(pts * 1.2) : pts, act);
+  ktoDamage = (v, why) => { if (relicDone('code')) { if (clock < kto.shieldUntil) kto.shieldUntil = clock; v *= 1.3; } return ktoDamage0(v, why); };
+}
+// 매 프레임: 건물 속 조각 · 금속 탐지기 · 떠 있는 조각 돌기 · 1인칭으로 다가가면 줍기
+function updateRelic(dt) {
+  if (!started) return;
+  for (const R of [...RL.inB]) if (R.b.ratio() >= 0.5) { RL.inB.splice(RL.inB.indexOf(R), 1); const c = bbCenter(R.b), nd = G.nodes[nearestNode(c.x, c.z)]; relicPop(R.R0, R.i, nd ? V3((nd[0] + c.x) / 2, 0, (nd[1] + c.z) / 2) : c, `${R.b.name} 잔해 속에서`); }
+  for (const it of RL.items) { it.m.rotation.y += dt * 2; it.m.position.y = Math.sin(clock * 3) * 0.3; if (FP.on && it.g.position.distanceTo(FP.pos) < 3) { relicTake(it); break; } }
+  if ((RL.detT -= dt) > 0) return; RL.detT = 0.4;
+  const t = FP.on ? FP.pos : controls.target; let best = 1e9; for (const B0 of RL.buried) best = Math.min(best, Math.hypot(B0.p.x - t.x, B0.p.z - t.z));
+  const chip = $('relicDet'); if (best > 60) { chip.hidden = true; return; }
+  const lv = best < 12 ? 3 : best < 30 ? 2 : 1; chip.hidden = false; chip.textContent = `📡 금속 탐지기 ${'▮'.repeat(lv)}${'▯'.repeat(3 - lv)} ${['', '약함', '보통', '강함! 여기를 폭발시켜 파 보세요'][lv]}`; chip.className = 'lv' + lv;
+  if ((RL.beepT -= 0.4) <= 0) { RL.beepT = [0, 3, 1.6, 0.8][lv]; if (SFX.ok && SFX.ok()) { try { const ctx = AU.ctx, o = osc('sine', 880 + lv * 220, ctx.currentTime, 0.08), g = gain(); env(g, ctx.currentTime, 0.002, 0.08, 0.07); o.connect(g).connect(AU.sfx); } catch {} } }
+}
+function relicBoom(p, R) {
+  for (const B0 of [...RL.buried]) if (Math.hypot(B0.p.x - p.x, B0.p.z - p.z) < R + 7) { RL.buried.splice(RL.buried.indexOf(B0), 1); relicPop(B0.R0, B0.i, B0.p, `${B0.hint}에서 파냈어요`); }
+}
+function relicClick(x, y) { const it = nearScreen(RL.items.map(it => [it, it.g.position.clone().setY(it.g.position.y + 1)]), x, y, 44); if (!it) return false; relicTake(it); return true; }
+function relicHack() { const R = RELICS.find(r => r.id === 'code'), i = R.src.indexOf('hack'); if (career.relic.code.includes(i)) return; relicPop(R, i, controls.target.clone(), '전산실 서버에서 빼냈어요'); }
+// 🏺 유물 도감
+function renderRelic() {
+  const box = $('relicList'); if (!box) return;
+  box.innerHTML = RELICS.map(R0 => {
+    const got = career.relic[R0.id], done = got.length >= 5;
+    const slots = R0.parts.map((p, i) => `<span class="${got.includes(i) ? 'on' : ''}">${got.includes(i) ? R0.icon : '?'}<small>${p}</small></span>`).join('');
+    const hints = R0.parts.map((p, i) => { if (got.includes(i)) return ''; const bz = RL.buried.find(x => x.R0 === R0 && x.i === i), ib = RL.inB.find(x => x.R0 === R0 && x.i === i), lying = RL.items.find(x => x.R0 === R0 && x.i === i); return `<li>${p}: ${lying ? '✨ 땅 위에 떨어져 있어요 (📍 단추로 이동)' : bz ? '🗺️ ' + bz.hint : ib ? '🏢 ' + ib.b.name + ' 속 (절반 넘게 부수기)' : R0.src[i] === 'hack' ? '💻 전산실 해킹 성공' : '다음 판에 다시 숨겨져요'}</li>`; }).join('');
+    return `<div class="rl${done ? ' done' : ''}"><b>${R0.icon} ${R0.name} ${got.length}/5</b><div class="rslots">${slots}</div><em>${done ? '✅ 완성 · ' : '완성하면 · '}${R0.fx}</em>${done ? '' : `<ul>${hints}</ul>`}</div>`;
+  }).join('');
+}
+function relicMenu() { for (const k of ['evmenu', 'setmenu', 'gacha', 'rankmenu', 'acctmenu', 'helpmenu', 'storymenu']) if ($(k)) $(k).hidden = true; $('relicmenu').hidden = false; renderRelic(); }
+relicSetup(); applyRelics();
+
+/* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
    ===================================================================== */
 const ray = new THREE.Raycaster();
@@ -8327,7 +8437,7 @@ window.addEventListener('pointerup', e => {
 });
 window.addEventListener('pointercancel', e => { activePointers.delete(e.pointerId); press = null; stopAuto(); });
 function attack(x, y) {
-  if (findClick(x, y) || kuClick(x, y)) return;
+  if (relicClick(x, y) || findClick(x, y) || kuClick(x, y)) return;
   if (clock < (kto.lockUntil || 0) && weapon !== 'fix' && weapon !== 'build') { toast(`👑 김태오가 관리자 권한을 빼앗았어요 · ${Math.ceil(kto.lockUntil - clock)}초 뒤 공격 가능`); return; }
   if (WAR.orderMode) { applyOrder(pickAt(x, y)); return; }
   { const cr = crateAtScreen(x, y); if (cr && cr.landed) { openCrate(cr); return; } }
@@ -8446,6 +8556,7 @@ document.querySelectorAll('#toggles .tg').forEach(b => b.addEventListener('click
   if (t === 'help') pop('helpmenu');
   if (t === 'minigame') mgMenu();
   if (t === 'storybtn') storyMenu();
+  if (t === 'relicbtn') relicMenu();
   if (t === 'rank') { pop('rankmenu'); RK.online = null; renderRank(); if (ONLINE()) loadOnline(); }
 }));
 $('live').addEventListener('click', () => flyTo(STAGE_VIEW.pos.clone(), STAGE_VIEW.tgt.clone()));
@@ -8716,7 +8827,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateDebrisClean(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, STORY, SY, story, storyTap, storySkip, storyMenu, debris, CLEAN, TELE, teleSend, openAdmin, ADMIN_SQL, updateDebrisClean, PB, pbRebuild, bakeStatic, ktoGod, kto, fpSel, showWhatsNew, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateDebrisClean(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); updateSpecials(0.05); if (FP.on) updateFP(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, RELICS, RL, relicSetup, relicPop, relicTake, relicBoom, relicDone, relicMenu, relicHack, STORY, SY, story, storyTap, storySkip, storyMenu, debris, CLEAN, TELE, teleSend, openAdmin, ADMIN_SQL, updateDebrisClean, PB, pbRebuild, bakeStatic, ktoGod, kto, fpSel, showWhatsNew, WANT, wantAdd, spawnHeli, ZJ, spawnZJ, KU, spawnKu, kuClick, CAMPS, CAMP, startCamp, FIND, FIND_KINDS, startFind, findClick, spawnKaiju, KAIJU, GACHA, inv, screenOf, FP, fpEnter, fpExit, fpAction, updateFP, useSpecial, SPX, setSpecial: k => { special = k; }, TS, VILLAGES, AVENUE, bull, trackFence, BGM, MG, mgStart, mgMenu, STG, startWeek, setDiff, threat, useAuthority, makeElite, ktoExtra, get DIFF() { return DIFF; }, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
