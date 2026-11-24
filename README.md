@@ -22,6 +22,7 @@
 - 기본: https://teokima.github.io/glocal-crash/
 - 크리스마스: https://teokima.github.io/glocal-crash/christmas.html
 
+- 12.3판: 적 세력 3곳(🎓 총장 · 📚 교수 · 🏛️ 시장)이 나처럼 업그레이드·수비대·복구·탈환 · 🏳️ 세력 판도 · 종강 뒤 회색 덩어리 없앰
 - 12판: 세력 전쟁(돌격대·탈환대·총공격/방어/총돌격·캠퍼스 지배율) · 보급 상자·황금 건물·소나기 · 📖 조작·명령 모음(H) · [요청 정리표](docs/요청정리.md)
 
 ## 실행

@@ -253,6 +253,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .named{padding:5px 12px!important;box-shadow:0 0 16px rgba(120,170,255,.55);transform:scale(1.15)}.named b{font-size:14.5px!important}.named small{font-size:11.5px!important}
 .pact{display:flex;gap:6px;margin-top:8px}.pact button{flex:1;padding:7px 4px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-size:12px;font-weight:700}.pact button.up{background:linear-gradient(90deg,#c99a2e,#ffd27a);color:#1a1208;border:0}.pact button:disabled{opacity:.5}
 @media (max-width:640px){#namedbar{top:84px;bottom:auto;left:auto;right:10px;margin:0;max-width:62vw;justify-content:flex-end}#namedbar button{font-size:11px;padding:4px 8px}#evcards{top:120px!important}}
+#facbox{padding:8px;width:220px;box-sizing:border-box}#facbox .fh{display:flex;justify-content:space-between;align-items:baseline}#facbox .fh b{font-size:13px}#facbox .fh small{font-size:10.5px;color:var(--dim)}
+#fbBar{display:flex;height:7px;border-radius:4px;overflow:hidden;margin:5px 0;background:rgba(255,255,255,.08)}#fbBar i{display:block;height:100%}
+#fbRows .fr{display:grid;grid-template-columns:58px 30px 30px 1fr;align-items:baseline;gap:3px;font-size:11.5px;padding:2px 3px;border-radius:6px;cursor:pointer}#fbRows .fr:hover{background:rgba(255,255,255,.08)}#fbRows .fr span{font-weight:800;white-space:nowrap}#fbRows .fr b{font-size:11.5px}#fbRows .fr em{font-style:normal;color:#ffd27a;font-size:11px}#fbRows .fr small{color:var(--dim);font-size:10.5px;text-align:right;white-space:nowrap}#fbRows .fr.gone{opacity:.45}
+#facbox.fold #fbRows{display:none}#facbox .fh{cursor:pointer}
+@media (max-width:640px){#facbox{width:150px;padding:6px}#fbT{display:none}#fbRows .fr{grid-template-columns:52px 28px 1fr;font-size:10.5px}#fbRows .fr small{display:none}}
 #warbox{padding:8px;width:220px;box-sizing:border-box}#warbox[hidden]{display:none}#warbox .wh{display:flex;flex-direction:column;margin-bottom:6px}#warbox .wh b{font-size:13px;color:#d6b8ff}#warbox .wh small{font-size:11px;color:var(--dim);line-height:1.4}
 #warbox .wdom{height:6px;border-radius:4px;background:rgba(255,255,255,.1);margin:4px 0 2px;overflow:hidden}#warbox .wdom i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7a52c8,#ffc83d)}
 #warbox .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}#warbox button{padding:7px 2px;border-radius:8px;border:1px solid rgba(176,107,255,.5);background:rgba(123,82,200,.18);font-weight:800;font-size:11.5px}#warbox button:hover{background:rgba(123,82,200,.35)}#warbox button.hot{background:#c0392b;border-color:#ff8a7a;animation:namedPulse 1s infinite}
@@ -289,6 +294,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 #buildbar .sw{width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,.25)}
 #buildbar .sw.on{border-color:#fff;box-shadow:0 0 0 2px var(--hot2)}
 #vToggle{display:none;padding:8px 12px;border-radius:12px;font-weight:800;font-size:13px}
+@media (min-width:641px) and (max-height:900px){#vToggle{display:block}#zoom{display:none!important}#zoom.open{display:flex!important}}
 @media (max-width:640px){#vToggle{display:block}#zoom{display:none!important}#zoom.open{display:flex!important}#situ{left:10px!important;right:10px!important;width:auto!important;bottom:150px!important;max-height:84px}#situ .si span{display:none}#tip{bottom:240px}}
 #zoom{display:flex;flex-direction:column;gap:4px;border-radius:12px;padding:6px;width:150px;box-sizing:border-box}
 #zoom .vh{font-size:11px;color:var(--dim);font-weight:700;padding-left:2px}
@@ -419,6 +425,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   <div id="live" class="card" title="누르면 노천극장으로 이동"><span class="led"></span><span id="livetxt">노천극장 · 공연 중</span></div>
   <div id="compass" class="card" title="누르면 북쪽이 위로"><svg viewBox="0 0 30 30"><g id="needle"><path d="M15 3 L19.5 15 L10.5 15 Z" fill="#ff5a36"/><path d="M15 27 L19.5 15 L10.5 15 Z" fill="#d8d4ca"/><text x="15" y="12.2" text-anchor="middle" font-size="6.5" font-weight="900" fill="#fff" font-family="sans-serif">N</text></g></svg></div>
   <div id="missions" class="card"><div class="mh" id="mhead"><b>미션 <span id="mfold">▾</span></b><small id="mdone">완료 0</small></div><div id="mlist"></div></div>
+  <div id="facbox" class="card"><div class="fh"><b>🏳️ 세력 판도</b><small id="fbT"></small></div><div id="fbBar"></div><div id="fbRows"></div></div>
   <div id="warbox" class="card" hidden><div class="wh"><b>⚔️ 내 세력</b><small id="wbStat"></small><div class="wdom"><i id="wbDom"></i></div><small id="wbDomT"></small></div>
     <div class="wgrid"><button id="wbAtk">🎯 총공격</button><button id="wbDef">🛡️ 방어</button><button id="wbRush">📣 총돌격</button><button id="wbAuto">✋ 자동 출동 끄기</button></div></div>
   <button id="vToggle" class="card">🎥 시점</button>
@@ -515,6 +522,12 @@ button{font:inherit;color:inherit;cursor:pointer}
       <li><b>내 건물 세우기</b> 보관함 → 내 세력 → 🏗️ (300만부터)</li>
       <li><b>생산 고르기 · ⬆️ 업그레이드 · 🤝 반환 협상</b> 보관함 → 내 세력 탭</li>
       <li><b>탈환대</b> 적이 내 기지를 부수며 빼앗으러 옴 → 근처를 공격하거나 🛡️ 방어</li></ul></section>
+    <section><h4>🏳️ 적 세력 (왼쪽 '세력 판도')</h4><ul>
+      <li><b>🎓 총장 · 📚 교수 · 🏛️ 시장</b> 캠퍼스 건물마다 주인 세력이 있어요 (이름표 앞 아이콘)</li>
+      <li><b>업그레이드</b> 세력도 자금을 모아 ★2·★3으로 보강 → 블록이 20%·40% 덜 깨짐</li>
+      <li><b>수비대</b> 공격받으면 출동해 내 돌격대와 몸싸움 · 부서진 곳을 고침 · 근처를 터뜨리면 흩어짐</li>
+      <li><b>복구·탈환</b> 25초 조용하면 스스로 고치고, 빼앗긴 건물은 원래 세력이 탈환대를 보냄</li>
+      <li><b>와해</b> 한 세력의 건물을 모두 빼앗으면 장학금 300만 · 줄 누르면 그 세력 건물로 이동</li></ul></section>
     <section><h4>🎁 뽑기 · 보관함</h4><ul>
       <li><b>🎒 아이템 10칸</b> 유닛·무기 [쓰기] · 장학금 봉투 [사용] · [버리기]</li><li><b>🛡️ 장비 2칸</b> [착용]/[해제]한 것만 효과</li>
       <li><b>소환</b> 도구판 [소환](-) 고르고 목표를 누름</li></ul></section>
@@ -2226,7 +2239,7 @@ function undo() {
 }
 function resetAll() {
   newRankSession();
-  for (const bd of buildings) for (let i = 0; i < bd.total; i++) bd.revive(i);
+  for (const bd of buildings) if (!bd.userChunk) for (let i = 0; i < bd.total; i++) bd.revive(i);
   for (const d of debris) if (d.state) freeDebris(d);
   settledQ.length = 0; debrisMesh.count = 0; freeD.length = 0; for (let i = DMAX - 1; i >= 0; i--) freeD.push(debris[i]);
   debrisMesh.instanceMatrix.needsUpdate = true;
@@ -2238,7 +2251,7 @@ function resetAll() {
   for (const pr of projectiles) scene.remove(pr.mesh); projectiles.length = 0;
   theater.screenBroken = false; concert.state = 'play'; quake.active = false;
   endAllEvents(); repairScore = 0; clearBuilt();
-  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
+  if (fest.kind) { for (const p of fest.props) scene.remove(p); fest.kind = null; uncard('fest'); } clearOwned(); clearDonations(); resetFactions(); clearKto(); clearSchemes(); fixFountain(); clearClashes(); clearWar(); endRetake(); retake.cool = 120; cede.cool = 200; clearMyBuilds(); if (mayor.active) { scene.remove(mayor.fig.g); mayor.active = false; } exam.until = 0; truce.until = 0;
   dmgLog.length = 0; EVS.facCool = clock + 20; DEF.lvl = 0;
   for (const d of [...boss.domes]) d.retreat(false); if (boss.active) { scene.remove(boss.fig.g); scene.remove(boss.podium); boss.active = false; $('bossbar').hidden = true; } boss.defeated = false;
   for (const j of defJets) scene.remove(j.g); defJets.length = 0;
@@ -2294,7 +2307,7 @@ function explode(p, R, power, act) {
   for (const t of teams) if (t.kind !== 'facility') for (const a of t.crew) if (a.pos.distanceTo(p) < R * 2 + 3) a.down = 2;
   scarePeople(p, R * 4 + 25); protestPanic(p, R * 3 + 15);
   if (boss.active && p.distanceTo(boss.pos) < 45) bossDamage(R * 0.5, '근처 폭발');
-  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R); crateBoom(p, R);
+  cjmanBoom(p, R); festBoom(p, R); ktoBoom(p, R); schemeBoom(p, R); fountainBoom(p, R); riotLineBoom(p, R); clashBoom(p, R); retakeBoom(p, R); crateBoom(p, R); facBoom(p, R);
   if (NET.on && !NET.remote) sendNet({ t: 'fx', k: 'boom', p: [p.x, p.y, p.z], R });
   R *= SET.power; power *= Math.sqrt(SET.power);
   act.R = R;
@@ -3542,6 +3555,7 @@ function startJonggang(urgent) {
   SFX.bell();
 }
 function restoreBuilding(bd) {
+  if (bd.userChunk) return;          // 직접 지은 구역은 건드리지 않음 (빈 칸까지 살리면 회색 덩어리가 됨)
   for (let i = 0; i < bd.total; i++) bd.revive(i);
   const [a, b, c, d] = bd.bb;
   for (const x of debris) if (x.state && x.p.x > a - 6 && x.p.x < b + 6 && x.p.z > c - 6 && x.p.z < d + 6) freeDebris(x);
@@ -5105,7 +5119,9 @@ function claimBuilding(b) {
   const tx = new THREE.CanvasTexture(cv); tx.colorSpace = THREE.SRGBColorSpace;
   const cloth = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.5), new THREE.MeshStandardMaterial({ map: tx, side: THREE.DoubleSide })); cloth.position.set(2, 8.6, 0);
   flag.add(pole, cloth); flag.position.copy(c); scene.add(flag); b.flag = flag;
-  if (b.lblDiv) { b.def.labelText = `👑 ${b.name} · 내 건물`; b.labelDirty = true; }
+  const keepL = lvlOf(b); b.armor = 0.25 * (keepL - 1);   // 세력이 보강해 둔 단계는 그대로 내 것
+  if (b.lblDiv) { b.def.labelText = `👑 ${b.name} · 내 건물${keepL > 1 ? ' ' + '★'.repeat(keepL) : ''}`; b.labelDirty = true; }
+  if (keepL > 1) situLog('👑', `${b.name} ${'★'.repeat(keepL)} 그대로 차지`, '적 세력이 업그레이드해 둔 건물이라 단계가 그대로 내 것이 됐어요', 'gold');
   const mineN = agents.filter(a => a.kind === 'mine' && !a.raider).length;   // 내 학생은 모두 합쳐 40명까지
   for (let k = 0; k < Math.min(8, 40 - mineN); k++) { const p = bbCenter(b).add(V3(rand(-20, 20), 0, rand(-20, 20))); const s = freeSpots(p, 1, 0)[0] || p; addAgent({ pos: s, kind: 'mine', role: 'mine', shirt: 0x7a52c8, speed: 1.3, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { const c2 = bbCenter(b); a.goal = (freeSpots(c2.add(V3(rand(-25, 25), 0, rand(-25, 25))), 1, 0)[0]) || c2; } } }); }
   banner('점령 성공!', `${b.name}이(가) 내 건물이 됐어요 · [뽑기·보관함 → 👑 내 세력]에서 이 건물이 무엇을 만들지 고르세요 (수입·학생·용역·드론·전차)`, 'gold'); SFX.bell(); whiteFlash();
@@ -6081,6 +6097,7 @@ function loseBuilding(b, why) {
     owned.delete(b); b.armor = 0; b.lvl = 1; b.claimCard = null; b.claimSnooze = clock + 30;
     b.blocks.forEach((k, i) => { if (k.c0) { k.c.copy(k.c0); b.setBlockColor(i, k.c); } }); b.meshes.forEach(m => { if (m.instanceColor) m.instanceColor.needsUpdate = true; });
     if (b.flag) { scene.remove(b.flag); b.flag = null; } if (b.lblDiv) { b.def.labelText = b.labelText0 || null; b.labelDirty = true; }
+    facApply(b); const FL = facOf(b); if (FL) situLog(FL.icon, `${b.name} → ${FL.name}`, '원래 주인 세력이 되찾았어요 · 다시 부수고 점령할 수 있어요', 'red');
   }
   for (const a of agents) if (a.home === b || (a.kind === 'mine' && !b.built && a.pos.distanceTo(bbCenter(b)) < 40)) a.fadeOut = true;
   banner(`${b.name}을(를) 잃었어요`, why, 'red'); renderInv();
@@ -6092,8 +6109,9 @@ function startRetake(b) {
   b = b || pick([...owned, ...myBuilds]); if (!b) return;
   const c = bbCenter(b), nd = G.nodes[nearestNode(c.x, c.z)], from = nd ? V3(nd[0], 0, nd[1]) : c;
   Object.assign(retake, { b, crew: [], prog: 0 });
-  for (let k = 0; k < 10; k++) { const a = addAgent({ pos: from.clone().add(V3(rand(-6, 6), 0, rand(-6, 6))), kind: 'guard', role: k % 2 ? 'army' : 'facility', shirt: k % 2 ? 0x5d6b47 : 0xff7a1a, pants: 0x2b3040, hat: k % 2 ? 0x3a4a2a : 0xffd23a, shield: k % 3 === 0, speed: 2.6, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = c.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); a.swing = 0.8; } } }); if (a) retake.crew.push(a); }
-  banner('⚔️ 탈환 작전!', `교직원 연합 탈환대가 ${b.name}을(를) 부수며 빼앗으러 옵니다 · 근처를 공격하거나 [🛡️ 방어] 명령`, 'red'); SFX.siren(c);
+  const FB = facForRetake(b), NB = 10 + (FB.fund >= 600000 ? (FB.fund -= 600000, 2 + Math.round(facLvlSum(FB) / 4)) : 0); retake.fac = FB;
+  for (let k = 0; k < NB; k++) { const a = addAgent({ pos: from.clone().add(V3(rand(-6, 6), 0, rand(-6, 6))), kind: 'guard', role: k % 2 ? 'army' : 'facility', shirt: k % 3 ? FB.shirt : (k % 2 ? 0x5d6b47 : 0xff7a1a), pants: 0x2b3040, hat: k % 3 ? FB.hat : 0x3a4a2a, shield: k % 3 === 0, speed: 2.6, think: (a, dt) => { if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) { a.goal = c.clone().add(V3(rand(-12, 12), 0, rand(-12, 12))); a.swing = 0.8; } } }); if (a) retake.crew.push(a); }
+  banner('⚔️ 탈환 작전!', `${FB.icon} ${FB.name} 탈환대 ${NB}명이 ${b.name}을(를) 부수며 빼앗으러 옵니다 · 근처를 공격하거나 [🛡️ 방어] 명령`, 'red'); SFX.siren(c);
   regNamed('⚔️ 탈환대', () => { const L = retake.crew.filter(a => !a.dead); return L.length ? L[0].pos.clone().setY(L[0].y) : c; }, () => !!retake.b);
 }
 function updateRetake(dt) {
@@ -6188,7 +6206,7 @@ function updateWar(dt) {
   if (WAR.order && WAR.order.ratio() >= CLAIM_AT) { banner('총공격 성공!', `${WAR.order.name}이(가) 무너졌어요 · 점령할 수 있어요`, 'gold'); offerClaim(WAR.order); WAR.order = null; uncard('order'); }
   // 내 세력 판
   if (frameNo % 20 === 0) { renderWarBox(); checkDomination(); }
-  updateCrates(dt); updateGold(dt); updateRain(dt); updateHero(dt); updateCounter(dt); updateTowers(dt);
+  updateCrates(dt); updateGold(dt); updateRain(dt); updateHero(dt); updateCounter(dt); updateTowers(dt); updateFactions(dt);
 }
 // ── 명령 ──
 function orderAttack() { if (!raiders().length && !myBases().length) { toast('아직 내 세력이 없어요 · 건물을 점령하거나 직접 세우세요'); return; } WAR.orderMode = true; toast('🎯 총공격할 캠퍼스 건물을 누르세요'); }
@@ -6351,6 +6369,7 @@ const ACH = [
   ['dom50', '캠퍼스 정복자', '지배율 50%', () => WAR.domDone && WAR.domDone.has(50), 5000000],
   ['boss', '총장 사퇴', '총장 보스를 쓰러뜨림', () => career.bossDown >= 1, 1000000],
   ['kto', '만든이를 넘어서', '최강 네임드 김태오를 쓰러뜨림', () => career.ktoDown >= 1, 5000000],
+  ['facdown', '세력 와해', '총장·교수·시장 세력 중 하나의 건물을 모두 빼앗음', () => (career.facDown || 0) >= 1, 2000000],
   ['blocks10k', '철거 장인', '누적 블록 1만 개', () => career.blocks >= 10000, 1000000],
   ['blocks100k', '철거 전설', '누적 블록 10만 개', () => career.blocks >= 100000, 5000000],
   ['crates5', '보급 수집가', '보급 상자 5개 열기', () => (career.crates || 0) >= 5, 800000],
@@ -6414,6 +6433,173 @@ function updateTowers(dt) {
   }
 }
 function clearTowers() { for (const t of towers) { scene.remove(t.g); t.b.tower = null; } towers.length = 0; }
+
+/* =====================================================================
+   12-34. 적 세력 (12.3판): 🎓 총장 세력 · 📚 교수 세력 · 🏛️ 시장 세력
+   - 캠퍼스 건물마다 주인 세력이 있고, 세력은 자금을 모아 나처럼 ★2·★3 업그레이드(블록 보강)
+   - 공격받으면 수비대를 보내 몸싸움·복구, 조용해지면 부서진 건물을 고침
+   - 내가 빼앗은 건물은 원래 주인 세력이 탈환대를 보내 되찾으려 함 (세력 자금이 많을수록 더 많이)
+   - 세력이 건물을 모두 잃으면 '와해' → 큰 보상
+   ===================================================================== */
+const FAC = {
+  pres:  { key: 'pres',  icon: '🎓', name: '총장 세력', short: '총장', color: '#5b8cff', shirt: 0x24407a, hat: 0xffd24a, fund: 1500000, guards: [], gone: false,
+           list: ['행정관', 'KU Station', '자산관리동', '중원도서관', '학생회관', '노천극장', '건국어린이집'] },
+  prof:  { key: 'prof',  icon: '📚', name: '교수 세력', short: '교수', color: '#e0a040', shirt: 0x5a3a24, hat: null, fund: 1500000, guards: [], gone: false,
+           list: ['교수연구동', '인문사회관', '생명과학관', '자연과학관', '종합강의동', '창의예술관', '교양강의동', '의과대학', '복합실습동'] },
+  mayor: { key: 'mayor', icon: '🏛️', name: '시장 세력', short: '시장', color: '#3fbf7f', shirt: 0x2f7a4a, hat: 0xf2f2f2, fund: 1500000, guards: [], gone: false,
+           list: ['건국체육관', '창업보육센터', '상허산학협력단', '해오름학사', '모시래학사(남학생동)', '모시래학사(여학생동본관)', '모시래학사(여학생동신관)', 'HVAC시설', 'LPG, O2저장소'] },
+};
+const FACS = Object.values(FAC);
+const FAC_UPG = [0, 1200000, 3000000];             // 세력 업그레이드 비용 (나보다 조금 싸게 → 비등하게)
+const FAC_ARMOR = 0.2;                              // 단계마다 블록이 덜 깨지는 비율
+const facOf = b => b && b.fac && FAC[b.fac];
+const facBldgs = F => CAMPUS_BUILDINGS.filter(b => b.fac === F.key && !owned.has(b));
+const facLvlSum = F => facBldgs(F).reduce((s, b) => s + lvlOf(b), 0);
+for (const b of CAMPUS_BUILDINGS) {
+  if (!b.name) continue;
+  const F = FACS.find(F => F.list.includes(b.name)) || FAC.pres;
+  b.fac = F.key; b.lvl = 1; b.labelBase = b.def.labelText || b.name;
+}
+function facApply(b) {             // 세력 건물의 보강·이름표를 단계에 맞춤
+  const F = facOf(b); if (!F || owned.has(b)) return;
+  b.armor = armored.has(b) ? Math.max(0.55, FAC_ARMOR * (lvlOf(b) - 1)) : FAC_ARMOR * (lvlOf(b) - 1);
+  b.labelText0 = `${F.icon} ${b.labelBase}${lvlOf(b) > 1 ? ' ' + '★'.repeat(lvlOf(b)) : ''}`;
+  b.def.labelText = b.labelText0; b.labelDirty = true;
+}
+CAMPUS_BUILDINGS.forEach(facApply);
+// 업그레이드 (세력 AI)
+function facUpgrade(F, b) {
+  const L = lvlOf(b), cost = FAC_UPG[L]; if (L >= 3 || F.fund < cost) return false;
+  F.fund -= cost; b.lvl = L + 1; facApply(b);
+  const c = bbCenter(b), col = new THREE.Color(F.color);
+  for (let j = 0; j < 40; j++) fire.spawn(c.x + rand(-10, 10), b.base + rand(0, b.H * B), c.z + rand(-10, 10), 0, rand(1, 4), 0, col.r, col.g, col.b, 0.3, 1, 0.8, 1, 0, 1);
+  situLog(F.icon, `${F.name}: ${b.name} ${'★'.repeat(b.lvl)}`, `블록 보강 ${Math.round(b.armor * 100)}% · 수비대 늘어남 · 더 부수기 어려워짐`, 'red', 'facup' + b.name);
+  if (b.lvl === 3) banner(`${F.icon} ${b.name} ★★★ 요새화`, `${F.name}이(가) 최고 단계로 보강했어요 · 블록이 ${Math.round(b.armor * 100)}% 덜 깨짐`, 'red');
+  return true;
+}
+// 수비대: 공격받는 세력 건물로 출동 → 내 돌격대와 몸싸움 · 부서진 곳 복구
+const FAC_GCAP = SMALL ? 12 : 24;
+const facGuards = () => FACS.reduce((s, F) => s + F.guards.length, 0);
+function facDispatch(F, b, n) {
+  n = Math.min(n, FAC_GCAP - facGuards()); if (n <= 0) return 0;
+  const c = bbCenter(b), src = facBldgs(F).filter(x => x !== b && x.ratio() < 0.5).sort((p, q) => bbCenter(p).distanceTo(c) - bbCenter(q).distanceTo(c))[0];
+  const sc = src ? bbCenter(src) : c, nd = G.nodes[nearestNode(sc.x, sc.z)], from = nd ? V3(nd[0], 0, nd[1]) : sc;
+  let k = 0;
+  for (; k < n; k++) {
+    const a = addAgent({ pos: from.clone().add(V3(rand(-4, 4), 0, rand(-4, 4))), kind: 'guard', role: 'facility', shirt: F.shirt, pants: 0x1f2633, hat: F.hat, shield: k % 3 === 0, tool: k % 3 !== 0, speed: rand(2.6, 3.1), think: facGuardThink });
+    if (!a) break; a.fac = F; a.post = b; a.fixT = rand(0.5, 1.5); F.guards.push(a);
+  }
+  if (k) { b.guardT = clock; situLog(F.icon, `${F.name} 수비대 ${k}명 → ${b.name}`, '공격받는 건물을 지키고 부서진 곳을 고쳐요 · 근처를 터뜨리면 흩어져요', 'red', 'facg' + b.name); }
+  return k;
+}
+function facGuardThink(a, dt) {
+  if (a.down > 0) return;
+  const b = a.post;
+  if (!b || owned.has(b) || clock - (b.hitAt || 0) > 40) { a.fadeOut = true; return; }
+  // 가까운 내 돌격대에게 붙음
+  const foe = agents.find(m => m.kind === 'mine' && m.raider && !m.fadeOut && m.down <= 0 && Math.abs(m.pos.x - a.pos.x) < 12 && Math.abs(m.pos.z - a.pos.z) < 12);
+  if (foe) { if (a.pos.distanceTo(foe.pos) > 1.8) stepTo(a, foe.pos.x, foe.pos.z, a.speed, dt); else a.swing = Math.max(0, Math.sin(clock * 9 + a.pos.x)) * 1.4; return; }
+  const c = bbCenter(b);
+  if (!a.goal || stepTo(a, a.goal.x, a.goal.z, a.speed, dt)) a.goal = (freeSpots(c.clone().add(V3(rand(-14, 14), 0, rand(-14, 14))), 1, 0)[0]) || c;
+  // 복구: 건물 근처에 있으면 1.4초마다 블록 1개
+  if (Math.hypot(a.pos.x - c.x, a.pos.z - c.z) < 30 && (a.fixT -= dt) <= 0) {
+    a.fixT = 1.4; a.swing = 1.2;
+    if (b.alive < b.total && a.fac.fund >= 3000) { const i = facDeadLow(b); if (i >= 0 && b.revive(i)) { a.fac.fund -= 3000; if (Math.random() < 0.3) { b.center(i, _c); fire.spawn(_c.x, _c.y, _c.z, 0, 2, 0, 0.6, 0.8, 1, 0.4, 1, 0.6, 1, 0, 1); } } }
+  }
+}
+function facDeadLow(b) {            // 가장 아래쪽 부서진 블록 (위에서부터 복구하면 공중에 뜸)
+  let best = -1, by = 1e9;
+  for (let t = 0; t < 40; t++) { const i = (Math.random() * b.total) | 0; const k = b.blocks[i]; if (!k.alive && k.y < by) { by = k.y; best = i; } }
+  if (best < 0) for (let i = 0; i < b.total; i++) if (!b.blocks[i].alive) return i;
+  return best;
+}
+// 몸싸움 (1.2초마다): 세력 수비대 ↔ 내 돌격대
+function facBrawl() {
+  const mine = agents.filter(m => m.kind === 'mine' && m.raider && m.down <= 0 && !m.fadeOut);
+  if (!mine.length) return;
+  for (const F of FACS) for (const e of F.guards) {
+    if (e.down > 0 || e.fadeOut) continue; const m = mine.find(m => m.pos.distanceTo(e.pos) < 2.5); if (!m) continue;
+    const L = lvlOf(e.post), myWin = Math.random() < 0.55 - 0.07 * (L - 1) + (heroNear(m) ? 0.18 : 0), l = myWin ? e : m;
+    l.down = 2; l.hits = (l.hits || 0) + 1; popText(l.pos.clone().setY(l.y + 2.4), myWin ? `${F.short} 수비대 밀림!` : '돌격대 밀림!'); SFX.hit(l.pos, 0.4);
+    if (l.hits >= 3) { l.fadeOut = true; if (myWin) { wallet.won += 30000; uiDirty = true; } }
+  }
+}
+// 폭발에 수비대가 흩어짐 (3번 맞으면 퇴각)
+function facBoom(p, R0) {
+  for (const F of FACS) for (const a of F.guards) if (!a.fadeOut && a.pos.distanceTo(p) < R0 * 2 + 5) {
+    fleeFrom(a, p, 7, 2); a.hits = (a.hits || 0) + 2; if (a.hits >= 3) { a.fadeOut = true; popText(a.pos.clone().setY(a.y + 2.5), `${F.short} 수비대 퇴각`); }
+  }
+}
+// 세력 AI
+const facT = { think: 3, brawl: 1.2, ui: 0 };
+function updateFactions(dt) {
+  if (NET.on && !NET.host) return;
+  for (const F of FACS) {
+    F.guards = F.guards.filter(a => !a.dead && !a.fadeOut);
+    const bs = facBldgs(F);
+    F.fund += dt * (bs.length ? 2500 + 1600 * facLvlSum(F) : 0) * (exam.until > clock ? 0.7 : 1);
+    // 와해: 이 세력 건물이 하나도 안 남음
+    if (!bs.length && !F.gone && CAMPUS_BUILDINGS.some(b => b.fac === F.key)) {
+      F.gone = true; wallet.won += 3000000; uiDirty = true; addScore(3000);
+      banner(`${F.icon} ${F.name} 와해!`, `${F.short} 쪽 건물을 모두 빼앗았어요 · 장학금 ₩3,000,000`, 'gold'); SFX.cheer(controls.target); whiteFlash();
+      career.facDown = (career.facDown || 0) + 1;
+    } else if (bs.length && F.gone) F.gone = false;
+  }
+  if ((facT.brawl -= dt) <= 0) { facT.brawl = 1.2; facBrawl(); }
+  if ((facT.think -= dt) > 0) return; facT.think = 3;
+  const bases = myBases();
+  for (const F of FACS) {
+    const bs = facBldgs(F); if (!bs.length) continue;
+    // ① 공격받는 건물 → 수비대 (단계가 높을수록 많이)
+    for (const b of bs) {
+      const hot = clock - (b.hitAt || 0) < 4 && b.ratio() > 0.04;
+      if (!hot || clock - (b.guardT || -99) < 25 || F.fund < 150000 || inTruce()) continue;
+      const n = 3 + 2 * lvlOf(b) + (F.fund > 3000000 ? 2 : 0);
+      if (facDispatch(F, b, n)) F.fund -= 150000;
+    }
+    // ② 조용한 건물은 스스로 복구 (25초 동안 안 맞으면 3초마다 단계만큼 더)
+    for (const b of bs) {
+      if (b.alive >= b.total || clock - (b.hitAt || 0) < 25 || F.fund < 50000) continue;
+      let n = 0; const want = 6 + 6 * lvlOf(b);
+      NET.remote = true; for (let t = 0; t < want; t++) { const i = facDeadLow(b); if (i < 0 || !b.revive(i)) break; n++; } NET.remote = false;
+      F.fund -= n * 2000; if (n && b.ratio() < 0.02 && b.wasDown) { b.wasDown = false; situLog(F.icon, `${F.name}: ${b.name} 복구 완료`, '부서진 건물을 세력 자금으로 다시 지었어요', 'red', 'facfix' + b.name); }
+      if (b.ratio() > 0.3) b.wasDown = true;
+    }
+    // ③ 업그레이드: 내 기지와 가깝거나 최근 맞은 건물부터
+    if (F.fund >= FAC_UPG[1] + 300000) {
+      const score = b => (clock - (b.hitAt || -999) < 90 ? 2000 : 0) - Math.min(...(bases.length ? bases.map(x => bbCenter(x).distanceTo(bbCenter(b))) : [500])) - lvlOf(b) * 300;
+      const t = bs.filter(b => lvlOf(b) < 3 && F.fund >= FAC_UPG[lvlOf(b)] + 300000).sort((p, q) => score(q) - score(p))[0];
+      if (t) facUpgrade(F, t);
+    }
+    // ④ 빼앗긴 건물 되찾기: 자금이 많으면 탈환 작전을 앞당김
+    if (bases.length && !retake.b && F.fund > 1500000 && [...owned].some(b => b.fac === F.key)) retake.cool -= 3 * Math.min(3, F.fund / 1500000);
+  }
+}
+// 탈환대 = 그 건물 원래 주인 세력 (세운 건물은 가장 강한 세력)
+function facForRetake(b) { return facOf(b) || [...FACS].sort((p, q) => q.fund + facLvlSum(q) * 1e6 - p.fund - facLvlSum(p) * 1e6)[0]; }
+// 세력 판도 (왼쪽 판)
+function renderFacBox() {
+  const box = $('facbox'); if (!box) return;
+  const named = CAMPUS_BUILDINGS.filter(b => b.name).length;
+  const rows = [{ icon: '👑', name: '나', color: '#b06bff', n: owned.size, lv: [...owned].reduce((s, b) => s + lvlOf(b), 0), fund: wallet.won, g: raiders().length, me: true },
+    ...FACS.map(F => { const bs = facBldgs(F); return { F, icon: F.icon, name: F.short, color: F.color, n: bs.length, lv: facLvlSum(F), fund: F.fund, g: F.guards.length }; })];
+  $('fbBar').innerHTML = rows.map(r => `<i style="flex:${Math.max(0.0001, r.n)};background:${r.color}"></i>`).join('');
+  const short = v => v >= 1e8 ? (v / 1e8).toFixed(1) + '억' : v >= 1e4 ? Math.round(v / 1e4) + '만' : Math.round(v) + '';
+  $('fbRows').innerHTML = rows.map((r, i) => `<div class="fr${r.n ? '' : ' gone'}" data-i="${i}"><span style="color:${r.color}">${r.icon} ${r.name}</span><b>${r.n}채</b><em>${r.n ? '★' + (r.lv / r.n).toFixed(1) : '와해'}</em><small>₩${short(r.fund)} ${r.me ? '⚔️' : '🛡️'}${r.g}</small></div>`).join('');
+  $('fbRows').querySelectorAll('.fr').forEach(d => d.onclick = () => {
+    const r = rows[+d.dataset.i], list = r.me ? [...owned] : facBldgs(r.F); const b = list.sort((p, q) => lvlOf(q) - lvlOf(p))[0]; if (!b) return;
+    const c = bbCenter(b); c.y = b.base + b.H * B * 0.5; flyTo(c.clone().add(V3(60, 55, 60)), c);
+  });
+  $('fbT').textContent = `캠퍼스 ${named}채 · ★평균 단계`;
+  if (!facT.folded && innerHeight < 940) { facT.folded = true; $('missions').classList.add('fold'); $('mfold').textContent = '▸'; }   // 왼쪽 판이 넘치지 않게 미션은 접어 둠
+}
+setInterval(() => { try { if ($('intro').style.display === 'none') renderFacBox(); } catch {} }, 1000);
+if (SMALL) $('facbox').classList.add('fold');
+$('facbox').querySelector('.fh').onclick = () => $('facbox').classList.toggle('fold');
+function resetFactions() {
+  for (const F of FACS) { F.fund = 1500000; F.gone = false; for (const a of F.guards) a.fadeOut = true; F.guards = []; }
+  for (const b of CAMPUS_BUILDINGS) if (b.fac) { b.lvl = 1; b.guardT = 0; b.wasDown = false; facApply(b); }
+}
 
 /* =====================================================================
    13. 입력 (누르기=공격, 끌기=이동) · 조준 표시
@@ -6861,7 +7047,7 @@ window.__game = { THREE, scene, camera, renderer, controls, buildings, vehicles,
   agents, teams, protest, jong, wallet, triggerEvent, useNuke, nukeBlast, terrainAt, useBuild, buildOpt, chunks, resultCard, inv, units, summon, setSummon: id => { summonPick = id; },
   prof(n = 60) { const dt = 1 / 60, T = {}, run = (k, f) => { const t = performance.now(); for (let i = 0; i < n; i++) f(); T[k] = +((performance.now() - t) / n).toFixed(3); };
     run("debris", () => updateDebris(dt)); run("vehicles", () => { for (const v of movers) v.update(dt); }); run("concert", () => updateConcert(dt, beatNow())); run("events", () => updateEvents(dt)); run("agents", () => updateAgents(dt)); run("defense", () => updateDefense(dt)); run("tags", () => updatePeopleTags(dt)); run("units", () => updateUnits(dt)); run("particles", () => { fire.update(dt); smoke.update(dt); }); run("sky", () => { updateSky(dt); updateBirds(dt); }); run("flush", () => buildings.forEach(b => b.flush())); return T; }, boss, DEF, aaGuns, defJets, useFighters, MS, spawnBoss, dispatchTeam,
-  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
+  step(sec) { for (let t = 0; t < sec; t += 0.05) { clock += 0.05; for (let i = timers.length - 1; i >= 0; i--) if (timers[i].t <= clock) timers.splice(i, 1)[0].fn(); updateUnits(0.05); updateProjectiles(0.05); updateDebris(0.05); updateEvents(0.05); updateDefense(0.05); updateAgents(0.05); updateMayor(0.05); updateCjman(0.05); updateFestival(0.05); updateExam(); updateOwned(0.05); updateKto(0.05); updateScheme(0.05); updateRiotLine(0.05); updateClashes(0.05); updateMyBuilds(0.05); updateRetake(0.05); updateWar(0.05); frameNo++; } buildings.forEach(b => b.flush()); }, summonContractor, useFix, interiors, fest, mayor, owned, myBuilds, towers, buildTower, FAC, updateFactions, resetFactions, facDispatch, facUpgrade, restoreBuilding, hero, WAR, startCounter, ACH, checkAch, retake, startRetake, offerCede, upgradeBuilding, NAMED_REG, FOUNTAINS, buildHQ, riotLine, clashes, career, ACC, restio, SEASON, scheme, startScheme, tryTrap, traps, fountain, cuShop, kto, spawnKto, donateBuilding, remodelBuilding, armored, donated, claimBuilding, negotiate, truce, exam, profile, recordScore, renderRank, RK, startFestival, chungjuman, mayorVisit, SET, applyQuality, NET, hostRoom, joinRoom, startGame, get campusPct() { return campusPct; } };
 </script>
 </body>
 </html>
