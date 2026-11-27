@@ -1,4 +1,2 @@
-// 온라인 랭킹 설정 (선택) — 비워 두면 랭킹은 이 기기에만 저장됩니다.
-// Supabase 프로젝트를 만든 뒤 아래 두 줄의 주석을 풀고 값을 넣으세요. (자세한 방법: docs/개발명세서.md '온라인 랭킹')
-// key 는 공개용 anon key 만 넣으세요. service_role key 는 절대 넣지 마세요.
-// window.GLOCAL_RANK = { url: 'https://xxxx.supabase.co', key: 'anon-public-key' };
+// 온라인 랭킹·방문 기록 설정 — Supabase 공개용 anon key 만 넣을 것 (service_role 금지)
+window.GLOCAL_RANK = { url: 'https://dimjsgwekbltldwmswxw.supabase.co', key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpbWpzZ3dla2JsdGxkd21zd3h3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3NjEwMTUsImV4cCI6MjExMTMzNzAxNX0.GQ3ITdFvq6ilWaJG9hkaYmGZ_pAKpNP-77XA1ehF1uY' };
